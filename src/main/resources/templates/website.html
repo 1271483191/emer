@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    website<br/>
+    <table border="1">
+        <div th:each="website,websiteStat : ${websites.getList()}">
+            <tr>
+                <td th:text="${website.getCompanyId()}"></td>
+                <td><a th:text="${website.getState()}" th:onclick="'javascript:updateWebsite(\'state\', \'' + ${website.getWebsiteId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td><a th:text="${website.getElseExp()}" th:onclick="'javascript:updateWebsite(\'elseExp\', \'' + ${website.getWebsiteId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td><a th:text="${website.getElseReal()}" th:onclick="'javascript:updateWebsite(\'elseReal\', \'' + ${website.getWebsiteId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td><a th:text="${website.getFlourExp()}" th:onclick="'javascript:updateWebsite(\'flourExp\', \'' + ${website.getWebsiteId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td><a th:text="${website.getFlourReal()}" th:onclick="'javascript:updateWebsite(\'flourReal\', \'' + ${website.getWebsiteId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td><a th:text="${website.getOilExp()}" th:onclick="'javascript:updateWebsite(\'oilExp\', \'' + ${website.getWebsiteId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td><a th:text="${website.getOilReal()}" th:onclick="'javascript:updateWebsite(\'oilReal\', \'' + ${website.getWebsiteId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td><a th:text="${website.getRiceExp()}" th:onclick="'javascript:updateWebsite(\'riceExp\', \'' + ${website.getWebsiteId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td><a th:text="${website.getRiceReal()}" th:onclick="'javascript:updateWebsite(\'riceReal\', \'' + ${website.getWebsiteId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td th:text="${website.getWebsiteId()}"></td>
+                <td><button th:onclick="'javascript:deleteWebsite(\''+${website.getCompanyId()}+'\');'">删除</button></td>
+            </tr>
+        </div>
+    </table>
+    <a th:href="@{'/toWebsite?page='+${websites.getPageNum() - 1}}">上一页</a>
+    <a th:href="@{'/toWebsite?page='+${websites.getPageNum() + 1}}">下一页</a>
+    <a href="/toIndex">返回</a><br/>
+
+    <script>
+        function deleteWebsite(wid){
+            var curWwwPath=window.document.location.href;
+            var pathName=window.document.location.pathname;
+            var localhostPaht;
+            var pos = curWwwPath.indexOf(pathName);
+            localhostPaht = curWwwPath.substring(0,pos);
+            localhostPaht += "/";
+
+            console.log(localhostPaht)
+            var href = localhostPaht + "deleteWebsite?companyId=" + wid;
+            console.log(href)
+            location.href = href;
+        }
+
+        function updateWebsite(info, id){
+            var curWwwPath=window.document.location.href;
+            var pathName=window.document.location.pathname;
+            var localhostPaht;
+            var pos = curWwwPath.indexOf(pathName);
+            localhostPaht = curWwwPath.substring(0,pos);
+            localhostPaht += "/";
+            console.log(info)
+            console.log(id)
+
+            var value = prompt("请输入更改值","");
+            if(value){
+                var href = localhostPaht + "updateWebsite?" + info + "=" + value + "&websiteId=" + id;
+                console.log(href)
+                location.href = href;
+            }
+        }
+
+    </script>
+</body>
+</html>

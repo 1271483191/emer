@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    company_info<br/>
+
+    <table id="companyInfo" border="1">
+        <div th:each="company,companyStat : ${companyInfos.getList()}">
+            <tr>
+                <td th:text="${company.getCompanyId()}"></td>
+                <td><a th:text="${company.getActivationStatus()}" th:onclick="'javascript:updateCompanyInfo(\'activationStatus\', \'' + ${company.getCompanyId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td><a th:text="${company.getInDay()}" th:onclick="'javascript:updateCompanyInfo(\'inDay\', \'' + ${company.getCompanyId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td><a th:text="${company.getLatitude()}" th:onclick="'javascript:updateCompanyInfo(\'latitude\', \'' + ${company.getCompanyId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td><a th:text="${company.getLongitude()}" th:onclick="'javascript:updateCompanyInfo(\'longitude\', \'' + ${company.getCompanyId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td><a th:text="${company.getLocation()}" th:onclick="'javascript:updateCompanyInfo(\'location\', \'' + ${company.getCompanyId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td><a th:text="${company.getName()}" th:onclick="'javascript:updateCompanyInfo(\'name\', \'' + ${company.getCompanyId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td><a th:text="${company.getOutDay()}" th:onclick="'javascript:updateCompanyInfo(\'outDay\', \'' + ${company.getCompanyId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td><a th:text="${company.getPhone()}" th:onclick="'javascript:updateCompanyInfo(\'phone\', \'' + ${company.getCompanyId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td><a th:text="${company.getPosition()}" th:onclick="'javascript:updateCompanyInfo(\'position\', \'' + ${company.getCompanyId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td><a th:text="${company.getPrincipal()}" th:onclick="'javascript:updateCompanyInfo(\'principal\', \'' + ${company.getCompanyId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td><a th:text="${company.getSaveDay()}" th:onclick="'javascript:updateCompanyInfo(\'saveDay\', \'' + ${company.getCompanyId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td><a th:text="${company.getSocialId()}" th:onclick="'javascript:updateCompanyInfo(\'socialId\', \'' + ${company.getCompanyId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td><a th:text="${company.getLevel()}" th:onclick="'javascript:updateCompanyInfo(\'level\', \'' + ${company.getCompanyId()} + '\');'" href="javascript:void(0)"> </a></td>
+            </tr>
+        </div>
+    </table><br/>
+    <a th:href="@{'/toCompanyInfo?page='+${companyInfos.getPageNum() - 1}}">上一页</a>
+    <a th:href="@{'/toCompanyInfo?page='+${companyInfos.getPageNum() + 1}}">下一页</a>
+    <a href="/toIndex">返回</a><br/>
+
+    <script src="jquery/jquery-1.7.2.min.js"></script>
+
+    <script>
+
+        function updateCompanyInfo(info, id){
+            var curWwwPath=window.document.location.href;
+            var pathName=window.document.location.pathname;
+            var localhostPaht;
+            var pos = curWwwPath.indexOf(pathName);
+            localhostPaht = curWwwPath.substring(0,pos);
+            localhostPaht += "/";
+            console.log(info)
+            console.log(id)
+
+            var value = prompt("请输入更改值","");
+            if(value){
+                var href = localhostPaht + "updateCompanyInfo?" + info + "=" + value + "&companyId=" + id;
+                console.log(href)
+                location.href = href;
+            }
+        }
+    </script>
+</body>
+</html>

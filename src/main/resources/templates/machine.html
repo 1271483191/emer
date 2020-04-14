@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    machine<br/>
+    <table border="1">
+        <div th:each="machine,machineStat : ${machines.getList()}">
+            <tr>
+                <td th:text="${machine.getCompanyId()}"></td>
+                <td><a th:text="${machine.getState()}" th:onclick="'javascript:updateMachine(\'state\', \'' + ${machine.getMachineId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td><a th:text="${machine.getElseDay()}" th:onclick="'javascript:updateMachine(\'elseDay\', \'' + ${machine.getMachineId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td><a th:text="${machine.getElseDayReal()}" th:onclick="'javascript:updateMachine(\'elseDayReal\', \'' + ${machine.getMachineId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td th:text="${machine.getMachineId()}"></td>
+                <td><a th:text="${machine.getOilConciseDay()}" th:onclick="'javascript:updateMachine(\'oilConciseDay\', \'' + ${machine.getMachineId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td><a th:text="${machine.getOilConciseDayReal()}" th:onclick="'javascript:updateMachine(\'oilConciseDayReal\', \'' + ${machine.getMachineId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td><a th:text="${machine.getOilDay()}" th:onclick="'javascript:updateMachine(\'oilDay\', \'' + ${machine.getMachineId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td><a th:text="${machine.getOilDayReal()}" th:onclick="'javascript:updateMachine(\'oilDayReal\', \'' + ${machine.getMachineId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td><a th:text="${machine.getOilSubpDay()}" th:onclick="'javascript:updateMachine(\'oilSubpDay\', \'' + ${machine.getMachineId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td><a th:text="${machine.getOilSubpDayReal()}" th:onclick="'javascript:updateMachine(\'oilSubpDayReal\', \'' + ${machine.getMachineId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td><a th:text="${machine.getPaddyDay()}" th:onclick="'javascript:updateMachine(\'paddyDay\', \'' + ${machine.getMachineId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td><a th:text="${machine.getPaddyDayReal()}" th:onclick="'javascript:updateMachine(\'paddyDayReal\', \'' + ${machine.getMachineId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td><a th:text="${machine.getWheatDay()}" th:onclick="'javascript:updateMachine(\'wheatDay\', \'' + ${machine.getMachineId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td><a th:text="${machine.getWheatDayReal()}" th:onclick="'javascript:updateMachine(\'wheatDayReal\', \'' + ${machine.getMachineId()} + '\');'" href="javascript:void(0)"> </a></td>
+
+                <td><button th:onclick="'javascript:deleteMachine(\''+${machine.getCompanyId()}+'\');'">删除</button></td>
+            </tr>
+        </div>
+    </table>
+    <a th:href="@{'/toMachine?page='+${machines.getPageNum() - 1}}">上一页</a>
+    <a th:href="@{'/toMachine?page='+${machines.getPageNum() + 1}}">下一页</a>
+    <a href="/toIndex">返回</a><br/>
+
+    <script>
+        function deleteMachine(mid){
+            var curWwwPath=window.document.location.href;
+            var pathName=window.document.location.pathname;
+            var localhostPaht;
+            var pos = curWwwPath.indexOf(pathName);
+            localhostPaht = curWwwPath.substring(0,pos);
+            localhostPaht += "/";
+
+            console.log(localhostPaht)
+            var href = localhostPaht + "deleteMachine?companyId=" + mid;
+            console.log(href)
+            location.href = href;
+        }
+
+        function updateMachine(info, id){
+            var curWwwPath=window.document.location.href;
+            var pathName=window.document.location.pathname;
+            var localhostPaht;
+            var pos = curWwwPath.indexOf(pathName);
+            localhostPaht = curWwwPath.substring(0,pos);
+            localhostPaht += "/";
+            console.log(info)
+            console.log(id)
+
+            var value = prompt("请输入更改值","");
+            if(value){
+                var href = localhostPaht + "updateMachine?" + info + "=" + value + "&machineId=" + id;
+                console.log(href)
+                location.href = href;
+            }
+        }
+    </script>
+</body>
+</html>

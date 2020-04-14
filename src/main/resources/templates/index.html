@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+</head>
+<body>
+    <button onclick="navigate(1)">公司信息</button><br/>
+    <button onclick="navigate(2)">应急配送中心</button><br/>
+    <button onclick="navigate(3)">应急加工企业</button><br/>
+    <button onclick="navigate(4)">应急储运企业</button><br/>
+    <button onclick="navigate(5)">应急供应网点</button><br/>
+    <button onclick="navigate(6)">用户</button><br/>
+    <button onclick="navigate(7)">新增用户</button><br/>
+
+    <script>
+        function navigate(flag) {
+            var curWwwPath=window.document.location.href;
+            var pathName=window.document.location.pathname;
+            var localhostPaht;
+            console.log(pathName)
+            if(pathName == "/"){
+                localhostPaht = curWwwPath;
+            }else{
+                var pos=curWwwPath.indexOf(pathName);
+                localhostPaht=curWwwPath.substring(0,pos);
+                localhostPaht += "/";
+            }
+
+            console.log(localhostPaht);
+            switch (flag) {
+                case 1:
+                    location.href = localhostPaht + "toCompanyInfo";
+                    break;
+                case 2:
+                    location.href = localhostPaht + "toDelivery";
+                    break;
+                case 3:
+                    location.href = localhostPaht + "toMachine";
+                    break;
+                case 4:
+                    location.href = localhostPaht + "toStoreage";
+                    break;
+                case 5:
+                    location.href = localhostPaht + "toWebsite";
+                    break;
+                case 6:
+                    location.href = localhostPaht + "toUser";
+                    break;
+                case 7:
+                    location.href = localhostPaht + "toInsertUser";
+                    break;
+            }
+        }
+
+
+    </script>
+</body>
+</html>

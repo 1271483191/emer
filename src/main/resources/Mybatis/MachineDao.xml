@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yunjing.emer.dao.MachineDao">
+  <resultMap id="BaseResultMap" type="com.yunjing.emer.entity.Machine">
+    <id column="machine_id" jdbcType="INTEGER" property="machineId" />
+    <result column="company_id" jdbcType="INTEGER" property="companyId" />
+    <result column="wheat_day" jdbcType="DOUBLE" property="wheatDay" />
+    <result column="paddy_day" jdbcType="DOUBLE" property="paddyDay" />
+    <result column="oil_day" jdbcType="DOUBLE" property="oilDay" />
+    <result column="oil_concise_day" jdbcType="DOUBLE" property="oilConciseDay" />
+    <result column="oil_subp_day" jdbcType="DOUBLE" property="oilSubpDay" />
+    <result column="else_day" jdbcType="DOUBLE" property="elseDay" />
+    <result column="wheat_day_real" jdbcType="DOUBLE" property="wheatDayReal" />
+    <result column="paddy_day_real" jdbcType="DOUBLE" property="paddyDayReal" />
+    <result column="oil_day_real" jdbcType="DOUBLE" property="oilDayReal" />
+    <result column="oil_concise_day_real" jdbcType="DOUBLE" property="oilConciseDayReal" />
+    <result column="oil_subp_day_real" jdbcType="DOUBLE" property="oilSubpDayReal" />
+    <result column="else_day_real" jdbcType="DOUBLE" property="elseDayReal" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    machine_id, company_id, wheat_day, paddy_day, oil_day, oil_concise_day, oil_subp_day, 
+    else_day, wheat_day_real, paddy_day_real, oil_day_real, oil_concise_day_real, oil_subp_day_real, 
+    else_day_real, `state`
+  </sql>
+  <select id="selectByExample" parameterType="com.yunjing.emer.entity.MachineExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from machine
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from machine
+    where machine_id = #{machineId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from machine
+    where machine_id = #{machineId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yunjing.emer.entity.MachineExample">
+    delete from machine
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="machine_id" keyProperty="machineId" parameterType="com.yunjing.emer.entity.Machine" useGeneratedKeys="true">
+    insert into machine (company_id, wheat_day, paddy_day, 
+      oil_day, oil_concise_day, oil_subp_day, 
+      else_day, wheat_day_real, paddy_day_real, 
+      oil_day_real, oil_concise_day_real, oil_subp_day_real, 
+      else_day_real, `state`)
+    values (#{companyId,jdbcType=INTEGER}, #{wheatDay,jdbcType=DOUBLE}, #{paddyDay,jdbcType=DOUBLE}, 
+      #{oilDay,jdbcType=DOUBLE}, #{oilConciseDay,jdbcType=DOUBLE}, #{oilSubpDay,jdbcType=DOUBLE}, 
+      #{elseDay,jdbcType=DOUBLE}, #{wheatDayReal,jdbcType=DOUBLE}, #{paddyDayReal,jdbcType=DOUBLE}, 
+      #{oilDayReal,jdbcType=DOUBLE}, #{oilConciseDayReal,jdbcType=DOUBLE}, #{oilSubpDayReal,jdbcType=DOUBLE}, 
+      #{elseDayReal,jdbcType=DOUBLE}, #{state,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="machine_id" keyProperty="machineId" parameterType="com.yunjing.emer.entity.Machine" useGeneratedKeys="true">
+    insert into machine
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="companyId != null">
+        company_id,
+      </if>
+      <if test="wheatDay != null">
+        wheat_day,
+      </if>
+      <if test="paddyDay != null">
+        paddy_day,
+      </if>
+      <if test="oilDay != null">
+        oil_day,
+      </if>
+      <if test="oilConciseDay != null">
+        oil_concise_day,
+      </if>
+      <if test="oilSubpDay != null">
+        oil_subp_day,
+      </if>
+      <if test="elseDay != null">
+        else_day,
+      </if>
+      <if test="wheatDayReal != null">
+        wheat_day_real,
+      </if>
+      <if test="paddyDayReal != null">
+        paddy_day_real,
+      </if>
+      <if test="oilDayReal != null">
+        oil_day_real,
+      </if>
+      <if test="oilConciseDayReal != null">
+        oil_concise_day_real,
+      </if>
+      <if test="oilSubpDayReal != null">
+        oil_subp_day_real,
+      </if>
+      <if test="elseDayReal != null">
+        else_day_real,
+      </if>
+      <if test="state != null">
+        `state`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="companyId != null">
+        #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="wheatDay != null">
+        #{wheatDay,jdbcType=DOUBLE},
+      </if>
+      <if test="paddyDay != null">
+        #{paddyDay,jdbcType=DOUBLE},
+      </if>
+      <if test="oilDay != null">
+        #{oilDay,jdbcType=DOUBLE},
+      </if>
+      <if test="oilConciseDay != null">
+        #{oilConciseDay,jdbcType=DOUBLE},
+      </if>
+      <if test="oilSubpDay != null">
+        #{oilSubpDay,jdbcType=DOUBLE},
+      </if>
+      <if test="elseDay != null">
+        #{elseDay,jdbcType=DOUBLE},
+      </if>
+      <if test="wheatDayReal != null">
+        #{wheatDayReal,jdbcType=DOUBLE},
+      </if>
+      <if test="paddyDayReal != null">
+        #{paddyDayReal,jdbcType=DOUBLE},
+      </if>
+      <if test="oilDayReal != null">
+        #{oilDayReal,jdbcType=DOUBLE},
+      </if>
+      <if test="oilConciseDayReal != null">
+        #{oilConciseDayReal,jdbcType=DOUBLE},
+      </if>
+      <if test="oilSubpDayReal != null">
+        #{oilSubpDayReal,jdbcType=DOUBLE},
+      </if>
+      <if test="elseDayReal != null">
+        #{elseDayReal,jdbcType=DOUBLE},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yunjing.emer.entity.MachineExample" resultType="java.lang.Long">
+    select count(*) from machine
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update machine
+    <set>
+      <if test="record.machineId != null">
+        machine_id = #{record.machineId,jdbcType=INTEGER},
+      </if>
+      <if test="record.companyId != null">
+        company_id = #{record.companyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.wheatDay != null">
+        wheat_day = #{record.wheatDay,jdbcType=DOUBLE},
+      </if>
+      <if test="record.paddyDay != null">
+        paddy_day = #{record.paddyDay,jdbcType=DOUBLE},
+      </if>
+      <if test="record.oilDay != null">
+        oil_day = #{record.oilDay,jdbcType=DOUBLE},
+      </if>
+      <if test="record.oilConciseDay != null">
+        oil_concise_day = #{record.oilConciseDay,jdbcType=DOUBLE},
+      </if>
+      <if test="record.oilSubpDay != null">
+        oil_subp_day = #{record.oilSubpDay,jdbcType=DOUBLE},
+      </if>
+      <if test="record.elseDay != null">
+        else_day = #{record.elseDay,jdbcType=DOUBLE},
+      </if>
+      <if test="record.wheatDayReal != null">
+        wheat_day_real = #{record.wheatDayReal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.paddyDayReal != null">
+        paddy_day_real = #{record.paddyDayReal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.oilDayReal != null">
+        oil_day_real = #{record.oilDayReal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.oilConciseDayReal != null">
+        oil_concise_day_real = #{record.oilConciseDayReal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.oilSubpDayReal != null">
+        oil_subp_day_real = #{record.oilSubpDayReal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.elseDayReal != null">
+        else_day_real = #{record.elseDayReal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.state != null">
+        `state` = #{record.state,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update machine
+    set machine_id = #{record.machineId,jdbcType=INTEGER},
+      company_id = #{record.companyId,jdbcType=INTEGER},
+      wheat_day = #{record.wheatDay,jdbcType=DOUBLE},
+      paddy_day = #{record.paddyDay,jdbcType=DOUBLE},
+      oil_day = #{record.oilDay,jdbcType=DOUBLE},
+      oil_concise_day = #{record.oilConciseDay,jdbcType=DOUBLE},
+      oil_subp_day = #{record.oilSubpDay,jdbcType=DOUBLE},
+      else_day = #{record.elseDay,jdbcType=DOUBLE},
+      wheat_day_real = #{record.wheatDayReal,jdbcType=DOUBLE},
+      paddy_day_real = #{record.paddyDayReal,jdbcType=DOUBLE},
+      oil_day_real = #{record.oilDayReal,jdbcType=DOUBLE},
+      oil_concise_day_real = #{record.oilConciseDayReal,jdbcType=DOUBLE},
+      oil_subp_day_real = #{record.oilSubpDayReal,jdbcType=DOUBLE},
+      else_day_real = #{record.elseDayReal,jdbcType=DOUBLE},
+      `state` = #{record.state,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yunjing.emer.entity.Machine">
+    update machine
+    <set>
+      <if test="companyId != null">
+        company_id = #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="wheatDay != null">
+        wheat_day = #{wheatDay,jdbcType=DOUBLE},
+      </if>
+      <if test="paddyDay != null">
+        paddy_day = #{paddyDay,jdbcType=DOUBLE},
+      </if>
+      <if test="oilDay != null">
+        oil_day = #{oilDay,jdbcType=DOUBLE},
+      </if>
+      <if test="oilConciseDay != null">
+        oil_concise_day = #{oilConciseDay,jdbcType=DOUBLE},
+      </if>
+      <if test="oilSubpDay != null">
+        oil_subp_day = #{oilSubpDay,jdbcType=DOUBLE},
+      </if>
+      <if test="elseDay != null">
+        else_day = #{elseDay,jdbcType=DOUBLE},
+      </if>
+      <if test="wheatDayReal != null">
+        wheat_day_real = #{wheatDayReal,jdbcType=DOUBLE},
+      </if>
+      <if test="paddyDayReal != null">
+        paddy_day_real = #{paddyDayReal,jdbcType=DOUBLE},
+      </if>
+      <if test="oilDayReal != null">
+        oil_day_real = #{oilDayReal,jdbcType=DOUBLE},
+      </if>
+      <if test="oilConciseDayReal != null">
+        oil_concise_day_real = #{oilConciseDayReal,jdbcType=DOUBLE},
+      </if>
+      <if test="oilSubpDayReal != null">
+        oil_subp_day_real = #{oilSubpDayReal,jdbcType=DOUBLE},
+      </if>
+      <if test="elseDayReal != null">
+        else_day_real = #{elseDayReal,jdbcType=DOUBLE},
+      </if>
+      <if test="state != null">
+        `state` = #{state,jdbcType=INTEGER},
+      </if>
+    </set>
+    where machine_id = #{machineId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yunjing.emer.entity.Machine">
+    update machine
+    set company_id = #{companyId,jdbcType=INTEGER},
+      wheat_day = #{wheatDay,jdbcType=DOUBLE},
+      paddy_day = #{paddyDay,jdbcType=DOUBLE},
+      oil_day = #{oilDay,jdbcType=DOUBLE},
+      oil_concise_day = #{oilConciseDay,jdbcType=DOUBLE},
+      oil_subp_day = #{oilSubpDay,jdbcType=DOUBLE},
+      else_day = #{elseDay,jdbcType=DOUBLE},
+      wheat_day_real = #{wheatDayReal,jdbcType=DOUBLE},
+      paddy_day_real = #{paddyDayReal,jdbcType=DOUBLE},
+      oil_day_real = #{oilDayReal,jdbcType=DOUBLE},
+      oil_concise_day_real = #{oilConciseDayReal,jdbcType=DOUBLE},
+      oil_subp_day_real = #{oilSubpDayReal,jdbcType=DOUBLE},
+      else_day_real = #{elseDayReal,jdbcType=DOUBLE},
+      `state` = #{state,jdbcType=INTEGER}
+    where machine_id = #{machineId,jdbcType=INTEGER}
+  </update>
+</mapper>

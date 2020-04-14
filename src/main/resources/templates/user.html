@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    user<br/>
+    <table border="1">
+        <div th:each="user,userStat : ${users.getList()}">
+            <tr>
+                <td><a th:text="${user.getPhone()}" th:onclick="'javascript:updateUser(\'phone\', \'' + ${user.getUserId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td><a th:text="${user.getCompany()}" th:onclick="'javascript:updateUser(\'company\', \'' + ${user.getUserId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td><a th:text="${user.getName()}" th:onclick="'javascript:updateUser(\'name\', \'' + ${user.getUserId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td><a th:text="${user.getPassword()}" th:onclick="'javascript:updateUser(\'password\', \'' + ${user.getUserId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td><a th:text="${user.getProvince()}" th:onclick="'javascript:updateUser(\'province\', \'' + ${user.getUserId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td><a th:text="${user.getType()}" th:onclick="'javascript:updateUser(\'type\', \'' + ${user.getUserId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td th:text="${user.getUserId()}"></td>
+                <td><a th:text="${user.getUsername()}" th:onclick="'javascript:updateUser(\'username\', \'' + ${user.getUserId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td><button th:onclick="'javascript:deleteUser(\''+${user.getUserId()}+'\');'">删除</button></td>
+            </tr>
+        </div>
+    </table>
+    <a th:href="@{'/toUser?page='+${users.getPageNum() - 1}}">上一页</a>
+    <a th:href="@{'/toUser?page='+${users.getPageNum() + 1}}">下一页</a>
+    <a href="/toIndex">返回</a><br/>
+
+    <script>
+        function deleteUser(uid){
+            var curWwwPath=window.document.location.href;
+            var pathName=window.document.location.pathname;
+            var localhostPaht;
+            var pos = curWwwPath.indexOf(pathName);
+            localhostPaht = curWwwPath.substring(0,pos);
+            localhostPaht += "/";
+
+            console.log(localhostPaht)
+            var href = localhostPaht + "deleteUser?userId=" + uid;
+            console.log(href)
+            location.href = href;
+        }
+
+        function updateUser(info, id){
+            var curWwwPath=window.document.location.href;
+            var pathName=window.document.location.pathname;
+            var localhostPaht;
+            var pos = curWwwPath.indexOf(pathName);
+            localhostPaht = curWwwPath.substring(0,pos);
+            localhostPaht += "/";
+            console.log(info)
+            console.log(id)
+
+            var value = prompt("请输入更改值","");
+            if(value){
+                var href = localhostPaht + "updateUser?" + info + "=" + value + "&userId=" + id;
+                console.log(href)
+                location.href = href;
+            }
+        }
+    </script></body>
+</html>

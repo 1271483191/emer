@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    storeage<br/>
+    <table border="1">
+        <div th:each="storeage,storeageStat : ${storeages.getList()}">
+            <tr>
+                <td th:text="${storeage.getCompanyId()}"></td>
+                <td><a th:text="${storeage.getState()}" th:onclick="'javascript:updateStoreage(\'state\', \'' + ${storeage.getStoreageId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td><a th:text="${storeage.getCarNum()}" th:onclick="'javascript:updateStoreage(\'carNum\', \'' + ${storeage.getStoreageId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td th:text="${storeage.getStoreageId()}"></td>
+                <td><a th:text="${storeage.getTransportDay()}" th:onclick="'javascript:updateStoreage(\'transportDay\', \'' + ${storeage.getStoreageId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td><a th:text="${storeage.getTransportDayReal()}" th:onclick="'javascript:updateStoreage(\'transportDayReal\', \'' + ${storeage.getStoreageId()} + '\');'" href="javascript:void(0)"> </a></td>
+
+
+                <td><button th:onclick="'javascript:deleteStoreage(\''+${storeage.getCompanyId()}+'\');'">删除</button></td>
+            </tr>
+        </div>
+    </table>
+    <a th:href="@{'/toStoreage?page='+${storeages.getPageNum() - 1}}">上一页</a>
+    <a th:href="@{'/toStoreage?page='+${storeages.getPageNum() + 1}}">下一页</a>
+    <a href="/toIndex">返回</a><br/>
+
+    <script>
+        function deleteStoreage(sid){
+            var curWwwPath=window.document.location.href;
+            var pathName=window.document.location.pathname;
+            var localhostPaht;
+            var pos = curWwwPath.indexOf(pathName);
+            localhostPaht = curWwwPath.substring(0,pos);
+            localhostPaht += "/";
+
+            console.log(localhostPaht)
+            var href = localhostPaht + "deleteStoreage?companyId=" + sid;
+            console.log(href)
+            location.href = href;
+        }
+
+        function updateStoreage(info, id){
+            var curWwwPath=window.document.location.href;
+            var pathName=window.document.location.pathname;
+            var localhostPaht;
+            var pos = curWwwPath.indexOf(pathName);
+            localhostPaht = curWwwPath.substring(0,pos);
+            localhostPaht += "/";
+            console.log(info)
+            console.log(id)
+
+            var value = prompt("请输入更改值","");
+            if(value){
+                var href = localhostPaht + "updateStoreage?" + info + "=" + value + "&storeageId=" + id;
+                console.log(href)
+                location.href = href;
+            }
+        }
+    </script>
+</body>
+</html>
