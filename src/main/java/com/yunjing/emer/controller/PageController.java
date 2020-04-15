@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class PageController {
@@ -108,9 +110,39 @@ public class PageController {
 
     @RequestMapping("/toIndex")
     @ResponseBody
-    public ModelAndView toIndex(){
+    public ModelAndView toIndex(Integer page){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("index");
+
+        if(page == null){
+            page = 1;
+        }
+
+        PageHelper.startPage(page,20);
+        PageInfo<CompanyInfo> companyInfoList = new PageInfo<>(companyInfoService.selectByPage());
+        //System.out.println(companyInfoList);
+        System.out.println(companyInfoList.getList());
+
+
+        List websiteList = websiteService.selectAll();
+        List deliveryList = deliveryService.selectAll();
+        List machineList = machineService.selectAll();
+        List storeageList = storeageService.selectAll();
+
+        int websiteNum = websiteList.size();
+        int deliveryNum = deliveryList.size();
+        int machineNum = machineList.size();
+        int storeageNum = storeageList.size();
+
+        Map baseInfoMap = new HashMap();
+        baseInfoMap.put("websiteNum", websiteNum);
+        baseInfoMap.put("deliveryNum", deliveryNum);
+        baseInfoMap.put("machineNum", machineNum);
+        baseInfoMap.put("storeageNum", storeageNum);
+        baseInfoMap.put("total", websiteNum + deliveryNum + machineNum + storeageNum);
+        baseInfoMap.put("companyInfoList", companyInfoList);
+        modelAndView.addObject("baseInfoMap", baseInfoMap);
+
         return modelAndView;
     }
 
@@ -294,4 +326,74 @@ public class PageController {
         System.out.println(result);
         return "redirect:/toUser";
     }
+
+    @RequestMapping("/toIndexMain")
+    public String toIndexMain(){
+        return "indexMain";
+    }
+
+    @RequestMapping("/toLogin")
+    public String toLogin(){
+        return "login";
+    }
+
+    @RequestMapping("/toRegist")
+    public String toRegist(){
+        return "regist";
+    }
+
+    @RequestMapping("/toSearch")
+    public String toSearch(){
+        return "search";
+    }
+
+    @RequestMapping("/toSupplyShow")
+    @ResponseBody
+    public ModelAndView toSupplyShow(Integer page){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("supply-show");
+
+        if(page == null){
+            page = 1;
+        }
+
+        PageHelper.startPage(page,10);
+        PageInfo<Website> websiteList = new PageInfo<>(websiteService.selectByPage());
+        //System.out.println(companyInfoList);
+
+        List<CompanyInfo> companyInfoList = new ArrayList<>();
+
+        for(Website e : websiteList.getList()){
+            companyInfoList.add(companyInfoService.selectById(e.getCompanyId()));
+        }
+
+        modelAndView.addObject("companys", companyInfoList);
+        modelAndView.addObject("websites", websiteList);
+
+        return modelAndView;
+    }
+
+    @RequestMapping("/toSupplyStatistics")
+    @ResponseBody
+    public ModelAndView toSupplyStatistics(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("supply-statistics");
+
+
+        return modelAndView;
+    }
+
+    @RequestMapping("/toWebSite2")
+    @ResponseBody
+    public ModelAndView toWebSite2(String websiteId){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("website2");
+        Website website = websiteService.selectById(websiteId);
+        modelAndView.addObject("website", website);
+
+        return modelAndView;
+
+    }
+
 }
+

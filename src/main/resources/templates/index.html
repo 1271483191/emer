@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
+<html xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -53,11 +54,11 @@
                   <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"> </div>
               </div>
             <!--logo start-->
-            <a href="index.html" class="logo"><b>粮食应急保障企业信息统计</b></a>
+            <a href="toIndex" class="logo"><b>粮食应急保障企业信息统计</b></a>
 
             <div class="top-menu">
             	<ul class="nav pull-right top-menu">
-                    <li><a class="logout" href="login.html">注销</a></li>
+                    <li><a class="logout" href="toLogin">注销</a></li>
             	</ul>
             </div>
         </header>
@@ -77,14 +78,14 @@
               	  <h5 class="centered">云境商务智能研究所</h5>
               	  	
                   <li class="mt">
-                      <a class="active" href="index.html">
+                      <a class="active" href="toIndex">
                           <i class="fa fa-dashboard"></i>
                           <span style="font-size: 1.5rem">首页</span>
                       </a>
                   </li>
 
                   <li class="sub-menu">
-                      <a href="search.html">
+                      <a href="toSearch">
                           <i class="fa fa-cogs"></i>
                           <span style="font-size: 1.5rem">统计查询</span>
                       </a>
@@ -95,8 +96,8 @@
                           <span style="font-size: 1.5rem">应急供应网点</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="supply-statistics.html" >供应网点统计</a></li>
-                          <li><a  href="supply-show.html" >全国供应网点列表展示</a></li>
+                          <li><a  href="toSupplyStatistics" >供应网点统计</a></li>
+                          <li><a  href="toSupplyShow" >全国供应网点列表展示</a></li>
 
                       </ul>
                   </li>
@@ -170,18 +171,18 @@
                       			</div>
 								<div class="row">
 									<div class="col-sm-6 col-xs-6 goleft">
-										<p><i class="fa fa-database"></i> 70个</p>
+										<p><i class="fa fa-database"></i> <span th:text="${baseInfoMap.get('websiteNum')} + 个"></span></p>
 									</div>
 	                      		</div>
 								<canvas id="serverstatus01" height="120" width="120"></canvas>
 								<script>
 									var doughnutData = [
 											{
-												value: 70,
+												value: [[${baseInfoMap.get("websiteNum")}]],
 												color:"#99CCFF"
 											},
 											{
-												value : 30,
+												value : [[${baseInfoMap.get("total")}]],
 												color : "#fdfdfd"
 											}
 										];
@@ -197,18 +198,18 @@
 								  </div>
 								  <div class="row">
 									  <div class="col-sm-6 col-xs-6 goleft">
-										  <p><i class="fa fa-database"></i> 48家</p>
+										  <p><i class="fa fa-database"></i> <span th:text="${baseInfoMap.get('machineNum')} + 家"></span></p>
 									  </div>
 								  </div>
 								  <canvas id="serverstatus02" height="120" width="120"></canvas>
 								  <script>
                                       var doughnutData = [
                                           {
-                                              value: 48,
+                                              value: [[${baseInfoMap.get("machineNum")}]],
                                               color:"#99CCFF"
                                           },
                                           {
-                                              value : 52,
+                                              value : [[${baseInfoMap.get("total")}]],
                                               color : "#fdfdfd"
                                           }
                                       ];
@@ -224,18 +225,18 @@
 								  </div>
 								  <div class="row">
 									  <div class="col-sm-6 col-xs-6 goleft">
-										  <p><i class="fa fa-database"></i> 90个</p>
+										  <p><i class="fa fa-database"></i> <span th:text="${baseInfoMap.get('deliveryNum')} + 个"></span></p>
 									  </div>
 								  </div>
 								  <canvas id="serverstatus03" height="120" width="120"></canvas>
 								  <script>
                                       var doughnutData = [
                                           {
-                                              value: 90,
+                                              value: [[${baseInfoMap.get("deliveryNum")}]],
                                               color:"#99CCFF"
                                           },
                                           {
-                                              value : 10,
+                                              value : [[${baseInfoMap.get("total")}]],
                                               color : "#fdfdfd"
                                           }
                                       ];
@@ -250,18 +251,18 @@
 								  </div>
 								  <div class="row">
 									  <div class="col-sm-6 col-xs-6 goleft">
-										  <p><i class="fa fa-database"></i> 56家</p>
+										  <p><i class="fa fa-database"></i> <span th:text="${baseInfoMap.get('storeageNum')} + 家"></span></p>
 									  </div>
 								  </div>
 								  <canvas id="serverstatus04" height="120" width="120"></canvas>
 								  <script>
                                       var doughnutData = [
                                           {
-                                              value: 56,
+                                              value: [[${baseInfoMap.get("storeageNum")}]],
                                               color:"#99CCFF"
                                           },
                                           {
-                                              value : 44,
+                                              value : [[${baseInfoMap.get("total")}]],
                                               color : "#fdfdfd"
                                           }
                                       ];
@@ -281,23 +282,33 @@
 
 						<!-- TWITTER PANEL -->
 						<div class="col-md-12 mb">
-                      		<div class="darkblue-panel pn">
+                      		<div class="darkblue-panel ">
 								<hr>
 								<div class="content-panel">
 									<section id="no-more-tables">
-										<table id="example" class="display" cellspacing="0" width="100%">
-											<thead>
-											<tr>
-												<th>公司编号</th>
-												<th>公司名称</th>
-												<th>所在位置</th>
-												<th>负责人</th>
-												<th>联系电话</th>
-											</tr>
-											</thead>
+										<table border="1" id="example" class="display" cellspacing="0" width="100%">
+											<div>
+												<tr>
+													<th style="text-align: center; font-size: 1.5rem" >公司编号</th>
+													<th style="text-align: center; font-size: 1.5rem" >公司名称</th>
+													<th style="text-align: center; font-size: 1.5rem" >所在位置</th>
+													<th style="text-align: center; font-size: 1.5rem" >负责人</th>
+													<th style="text-align: center; font-size: 1.5rem" >联系电话</th>
+												</tr>
+											</div>
+											<div th:each="company,companyStat : ${baseInfoMap.get('companyInfoList').getList()}">
+												<tr>
+													<th style="text-align: center; font-size: 1.5rem" th:text="${company.getCompanyId()}"></th>
+													<th style="text-align: center; font-size: 1.5rem" th:text="${company.getName()}"></th>
+													<th style="text-align: center; font-size: 1.5rem" th:text="${company.getPosition()} + ${company.getLocation()}">所在位置</th>
+													<th style="text-align: center; font-size: 1.5rem" th:text="${company.getPrincipal()}">负责人</th>
+													<th style="text-align: center; font-size: 1.5rem" th:text="${company.getPhone()}">联系电话</th>
+												</tr>
+											</div>
 										</table>
 									</section>
 								</div><!-- /content-panel -->
+
 								<script>
                                     var data = [
                                         [
@@ -324,9 +335,14 @@
 
 								</script>
 
-									<div class="pull-right">
-										<h4 style="margin-right: 15px;"><a class="fa fa-download download" href="#" download="全国粮食应急保障企业信息简表">下载</a></h4>
-									</div>
+								<div style="font-size: 1.7rem;color: white;margin-top: 10px;padding-bottom: 10px" >
+									<a style="color:white;" th:href="@{'/toIndex?page='+${baseInfoMap.get('companyInfoList').getPageNum() - 1}}">上一页</a><span th:text="'&nbsp;&nbsp;第' + ${baseInfoMap.get('companyInfoList').getPageNum()} + '页&nbsp;'"></span>
+									<a style="color:white;" th:href="@{'/toIndex?page='+${baseInfoMap.get('companyInfoList').getPageNum() + 1}}">下一页</a><br/>
+								</div>
+
+								<div class="pull-right">
+									<h4 style="margin-right: 15px;"><a class="fa fa-download download" href="#" download="全国粮食应急保障企业信息简表">下载</a></h4>
+								</div>
                       		</div>
 						</div><!-- /col-md-4 -->
 					</div><!-- /row -->
@@ -407,7 +423,7 @@
       <footer class="site-footer">
           <div class="text-center">
               2020.<a href="http://www.winginbi.com" target="_blank">YunQin</a>
-              <a href="index.html#" class="go-top">
+              <a href="toIndex" class="go-top">
                   <i class="fa fa-angle-up"></i>
               </a>
           </div>
@@ -432,7 +448,7 @@
     <script type="text/javascript" src="assets/js/gritter-conf.js"></script>
 
     <!--script for this page-->
-    <script src="assets/js/sparkline-chart.js"></script>    
+    <script src="assets/js/sparkline-chart.js"></script>
 	<script src="assets/js/zabuto_calendar.js"></script>
 	
 	<script type="application/javascript">

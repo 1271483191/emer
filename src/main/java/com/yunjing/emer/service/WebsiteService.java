@@ -14,4 +14,5 @@ public interface WebsiteService {
     boolean deleteByCId(Integer cid);
     boolean update(Website website);
     Page<Website> selectByPage();
+    Website selectById(String websiteId);
 }

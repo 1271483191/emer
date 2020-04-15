@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -46,11 +47,11 @@
             <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"> </div>
         </div>
         <!--logo start-->
-        <a href="index.html" class="logo"><b>粮食应急保障企业信息统计</b></a>
+        <a href="toIndex" class="logo"><b>粮食应急保障企业信息统计</b></a>
 
         <div class="top-menu">
             <ul class="nav pull-right top-menu">
-                <li><a class="logout" href="login.html">注销</a></li>
+                <li><a class="logout" href="toLogin">注销</a></li>
             </ul>
         </div>
     </header>
@@ -70,26 +71,26 @@
                 <h5 class="centered">云境商务智能研究所</h5>
 
                 <li class="mt">
-                    <a  href="index.html">
+                    <a  href="toIndex">
                         <i class="fa fa-dashboard"></i>
                         <span style="font-size: 1.5rem">首页</span>
                     </a>
                 </li>
 
                 <li class="sub-menu">
-                    <a  href="search.html">
+                    <a class="active" href="toSearch">
                         <i class="fa fa-cogs"></i>
                         <span style="font-size: 1.5rem">统计查询</span>
                     </a>
                 </li>
                 <li class="sub-menu">
-                    <a class="active" href="javascript:;" >
+                    <a href="javascript:;" >
                         <i class="fa fa-book"></i>
                         <span style="font-size: 1.5rem">应急供应网点</span>
                     </a>
                     <ul class="sub">
-                        <li><a  href="supply-statistics.html" >供应网点统计</a></li>
-                        <li><a  href="supply-show.html" >全国供应网点列表展示</a></li>
+                        <li><a  href="toSupplyStatistics" >供应网点统计</a></li>
+                        <li><a  href="toSupplyShow" >全国供应网点列表展示</a></li>
 
                     </ul>
                 </li>
@@ -151,144 +152,215 @@
 
             <div class="row">
                 <div class="col-lg-12 main-chart">
-                    <h3><i class="fa fa-angle-right"></i>供应能力统计</h3>
+                    <h3><i class="fa fa-angle-right"></i>全国供应网点列表展示</h3>
                     <hr>
-
                     <div class="row mt">
-                        <div class="col-lg-3">
+                        <div class="col-lg-12">
                             <div class="content-panel">
-                                <h4><i class="fa fa-angle-right"></i> 面粉</h4>
-                                <div class="panel-body">
-                                    <div id="powder" class="graph"></div>
+                                <section id="no-more-tables1">
+                                    <table class="table table-bordered table-striped table-condensed cf" style="color: #5e5e5e">
+                                        <thead class="cf">
+                                        <tr>
+                                            <th>网点编号</th>
+                                            <th>网点名称</th>
+                                            <th class="numeric">生产状态</th>
+                                            <th class="numeric">停用</th>
+
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="website,websiteStat : ${websites.getList()}">
+                                            <td>
+                                                <a  th:text="${website.getWebsiteId()}" th:href="@{'/toWebSite2?websiteId='+${website.getWebsiteId()}}"></a>
+                                            </td>
+                                            <td th:text="${companys.get(websiteStat.index).getName()}"></td>
+                                            <span th:switch="${website.getState()}">
+                                                <td th:case="1">生产中</td>
+                                                <td th:case="0">停产</td>
+                                            </span>
+
+                                            <span th:switch="${website.getState()}">
+                                                <td th:case="1"><button>停用</button></td>
+                                                <td th:case="0">已停产</td>
+                                            </span>
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+
+                                </section>
+                                <div style="font-size: 1.7rem;margin-top: 10px;padding-bottom: 10px;text-align: center" >
+                                    <a th:href="@{'/toSupplyShow?page='+${websites.getPageNum() - 1}}">上一页</a><span th:text="'&nbsp;&nbsp;第' + ${websites.getPageNum()} + '页&nbsp;'"></span>
+                                    <a th:href="@{'/toSupplyShow?page='+${websites.getPageNum() + 1}}">下一页</a><br/>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="content-panel">
-                                <h4><i class="fa fa-angle-right"></i> 大米</h4>
-                                <div class="panel-body">
-                                    <div id="rice" class="graph"></div>
-                                </div>
-                            </div>
-                        </div>
+                            </div><!-- /content-panel -->
+                        </div><!-- /col-lg-12 -->
+                    </div><!-- /row -->
+                    <br>
 
 
-
-                        <div class="col-lg-3">
-                            <div class="content-panel">
-                                <h4><i class="fa fa-angle-right"></i> 食用油</h4>
-                                <div class="panel-body">
-                                    <div id="oil" class="graph"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="content-panel">
-                                <h4><i class="fa fa-angle-right"></i> 其他</h4>
-                                <div class="panel-body">
-                                    <div id="other" class="graph"></div>
-                                </div>
-                            </div>
-                        </div>
+                    <h3><i class="fa fa-angle-right"></i>网点搜索</h3>
+                    <hr>
+                    <br>
+                    <div class="sear">
+                        <h5 style="display: inline">时间查询：</h5><span><br></span>
+                        <input type="date" id="time1" value="time1" style="border-radius: 0.9rem">&emsp;至 &emsp;
+                        <input type="date" id="time2" value="time2" style="border-radius: 0.9rem">
+                        <span><br></span>
+                        <button class="pull-right searchbutt">查询</button>
                     </div>
 
 
 
-                </div>
-            </div>
-            <hr>
-
-            <div class="row">
-                <div class="col-lg-12 main-chart">
+                    <br>
                     <div class="row mt">
-                        <div class="col-lg-3">
+                        <div class="col-lg-12">
                             <div class="content-panel">
-                                <h4><i class="fa fa-angle-right"></i>供应网点</h4>
-                                <div class="panel-body">
-                                    <div id="number1" class="graph"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="content-panel">
-                                <h4><i class="fa fa-angle-right"></i>企业数量</h4>
-                                <div class="panel-body">
-                                    <div id="number2" class="graph"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <hr>
+                                <section  id="no-more-tables2">
+                                    <table class="table table-bordered table-striped table-condensed cf" style="color: #5e5e5e">
+                                        <thead class="cf">
+                                        <tr>
+                                            <th>Code</th>
+                                            <th>Company</th>
+                                            <th class="numeric">Price</th>
+                                            <th class="numeric">Change</th>
+                                            <th class="numeric">Change %</th>
+                                            <th class="numeric">Open</th>
+                                            <th class="numeric">High</th>
+                                            <th class="numeric">Low</th>
+                                            <th class="numeric">Volume</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td data-title="Code">AAC</td>
+                                            <td data-title="Company">AUSTRALIAN AGRICULTURAL COMPANY LIMITED.</td>
+                                            <td class="numeric" data-title="Price">$1.38</td>
+                                            <td class="numeric" data-title="Change">-0.01</td>
+                                            <td class="numeric" data-title="Change %">-0.36%</td>
+                                            <td class="numeric" data-title="Open">$1.39</td>
+                                            <td class="numeric" data-title="High">$1.39</td>
+                                            <td class="numeric" data-title="Low">$1.38</td>
+                                            <td class="numeric" data-title="Volume">9,395</td>
+                                        </tr>
+                                        <tr>
+                                            <td data-title="Code">AAD</td>
+                                            <td data-title="Company">ARDENT LEISURE GROUP</td>
+                                            <td class="numeric" data-title="Price">$1.15</td>
+                                            <td class="numeric" data-title="Change">  +0.02</td>
+                                            <td class="numeric" data-title="Change %">1.32%</td>
+                                            <td class="numeric" data-title="Open">$1.14</td>
+                                            <td class="numeric" data-title="High">$1.15</td>
+                                            <td class="numeric" data-title="Low">$1.13</td>
+                                            <td class="numeric" data-title="Volume">56,431</td>
+                                        </tr>
+                                        <tr>
+                                            <td data-title="Code">AAX</td>
+                                            <td data-title="Company">AUSENCO LIMITED</td>
+                                            <td class="numeric" data-title="Price">$4.00</td>
+                                            <td class="numeric" data-title="Change">-0.04</td>
+                                            <td class="numeric" data-title="Change %">-0.99%</td>
+                                            <td class="numeric" data-title="Open">$4.01</td>
+                                            <td class="numeric" data-title="High">$4.05</td>
+                                            <td class="numeric" data-title="Low">$4.00</td>
+                                            <td class="numeric" data-title="Volume">90,641</td>
+                                        </tr>
+                                        <tr>
+                                            <td data-title="Code">ABC</td>
+                                            <td data-title="Company">ADELAIDE BRIGHTON LIMITED</td>
+                                            <td class="numeric" data-title="Price">$3.00</td>
+                                            <td class="numeric" data-title="Change">  +0.06</td>
+                                            <td class="numeric" data-title="Change %">2.04%</td>
+                                            <td class="numeric" data-title="Open">$2.98</td>
+                                            <td class="numeric" data-title="High">$3.00</td>
+                                            <td class="numeric" data-title="Low">$2.96</td>
+                                            <td class="numeric" data-title="Volume">862,518</td>
+                                        </tr>
+                                        <tr>
+                                            <td data-title="Code">ABP</td>
+                                            <td data-title="Company">ABACUS PROPERTY GROUP</td>
+                                            <td class="numeric" data-title="Price">$1.91</td>
+                                            <td class="numeric" data-title="Change">0.00</td>
+                                            <td class="numeric" data-title="Change %">0.00%</td>
+                                            <td class="numeric" data-title="Open">$1.92</td>
+                                            <td class="numeric" data-title="High">$1.93</td>
+                                            <td class="numeric" data-title="Low">$1.90</td>
+                                            <td class="numeric" data-title="Volume">595,701</td>
+                                        </tr>
+                                        <tr>
+                                            <td data-title="Code">ABY</td>
+                                            <td data-title="Company">ADITYA BIRLA MINERALS LIMITED</td>
+                                            <td class="numeric" data-title="Price">$0.77</td>
+                                            <td class="numeric" data-title="Change">  +0.02</td>
+                                            <td class="numeric" data-title="Change %">2.00%</td>
+                                            <td class="numeric" data-title="Open">$0.76</td>
+                                            <td class="numeric" data-title="High">$0.77</td>
+                                            <td class="numeric" data-title="Low">$0.76</td>
+                                            <td class="numeric" data-title="Volume">54,567</td>
+                                        </tr>
+                                        <tr>
+                                            <td data-title="Code">ACR</td>
+                                            <td data-title="Company">ACRUX LIMITED</td>
+                                            <td class="numeric" data-title="Price">$3.71</td>
+                                            <td class="numeric" data-title="Change">  +0.01</td>
+                                            <td class="numeric" data-title="Change %">0.14%</td>
+                                            <td class="numeric" data-title="Open">$3.70</td>
+                                            <td class="numeric" data-title="High">$3.72</td>
+                                            <td class="numeric" data-title="Low">$3.68</td>
+                                            <td class="numeric" data-title="Volume">191,373</td>
+                                        </tr>
+                                        <tr>
+                                            <td data-title="Code">ADU</td>
+                                            <td data-title="Company">ADAMUS RESOURCES LIMITED</td>
+                                            <td class="numeric" data-title="Price">$0.72</td>
+                                            <td class="numeric" data-title="Change">0.00</td>
+                                            <td class="numeric" data-title="Change %">0.00%</td>
+                                            <td class="numeric" data-title="Open">$0.73</td>
+                                            <td class="numeric" data-title="High">$0.74</td>
+                                            <td class="numeric" data-title="Low">$0.72</td>
+                                            <td class="numeric" data-title="Volume">8,602,291</td>
+                                        </tr>
+                                        <tr>
+                                            <td data-title="Code">AGG</td>
+                                            <td data-title="Company">ANGLOGOLD ASHANTI LIMITED</td>
+                                            <td class="numeric" data-title="Price">$7.81</td>
+                                            <td class="numeric" data-title="Change">-0.22</td>
+                                            <td class="numeric" data-title="Change %">-2.74%</td>
+                                            <td class="numeric" data-title="Open">$7.82</td>
+                                            <td class="numeric" data-title="High">$7.82</td>
+                                            <td class="numeric" data-title="Low">$7.81</td>
+                                            <td class="numeric" data-title="Volume">148</td>
+                                        </tr>
+                                        <tr>
+                                            <td data-title="Code">AGK</td>
+                                            <td data-title="Company">AGL ENERGY LIMITED</td>
+                                            <td class="numeric" data-title="Price">$13.82</td>
+                                            <td class="numeric" data-title="Change">  +0.02</td>
+                                            <td class="numeric" data-title="Change %">0.14%</td>
+                                            <td class="numeric" data-title="Open">$13.83</td>
+                                            <td class="numeric" data-title="High">$13.83</td>
+                                            <td class="numeric" data-title="Low">$13.67</td>
+                                            <td class="numeric" data-title="Volume">846,403</td>
+                                        </tr>
+                                        <tr>
+                                            <td data-title="Code">AGO</td>
+                                            <td data-title="Company">ATLAS IRON LIMITED</td>
+                                            <td class="numeric" data-title="Price">$3.17</td>
+                                            <td class="numeric" data-title="Change">-0.02</td>
+                                            <td class="numeric" data-title="Change %">-0.47%</td>
+                                            <td class="numeric" data-title="Open">$3.11</td>
+                                            <td class="numeric" data-title="High">$3.22</td>
+                                            <td class="numeric" data-title="Low">$3.10</td>
+                                            <td class="numeric" data-title="Volume">5,416,303</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </section>
+                            </div><!-- /content-panel -->
+                        </div><!-- /col-lg-12 -->
+                    </div><!-- /row -->
 
-            <div class="row">
-                <div class="col-lg-12 main-chart">
-                    <div class="row mt">
-                        <div class="col-lg-4">
-                            <div class="content-panel">
-                                <h4><i class="fa fa-angle-right"></i>日入库量</h4>
-                                <div class="panel-body text-center">
-                                    <canvas id="input" height="120" width="120"></canvas>
-                                </div>
-                                <script>
-                                    var doughnutData = [
-                                        {
-                                            value: 70,
-                                            color:"#99CCFF"
-                                        },
-                                        {
-                                            value : 30,
-                                            color : "#fdfdfd"
-                                        }
-                                    ];
-                                    var myDoughnut = new Chart(document.getElementById("input").getContext("2d")).Doughnut(doughnutData);
-                                </script>
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="content-panel">
-                                <h4><i class="fa fa-angle-right"></i>日销量</h4>
-                                <div class="panel-body text-center">
-                                    <canvas id="sale" height="120" width="120"></canvas>
-                                </div>
-                                <script>
-                                    var doughnutData = [
-                                        {
-                                            value: 56,
-                                            color:"#99CCFF"
-                                        },
-                                        {
-                                            value : 44,
-                                            color : "#fdfdfd"
-                                        }
-                                    ];
-                                    var myDoughnut = new Chart(document.getElementById("sale").getContext("2d")).Doughnut(doughnutData);
-                                </script>
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="content-panel">
-                                <h4><i class="fa fa-angle-right"></i>日库存</h4>
-                                <div class="panel-body text-center">
-                                    <canvas id="stock" height="120" width="120"></canvas>
-                                </div>
-                                <script>
-                                    var doughnutData = [
-                                        {
-                                            value: 89,
-                                            color:"#99CCFF"
-                                        },
-                                        {
-                                            value : 11,
-                                            color : "#fdfdfd"
-                                        }
-                                    ];
-                                    var myDoughnut = new Chart(document.getElementById("stock").getContext("2d")).Doughnut(doughnutData);
-                                </script>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </section>
@@ -301,7 +373,7 @@
     <footer class="site-footer">
         <div class="text-center">
             2020.<a href="http://www.winginbi.com" target="_blank">YunQin</a>
-            <a href="index.html#" class="go-top">
+            <a href="toIndex" class="go-top">
                 <i class="fa fa-angle-up"></i>
             </a>
         </div>
@@ -321,10 +393,6 @@
 
 <!--common script for all pages-->
 <script src="assets/js/common-scripts.js"></script>
-<script src="js/raphael-min.js"></script>
-<script src="js/morris-0.4.3.min.js"></script>
-<script src="assets/js/common-scripts.js"></script>
-
 
 <script type="text/javascript" src="assets/js/gritter/js/jquery.gritter.js"></script>
 <script type="text/javascript" src="assets/js/gritter-conf.js"></script>
@@ -332,92 +400,170 @@
 <!--script for this page-->
 <script src="assets/js/sparkline-chart.js"></script>
 <script src="assets/js/zabuto_calendar.js"></script>
-<script src="assets/js/morris-conf.js"></script>
+
+<script type="application/javascript">
+    $(document).ready(function () {
+        $("#date-popover").popover({html: true, trigger: "manual"});
+        $("#date-popover").hide();
+        $("#date-popover").click(function (e) {
+            $(this).hide();
+        });
+
+        $("#my-calendar").zabuto_calendar({
+            action: function () {
+                return myDateFunction(this.id, false);
+            },
+            action_nav: function () {
+                return myNavFunction(this.id);
+            },
+            ajax: {
+                url: "show_data.php?action=1",
+                modal: true
+            },
+            legend: [
+                {type: "text", label: "Special event", badge: "00"},
+                {type: "block", label: "Regular event", }
+            ]
+        });
+    });
+
+
+    function myNavFunction(id) {
+        $("#date-popover").hide();
+        var nav = $("#" + id).data("navigation");
+        var to = $("#" + id).data("to");
+        console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
+    }
+</script>
 <script>
-    Morris.Bar({
-        element: 'powder',
-        data: [
-            {device: '设计', geekbench: 136},
-            {device: '实际', geekbench: 167},
-        ],
-        xkey: 'device',
-        ykeys: ['geekbench'],
-        labels: ['数值'],
-        barRatio: 0.4,
-        xLabelAngle: 35,
-        hideHover: 'auto',
-        barColors: ['#ac92ec']
-    })
-    Morris.Bar({
-        element: 'rice',
-        data: [
-            {device: '设计', geekbench: 56},
-            {device: '实际', geekbench: 89},
-        ],
-        xkey: 'device',
-        ykeys: ['geekbench'],
-        labels: ['数值'],
-        barRatio: 0.4,
-        xLabelAngle: 35,
-        hideHover: 'auto',
-        barColors: ['#ac92ec']
-    })
-    Morris.Bar({
-        element: 'oil',
-        data: [
-            {device: '设计', geekbench: 280},
-            {device: '实际', geekbench: 198},
-        ],
-        xkey: 'device',
-        ykeys: ['geekbench'],
-        labels: ['数值'],
-        barRatio: 0.4,
-        xLabelAngle: 35,
-        hideHover: 'auto',
-        barColors: ['#ac92ec']
-    })
-    Morris.Bar({
-        element: 'other',
-        data: [
-            {device: '设计', geekbench: 120},
-            {device: '实际', geekbench: 78},
-        ],
-        xkey: 'device',
-        ykeys: ['geekbench'],
-        labels: ['数值'],
-        barRatio: 0.4,
-        xLabelAngle: 35,
-        hideHover: 'auto',
-        barColors: ['#ac92ec']
-    })
-    Morris.Bar({
-        element: 'number1',
-        data: [
-            {device: '在产', geekbench: 450},
-            {device: '停产', geekbench: 89},
-        ],
-        xkey: 'device',
-        ykeys: ['geekbench'],
-        labels: ['数值'],
-        barRatio: 0.4,
-        xLabelAngle: 35,
-        hideHover: 'auto',
-        barColors: ['#50b7c1']
-    })
-    Morris.Bar({
-        element: 'number2',
-        data: [
-            {device: '新增', geekbench: 69},
-            {device: '停用', geekbench: 40},
-        ],
-        xkey: 'device',
-        ykeys: ['geekbench'],
-        labels: ['数值'],
-        barRatio: 0.4,
-        xLabelAngle: 35,
-        hideHover: 'auto',
-        barColors: ['#50b7c1']
-    })
+    var doughnutData = [
+        {
+            value: 30,
+            color:"#1abc9c"
+        },
+        {
+            value : 50,
+            color : "#2ecc71"
+        },
+        {
+            value : 100,
+            color : "#3498db"
+        },
+        {
+            value : 40,
+            color : "#9b59b6"
+        },
+        {
+            value : 120,
+            color : "#34495e"
+        }
+
+    ];
+    var lineChartData = {
+        labels : ["","","","","","",""],
+        datasets : [
+            {
+                fillColor : "rgba(220,220,220,0.5)",
+                strokeColor : "rgba(220,220,220,1)",
+                pointColor : "rgba(220,220,220,1)",
+                pointStrokeColor : "#fff",
+                data : [65,59,90,81,56,55,40]
+            },
+            {
+                fillColor : "rgba(151,187,205,0.5)",
+                strokeColor : "rgba(151,187,205,1)",
+                pointColor : "rgba(151,187,205,1)",
+                pointStrokeColor : "#fff",
+                data : [28,48,40,19,96,27,100]
+            }
+        ]
+
+    };
+    var pieData = [
+        {
+            value: 30,
+            color:"#1abc9c"
+        },
+        {
+            value : 50,
+            color : "#16a085"
+        },
+        {
+            value : 100,
+            color : "#27ae60"
+        }
+
+    ];
+    var barChartData = {
+        labels : ["January","February","March","April","May","June","July"],
+        datasets : [
+            {
+                fillColor : "rgba(220,220,220,0.5)",
+                strokeColor : "rgba(220,220,220,1)",
+                data : [65,59,90,81,56,55,40]
+            },
+            {
+                fillColor : "rgba(151,187,205,0.5)",
+                strokeColor : "rgba(151,187,205,1)",
+                data : [28,48,40,19,96,27,100]
+            }
+        ]
+
+    };
+    var chartData = [
+        {
+            value : Math.random(),
+            color: "#D97041"
+        },
+        {
+            value : Math.random(),
+            color: "#C7604C"
+        },
+        {
+            value : Math.random(),
+            color: "#21323D"
+        },
+        {
+            value : Math.random(),
+            color: "#9D9B7F"
+        },
+        {
+            value : Math.random(),
+            color: "#7D4F6D"
+        },
+        {
+            value : Math.random(),
+            color: "#584A5E"
+        }
+    ];
+    var radarChartData = {
+        labels : ["","","","","","",""],
+        datasets : [
+            {
+                fillColor : "rgba(220,220,220,0.5)",
+                strokeColor : "rgba(220,220,220,1)",
+                pointColor : "rgba(220,220,220,1)",
+                pointStrokeColor : "#fff",
+                data : [65,59,90,81,56,55,40]
+            },
+            {
+                fillColor : "rgba(151,187,205,0.5)",
+                strokeColor : "rgba(151,187,205,1)",
+                pointColor : "rgba(151,187,205,1)",
+                pointStrokeColor : "#fff",
+                data : [28,48,40,19,96,27,100]
+            }
+        ]
+
+    };
+    new Chart(document.getElementById("doughnut").getContext("2d")).Doughnut(doughnutData);
+    new Chart(document.getElementById("line").getContext("2d")).Line(lineChartData);
+    new Chart(document.getElementById("radar").getContext("2d")).Radar(radarChartData);
+    new Chart(document.getElementById("polarArea").getContext("2d")).PolarArea(chartData);
+    new Chart(document.getElementById("bar").getContext("2d")).Bar(barChartData);
+    new Chart(document.getElementById("pie").getContext("2d")).Pie(pieData);
+
+
 </script>
 
 
