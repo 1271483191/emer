@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Dashboard">
+    <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="js/cityAndPro.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+
+    <title>粮食应急保障企业信息统计</title>
+    <link rel="icon" type="image/x-icon" href="img/logo.png" />
+
+    <!-- Bootstrap core CSS -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <!--external css-->
+    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/style-responsive.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<!-- **********************************************************************************************************************************************************
+MAIN CONTENT
+*********************************************************************************************************************************************************** -->
+
+<div id="login-page">
+    <div class="container">
+
+        <form class="form-login" action="index.html">
+            <h2 class="form-login-heading">注册</h2>
+            <div class="login-wrap">
+                <input type="text" class="form-control" placeholder="用户名" autofocus>
+                <br>
+                <input type="password" class="form-control" placeholder="密码">
+                <br>
+                <input id="password2" type="password" class="form-control" placeholder="确认密码">
+                <br>
+                <input id="username" type="text" class="form-control" placeholder="姓名" autofocus>
+                <br>
+                <input id="usertel" type="text" class="form-control" placeholder="联系电话" autofocus>
+                <br>
+                <input id="usercompany" type="text" class="form-control" placeholder="单位" autofocus>
+                <br>
+                <p>所在地区</p>
+                <div>
+                    <div >
+                        <select name="input_province" id="input_province" class="form-control">
+                            <option value="">-请选择-</option>
+                        </select>
+                    </div>
+                    <br>
+                    <div>
+                        <select name="input_city" id="input_city" class="form-control">
+                            <option value="">-请选择-</option>
+                        </select>
+                    </div>
+                </div>
+                &emsp;
+                <script>
+                    $(function() {
+                        var html = "";
+                        var province_idx;
+                        $("#input_city").append(html);
+
+                        $.each(cityMessage, function(idx, item) {
+                            if(item.parid == '1'){
+                                html += "<option value='" + item.regname + "' exid='" + item.regid + "'>" + item.regname + "</option>";
+                            }
+
+                        });
+                        $("#input_province").append(html);
+                        $("#input_province").change(function(e) {
+                            var province =$(this).val();
+                            var cityList = [];
+                            if(province == "") return;
+                            $("#input_city option").remove();
+                            var html = "<option value=''>-请选择-</option>";
+
+//					获取已选择的省份的数组下标
+                            $.each(cityMessage, function(idx, item) {
+                                if(province == item.regname && item.parid == '1') {
+                                    province_idx=idx
+                                }
+                            })
+
+//					获取已选择的省份的城市列表
+                            $.each(cityMessage, function(idx, item) {
+                                if(cityMessage[idx].parid == cityMessage[province_idx].regid) {
+                                    cityList.push(cityMessage[idx])
+                                }
+                            })
+
+//					添加城市信息给标签
+                            if(cityList instanceof Array && cityList.length>0){
+                                $.each(cityList, function(idx, item) {
+                                    console.log(item)
+                                    html += "<option value='" + item.regname + "' exid='" + item.regid + "'>" + item.regname + "</option>";
+
+                                });
+                            }else{
+                                html += "<option value='" + cityMessage[province_idx].regname + "' exid='" + cityMessage[province_idx].regid + "'>" + cityMessage[province_idx].regname + "</option>";
+
+                            }
+                            $("#input_city").append(html);
+                        });
+                    });
+                </script>
+                <button class="btn btn-theme btn-block" href="index.html" type="submit"><i class="fa fa-angle-right"></i>注册</button>
+                <br>
+
+                <div class="registration">
+                    <a class="" href="login.html">
+                        已有账号？去登录
+                    </a>
+                </div>
+
+            </div>
+
+
+            <!-- myModal -->
+
+        </form>
+
+    </div>
+</div>
+
+<!-- js placed at the end of the document so the pages load faster -->
+<script src="assets/js/jquery.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+
+<!--BACKSTRETCH-->
+<!-- You can use an image of whatever size. This script will stretch to fit in any screen size.-->
+<script type="text/javascript" src="assets/js/jquery.backstretch.min.js"></script>
+<script>
+    $.backstretch("assets/img/bg.jpg", {speed: 500});
+</script>
+
+
+</body>
+</html>
