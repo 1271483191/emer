@@ -12,11 +12,39 @@
         姓名：<input name="name" type="text" property="请输入姓名"><br/>
         电话：<input name="phone" type="text" property="请输入电话"><br/>
         公司：<input name="company" type="text" property="请输入公司"><br/>
-        省份：<input name="province" type="text" property="请输入省份"><br/>
-        请选择权限：<input value="0" name="type" type="radio" checked="checked"/>省级
-        <input value="1" name="type" type="radio"/>国家级<br/>
-        <input type="submit" />
+        <label for="addr-show">您选择的是：
+            <input name="province" type="text" value="" id="addr-show">
+        </label>
+        <br/>
+
+        <!--省份选择-->
+        <select id="prov" onchange="showCity(this)">
+            <option>=请选择省份=</option>
+        </select>
+
+        <!--城市选择-->
+        <select id="city" onchange="showCountry(this)">
+            <option>=请选择城市=</option>
+        </select>
+
+        <!--县区选择-->
+        <select id="country" onchange="selecCountry(this)">
+            <option>=请选择县区=</option>
+        </select>
+        <br/>
+        <!--<button type="button" class="btn met1" onClick="showAddr()">确定</button><br/>-->
+        请选择权限：<br/>
+        <input value="0" name="type" type="radio" checked="checked"/>国家级<br/>
+        <input value="1" name="type" type="radio"/>省级<br/>
+        <input value="2" name="type" type="radio"/>市级<br/>
+        <input value="3" name="type" type="radio"/>县级<br/>
+        <input type="submit"/>
 
     </form>
+    <script src="static/three/city.js"></script>
+    <script src="static/three/city02.js"></script>
+    <script src="static/three/method01.js"></script>
+    <script src="static/jquery/jquery-1.7.2.min.js"></script>
+
 </body>
 </html>
