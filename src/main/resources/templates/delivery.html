@@ -10,24 +10,24 @@
     <table border="1">
         <div th:each="delivery,deliveryStat : ${deliverys.getList()}">
             <tr>
-                <td th:text="${delivery.getCompanyId()}"></td>
-                <td><a th:text="${delivery.getWareAbility()}" th:onclick="'javascript:updateDelivery(\'wareAbility\', \'' + ${delivery.getDeliveryId()} + '\');'" href="javascript:void(0)"> </a></td>
-                <td><a th:text="${delivery.getState()}" th:onclick="'javascript:updateDelivery(\'state\', \'' + ${delivery.getDeliveryId()} + '\');'" href="javascript:void(0)"> </a></td>
-                <td><a th:text="${delivery.getRange()}" th:onclick="'javascript:updateDelivery(\'range\', \'' + ${delivery.getDeliveryId()} + '\');'" href="javascript:void(0)"> </a></td>
-                <td><a th:text="${delivery.getRadius()}" th:onclick="'javascript:updateDelivery(\'radius\', \'' + ${delivery.getDeliveryId()} + '\');'" href="javascript:void(0)"> </a></td>
-                <td><a th:text="${delivery.getDeliveryDay()}" th:onclick="'javascript:updateDelivery(\'deliveryDay\', \'' + ${delivery.getDeliveryId()} + '\');'" href="javascript:void(0)"> </a></td>
-                <td><a th:text="${delivery.getCarNum()}" th:onclick="'javascript:updateDelivery(\'carNum\', \'' + ${delivery.getDeliveryId()} + '\');'" href="javascript:void(0)"> </a></td>
-                <td><a th:text="${delivery.getDeliveryDayReal()}" th:onclick="'javascript:updateDelivery(\'deliveryDayReal\', \'' + ${delivery.getDeliveryId()} + '\');'" href="javascript:void(0)"> </a></td>
-                <td th:text="${delivery.getDeliveryId()}"></td>
-                <td><a th:text="${delivery.getDeliveryNum()}" th:onclick="'javascript:updateDelivery(\'deliveryNum\', \'' + ${delivery.getDeliveryId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td width="100px" th:text="${delivery.getCompanyId()}"></td>
+                <td width="100px"><a th:text="${delivery.getWareAbility()}" th:onclick="'javascript:updateDelivery(\'wareAbility\', \'' + ${delivery.getDeliveryId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td width="100px"><a th:text="${delivery.getState()}" th:onclick="'javascript:updateDelivery(\'state\', \'' + ${delivery.getDeliveryId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td width="100px"><a th:text="${delivery.getRange()}" th:onclick="'javascript:updateDelivery(\'range\', \'' + ${delivery.getDeliveryId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td width="100px"><a th:text="${delivery.getRadius()}" th:onclick="'javascript:updateDelivery(\'radius\', \'' + ${delivery.getDeliveryId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td width="100px"><a th:text="${delivery.getDeliveryDay()}" th:onclick="'javascript:updateDelivery(\'deliveryDay\', \'' + ${delivery.getDeliveryId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td width="100px"><a th:text="${delivery.getCarNum()}" th:onclick="'javascript:updateDelivery(\'carNum\', \'' + ${delivery.getDeliveryId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td width="100px"><a th:text="${delivery.getDeliveryDayReal()}" th:onclick="'javascript:updateDelivery(\'deliveryDayReal\', \'' + ${delivery.getDeliveryId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td width="100px" th:text="${delivery.getDeliveryId()}"></td>
+                <td width="100px"><a th:text="${delivery.getDeliveryNum()}" th:onclick="'javascript:updateDelivery(\'deliveryNum\', \'' + ${delivery.getDeliveryId()} + '\');'" href="javascript:void(0)"> </a></td>
 
 
-                <td><button th:onclick="'javascript:deleteDelivery(\''+${delivery.getCompanyId()}+'\');'">删除</button></td>
+                <td width="100px"><button th:onclick="'javascript:deleteDelivery(\''+${delivery.getCompanyId()}+'\');'">删除</button></td>
             </tr>
         </div>
     </table>
-    <a th:href="@{'/toDelivery?page='+${deliverys.getPageNum() - 1}}">上一页</a>
-    <a th:href="@{'/toDelivery?page='+${deliverys.getPageNum() + 1}}">下一页</a>
+    <a th:href="@{'/toDelivery?page='+${deliverys.getPageNum() - 1}}">上一页</a><span th:text="'&nbsp;&nbsp;第' + ${deliverys.getPageNum()} + '页&nbsp;'"></span>
+    <a th:href="@{'/toDelivery?page='+${deliverys.getPageNum() + 1}}">下一页</a><br/>
     <a href="/toIndex">返回</a><br/>
 
     <script>

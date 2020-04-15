@@ -10,28 +10,28 @@
     <table border="1">
         <div th:each="machine,machineStat : ${machines.getList()}">
             <tr>
-                <td th:text="${machine.getCompanyId()}"></td>
-                <td><a th:text="${machine.getState()}" th:onclick="'javascript:updateMachine(\'state\', \'' + ${machine.getMachineId()} + '\');'" href="javascript:void(0)"> </a></td>
-                <td><a th:text="${machine.getElseDay()}" th:onclick="'javascript:updateMachine(\'elseDay\', \'' + ${machine.getMachineId()} + '\');'" href="javascript:void(0)"> </a></td>
-                <td><a th:text="${machine.getElseDayReal()}" th:onclick="'javascript:updateMachine(\'elseDayReal\', \'' + ${machine.getMachineId()} + '\');'" href="javascript:void(0)"> </a></td>
-                <td th:text="${machine.getMachineId()}"></td>
-                <td><a th:text="${machine.getOilConciseDay()}" th:onclick="'javascript:updateMachine(\'oilConciseDay\', \'' + ${machine.getMachineId()} + '\');'" href="javascript:void(0)"> </a></td>
-                <td><a th:text="${machine.getOilConciseDayReal()}" th:onclick="'javascript:updateMachine(\'oilConciseDayReal\', \'' + ${machine.getMachineId()} + '\');'" href="javascript:void(0)"> </a></td>
-                <td><a th:text="${machine.getOilDay()}" th:onclick="'javascript:updateMachine(\'oilDay\', \'' + ${machine.getMachineId()} + '\');'" href="javascript:void(0)"> </a></td>
-                <td><a th:text="${machine.getOilDayReal()}" th:onclick="'javascript:updateMachine(\'oilDayReal\', \'' + ${machine.getMachineId()} + '\');'" href="javascript:void(0)"> </a></td>
-                <td><a th:text="${machine.getOilSubpDay()}" th:onclick="'javascript:updateMachine(\'oilSubpDay\', \'' + ${machine.getMachineId()} + '\');'" href="javascript:void(0)"> </a></td>
-                <td><a th:text="${machine.getOilSubpDayReal()}" th:onclick="'javascript:updateMachine(\'oilSubpDayReal\', \'' + ${machine.getMachineId()} + '\');'" href="javascript:void(0)"> </a></td>
-                <td><a th:text="${machine.getPaddyDay()}" th:onclick="'javascript:updateMachine(\'paddyDay\', \'' + ${machine.getMachineId()} + '\');'" href="javascript:void(0)"> </a></td>
-                <td><a th:text="${machine.getPaddyDayReal()}" th:onclick="'javascript:updateMachine(\'paddyDayReal\', \'' + ${machine.getMachineId()} + '\');'" href="javascript:void(0)"> </a></td>
-                <td><a th:text="${machine.getWheatDay()}" th:onclick="'javascript:updateMachine(\'wheatDay\', \'' + ${machine.getMachineId()} + '\');'" href="javascript:void(0)"> </a></td>
-                <td><a th:text="${machine.getWheatDayReal()}" th:onclick="'javascript:updateMachine(\'wheatDayReal\', \'' + ${machine.getMachineId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td width="100px" th:text="${machine.getCompanyId()}"></td>
+                <td width="100px"><a th:text="${machine.getState()}" th:onclick="'javascript:updateMachine(\'state\', \'' + ${machine.getMachineId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td width="100px"><a th:text="${machine.getElseDay()}" th:onclick="'javascript:updateMachine(\'elseDay\', \'' + ${machine.getMachineId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td width="100px"><a th:text="${machine.getElseDayReal()}" th:onclick="'javascript:updateMachine(\'elseDayReal\', \'' + ${machine.getMachineId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td width="100px" th:text="${machine.getMachineId()}"></td>
+                <td width="100px"><a th:text="${machine.getOilConciseDay()}" th:onclick="'javascript:updateMachine(\'oilConciseDay\', \'' + ${machine.getMachineId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td width="100px"><a th:text="${machine.getOilConciseDayReal()}" th:onclick="'javascript:updateMachine(\'oilConciseDayReal\', \'' + ${machine.getMachineId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td width="100px"><a th:text="${machine.getOilDay()}" th:onclick="'javascript:updateMachine(\'oilDay\', \'' + ${machine.getMachineId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td width="100px"><a th:text="${machine.getOilDayReal()}" th:onclick="'javascript:updateMachine(\'oilDayReal\', \'' + ${machine.getMachineId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td width="100px"><a th:text="${machine.getOilSubpDay()}" th:onclick="'javascript:updateMachine(\'oilSubpDay\', \'' + ${machine.getMachineId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td width="100px"><a th:text="${machine.getOilSubpDayReal()}" th:onclick="'javascript:updateMachine(\'oilSubpDayReal\', \'' + ${machine.getMachineId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td width="100px"><a th:text="${machine.getPaddyDay()}" th:onclick="'javascript:updateMachine(\'paddyDay\', \'' + ${machine.getMachineId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td width="100px"><a th:text="${machine.getPaddyDayReal()}" th:onclick="'javascript:updateMachine(\'paddyDayReal\', \'' + ${machine.getMachineId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td width="100px"><a th:text="${machine.getWheatDay()}" th:onclick="'javascript:updateMachine(\'wheatDay\', \'' + ${machine.getMachineId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td width="100px"><a th:text="${machine.getWheatDayReal()}" th:onclick="'javascript:updateMachine(\'wheatDayReal\', \'' + ${machine.getMachineId()} + '\');'" href="javascript:void(0)"> </a></td>
 
                 <td><button th:onclick="'javascript:deleteMachine(\''+${machine.getCompanyId()}+'\');'">删除</button></td>
             </tr>
         </div>
     </table>
-    <a th:href="@{'/toMachine?page='+${machines.getPageNum() - 1}}">上一页</a>
-    <a th:href="@{'/toMachine?page='+${machines.getPageNum() + 1}}">下一页</a>
+    <a th:href="@{'/toMachine?page='+${machines.getPageNum() - 1}}">上一页</a><span th:text="'&nbsp;&nbsp;第' + ${machines.getPageNum()} + '页&nbsp;'"></span>
+    <a th:href="@{'/toMachine?page='+${machines.getPageNum() + 1}}">下一页</a><br/>
     <a href="/toIndex">返回</a><br/>
 
     <script>

@@ -10,20 +10,20 @@
     <table border="1">
         <div th:each="storeage,storeageStat : ${storeages.getList()}">
             <tr>
-                <td th:text="${storeage.getCompanyId()}"></td>
-                <td><a th:text="${storeage.getState()}" th:onclick="'javascript:updateStoreage(\'state\', \'' + ${storeage.getStoreageId()} + '\');'" href="javascript:void(0)"> </a></td>
-                <td><a th:text="${storeage.getCarNum()}" th:onclick="'javascript:updateStoreage(\'carNum\', \'' + ${storeage.getStoreageId()} + '\');'" href="javascript:void(0)"> </a></td>
-                <td th:text="${storeage.getStoreageId()}"></td>
-                <td><a th:text="${storeage.getTransportDay()}" th:onclick="'javascript:updateStoreage(\'transportDay\', \'' + ${storeage.getStoreageId()} + '\');'" href="javascript:void(0)"> </a></td>
-                <td><a th:text="${storeage.getTransportDayReal()}" th:onclick="'javascript:updateStoreage(\'transportDayReal\', \'' + ${storeage.getStoreageId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td width="100px" th:text="${storeage.getCompanyId()}"></td>
+                <td width="100px"><a th:text="${storeage.getState()}" th:onclick="'javascript:updateStoreage(\'state\', \'' + ${storeage.getStoreageId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td width="100px"><a th:text="${storeage.getCarNum()}" th:onclick="'javascript:updateStoreage(\'carNum\', \'' + ${storeage.getStoreageId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td width="100px" th:text="${storeage.getStoreageId()}"></td>
+                <td width="100px"><a th:text="${storeage.getTransportDay()}" th:onclick="'javascript:updateStoreage(\'transportDay\', \'' + ${storeage.getStoreageId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td width="100px"><a th:text="${storeage.getTransportDayReal()}" th:onclick="'javascript:updateStoreage(\'transportDayReal\', \'' + ${storeage.getStoreageId()} + '\');'" href="javascript:void(0)"> </a></td>
 
 
-                <td><button th:onclick="'javascript:deleteStoreage(\''+${storeage.getCompanyId()}+'\');'">删除</button></td>
+                <td width="100px"><button th:onclick="'javascript:deleteStoreage(\''+${storeage.getCompanyId()}+'\');'">删除</button></td>
             </tr>
         </div>
     </table>
-    <a th:href="@{'/toStoreage?page='+${storeages.getPageNum() - 1}}">上一页</a>
-    <a th:href="@{'/toStoreage?page='+${storeages.getPageNum() + 1}}">下一页</a>
+    <a th:href="@{'/toStoreage?page='+${storeages.getPageNum() - 1}}">上一页</a><span th:text="'&nbsp;&nbsp;第' + ${storeages.getPageNum()} + '页&nbsp;'"></span>
+    <a th:href="@{'/toStoreage?page='+${storeages.getPageNum() + 1}}">下一页</a><br/>
     <a href="/toIndex">返回</a><br/>
 
     <script>

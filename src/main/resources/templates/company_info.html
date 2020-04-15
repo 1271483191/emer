@@ -11,25 +11,25 @@
     <table id="companyInfo" border="1">
         <div th:each="company,companyStat : ${companyInfos.getList()}">
             <tr>
-                <td th:text="${company.getCompanyId()}"></td>
-                <td><a th:text="${company.getActivationStatus()}" th:onclick="'javascript:updateCompanyInfo(\'activationStatus\', \'' + ${company.getCompanyId()} + '\');'" href="javascript:void(0)"> </a></td>
-                <td><a th:text="${company.getInDay()}" th:onclick="'javascript:updateCompanyInfo(\'inDay\', \'' + ${company.getCompanyId()} + '\');'" href="javascript:void(0)"> </a></td>
-                <td><a th:text="${company.getLatitude()}" th:onclick="'javascript:updateCompanyInfo(\'latitude\', \'' + ${company.getCompanyId()} + '\');'" href="javascript:void(0)"> </a></td>
-                <td><a th:text="${company.getLongitude()}" th:onclick="'javascript:updateCompanyInfo(\'longitude\', \'' + ${company.getCompanyId()} + '\');'" href="javascript:void(0)"> </a></td>
-                <td><a th:text="${company.getLocation()}" th:onclick="'javascript:updateCompanyInfo(\'location\', \'' + ${company.getCompanyId()} + '\');'" href="javascript:void(0)"> </a></td>
-                <td><a th:text="${company.getName()}" th:onclick="'javascript:updateCompanyInfo(\'name\', \'' + ${company.getCompanyId()} + '\');'" href="javascript:void(0)"> </a></td>
-                <td><a th:text="${company.getOutDay()}" th:onclick="'javascript:updateCompanyInfo(\'outDay\', \'' + ${company.getCompanyId()} + '\');'" href="javascript:void(0)"> </a></td>
-                <td><a th:text="${company.getPhone()}" th:onclick="'javascript:updateCompanyInfo(\'phone\', \'' + ${company.getCompanyId()} + '\');'" href="javascript:void(0)"> </a></td>
-                <td><a th:text="${company.getPosition()}" th:onclick="'javascript:updateCompanyInfo(\'position\', \'' + ${company.getCompanyId()} + '\');'" href="javascript:void(0)"> </a></td>
-                <td><a th:text="${company.getPrincipal()}" th:onclick="'javascript:updateCompanyInfo(\'principal\', \'' + ${company.getCompanyId()} + '\');'" href="javascript:void(0)"> </a></td>
-                <td><a th:text="${company.getSaveDay()}" th:onclick="'javascript:updateCompanyInfo(\'saveDay\', \'' + ${company.getCompanyId()} + '\');'" href="javascript:void(0)"> </a></td>
-                <td><a th:text="${company.getSocialId()}" th:onclick="'javascript:updateCompanyInfo(\'socialId\', \'' + ${company.getCompanyId()} + '\');'" href="javascript:void(0)"> </a></td>
-                <td><a th:text="${company.getLevel()}" th:onclick="'javascript:updateCompanyInfo(\'level\', \'' + ${company.getCompanyId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td width="100px" th:text="${company.getCompanyId()}"></td>
+                <td width="100px"><a th:text="${company.getActivationStatus()}" th:onclick="'javascript:updateCompanyInfo(\'activationStatus\', \'' + ${company.getCompanyId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td width="100px"><a th:text="${company.getInDay()}" th:onclick="'javascript:updateCompanyInfo(\'inDay\', \'' + ${company.getCompanyId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td width="100px"><a th:text="${company.getLatitude()}" th:onclick="'javascript:updateCompanyInfo(\'latitude\', \'' + ${company.getCompanyId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td width="100px"><a th:text="${company.getLongitude()}" th:onclick="'javascript:updateCompanyInfo(\'longitude\', \'' + ${company.getCompanyId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td width="100px"><a th:text="${company.getLocation()}" th:onclick="'javascript:updateCompanyInfo(\'location\', \'' + ${company.getCompanyId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td width="100px"><a th:text="${company.getName()}" th:onclick="'javascript:updateCompanyInfo(\'name\', \'' + ${company.getCompanyId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td width="100px"><a th:text="${company.getOutDay()}" th:onclick="'javascript:updateCompanyInfo(\'outDay\', \'' + ${company.getCompanyId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td width="100px"><a th:text="${company.getPhone()}" th:onclick="'javascript:updateCompanyInfo(\'phone\', \'' + ${company.getCompanyId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td width="100px"><a th:text="${company.getPosition()}" th:onclick="'javascript:updateCompanyInfo(\'position\', \'' + ${company.getCompanyId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td width="100px"><a th:text="${company.getPrincipal()}" th:onclick="'javascript:updateCompanyInfo(\'principal\', \'' + ${company.getCompanyId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td width="100px"><a th:text="${company.getSaveDay()}" th:onclick="'javascript:updateCompanyInfo(\'saveDay\', \'' + ${company.getCompanyId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td width="100px"><a th:text="${company.getSocialId()}" th:onclick="'javascript:updateCompanyInfo(\'socialId\', \'' + ${company.getCompanyId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td width="100px"><a th:text="${company.getLevel()}" th:onclick="'javascript:updateCompanyInfo(\'level\', \'' + ${company.getCompanyId()} + '\');'" href="javascript:void(0)"> </a></td>
             </tr>
         </div>
     </table><br/>
-    <a th:href="@{'/toCompanyInfo?page='+${companyInfos.getPageNum() - 1}}">上一页</a>
-    <a th:href="@{'/toCompanyInfo?page='+${companyInfos.getPageNum() + 1}}">下一页</a>
+    <a th:href="@{'/toCompanyInfo?page='+${companyInfos.getPageNum() - 1}}">上一页</a><span th:text="'&nbsp;&nbsp;第' + ${companyInfos.getPageNum()} + '页&nbsp;'"></span>
+    <a th:href="@{'/toCompanyInfo?page='+${companyInfos.getPageNum() + 1}}">下一页</a><br/>
     <a href="/toIndex">返回</a><br/>
 
     <script src="jquery/jquery-1.7.2.min.js"></script>

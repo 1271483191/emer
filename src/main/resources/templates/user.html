@@ -10,20 +10,20 @@
     <table border="1">
         <div th:each="user,userStat : ${users.getList()}">
             <tr>
-                <td><a th:text="${user.getPhone()}" th:onclick="'javascript:updateUser(\'phone\', \'' + ${user.getUserId()} + '\');'" href="javascript:void(0)"> </a></td>
-                <td><a th:text="${user.getCompany()}" th:onclick="'javascript:updateUser(\'company\', \'' + ${user.getUserId()} + '\');'" href="javascript:void(0)"> </a></td>
-                <td><a th:text="${user.getName()}" th:onclick="'javascript:updateUser(\'name\', \'' + ${user.getUserId()} + '\');'" href="javascript:void(0)"> </a></td>
-                <td><a th:text="${user.getPassword()}" th:onclick="'javascript:updateUser(\'password\', \'' + ${user.getUserId()} + '\');'" href="javascript:void(0)"> </a></td>
-                <td><a th:text="${user.getProvince()}" th:onclick="'javascript:updateUser(\'province\', \'' + ${user.getUserId()} + '\');'" href="javascript:void(0)"> </a></td>
-                <td><a th:text="${user.getType()}" th:onclick="'javascript:updateUser(\'type\', \'' + ${user.getUserId()} + '\');'" href="javascript:void(0)"> </a></td>
-                <td th:text="${user.getUserId()}"></td>
-                <td><a th:text="${user.getUsername()}" th:onclick="'javascript:updateUser(\'username\', \'' + ${user.getUserId()} + '\');'" href="javascript:void(0)"> </a></td>
-                <td><button th:onclick="'javascript:deleteUser(\''+${user.getUserId()}+'\');'">删除</button></td>
+                <td width="100px"><a th:text="${user.getPhone()}" th:onclick="'javascript:updateUser(\'phone\', \'' + ${user.getUserId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td width="100px"><a th:text="${user.getCompany()}" th:onclick="'javascript:updateUser(\'company\', \'' + ${user.getUserId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td width="100px"><a th:text="${user.getName()}" th:onclick="'javascript:updateUser(\'name\', \'' + ${user.getUserId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td width="100px"><a th:text="${user.getPassword()}" th:onclick="'javascript:updateUser(\'password\', \'' + ${user.getUserId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td width="100px"><a th:text="${user.getProvince()}" th:onclick="'javascript:updateUser(\'province\', \'' + ${user.getUserId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td width="100px"><a th:text="${user.getType()}" th:onclick="'javascript:updateUser(\'type\', \'' + ${user.getUserId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td width="100px" th:text="${user.getUserId()}"></td>
+                <td width="100px"><a th:text="${user.getUsername()}" th:onclick="'javascript:updateUser(\'username\', \'' + ${user.getUserId()} + '\');'" href="javascript:void(0)"> </a></td>
+                <td width="100px"><button th:onclick="'javascript:deleteUser(\''+${user.getUserId()}+'\');'">删除</button></td>
             </tr>
         </div>
     </table>
-    <a th:href="@{'/toUser?page='+${users.getPageNum() - 1}}">上一页</a>
-    <a th:href="@{'/toUser?page='+${users.getPageNum() + 1}}">下一页</a>
+    <a th:href="@{'/toUser?page='+${users.getPageNum() - 1}}">上一页</a><span th:text="'&nbsp;&nbsp;第' + ${users.getPageNum()} + '页&nbsp;'"></span>
+    <a th:href="@{'/toUser?page='+${users.getPageNum() + 1}}">下一页</a><br/>
     <a href="/toIndex">返回</a><br/>
 
     <script>
