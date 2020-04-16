@@ -4,6 +4,7 @@ import com.github.pagehelper.Page;
 import com.yunjing.emer.dao.UserDao;
 import com.yunjing.emer.entity.Storeage;
 import com.yunjing.emer.entity.User;
+import com.yunjing.emer.entity.UserExample;
 import com.yunjing.emer.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,11 +38,22 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean insertUser(User user) {
-        int i = userDao.insert(user);
-        if(i > 0){
-            return true;
+
+        UserExample userExample = new UserExample();
+        UserExample.Criteria criteria = userExample.createCriteria();
+        criteria.andUsernameEqualTo(user.getUsername());
+        List<User> userList = userDao.selectByExample(userExample);
+
+        if(userList == null || userList.size() == 0){
+            int i = userDao.insert(user);
+            if(i > 0){
+                return true;
+            }
+            return false;
         }
+
         return false;
+
     }
 
     @Override

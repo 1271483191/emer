@@ -3,9 +3,7 @@ package com.yunjing.emer.service.serviceImpl;
 import com.github.pagehelper.Page;
 import com.yunjing.emer.dao.CompanyInfoDao;
 import com.yunjing.emer.dao.WebsiteDao;
-import com.yunjing.emer.entity.User;
-import com.yunjing.emer.entity.Website;
-import com.yunjing.emer.entity.WebsiteExample;
+import com.yunjing.emer.entity.*;
 import com.yunjing.emer.service.WebsiteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,10 +21,41 @@ public class WebsiteServiceImpl implements WebsiteService {
     CompanyInfoDao companyInfoDao;
 
     @Override
-    public List<Website> selectAll() {
+    public List<Website> selectAll(Integer type) {
         List<Website> websiteList = new ArrayList<>();
         websiteList = websiteDao.selectByExample(null);
-        return websiteList;
+
+        List<Website> websiteList1 = new ArrayList<>();
+        switch (type){
+            case 0:case 1:{
+                websiteList1 = websiteList;
+                break;
+            }
+            case 2:{
+                for(Website d : websiteList){
+                    CompanyInfo companyInfo = companyInfoDao.selectByPrimaryKey(d.getCompanyId());
+                    if(companyInfo != null){
+                        if(companyInfo.getLevel() > 1){
+                            websiteList1.add(d);
+                        }
+
+                    }
+                }
+                break;
+            }
+            case 3:{
+                for(Website d : websiteList){
+                    CompanyInfo companyInfo = companyInfoDao.selectByPrimaryKey(d.getCompanyId());
+                    if(companyInfo != null){
+                        if(companyInfo.getLevel() == 3){
+                            websiteList1.add(d);
+                        }
+                    }
+                }
+                break;
+            }
+        }
+        return websiteList1;
     }
 
     @Override
@@ -54,8 +83,8 @@ public class WebsiteServiceImpl implements WebsiteService {
     }
 
     @Override
-    public Page<Website> selectByPage() {
-        return (Page<Website>)websiteDao.selectByExample(null);
+    public Page<Website> selectByPage(Integer type) {
+        return (Page<Website>)websiteDao.selectWebsiteByCompanyLevel(type);
     }
 
     @Override

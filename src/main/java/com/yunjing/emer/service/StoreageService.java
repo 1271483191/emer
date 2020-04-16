@@ -7,9 +7,9 @@ import com.yunjing.emer.entity.Storeage;
 import java.util.List;
 
 public interface StoreageService {
-    List<Storeage> selectAll();
+    List<Storeage> selectAll(Integer type);
     boolean deleteByCId(Integer cid);
     boolean update(Storeage storeage);
-    Page<Storeage> selectByPage();
+    Page<Storeage> selectByPage(Integer type);
 
 }

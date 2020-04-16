@@ -1,5 +1,6 @@
 package com.yunjing.emer.dao;
 
+import com.yunjing.emer.entity.User;
 import com.yunjing.emer.entity.Website;
 import com.yunjing.emer.entity.WebsiteExample;
 import java.util.List;
@@ -15,6 +16,8 @@ public interface WebsiteDao {
     int insert(Website record);
 
     int insertSelective(Website record);
+
+    List<Website> selectWebsiteByCompanyLevel(Integer type);
 
     List<Website> selectByExample(WebsiteExample example);
 

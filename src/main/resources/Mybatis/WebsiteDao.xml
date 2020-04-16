@@ -77,6 +77,9 @@
     website_id, company_id, `level`, flour_exp, rice_exp, oil_exp, else_exp, flour_real, 
     rice_real, oil_real, else_real, `state`
   </sql>
+  <select id="selectWebsiteByCompanyLevel" parameterType="int" resultMap="BaseResultMap" >
+    select * from website as w,company_info as c where w.company_id = c.company_id and c.level >= #{type}
+  </select>
   <select id="selectByExample" parameterType="com.yunjing.emer.entity.WebsiteExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
