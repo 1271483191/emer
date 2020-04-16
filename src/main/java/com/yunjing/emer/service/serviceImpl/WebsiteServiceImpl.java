@@ -57,4 +57,9 @@ public class WebsiteServiceImpl implements WebsiteService {
     public Page<Website> selectByPage() {
         return (Page<Website>)websiteDao.selectByExample(null);
     }
+
+    @Override
+    public Website selectById(String websiteId) {
+        return websiteDao.selectByPrimaryKey(Integer.parseInt(websiteId.trim()));
+    }
 }

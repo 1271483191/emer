@@ -217,8 +217,8 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
                 </div>
-            </div>
             </div>
             <hr>
 
@@ -337,8 +337,8 @@
     Morris.Bar({
         element: 'powder',
         data: [
-            {device: '设计', geekbench: 136},
-            {device: '实际', geekbench: 167},
+            {device: '设计', geekbench: [[${website.getFlourExp()}]]},
+            {device: '实际', geekbench: [[${website.getFlourReal()}]]},
         ],
         xkey: 'device',
         ykeys: ['geekbench'],
@@ -351,8 +351,8 @@
     Morris.Bar({
         element: 'rice',
         data: [
-            {device: '设计', geekbench: 12},
-            {device: '实际', geekbench: 89},
+            {device: '设计', geekbench: [[${website.getRiceExp()}]]},
+            {device: '实际', geekbench: [[${website.getRiceReal()}]]},
         ],
         xkey: 'device',
         ykeys: ['geekbench'],
@@ -365,8 +365,8 @@
     Morris.Bar({
         element: 'oil',
         data: [
-            {device: '设计', geekbench: 280},
-            {device: '实际', geekbench: 198},
+            {device: '设计', geekbench: [[${website.getOilExp()}]]},
+            {device: '实际', geekbench: [[${website.getOilReal()}]]},
         ],
         xkey: 'device',
         ykeys: ['geekbench'],
