@@ -18,6 +18,11 @@ public class Website implements Serializable {
     private Integer companyId;
 
     /**
+     * 应急级别
+     */
+    private Integer level;
+
+    /**
      * 面粉设计日供应能力
      */
     private Double flourExp;
@@ -78,6 +83,14 @@ public class Website implements Serializable {
 
     public void setCompanyId(Integer companyId) {
         this.companyId = companyId;
+    }
+
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
     }
 
     public Double getFlourExp() {
@@ -166,6 +179,7 @@ public class Website implements Serializable {
         Website other = (Website) that;
         return (this.getWebsiteId() == null ? other.getWebsiteId() == null : this.getWebsiteId().equals(other.getWebsiteId()))
             && (this.getCompanyId() == null ? other.getCompanyId() == null : this.getCompanyId().equals(other.getCompanyId()))
+            && (this.getLevel() == null ? other.getLevel() == null : this.getLevel().equals(other.getLevel()))
             && (this.getFlourExp() == null ? other.getFlourExp() == null : this.getFlourExp().equals(other.getFlourExp()))
             && (this.getRiceExp() == null ? other.getRiceExp() == null : this.getRiceExp().equals(other.getRiceExp()))
             && (this.getOilExp() == null ? other.getOilExp() == null : this.getOilExp().equals(other.getOilExp()))
@@ -183,6 +197,7 @@ public class Website implements Serializable {
         int result = 1;
         result = prime * result + ((getWebsiteId() == null) ? 0 : getWebsiteId().hashCode());
         result = prime * result + ((getCompanyId() == null) ? 0 : getCompanyId().hashCode());
+        result = prime * result + ((getLevel() == null) ? 0 : getLevel().hashCode());
         result = prime * result + ((getFlourExp() == null) ? 0 : getFlourExp().hashCode());
         result = prime * result + ((getRiceExp() == null) ? 0 : getRiceExp().hashCode());
         result = prime * result + ((getOilExp() == null) ? 0 : getOilExp().hashCode());
@@ -203,6 +218,7 @@ public class Website implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", websiteId=").append(websiteId);
         sb.append(", companyId=").append(companyId);
+        sb.append(", level=").append(level);
         sb.append(", flourExp=").append(flourExp);
         sb.append(", riceExp=").append(riceExp);
         sb.append(", oilExp=").append(oilExp);

@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.yunjing.emer.entity.Website">
     <id column="website_id" jdbcType="INTEGER" property="websiteId" />
     <result column="company_id" jdbcType="INTEGER" property="companyId" />
+    <result column="level" jdbcType="INTEGER" property="level" />
     <result column="flour_exp" jdbcType="DOUBLE" property="flourExp" />
     <result column="rice_exp" jdbcType="DOUBLE" property="riceExp" />
     <result column="oil_exp" jdbcType="DOUBLE" property="oilExp" />
@@ -73,8 +74,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    website_id, company_id, flour_exp, rice_exp, oil_exp, else_exp, flour_real, rice_real, 
-    oil_real, else_real, `state`
+    website_id, company_id, `level`, flour_exp, rice_exp, oil_exp, else_exp, flour_real, 
+    rice_real, oil_real, else_real, `state`
   </sql>
   <select id="selectByExample" parameterType="com.yunjing.emer.entity.WebsiteExample" resultMap="BaseResultMap">
     select
@@ -115,20 +116,23 @@
     </if>
   </delete>
   <insert id="insert" keyColumn="website_id" keyProperty="websiteId" parameterType="com.yunjing.emer.entity.Website" useGeneratedKeys="true">
-    insert into website (company_id, flour_exp, rice_exp, 
-      oil_exp, else_exp, flour_real, 
-      rice_real, oil_real, else_real, 
-      `state`)
-    values (#{companyId,jdbcType=INTEGER}, #{flourExp,jdbcType=DOUBLE}, #{riceExp,jdbcType=DOUBLE}, 
-      #{oilExp,jdbcType=DOUBLE}, #{elseExp,jdbcType=DOUBLE}, #{flourReal,jdbcType=DOUBLE}, 
-      #{riceReal,jdbcType=DOUBLE}, #{oilReal,jdbcType=DOUBLE}, #{elseReal,jdbcType=DOUBLE}, 
-      #{state,jdbcType=INTEGER})
+    insert into website (company_id, `level`, flour_exp, 
+      rice_exp, oil_exp, else_exp, 
+      flour_real, rice_real, oil_real, 
+      else_real, `state`)
+    values (#{companyId,jdbcType=INTEGER}, #{level,jdbcType=INTEGER}, #{flourExp,jdbcType=DOUBLE}, 
+      #{riceExp,jdbcType=DOUBLE}, #{oilExp,jdbcType=DOUBLE}, #{elseExp,jdbcType=DOUBLE}, 
+      #{flourReal,jdbcType=DOUBLE}, #{riceReal,jdbcType=DOUBLE}, #{oilReal,jdbcType=DOUBLE}, 
+      #{elseReal,jdbcType=DOUBLE}, #{state,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" keyColumn="website_id" keyProperty="websiteId" parameterType="com.yunjing.emer.entity.Website" useGeneratedKeys="true">
     insert into website
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="companyId != null">
         company_id,
+      </if>
+      <if test="level != null">
+        `level`,
       </if>
       <if test="flourExp != null">
         flour_exp,
@@ -161,6 +165,9 @@
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="companyId != null">
         #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="level != null">
+        #{level,jdbcType=INTEGER},
       </if>
       <if test="flourExp != null">
         #{flourExp,jdbcType=DOUBLE},
@@ -206,6 +213,9 @@
       <if test="record.companyId != null">
         company_id = #{record.companyId,jdbcType=INTEGER},
       </if>
+      <if test="record.level != null">
+        `level` = #{record.level,jdbcType=INTEGER},
+      </if>
       <if test="record.flourExp != null">
         flour_exp = #{record.flourExp,jdbcType=DOUBLE},
       </if>
@@ -242,6 +252,7 @@
     update website
     set website_id = #{record.websiteId,jdbcType=INTEGER},
       company_id = #{record.companyId,jdbcType=INTEGER},
+      `level` = #{record.level,jdbcType=INTEGER},
       flour_exp = #{record.flourExp,jdbcType=DOUBLE},
       rice_exp = #{record.riceExp,jdbcType=DOUBLE},
       oil_exp = #{record.oilExp,jdbcType=DOUBLE},
@@ -260,6 +271,9 @@
     <set>
       <if test="companyId != null">
         company_id = #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="level != null">
+        `level` = #{level,jdbcType=INTEGER},
       </if>
       <if test="flourExp != null">
         flour_exp = #{flourExp,jdbcType=DOUBLE},
@@ -294,6 +308,7 @@
   <update id="updateByPrimaryKey" parameterType="com.yunjing.emer.entity.Website">
     update website
     set company_id = #{companyId,jdbcType=INTEGER},
+      `level` = #{level,jdbcType=INTEGER},
       flour_exp = #{flourExp,jdbcType=DOUBLE},
       rice_exp = #{riceExp,jdbcType=DOUBLE},
       oil_exp = #{oilExp,jdbcType=DOUBLE},

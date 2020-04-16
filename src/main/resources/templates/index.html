@@ -294,7 +294,9 @@
 												<tr>
 													<th style="text-align: center; font-size: 1.5rem" >公司编号</th>
 													<th style="text-align: center; font-size: 1.5rem" >公司名称</th>
-													<th style="text-align: center; font-size: 1.5rem" >所在位置</th>
+													<th style="text-align: center; font-size: 1.5rem" >省</th>
+													<th style="text-align: center; font-size: 1.5rem" >市</th>
+													<th style="text-align: center; font-size: 1.5rem" >县</th>
 													<th style="text-align: center; font-size: 1.5rem" >负责人</th>
 													<th style="text-align: center; font-size: 1.5rem" >联系电话</th>
 												</tr>
@@ -303,9 +305,11 @@
 												<tr>
 													<th style="text-align: center; font-size: 1.5rem" th:text="${company.getCompanyId()}"></th>
 													<th style="text-align: center; font-size: 1.5rem" th:text="${company.getName()}"></th>
-													<th style="text-align: center; font-size: 1.5rem" th:text="${company.getPosition()} + ${company.getLocation()}">所在位置</th>
-													<th style="text-align: center; font-size: 1.5rem" th:text="${company.getPrincipal()}">负责人</th>
-													<th style="text-align: center; font-size: 1.5rem" th:text="${company.getPhone()}">联系电话</th>
+													<th style="text-align: center; font-size: 1.5rem" th:text="${company.getProvince()}"></th>
+													<th style="text-align: center; font-size: 1.5rem" th:text="${company.getCity()}"></th>
+													<th style="text-align: center; font-size: 1.5rem" th:text="${company.getCounty()}"></th>
+													<th style="text-align: center; font-size: 1.5rem" th:text="${company.getPrincipal()}"></th>
+													<th style="text-align: center; font-size: 1.5rem" th:text="${company.getPhone()}"></th>
 												</tr>
 											</div>
 										</table>
