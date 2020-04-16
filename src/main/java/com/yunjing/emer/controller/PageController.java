@@ -108,6 +108,11 @@ public class PageController {
         return "redirect:/toDelivery";
     }
 
+    @RequestMapping("/")
+    public String toIndex2(){
+        return "redirect:/toIndex";
+    }
+
     @RequestMapping("/toIndex")
     @ResponseBody
     public ModelAndView toIndex(Integer page){
@@ -141,6 +146,8 @@ public class PageController {
         baseInfoMap.put("storeageNum", storeageNum);
         baseInfoMap.put("total", websiteNum + deliveryNum + machineNum + storeageNum);
         baseInfoMap.put("companyInfoList", companyInfoList);
+        System.out.println(baseInfoMap);
+
         modelAndView.addObject("baseInfoMap", baseInfoMap);
 
         return modelAndView;
