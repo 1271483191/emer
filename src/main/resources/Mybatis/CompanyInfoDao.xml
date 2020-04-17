@@ -415,4 +415,44 @@
       save_day = #{saveDay,jdbcType=DOUBLE}
     where company_id = #{companyId,jdbcType=INTEGER}
   </update>
+
+  <select id="countByDelivery" parameterType="com.yunjing.emer.entity.CompanyInfoExample" resultType="java.lang.Long">
+
+    select count(b.company_id) as num from emer.company_info a
+    left outer join emer.delivery b on(a.company_id=b.company_id)
+
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+
+  <select id="countByStoreage" parameterType="com.yunjing.emer.entity.CompanyInfoExample" resultType="java.lang.Long">
+
+    select count(b.company_id) as num from emer.company_info a
+    left outer join emer.storeage b on(a.company_id=b.company_id)
+
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+
+  <select id="countByMachine" parameterType="com.yunjing.emer.entity.CompanyInfoExample" resultType="java.lang.Long">
+
+    select count(b.company_id) as num from emer.company_info a
+    left outer join emer.machine b on(a.company_id=b.company_id)
+
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+
+  <select id="countByWebsite" parameterType="com.yunjing.emer.entity.CompanyInfoExample" resultType="java.lang.Long">
+
+    select count(b.company_id) as num from emer.company_info a
+    left outer join emer.website b on(a.company_id=b.company_id)
+
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
 </mapper>

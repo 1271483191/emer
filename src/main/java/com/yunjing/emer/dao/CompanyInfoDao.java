@@ -27,4 +27,12 @@ public interface CompanyInfoDao {
     int updateByPrimaryKeySelective(CompanyInfo record);
 
     int updateByPrimaryKey(CompanyInfo record);
+
+    long countByDelivery(CompanyInfoExample example);
+
+    long countByStoreage(CompanyInfoExample example);
+
+    long countByWebsite(CompanyInfoExample example);
+
+    long countByMachine(CompanyInfoExample example);
 }
