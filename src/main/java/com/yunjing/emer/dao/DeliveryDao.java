@@ -2,6 +2,8 @@ package com.yunjing.emer.dao;
 
 import com.yunjing.emer.entity.Delivery;
 import com.yunjing.emer.entity.DeliveryExample;
+
+import java.util.Date;
 import java.util.List;
 
 import com.yunjing.emer.entity.User;
@@ -19,6 +21,8 @@ public interface DeliveryDao {
     int insertSelective(Delivery record);
 
     List<Delivery> selectDeliveryByCompanyLevel(User user);
+
+    List<Delivery> selectDeliveryByPageDate(User user, Date time1, Date time2);
 
     List<Delivery> selectByExample(DeliveryExample example);
 

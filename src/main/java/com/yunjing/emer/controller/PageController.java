@@ -369,7 +369,12 @@ public class PageController {
     }
 
     @RequestMapping("/toLogin")
-    public String toLogin(){
+    public String toLogin(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        if(user != null){
+            session.setAttribute("user", null);
+        }
         return "login";
     }
 
@@ -432,8 +437,56 @@ public class PageController {
             companyInfoList.add(companyInfoService.selectById(e.getCompanyId()));
         }
 
+        Map dateMap = new HashMap();
+        dateMap.put("date", 1);
+
         modelAndView.addObject("companys", companyInfoList);
         modelAndView.addObject("deliveries", deliveryList);
+        modelAndView.addObject("dateMap", dateMap);
+
+        return modelAndView;
+    }
+
+    @RequestMapping("/toDeliveryShowByDate")
+    @ResponseBody
+    public ModelAndView toDeliveryShowByDate(Integer page, HttpServletRequest request, String time1, String time2) throws ParseException {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("deliver-show");
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+
+
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date times1 = simpleDateFormat.parse(time1);
+        Date times2 = simpleDateFormat.parse(time2);
+
+        System.out.println(times1);
+        System.out.println(times2);
+
+        Map dateMap = new HashMap();
+        dateMap.put("date", 1);
+        dateMap.put("time1", time1);
+        dateMap.put("time2", time2);
+
+        if(page == null){
+            page = 1;
+        }
+
+        PageHelper.startPage(page,10);
+        PageInfo<Delivery> deliveryList = new PageInfo<>(deliveryService.selectByPageDate(user, times1, times2));
+        //System.out.println(companyInfoList);
+
+        List<CompanyInfo> companyInfoList = new ArrayList<>();
+
+        for(Delivery e : deliveryList.getList()){
+            System.out.println(e);
+            companyInfoList.add(companyInfoService.selectById(e.getCompanyId()));
+        }
+
+        modelAndView.addObject("companys", companyInfoList);
+        modelAndView.addObject("deliveries", deliveryList);
+        modelAndView.addObject("dateMap", dateMap);
 
         return modelAndView;
     }
