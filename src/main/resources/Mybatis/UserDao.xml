@@ -3,6 +3,7 @@
 <mapper namespace="com.yunjing.emer.dao.UserDao">
   <resultMap id="BaseResultMap" type="com.yunjing.emer.entity.User">
     <id column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="pass" jdbcType="INTEGER" property="pass" />
     <result column="county" jdbcType="VARCHAR" property="county" />
     <result column="city" jdbcType="VARCHAR" property="city" />
     <result column="province" jdbcType="VARCHAR" property="province" />
@@ -72,7 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    user_id, county, city, province, `password`, `type`, username, phone, `name`, company
+    user_id, pass, county, city, province, `password`, `type`, username, phone, `name`, 
+    company
   </sql>
   <select id="selectByExample" parameterType="com.yunjing.emer.entity.UserExample" resultMap="BaseResultMap">
     select
@@ -113,18 +115,21 @@
     </if>
   </delete>
   <insert id="insert" keyColumn="user_id" keyProperty="userId" parameterType="com.yunjing.emer.entity.User" useGeneratedKeys="true">
-    insert into user (county, city, province, 
-      `password`, `type`, username, 
-      phone, `name`, company
-      )
-    values (#{county,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, 
-      #{password,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, 
-      #{phone,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{company,jdbcType=VARCHAR}
-      )
+    insert into user (pass, county, city, 
+      province, `password`, `type`, 
+      username, phone, `name`, 
+      company)
+    values (#{pass,jdbcType=INTEGER}, #{county,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{province,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
+      #{username,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{company,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" keyColumn="user_id" keyProperty="userId" parameterType="com.yunjing.emer.entity.User" useGeneratedKeys="true">
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pass != null">
+        pass,
+      </if>
       <if test="county != null">
         county,
       </if>
@@ -154,6 +159,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pass != null">
+        #{pass,jdbcType=INTEGER},
+      </if>
       <if test="county != null">
         #{county,jdbcType=VARCHAR},
       </if>
@@ -195,6 +203,9 @@
       <if test="record.userId != null">
         user_id = #{record.userId,jdbcType=INTEGER},
       </if>
+      <if test="record.pass != null">
+        pass = #{record.pass,jdbcType=INTEGER},
+      </if>
       <if test="record.county != null">
         county = #{record.county,jdbcType=VARCHAR},
       </if>
@@ -230,6 +241,7 @@
   <update id="updateByExample" parameterType="map">
     update user
     set user_id = #{record.userId,jdbcType=INTEGER},
+      pass = #{record.pass,jdbcType=INTEGER},
       county = #{record.county,jdbcType=VARCHAR},
       city = #{record.city,jdbcType=VARCHAR},
       province = #{record.province,jdbcType=VARCHAR},
@@ -246,6 +258,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.yunjing.emer.entity.User">
     update user
     <set>
+      <if test="pass != null">
+        pass = #{pass,jdbcType=INTEGER},
+      </if>
       <if test="county != null">
         county = #{county,jdbcType=VARCHAR},
       </if>
@@ -278,7 +293,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.yunjing.emer.entity.User">
     update user
-    set county = #{county,jdbcType=VARCHAR},
+    set pass = #{pass,jdbcType=INTEGER},
+      county = #{county,jdbcType=VARCHAR},
       city = #{city,jdbcType=VARCHAR},
       province = #{province,jdbcType=VARCHAR},
       `password` = #{password,jdbcType=VARCHAR},

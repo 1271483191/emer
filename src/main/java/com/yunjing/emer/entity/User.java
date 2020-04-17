@@ -13,6 +13,11 @@ public class User implements Serializable {
     private Integer userId;
 
     /**
+     * 是否通过注册
+     */
+    private Integer pass;
+
+    /**
      * 所在县
      */
     private String county;
@@ -65,6 +70,14 @@ public class User implements Serializable {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public Integer getPass() {
+        return pass;
+    }
+
+    public void setPass(Integer pass) {
+        this.pass = pass;
     }
 
     public String getCounty() {
@@ -152,6 +165,7 @@ public class User implements Serializable {
         }
         User other = (User) that;
         return (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
+            && (this.getPass() == null ? other.getPass() == null : this.getPass().equals(other.getPass()))
             && (this.getCounty() == null ? other.getCounty() == null : this.getCounty().equals(other.getCounty()))
             && (this.getCity() == null ? other.getCity() == null : this.getCity().equals(other.getCity()))
             && (this.getProvince() == null ? other.getProvince() == null : this.getProvince().equals(other.getProvince()))
@@ -168,6 +182,7 @@ public class User implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getUserId() == null) ? 0 : getUserId().hashCode());
+        result = prime * result + ((getPass() == null) ? 0 : getPass().hashCode());
         result = prime * result + ((getCounty() == null) ? 0 : getCounty().hashCode());
         result = prime * result + ((getCity() == null) ? 0 : getCity().hashCode());
         result = prime * result + ((getProvince() == null) ? 0 : getProvince().hashCode());
@@ -187,6 +202,7 @@ public class User implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", userId=").append(userId);
+        sb.append(", pass=").append(pass);
         sb.append(", county=").append(county);
         sb.append(", city=").append(city);
         sb.append(", province=").append(province);

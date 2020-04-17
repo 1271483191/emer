@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -35,18 +37,23 @@ public class PageController {
     @Autowired
     WebsiteService websiteService;
 
+    @Autowired
+    LoginService loginService;
+
     @RequestMapping("/toCompanyInfo")
     @ResponseBody
-    public ModelAndView toCompanyInfo(Integer page){
+    public ModelAndView toCompanyInfo(Integer page, HttpServletRequest request){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("company_info");
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
 
         if(page == null){
             page = 1;
         }
 
         PageHelper.startPage(page,5);
-        PageInfo<CompanyInfo> companyInfoList = new PageInfo<>(companyInfoService.selectByPage());
+        PageInfo<CompanyInfo> companyInfoList = new PageInfo<>(companyInfoService.selectByPage(user.getType()));
         //System.out.println(companyInfoList);
         System.out.println(companyInfoList.getList());
 
@@ -65,17 +72,18 @@ public class PageController {
 
     @RequestMapping("/toDelivery")
     @ResponseBody
-    public ModelAndView toDelivery(Integer page){
+    public ModelAndView toDelivery(Integer page, HttpServletRequest request){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("delivery");
-
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
 
         if(page == null){
             page = 1;
         }
 
         PageHelper.startPage(page,5);
-        PageInfo<Delivery> deliveryList = new PageInfo<>(deliveryService.selectByPage());
+        PageInfo<Delivery> deliveryList = new PageInfo<>(deliveryService.selectByPage(user.getType()));
         //System.out.println(companyInfoList);
 
         List<CompanyInfo> companyInfoList = new ArrayList<>();
@@ -115,24 +123,26 @@ public class PageController {
 
     @RequestMapping("/toIndex")
     @ResponseBody
-    public ModelAndView toIndex(Integer page){
+    public ModelAndView toIndex(Integer page, HttpServletRequest request){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("index");
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
 
         if(page == null){
             page = 1;
         }
 
         PageHelper.startPage(page,20);
-        PageInfo<CompanyInfo> companyInfoList = new PageInfo<>(companyInfoService.selectByPage());
+        PageInfo<CompanyInfo> companyInfoList = new PageInfo<>(companyInfoService.selectByPage(user.getType()));
         //System.out.println(companyInfoList);
         System.out.println(companyInfoList.getList());
 
 
-        List websiteList = websiteService.selectAll();
-        List deliveryList = deliveryService.selectAll();
-        List machineList = machineService.selectAll();
-        List storeageList = storeageService.selectAll();
+        List websiteList = websiteService.selectAll(user.getType());
+        List deliveryList = deliveryService.selectAll(user.getType());
+        List machineList = machineService.selectAll(user.getType());
+        List storeageList = storeageService.selectAll(user.getType());
 
         int websiteNum = websiteList.size();
         int deliveryNum = deliveryList.size();
@@ -155,16 +165,18 @@ public class PageController {
 
     @RequestMapping("/toMachine")
     @ResponseBody
-    public ModelAndView toMachine(Integer page){
+    public ModelAndView toMachine(Integer page, HttpServletRequest request){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("machine");
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
 
         if(page == null){
             page = 1;
         }
 
         PageHelper.startPage(page,5);
-        PageInfo<Machine> machineList = new PageInfo<>(machineService.selectByPage());
+        PageInfo<Machine> machineList = new PageInfo<>(machineService.selectByPage(user.getType()));
         //System.out.println(companyInfoList);
 
         List<CompanyInfo> companyInfoList = new ArrayList<>();
@@ -199,16 +211,18 @@ public class PageController {
 
     @RequestMapping("/toStoreage")
     @ResponseBody
-    public ModelAndView toStoreage(Integer page){
+    public ModelAndView toStoreage(Integer page, HttpServletRequest request){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("storeage");
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
 
         if(page == null){
             page = 1;
         }
 
         PageHelper.startPage(page,5);
-        PageInfo<Storeage> storeageList = new PageInfo<>(storeageService.selectByPage());
+        PageInfo<Storeage> storeageList = new PageInfo<>(storeageService.selectByPage(user.getType()));
         //System.out.println(companyInfoList);
 
         List<CompanyInfo> companyInfoList = new ArrayList<>();
@@ -279,16 +293,18 @@ public class PageController {
 
     @RequestMapping("/toWebsite")
     @ResponseBody
-    public ModelAndView toWebsite(Integer page){
+    public ModelAndView toWebsite(Integer page, HttpServletRequest request){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("website");
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
 
         if(page == null){
             page = 1;
         }
 
         PageHelper.startPage(page,5);
-        PageInfo<Website> websiteList = new PageInfo<>(websiteService.selectByPage());
+        PageInfo<Website> websiteList = new PageInfo<>(websiteService.selectByPage(user.getType()));
         //System.out.println(companyInfoList);
 
         List<CompanyInfo> companyInfoList = new ArrayList<>();
@@ -329,9 +345,17 @@ public class PageController {
     @RequestMapping("/insertUser")
     public String insertUser(User user){
 
+        String src = "insert_false";
+        System.out.println(user);
+        user.setPass(0);
         boolean result = userService.insertUser(user);
         System.out.println(result);
-        return "redirect:/toUser";
+
+        if(result){
+            src = "redirect:/toLogin";
+        }
+
+        return src;
     }
 
     @RequestMapping("/toIndexMain")
@@ -342,6 +366,33 @@ public class PageController {
     @RequestMapping("/toLogin")
     public String toLogin(){
         return "login";
+    }
+
+    @RequestMapping("/login")
+    public String login(String username, String password, HttpServletRequest request){
+
+        String src = "redirect:/toLogin";
+        System.out.println("username:" + username + ",password:" + password);
+        int result = loginService.login(username, password);
+        System.out.println("result:" + result);
+        switch (result){
+            case -1:
+                src = "login_false";
+                break;
+            case 0:
+                src = "pass_false";
+                break;
+            case 1:{
+                src = "redirect:/toIndex";
+                HttpSession session = request.getSession();
+                User user = loginService.getUser(username,password);
+                System.out.println(user);
+                session.setAttribute("user", user);
+            }
+        }
+
+
+        return src;
     }
 
     @RequestMapping("/toRegist")
@@ -356,16 +407,18 @@ public class PageController {
 
     @RequestMapping("/toSupplyShow")
     @ResponseBody
-    public ModelAndView toSupplyShow(Integer page){
+    public ModelAndView toSupplyShow(Integer page, HttpServletRequest request){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("supply-show");
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
 
         if(page == null){
             page = 1;
         }
 
         PageHelper.startPage(page,10);
-        PageInfo<Website> websiteList = new PageInfo<>(websiteService.selectByPage());
+        PageInfo<Website> websiteList = new PageInfo<>(websiteService.selectByPage(user.getType()));
         //System.out.println(companyInfoList);
 
         List<CompanyInfo> companyInfoList = new ArrayList<>();

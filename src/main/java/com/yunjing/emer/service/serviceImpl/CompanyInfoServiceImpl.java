@@ -3,6 +3,7 @@ package com.yunjing.emer.service.serviceImpl;
 import com.github.pagehelper.Page;
 import com.yunjing.emer.dao.CompanyInfoDao;
 import com.yunjing.emer.entity.CompanyInfo;
+import com.yunjing.emer.entity.CompanyInfoExample;
 import com.yunjing.emer.service.CompanyInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,9 +18,29 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
     CompanyInfoDao companyInfoDao;
 
     @Override
-    public List<CompanyInfo> selectAll() {
+    public List<CompanyInfo> selectAll(Integer type) {
         List<CompanyInfo> companyInfoList = new ArrayList<>();
-        companyInfoList = companyInfoDao.selectByExample(null);
+        switch (type){
+            case 0:case 1:{
+                companyInfoList = companyInfoDao.selectByExample(null);
+                break;
+            }
+            case 2:{
+                CompanyInfoExample companyInfoExample = new CompanyInfoExample();
+                CompanyInfoExample.Criteria criteria = companyInfoExample.createCriteria();
+                criteria.andLevelBetween(2,3);
+                companyInfoList = companyInfoDao.selectByExample(companyInfoExample);
+                break;
+            }
+            case 3:{
+                CompanyInfoExample companyInfoExample = new CompanyInfoExample();
+                CompanyInfoExample.Criteria criteria = companyInfoExample.createCriteria();
+                criteria.andLevelEqualTo(3);
+                companyInfoList = companyInfoDao.selectByExample(companyInfoExample);
+                break;
+            }
+        }
+
         return companyInfoList;
     }
 
@@ -39,7 +60,31 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
     }
 
     @Override
-    public Page<CompanyInfo> selectByPage() {
-        return (Page<CompanyInfo>)companyInfoDao.selectByExample(null);
+    public Page<CompanyInfo> selectByPage(Integer type) {
+
+        List<CompanyInfo> companyInfoList = new ArrayList<>();
+        switch (type){
+            case 0:case 1:{
+                companyInfoList = companyInfoDao.selectByExample(null);
+                break;
+            }
+            case 2:{
+                CompanyInfoExample companyInfoExample = new CompanyInfoExample();
+                CompanyInfoExample.Criteria criteria = companyInfoExample.createCriteria();
+                criteria.andLevelBetween(2,3);
+                companyInfoList = companyInfoDao.selectByExample(companyInfoExample);
+                break;
+            }
+            case 3:{
+                CompanyInfoExample companyInfoExample = new CompanyInfoExample();
+                CompanyInfoExample.Criteria criteria = companyInfoExample.createCriteria();
+                criteria.andLevelEqualTo(3);
+                companyInfoList = companyInfoDao.selectByExample(companyInfoExample);
+                break;
+            }
+        }
+
+
+        return (Page<CompanyInfo>)companyInfoList;
     }
 }

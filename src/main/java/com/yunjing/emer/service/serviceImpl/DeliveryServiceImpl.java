@@ -3,9 +3,7 @@ package com.yunjing.emer.service.serviceImpl;
 import com.github.pagehelper.Page;
 import com.yunjing.emer.dao.CompanyInfoDao;
 import com.yunjing.emer.dao.DeliveryDao;
-import com.yunjing.emer.entity.CompanyInfo;
-import com.yunjing.emer.entity.Delivery;
-import com.yunjing.emer.entity.DeliveryExample;
+import com.yunjing.emer.entity.*;
 import com.yunjing.emer.service.DeliveryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,10 +21,46 @@ public class DeliveryServiceImpl  implements DeliveryService {
     CompanyInfoDao companyInfoDao;
 
     @Override
-    public List<Delivery> selectAll() {
+    public List<Delivery> selectAll(Integer type) {
+
         List<Delivery> deliveryList = new ArrayList<>();
         deliveryList = deliveryDao.selectByExample(null);
-        return deliveryList;
+
+        List<Delivery> deliveryList1 = new ArrayList<>();
+        switch (type){
+            case 0:case 1:{
+                deliveryList1 = deliveryList;
+                break;
+            }
+            case 2:{
+                for(Delivery d : deliveryList){
+                    CompanyInfo companyInfo = companyInfoDao.selectByPrimaryKey(d.getCompanyId());
+                    if(companyInfo != null){
+                        if(companyInfo.getLevel() > 1){
+                            deliveryList1.add(d);
+                        }
+
+                    }
+                }
+                break;
+            }
+            case 3:{
+                for(Delivery d : deliveryList){
+                    CompanyInfo companyInfo = companyInfoDao.selectByPrimaryKey(d.getCompanyId());
+                    if(companyInfo != null){
+                        if(companyInfo.getLevel() == 3){
+                            deliveryList1.add(d);
+                        }
+
+                    }
+                }
+                break;
+            }
+        }
+        List<Delivery> deliveryList2 = new ArrayList<>();
+        deliveryList2 = deliveryList1;
+
+        return deliveryList2;
     }
 
     @Override
@@ -55,7 +89,45 @@ public class DeliveryServiceImpl  implements DeliveryService {
     }
 
     @Override
-    public Page<Delivery> selectByPage() {
-        return (Page<Delivery>)deliveryDao.selectByExample(null);
+    public Page<Delivery> selectByPage(Integer type) {
+        List<Delivery> deliveryList = new ArrayList<>();
+        deliveryList = deliveryDao.selectByExample(null);
+
+        List<Delivery> deliveryList1 = new ArrayList<>();
+        switch (type){
+            case 0:case 1:{
+                deliveryList1 = deliveryList;
+                break;
+            }
+            case 2:{
+                for(Delivery d : deliveryList){
+                    CompanyInfo companyInfo = companyInfoDao.selectByPrimaryKey(d.getCompanyId());
+                    if(companyInfo != null){
+                        if(companyInfo.getLevel() > 1){
+                            deliveryList1.add(d);
+                        }
+
+                    }
+                }
+                break;
+            }
+            case 3:{
+                for(Delivery d : deliveryList){
+                    CompanyInfo companyInfo = companyInfoDao.selectByPrimaryKey(d.getCompanyId());
+                    if(companyInfo != null){
+                        if(companyInfo.getLevel() == 3){
+                            deliveryList1.add(d);
+                        }
+
+                    }
+                }
+                break;
+            }
+        }
+
+        List<Delivery> deliveryList2 = new ArrayList<>();
+        deliveryList2 = deliveryList1;
+
+        return (Page<Delivery>)deliveryList2;
     }
 }

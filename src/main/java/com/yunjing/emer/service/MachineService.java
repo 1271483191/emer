@@ -7,8 +7,8 @@ import com.yunjing.emer.entity.Machine;
 import java.util.List;
 
 public interface MachineService {
-    List<Machine> selectAll();
+    List<Machine> selectAll(Integer type);
     boolean deleteByCId(Integer cid);
     boolean update(Machine machine);
-    Page<Machine> selectByPage();
+    Page<Machine> selectByPage(Integer type);
 }

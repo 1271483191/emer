@@ -184,6 +184,66 @@ public class UserExample {
             return (Criteria) this;
         }
 
+        public Criteria andPassIsNull() {
+            addCriterion("pass is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassIsNotNull() {
+            addCriterion("pass is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassEqualTo(Integer value) {
+            addCriterion("pass =", value, "pass");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassNotEqualTo(Integer value) {
+            addCriterion("pass <>", value, "pass");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassGreaterThan(Integer value) {
+            addCriterion("pass >", value, "pass");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassGreaterThanOrEqualTo(Integer value) {
+            addCriterion("pass >=", value, "pass");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassLessThan(Integer value) {
+            addCriterion("pass <", value, "pass");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassLessThanOrEqualTo(Integer value) {
+            addCriterion("pass <=", value, "pass");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassIn(List<Integer> values) {
+            addCriterion("pass in", values, "pass");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassNotIn(List<Integer> values) {
+            addCriterion("pass not in", values, "pass");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassBetween(Integer value1, Integer value2) {
+            addCriterion("pass between", value1, value2, "pass");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassNotBetween(Integer value1, Integer value2) {
+            addCriterion("pass not between", value1, value2, "pass");
+            return (Criteria) this;
+        }
+
         public Criteria andCountyIsNull() {
             addCriterion("county is null");
             return (Criteria) this;

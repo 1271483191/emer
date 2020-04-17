@@ -7,9 +7,9 @@ import com.yunjing.emer.entity.Delivery;
 import java.util.List;
 
 public interface DeliveryService {
-    List<Delivery> selectAll();
+    List<Delivery> selectAll(Integer type);
     boolean deleteByCId(Integer cid);
     boolean update(Delivery delivery);
-    Page<Delivery> selectByPage();
+    Page<Delivery> selectByPage(Integer type);
 }
 

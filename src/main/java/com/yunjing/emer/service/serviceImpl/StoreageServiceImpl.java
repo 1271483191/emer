@@ -23,7 +23,7 @@ public class StoreageServiceImpl implements StoreageService {
     CompanyInfoDao companyInfoDao;
 
     @Override
-    public List<Storeage> selectAll() {
+    public List<Storeage> selectAll(Integer type) {
         List<Storeage> storeageList = new ArrayList<>();
         storeageList = storeageDao.selectByExample(null);
         return storeageList;
@@ -55,7 +55,7 @@ public class StoreageServiceImpl implements StoreageService {
     }
 
     @Override
-    public Page<Storeage> selectByPage() {
+    public Page<Storeage> selectByPage(Integer type) {
         return (Page<Storeage>)storeageDao.selectByExample(null);
     }
 }
