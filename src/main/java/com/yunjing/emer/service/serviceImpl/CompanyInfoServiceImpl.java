@@ -42,4 +42,5 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
     public Page<CompanyInfo> selectByPage(User user) {
         return (Page<CompanyInfo>)companyInfoDao.selectCompanyInfoByLevel(user);
     }
+
 }

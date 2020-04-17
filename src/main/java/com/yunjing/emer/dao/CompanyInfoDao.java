@@ -39,4 +39,7 @@ public interface CompanyInfoDao {
     long countByWebsite(CompanyInfoExample example);
 
     long countByMachine(CompanyInfoExample example);
+
+    List<CompanyInfo> selectCompanyInfoByDelivey(User user);
+
 }

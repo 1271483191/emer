@@ -88,7 +88,7 @@
                   </li>
 
                   <li class="sub-menu">
-                      <a href="toSearch">
+                      <a href="companysearch">
                           <i class="fa fa-cogs"></i>
                           <span style="font-size: 1.5rem">统计查询</span>
                       </a>
@@ -317,10 +317,6 @@
 
 
 								</div><!-- /content-panel -->
-								<div style="font-size: 1.5rem">
-									<a style="color: white" th:href="@{'/toIndex?page='+${baseInfoMap.get('companyInfoList').getPageNum() - 1}}">上一页</a><span style="color: white;" th:text="'&nbsp;&nbsp;第' + ${baseInfoMap.get('companyInfoList').getPageNum()} + '页&nbsp;'"></span>
-									<a style="color: white" th:href="@{'/toIndex?page='+${baseInfoMap.get('companyInfoList').getPageNum() + 1}}">下一页</a><br/>
-								</div>
 
 									<div class="pull-right">
 										<h4 style="margin-right: 15px;"><a class="fa fa-download download" href="#" download="全国粮食应急保障企业信息简表">下载</a></h4>
