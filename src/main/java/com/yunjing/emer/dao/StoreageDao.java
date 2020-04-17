@@ -3,6 +3,8 @@ package com.yunjing.emer.dao;
 import com.yunjing.emer.entity.Storeage;
 import com.yunjing.emer.entity.StoreageExample;
 import java.util.List;
+
+import com.yunjing.emer.entity.User;
 import org.apache.ibatis.annotations.Param;
 
 public interface StoreageDao {
@@ -15,6 +17,8 @@ public interface StoreageDao {
     int insert(Storeage record);
 
     int insertSelective(Storeage record);
+
+    List<Storeage> selectStoreageByCompanyLevel(User user);
 
     List<Storeage> selectByExample(StoreageExample example);
 

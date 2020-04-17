@@ -8,7 +8,6 @@ import com.yunjing.emer.service.WebsiteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -21,41 +20,8 @@ public class WebsiteServiceImpl implements WebsiteService {
     CompanyInfoDao companyInfoDao;
 
     @Override
-    public List<Website> selectAll(Integer type) {
-        List<Website> websiteList = new ArrayList<>();
-        websiteList = websiteDao.selectByExample(null);
-
-        List<Website> websiteList1 = new ArrayList<>();
-        switch (type){
-            case 0:case 1:{
-                websiteList1 = websiteList;
-                break;
-            }
-            case 2:{
-                for(Website d : websiteList){
-                    CompanyInfo companyInfo = companyInfoDao.selectByPrimaryKey(d.getCompanyId());
-                    if(companyInfo != null){
-                        if(companyInfo.getLevel() > 1){
-                            websiteList1.add(d);
-                        }
-
-                    }
-                }
-                break;
-            }
-            case 3:{
-                for(Website d : websiteList){
-                    CompanyInfo companyInfo = companyInfoDao.selectByPrimaryKey(d.getCompanyId());
-                    if(companyInfo != null){
-                        if(companyInfo.getLevel() == 3){
-                            websiteList1.add(d);
-                        }
-                    }
-                }
-                break;
-            }
-        }
-        return websiteList1;
+    public List<Website> selectAll(User user) {
+        return websiteDao.selectWebsiteByCompanyLevel(user);
     }
 
     @Override
@@ -83,8 +49,8 @@ public class WebsiteServiceImpl implements WebsiteService {
     }
 
     @Override
-    public Page<Website> selectByPage(Integer type) {
-        return (Page<Website>)websiteDao.selectWebsiteByCompanyLevel(type);
+    public Page<Website> selectByPage(User user) {
+        return (Page<Website>)websiteDao.selectWebsiteByCompanyLevel(user);
     }
 
     @Override

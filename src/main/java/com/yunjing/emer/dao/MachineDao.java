@@ -3,6 +3,8 @@ package com.yunjing.emer.dao;
 import com.yunjing.emer.entity.Machine;
 import com.yunjing.emer.entity.MachineExample;
 import java.util.List;
+
+import com.yunjing.emer.entity.User;
 import org.apache.ibatis.annotations.Param;
 
 public interface MachineDao {
@@ -15,6 +17,8 @@ public interface MachineDao {
     int insert(Machine record);
 
     int insertSelective(Machine record);
+
+    List<Machine> selectMachineByCompanyLevel(User user);
 
     List<Machine> selectByExample(MachineExample example);
 
