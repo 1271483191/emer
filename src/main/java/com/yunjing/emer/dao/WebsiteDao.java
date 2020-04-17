@@ -3,7 +3,11 @@ package com.yunjing.emer.dao;
 import com.yunjing.emer.entity.User;
 import com.yunjing.emer.entity.Website;
 import com.yunjing.emer.entity.WebsiteExample;
+
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface WebsiteDao {
@@ -20,6 +24,8 @@ public interface WebsiteDao {
     List<Website> selectWebsiteByCompanyLevel(User user);
 
     List<Website> selectByExample(WebsiteExample example);
+
+    List<Website> selectWebsiteByPageDate(User user, Date time1, Date time2);
 
     Website selectByPrimaryKey(Integer websiteId);
 

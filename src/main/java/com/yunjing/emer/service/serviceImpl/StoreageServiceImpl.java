@@ -3,15 +3,13 @@ package com.yunjing.emer.service.serviceImpl;
 import com.github.pagehelper.Page;
 import com.yunjing.emer.dao.CompanyInfoDao;
 import com.yunjing.emer.dao.StoreageDao;
-import com.yunjing.emer.entity.Machine;
-import com.yunjing.emer.entity.Storeage;
-import com.yunjing.emer.entity.StoreageExample;
-import com.yunjing.emer.entity.User;
+import com.yunjing.emer.entity.*;
 import com.yunjing.emer.service.StoreageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -56,5 +54,10 @@ public class StoreageServiceImpl implements StoreageService {
     @Override
     public Page<Storeage> selectByPage(User user) {
         return (Page<Storeage>)storeageDao.selectStoreageByCompanyLevel(user);
+    }
+
+    @Override
+    public Page<Storeage> selectByPageDate(User user, Date time1, Date time2) {
+        return (Page<Storeage>)storeageDao.selectStoreageByPageDate(user, time1, time2);
     }
 }

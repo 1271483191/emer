@@ -2,6 +2,8 @@ package com.yunjing.emer.dao;
 
 import com.yunjing.emer.entity.Machine;
 import com.yunjing.emer.entity.MachineExample;
+
+import java.util.Date;
 import java.util.List;
 
 import com.yunjing.emer.entity.User;
@@ -19,6 +21,8 @@ public interface MachineDao {
     int insertSelective(Machine record);
 
     List<Machine> selectMachineByCompanyLevel(User user);
+
+    List<Machine> selectMachineByPageDate(User user, Date time1, Date time2);
 
     List<Machine> selectByExample(MachineExample example);
 

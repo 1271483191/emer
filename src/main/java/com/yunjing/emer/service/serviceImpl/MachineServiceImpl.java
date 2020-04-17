@@ -3,15 +3,13 @@ package com.yunjing.emer.service.serviceImpl;
 import com.github.pagehelper.Page;
 import com.yunjing.emer.dao.CompanyInfoDao;
 import com.yunjing.emer.dao.MachineDao;
-import com.yunjing.emer.entity.Delivery;
-import com.yunjing.emer.entity.Machine;
-import com.yunjing.emer.entity.MachineExample;
-import com.yunjing.emer.entity.User;
+import com.yunjing.emer.entity.*;
 import com.yunjing.emer.service.MachineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -55,5 +53,11 @@ public class MachineServiceImpl implements MachineService {
     @Override
     public Page<Machine> selectByPage(User user) {
         return (Page<Machine>)machineDao.selectMachineByCompanyLevel(user);
+    }
+
+    @Override
+    public Page<Machine> selectByPageDate(User user, Date time1, Date time2) {
+        return (Page<Machine>)machineDao.selectMachineByPageDate(user, time1, time2);
+
     }
 }

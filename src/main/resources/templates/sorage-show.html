@@ -84,7 +84,7 @@
                     </a>
                 </li>
                 <li class="sub-menu">
-                    <a class="active" href="javascript:void(0);" >
+                    <a href="javascript:void(0);" >
                         <i class="fa fa-book"></i>
                         <span style="font-size: 1.5rem">应急供应网点</span>
                     </a>
@@ -105,7 +105,7 @@
                     </ul>
                 </li>
                 <li class="sub-menu">
-                    <a href="javascript:void(0);" >
+                    <a class="active" href="javascript:void(0);" >
                         <i class="fa fa-th"></i>
                         <span style="font-size: 1.5rem">应急储运企业</span>
                     </a>
@@ -176,7 +176,7 @@
                                     localhostPaht = curWwwPath.substring(0,pos);
                                     localhostPaht += "/";
 
-                                    var href = localhostPaht + "toSupplyShowByDate?time1=" + time1 + "&time2=" + time2;
+                                    var href = localhostPaht + "toStoreageShowByDate?time1=" + time1 + "&time2=" + time2;
                                     //console.log(href);
                                     location.href = href;
                                 }
@@ -198,17 +198,17 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr th:each="website,websiteStat : ${websites.getList()}">
+                                        <tr th:each="storeage,storeageStat : ${storeages.getList()}">
                                             <td>
-                                                <a  th:text="${website.getWebsiteId()}" th:href="@{'/toWebSite2?websiteId='+${website.getWebsiteId()}}"></a>
+                                                <a th:text="${storeage.getStoreageId()}" th:href="@{'/toWebSite2?websiteId='+${storeage.getStoreageId()}}"></a>
                                             </td>
-                                            <td th:text="${companys.get(websiteStat.index).getName()}"></td>
-                                            <span th:switch="${website.getState()}">
+                                            <td th:text="${companys.get(storeageStat.index).getName()}"></td>
+                                            <span th:switch="${storeage.getState()}">
                                                 <td th:case="1">生产中</td>
                                                 <td th:case="0">停产</td>
                                             </span>
 
-                                            <span th:switch="${website.getState()}">
+                                            <span th:switch="${storeage.getState()}">
                                                 <td th:case="1"><button>停用</button></td>
                                                 <td th:case="0">已停产</td>
                                             </span>
@@ -220,12 +220,12 @@
                                 </section>
                                 <div th:switch='${dateMap.get("date")}'>
                                     <div th:case="0" style="font-size: 1.7rem;margin-top: 10px;padding-bottom: 10px;text-align: center" >
-                                        <a th:href="@{'/toSupplyShow?page='+${websites.getPageNum() - 1}}">上一页</a><span th:text="'&nbsp;&nbsp;第' + ${websites.getPageNum()} + '页&nbsp;'"></span>
-                                        <a th:href="@{'/toSupplyShow?page='+${websites.getPageNum() + 1}}">下一页</a><br/>
+                                        <a th:href="@{'/toStoreageShow?page='+${storeages.getPageNum() - 1}}">上一页</a><span th:text="'&nbsp;&nbsp;第' + ${storeages.getPageNum()} + '页&nbsp;'"></span>
+                                        <a th:href="@{'/toStoreageShow?page='+${storeages.getPageNum() + 1}}">下一页</a><br/>
                                     </div>
                                     <div th:case="1" style="font-size: 1.7rem;margin-top: 10px;padding-bottom: 10px;text-align: center" >
-                                        <a th:href="@{'/toSupplyShowByDate?page='+${websites.getPageNum() - 1} + '&time1=' + ${dateMap.get('time1')} + '&time2=' + ${dateMap.get('time2')}}">上一页</a><span th:text="'&nbsp;&nbsp;第' + ${websites.getPageNum()} + '页&nbsp;'"></span>
-                                        <a th:href="@{'/toSupplyShowByDate?page='+${websites.getPageNum() + 1} + '&time1=' + ${dateMap.get('time1')} + '&time2=' + ${dateMap.get('time2')}}">下一页</a><br/>
+                                        <a th:href="@{'/toStoreageShowByDate?page='+${storeages.getPageNum() - 1} + '&time1=' + ${dateMap.get('time1')} + '&time2=' + ${dateMap.get('time2')}}">上一页</a><span th:text="'&nbsp;&nbsp;第' + ${storeages.getPageNum()} + '页&nbsp;'"></span>
+                                        <a th:href="@{'/toStoreageShowByDate?page='+${storeages.getPageNum() + 1} + '&time1=' + ${dateMap.get('time1')} + '&time2=' + ${dateMap.get('time2')}}">下一页</a><br/>
                                     </div>
                                 </div>
                             </div><!-- /content-panel -->
