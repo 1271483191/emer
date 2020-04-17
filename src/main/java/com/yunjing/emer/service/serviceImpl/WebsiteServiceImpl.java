@@ -8,7 +8,9 @@ import com.yunjing.emer.service.WebsiteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class WebsiteServiceImpl implements WebsiteService {
@@ -56,5 +58,10 @@ public class WebsiteServiceImpl implements WebsiteService {
     @Override
     public Website selectById(String websiteId) {
         return websiteDao.selectByPrimaryKey(Integer.parseInt(websiteId.trim()));
+    }
+
+    @Override
+    public Page<Website> selectByPageDate(User user, Date time1, Date time2) {
+        return (Page<Website>)websiteDao.selectWebsiteByPageDate(user, time1, time2);
     }
 }

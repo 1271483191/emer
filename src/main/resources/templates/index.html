@@ -21,7 +21,7 @@
 	  <link href="assets/css/style-responsive.css" rel="stylesheet">
 
 	  <link href="assets/css/table-responsive.css" rel="stylesheet">
-    
+
     <!-- Custom styles for this template -->
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/style-responsive.css" rel="stylesheet">
@@ -66,7 +66,7 @@
             </div>
         </header>
       <!--header end-->
-      
+
       <!-- **********************************************************************************************************************************************************
       MAIN SIDEBAR MENU
       *********************************************************************************************************************************************************** -->
@@ -76,10 +76,10 @@
               <!-- sidebar menu start-->
               <ul class="sidebar-menu" id="nav-accordion">
 				  <p class="logoname hidden-lg hidden-md " style="font-size: 2rem;color: white;text-align: center;font-weight: bolder">粮食应急保障企业信息统计</p>
-              
+
               	  <p class="centered"><a href="profile.html"><img src="assets/img/user.png" class="img-circle" width="60"></a></p>
               	  <h5 class="centered">云境商务智能研究所</h5>
-              	  	
+
                   <li class="mt">
                       <a class="active" href="toIndex">
                           <i class="fa fa-dashboard"></i>
@@ -94,7 +94,7 @@
                       </a>
                   </li>
                   <li class="sub-menu">
-                      <a href="javascript:;" >
+                      <a href="javascript:void(0);" >
                           <i class="fa fa-book"></i>
                           <span style="font-size: 1.5rem">应急供应网点</span>
                       </a>
@@ -105,37 +105,37 @@
                       </ul>
                   </li>
                   <li class="sub-menu">
-                      <a href="javascript:;" >
+                      <a href="javascript:void(0);" >
                           <i class="fa fa-tasks"></i>
                           <span style="font-size: 1.5rem">应急配送中心</span>
                       </a>
                       <ul class="sub">
-						  <li><a  href="deliver-statistics.html">供应网点统计</a></li>
-						  <li><a  href="deliver-show.html">全国供应网点列表展示</a></li>
+						  <li><a  href="deliver-statistics.html">配送中心统计</a></li>
+						  <li><a  href="toDeliverShow">配送中心列表展示</a></li>
                       </ul>
                   </li>
                   <li class="sub-menu">
-                      <a href="javascript:;" >
+                      <a href="javascript:void(0);" >
                           <i class="fa fa-th"></i>
                           <span style="font-size: 1.5rem">应急储运企业</span>
                       </a>
                       <ul class="sub">
-						  <li><a  href="sorage-statistics.html">供应网点统计</a></li>
-						  <li><a  href="sorage-show.html">全国供应网点列表展示</a></li>
+						  <li><a  href="sorage-statistics.html">储运企业统计</a></li>
+						  <li><a  href="toStoreageShow">储运企业列表展示</a></li>
                       </ul>
                   </li>
                   <li class="sub-menu">
-                      <a href="javascript:;" >
+                      <a href="javascript:void(0);" >
                           <i class=" fa fa-bar-chart-o"></i>
                           <span style="font-size: 1.5rem">应急加工企业</span>
                       </a>
                       <ul class="sub">
-						  <li><a  href="mechining-statistics.html">供应网点统计</a></li>
-						  <li><a  href="mechining-show.html">全国供应网点列表展示</a></li>
+						  <li><a  href="mechining-statistics.html">加工企业统计</a></li>
+						  <li><a  href="toMachineShow">加工企业列表展示</a></li>
                       </ul>
                   </li>
 				  <li class="sub-menu">
-					  <a href="javascript:;" >
+					  <a href="javascript:void(0);" >
 						  <i class="fa fa-users"></i>
 						  <span style="font-size: 1.5rem">权限管理</span>
 					  </a>
@@ -152,7 +152,7 @@
           </div>
       </aside>
       <!--sidebar end-->
-      
+
       <!-- **********************************************************************************************************************************************************
       MAIN CONTENT
       *********************************************************************************************************************************************************** -->
@@ -164,7 +164,7 @@
                   <div class="col-lg-12 main-chart">
 					  <h3><i class="fa fa-angle-right"></i>总体统计</h3>
 					  <hr>
-                      
+
                       <div class="row mt">
                       <!-- SERVER STATUS PANELS -->
                       	<div class="col-md-3 col-sm-3 mb">
@@ -185,7 +185,7 @@
 												color:"#99CCFF"
 											},
 											{
-												value : [[${baseInfoMap.get("total")}]],
+												value : [[${baseInfoMap.get("total")}]] - [[${baseInfoMap.get("websiteNum")}]],
 												color : "#fdfdfd"
 											}
 										];
@@ -212,7 +212,7 @@
                                               color:"#99CCFF"
                                           },
                                           {
-                                              value : [[${baseInfoMap.get("total")}]],
+                                              value : [[${baseInfoMap.get("total")}]] - [[${baseInfoMap.get("machineNum")}]],
                                               color : "#fdfdfd"
                                           }
                                       ];
@@ -239,7 +239,7 @@
                                               color:"#99CCFF"
                                           },
                                           {
-                                              value : [[${baseInfoMap.get("total")}]],
+                                              value : [[${baseInfoMap.get("total")}]] - [[${baseInfoMap.get("deliveryNum")}]],
                                               color : "#fdfdfd"
                                           }
                                       ];
@@ -265,7 +265,7 @@
                                               color:"#99CCFF"
                                           },
                                           {
-                                              value : [[${baseInfoMap.get("total")}]],
+                                              value : [[${baseInfoMap.get("total")}]] - [[${baseInfoMap.get("storeageNum")}]],
                                               color : "#fdfdfd"
                                           }
                                       ];
@@ -273,11 +273,11 @@
 								  </script>
 							  </div><! --/grey-panel -->
 						  </div><!-- /col-md-4-->
-                      	
+
 
                     </div><!-- /row -->
-                    
-                    				
+
+
 					<div class="row">
 						<div class="col-lg-12 main-chart">
 							<h3><i class="fa fa-angle-right"></i>全国粮食应急保障企业信息简表</h3>
@@ -397,16 +397,13 @@
 
 
       <!--main content end-->
-      <!--footer start-->
-      <footer class="site-footer">
-          <div class="text-center">
-              2020.<a href="http://www.winginbi.com" target="_blank">YunQin</a>
-              <a href="toIndex" class="go-top">
-                  <i class="fa fa-angle-up"></i>
-              </a>
-          </div>
-      </footer>
-      <!--footer end-->
+	  <!--footer start-->
+	  <footer class="site-footer">
+		  <div class="text-center">
+			  2020.<a href="http://www.winginbi.com" target="_blank">winginbi</a>
+		  </div>
+	  </footer>
+	  <!--footer end-->
   </section>
 
     <!-- js placed at the end of the document so the pages load faster -->

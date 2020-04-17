@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.crypto.Mac;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Controller
 public class PageController {
@@ -230,12 +230,17 @@ public class PageController {
         for(Storeage e : storeageList.getList()){
             companyInfoList.add(companyInfoService.selectById(e.getCompanyId()));
         }
+        Map dateMap = new HashMap();
+        dateMap.put("date", 1);
 
         modelAndView.addObject("companys", companyInfoList);
         modelAndView.addObject("storeages", storeageList);
+        modelAndView.addObject("dateMap", dateMap);
 
         return modelAndView;
     }
+
+
 
     @RequestMapping("/deleteStoreage")
     public String deleteStoreage(String companyId){
@@ -405,6 +410,110 @@ public class PageController {
         return "search";
     }
 
+    @RequestMapping("/toDeliverShow")
+    @ResponseBody
+    public ModelAndView toDeliverShow(Integer page, HttpServletRequest request){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("deliver-show");
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+
+        if(page == null){
+            page = 1;
+        }
+
+        PageHelper.startPage(page,10);
+        PageInfo<Delivery> deliveryList = new PageInfo<>(deliveryService.selectByPage(user));
+        //System.out.println(companyInfoList);
+
+        List<CompanyInfo> companyInfoList = new ArrayList<>();
+
+        for(Delivery e : deliveryList.getList()){
+            companyInfoList.add(companyInfoService.selectById(e.getCompanyId()));
+        }
+
+        modelAndView.addObject("companys", companyInfoList);
+        modelAndView.addObject("deliveries", deliveryList);
+
+        return modelAndView;
+    }
+
+    @RequestMapping("/toStoreageShow")
+    @ResponseBody
+    public ModelAndView toStoreageShow(Integer page, HttpServletRequest request){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("sorage-show");
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+
+        if(page == null){
+            page = 1;
+        }
+
+        PageHelper.startPage(page,10);
+        PageInfo<Storeage> storeageList = new PageInfo<>(storeageService.selectByPage(user));
+        //System.out.println(companyInfoList);
+
+        List<CompanyInfo> companyInfoList = new ArrayList<>();
+
+        for(Storeage e : storeageList.getList()){
+            companyInfoList.add(companyInfoService.selectById(e.getCompanyId()));
+        }
+
+        Map dateMap = new HashMap();
+        dateMap.put("date", 0);
+
+        modelAndView.addObject("companys", companyInfoList);
+        modelAndView.addObject("storeages", storeageList);
+        modelAndView.addObject("dateMap", dateMap);
+
+        return modelAndView;
+    }
+
+    @RequestMapping("/toStoreageShowByDate")
+    @ResponseBody
+    public ModelAndView toStoreageShowByDate(Integer page, HttpServletRequest request, String time1, String time2) throws ParseException {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("sorage-show");
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+
+
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date times1 = simpleDateFormat.parse(time1);
+        Date times2 = simpleDateFormat.parse(time2);
+
+        System.out.println(times1);
+        System.out.println(times2);
+
+        Map dateMap = new HashMap();
+        dateMap.put("date", 1);
+        dateMap.put("time1", time1);
+        dateMap.put("time2", time2);
+
+        if(page == null){
+            page = 1;
+        }
+
+        PageHelper.startPage(page,10);
+        PageInfo<Storeage> storeageList = new PageInfo<>(storeageService.selectByPageDate(user, times1, times2));
+        //System.out.println(companyInfoList);
+
+        List<CompanyInfo> companyInfoList = new ArrayList<>();
+
+        for(Storeage e : storeageList.getList()){
+            System.out.println(e);
+            companyInfoList.add(companyInfoService.selectById(e.getCompanyId()));
+        }
+
+        modelAndView.addObject("companys", companyInfoList);
+        modelAndView.addObject("storeages", storeageList);
+        modelAndView.addObject("dateMap", dateMap);
+
+        return modelAndView;
+    }
+
     @RequestMapping("/toSupplyShow")
     @ResponseBody
     public ModelAndView toSupplyShow(Integer page, HttpServletRequest request){
@@ -426,9 +535,133 @@ public class PageController {
         for(Website e : websiteList.getList()){
             companyInfoList.add(companyInfoService.selectById(e.getCompanyId()));
         }
+        Map dateMap = new HashMap();
+        dateMap.put("date", 0);
 
         modelAndView.addObject("companys", companyInfoList);
         modelAndView.addObject("websites", websiteList);
+        modelAndView.addObject("dateMap", dateMap);
+
+        return modelAndView;
+    }
+
+    @RequestMapping("/toSupplyShowByDate")
+    @ResponseBody
+    public ModelAndView toSupplyShowByDate(Integer page, HttpServletRequest request, String time1, String time2) throws ParseException {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("supply-show");
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+
+
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date times1 = simpleDateFormat.parse(time1);
+        Date times2 = simpleDateFormat.parse(time2);
+
+        System.out.println(times1);
+        System.out.println(times2);
+
+        Map dateMap = new HashMap();
+        dateMap.put("date", 1);
+        dateMap.put("time1", time1);
+        dateMap.put("time2", time2);
+
+        if(page == null){
+            page = 1;
+        }
+
+        PageHelper.startPage(page,10);
+        PageInfo<Website> websiteList = new PageInfo<>(websiteService.selectByPageDate(user, times1, times2));
+        //System.out.println(companyInfoList);
+
+        List<CompanyInfo> companyInfoList = new ArrayList<>();
+
+        for(Website e : websiteList.getList()){
+            companyInfoList.add(companyInfoService.selectById(e.getCompanyId()));
+        }
+
+        modelAndView.addObject("companys", companyInfoList);
+        modelAndView.addObject("websites", websiteList);
+        modelAndView.addObject("dateMap", dateMap);
+
+        return modelAndView;
+    }
+
+
+
+    @RequestMapping("/toMachineShow")
+    @ResponseBody
+    public ModelAndView toMachineShow(Integer page, HttpServletRequest request){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("mechining-show");
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+
+        if(page == null){
+            page = 1;
+        }
+
+        PageHelper.startPage(page,10);
+        PageInfo<Machine> machineList = new PageInfo<>(machineService.selectByPage(user));
+        //System.out.println(companyInfoList);
+
+        List<CompanyInfo> companyInfoList = new ArrayList<>();
+
+        for(Machine e : machineList.getList()){
+            companyInfoList.add(companyInfoService.selectById(e.getCompanyId()));
+        }
+
+        Map dateMap = new HashMap();
+        dateMap.put("date", 0);
+
+        modelAndView.addObject("companys", companyInfoList);
+        modelAndView.addObject("machines", machineList);
+        modelAndView.addObject("dateMap", dateMap);
+
+        return modelAndView;
+    }
+
+    @RequestMapping("/toMachineShowByDate")
+    @ResponseBody
+    public ModelAndView toMachineShowByDate(Integer page, HttpServletRequest request, String time1, String time2) throws ParseException {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("mechining-show");
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+
+
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date times1 = simpleDateFormat.parse(time1);
+        Date times2 = simpleDateFormat.parse(time2);
+
+        System.out.println(times1);
+        System.out.println(times2);
+
+        Map dateMap = new HashMap();
+        dateMap.put("date", 1);
+        dateMap.put("time1", time1);
+        dateMap.put("time2", time2);
+
+        if(page == null){
+            page = 1;
+        }
+
+        PageHelper.startPage(page,10);
+        PageInfo<Machine> machineList = new PageInfo<>(machineService.selectByPageDate(user, times1, times2));
+        //System.out.println(companyInfoList);
+
+        List<CompanyInfo> companyInfoList = new ArrayList<>();
+
+        for(Machine e : machineList.getList()){
+            System.out.println(e);
+            companyInfoList.add(companyInfoService.selectById(e.getCompanyId()));
+        }
+
+        modelAndView.addObject("companys", companyInfoList);
+        modelAndView.addObject("machines", machineList);
+        modelAndView.addObject("dateMap", dateMap);
 
         return modelAndView;
     }

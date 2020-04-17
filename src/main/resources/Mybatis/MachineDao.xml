@@ -104,6 +104,30 @@
       and c.county = 'false'
     </if>
   </select>
+  <select id="selectMachineByPageDate" resultMap="BaseResultMap" >
+    select * from machine as m,company_info as c
+    where m.company_id = c.company_id
+    and c.level >= #{user.type}
+    and c.time between #{time1} AND #{time2}
+    <if test="user.province != null and user.type == 1">
+      and c.province = #{user.province}
+    </if>
+    <if test="user.province == null">
+      and c.province = 'false'
+    </if>
+    <if test="user.city != null and user.type == 2">
+      and c.city = #{user.city}
+    </if>
+    <if test="user.city == null">
+      and c.city = 'false'
+    </if>
+    <if test="user.county != null and user.type == 3">
+      and c.county = #{user.county}
+    </if>
+    <if test="user.county == null">
+      and c.county = 'false'
+    </if>
+  </select>
   <select id="selectByExample" parameterType="com.yunjing.emer.entity.MachineExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
