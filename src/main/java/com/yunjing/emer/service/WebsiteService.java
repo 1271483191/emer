@@ -10,9 +10,9 @@ import com.yunjing.emer.entity.Website;
 import java.util.List;
 
 public interface WebsiteService {
-    List<Website> selectAll(Integer type);
+    List<Website> selectAll(User user);
     boolean deleteByCId(Integer cid);
     boolean update(Website website);
-    Page<Website> selectByPage(Integer type);
+    Page<Website> selectByPage(User user);
     Website selectById(String websiteId);
 }

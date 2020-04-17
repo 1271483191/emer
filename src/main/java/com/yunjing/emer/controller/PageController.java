@@ -53,7 +53,7 @@ public class PageController {
         }
 
         PageHelper.startPage(page,5);
-        PageInfo<CompanyInfo> companyInfoList = new PageInfo<>(companyInfoService.selectByPage(user.getType()));
+        PageInfo<CompanyInfo> companyInfoList = new PageInfo<>(companyInfoService.selectByPage(user));
         //System.out.println(companyInfoList);
         System.out.println(companyInfoList.getList());
 
@@ -83,7 +83,7 @@ public class PageController {
         }
 
         PageHelper.startPage(page,5);
-        PageInfo<Delivery> deliveryList = new PageInfo<>(deliveryService.selectByPage(user.getType()));
+        PageInfo<Delivery> deliveryList = new PageInfo<>(deliveryService.selectByPage(user));
         //System.out.println(companyInfoList);
 
         List<CompanyInfo> companyInfoList = new ArrayList<>();
@@ -134,15 +134,15 @@ public class PageController {
         }
 
         PageHelper.startPage(page,20);
-        PageInfo<CompanyInfo> companyInfoList = new PageInfo<>(companyInfoService.selectByPage(user.getType()));
+        PageInfo<CompanyInfo> companyInfoList = new PageInfo<>(companyInfoService.selectByPage(user));
         //System.out.println(companyInfoList);
         System.out.println(companyInfoList.getList());
 
 
-        List websiteList = websiteService.selectAll(user.getType());
-        List deliveryList = deliveryService.selectAll(user.getType());
-        List machineList = machineService.selectAll(user.getType());
-        List storeageList = storeageService.selectAll(user.getType());
+        List websiteList = websiteService.selectAll(user);
+        List deliveryList = deliveryService.selectAll(user);
+        List machineList = machineService.selectAll(user);
+        List storeageList = storeageService.selectAll(user);
 
         int websiteNum = websiteList.size();
         int deliveryNum = deliveryList.size();
@@ -176,7 +176,7 @@ public class PageController {
         }
 
         PageHelper.startPage(page,5);
-        PageInfo<Machine> machineList = new PageInfo<>(machineService.selectByPage(user.getType()));
+        PageInfo<Machine> machineList = new PageInfo<>(machineService.selectByPage(user));
         //System.out.println(companyInfoList);
 
         List<CompanyInfo> companyInfoList = new ArrayList<>();
@@ -222,7 +222,7 @@ public class PageController {
         }
 
         PageHelper.startPage(page,5);
-        PageInfo<Storeage> storeageList = new PageInfo<>(storeageService.selectByPage(user.getType()));
+        PageInfo<Storeage> storeageList = new PageInfo<>(storeageService.selectByPage(user));
         //System.out.println(companyInfoList);
 
         List<CompanyInfo> companyInfoList = new ArrayList<>();
@@ -304,7 +304,7 @@ public class PageController {
         }
 
         PageHelper.startPage(page,5);
-        PageInfo<Website> websiteList = new PageInfo<>(websiteService.selectByPage(user.getType()));
+        PageInfo<Website> websiteList = new PageInfo<>(websiteService.selectByPage(user));
         //System.out.println(companyInfoList);
 
         List<CompanyInfo> companyInfoList = new ArrayList<>();
@@ -418,7 +418,7 @@ public class PageController {
         }
 
         PageHelper.startPage(page,10);
-        PageInfo<Website> websiteList = new PageInfo<>(websiteService.selectByPage(user.getType()));
+        PageInfo<Website> websiteList = new PageInfo<>(websiteService.selectByPage(user));
         //System.out.println(companyInfoList);
 
         List<CompanyInfo> companyInfoList = new ArrayList<>();

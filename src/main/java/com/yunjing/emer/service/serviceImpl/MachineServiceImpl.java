@@ -6,6 +6,7 @@ import com.yunjing.emer.dao.MachineDao;
 import com.yunjing.emer.entity.Delivery;
 import com.yunjing.emer.entity.Machine;
 import com.yunjing.emer.entity.MachineExample;
+import com.yunjing.emer.entity.User;
 import com.yunjing.emer.service.MachineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,10 +24,8 @@ public class MachineServiceImpl implements MachineService {
     CompanyInfoDao companyInfoDao;
 
     @Override
-    public List<Machine> selectAll(Integer type) {
-        List<Machine> machineList = new ArrayList<>();
-        machineList = machineDao.selectByExample(null);
-        return machineList;
+    public List<Machine> selectAll(User user) {
+        return machineDao.selectMachineByCompanyLevel(user);
     }
 
     @Override
@@ -54,7 +53,7 @@ public class MachineServiceImpl implements MachineService {
     }
 
     @Override
-    public Page<Machine> selectByPage(Integer type) {
-        return (Page<Machine>)machineDao.selectByExample(null);
+    public Page<Machine> selectByPage(User user) {
+        return (Page<Machine>)machineDao.selectMachineByCompanyLevel(user);
     }
 }

@@ -4,6 +4,7 @@ import com.github.pagehelper.Page;
 import com.yunjing.emer.dao.CompanyInfoDao;
 import com.yunjing.emer.entity.CompanyInfo;
 import com.yunjing.emer.entity.CompanyInfoExample;
+import com.yunjing.emer.entity.User;
 import com.yunjing.emer.service.CompanyInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,30 +19,8 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
     CompanyInfoDao companyInfoDao;
 
     @Override
-    public List<CompanyInfo> selectAll(Integer type) {
-        List<CompanyInfo> companyInfoList = new ArrayList<>();
-        switch (type){
-            case 0:case 1:{
-                companyInfoList = companyInfoDao.selectByExample(null);
-                break;
-            }
-            case 2:{
-                CompanyInfoExample companyInfoExample = new CompanyInfoExample();
-                CompanyInfoExample.Criteria criteria = companyInfoExample.createCriteria();
-                criteria.andLevelBetween(2,3);
-                companyInfoList = companyInfoDao.selectByExample(companyInfoExample);
-                break;
-            }
-            case 3:{
-                CompanyInfoExample companyInfoExample = new CompanyInfoExample();
-                CompanyInfoExample.Criteria criteria = companyInfoExample.createCriteria();
-                criteria.andLevelEqualTo(3);
-                companyInfoList = companyInfoDao.selectByExample(companyInfoExample);
-                break;
-            }
-        }
-
-        return companyInfoList;
+    public List<CompanyInfo> selectAll(User user) {
+        return companyInfoDao.selectCompanyInfoByLevel(user);
     }
 
     @Override
@@ -60,31 +39,7 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
     }
 
     @Override
-    public Page<CompanyInfo> selectByPage(Integer type) {
-
-        List<CompanyInfo> companyInfoList = new ArrayList<>();
-        switch (type){
-            case 0:case 1:{
-                companyInfoList = companyInfoDao.selectByExample(null);
-                break;
-            }
-            case 2:{
-                CompanyInfoExample companyInfoExample = new CompanyInfoExample();
-                CompanyInfoExample.Criteria criteria = companyInfoExample.createCriteria();
-                criteria.andLevelBetween(2,3);
-                companyInfoList = companyInfoDao.selectByExample(companyInfoExample);
-                break;
-            }
-            case 3:{
-                CompanyInfoExample companyInfoExample = new CompanyInfoExample();
-                CompanyInfoExample.Criteria criteria = companyInfoExample.createCriteria();
-                criteria.andLevelEqualTo(3);
-                companyInfoList = companyInfoDao.selectByExample(companyInfoExample);
-                break;
-            }
-        }
-
-
-        return (Page<CompanyInfo>)companyInfoList;
+    public Page<CompanyInfo> selectByPage(User user) {
+        return (Page<CompanyInfo>)companyInfoDao.selectCompanyInfoByLevel(user);
     }
 }

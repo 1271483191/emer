@@ -6,6 +6,7 @@ import com.yunjing.emer.dao.StoreageDao;
 import com.yunjing.emer.entity.Machine;
 import com.yunjing.emer.entity.Storeage;
 import com.yunjing.emer.entity.StoreageExample;
+import com.yunjing.emer.entity.User;
 import com.yunjing.emer.service.StoreageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,10 +24,8 @@ public class StoreageServiceImpl implements StoreageService {
     CompanyInfoDao companyInfoDao;
 
     @Override
-    public List<Storeage> selectAll(Integer type) {
-        List<Storeage> storeageList = new ArrayList<>();
-        storeageList = storeageDao.selectByExample(null);
-        return storeageList;
+    public List<Storeage> selectAll(User user) {
+        return storeageDao.selectStoreageByCompanyLevel(user);
     }
 
     @Override
@@ -55,7 +54,7 @@ public class StoreageServiceImpl implements StoreageService {
     }
 
     @Override
-    public Page<Storeage> selectByPage(Integer type) {
-        return (Page<Storeage>)storeageDao.selectByExample(null);
+    public Page<Storeage> selectByPage(User user) {
+        return (Page<Storeage>)storeageDao.selectStoreageByCompanyLevel(user);
     }
 }

@@ -3,6 +3,8 @@ package com.yunjing.emer.dao;
 import com.yunjing.emer.entity.Delivery;
 import com.yunjing.emer.entity.DeliveryExample;
 import java.util.List;
+
+import com.yunjing.emer.entity.User;
 import org.apache.ibatis.annotations.Param;
 
 public interface DeliveryDao {
@@ -15,6 +17,8 @@ public interface DeliveryDao {
     int insert(Delivery record);
 
     int insertSelective(Delivery record);
+
+    List<Delivery> selectDeliveryByCompanyLevel(User user);
 
     List<Delivery> selectByExample(DeliveryExample example);
 

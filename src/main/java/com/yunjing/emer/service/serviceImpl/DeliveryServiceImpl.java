@@ -21,46 +21,9 @@ public class DeliveryServiceImpl  implements DeliveryService {
     CompanyInfoDao companyInfoDao;
 
     @Override
-    public List<Delivery> selectAll(Integer type) {
+    public List<Delivery> selectAll(User user) {
 
-        List<Delivery> deliveryList = new ArrayList<>();
-        deliveryList = deliveryDao.selectByExample(null);
-
-        List<Delivery> deliveryList1 = new ArrayList<>();
-        switch (type){
-            case 0:case 1:{
-                deliveryList1 = deliveryList;
-                break;
-            }
-            case 2:{
-                for(Delivery d : deliveryList){
-                    CompanyInfo companyInfo = companyInfoDao.selectByPrimaryKey(d.getCompanyId());
-                    if(companyInfo != null){
-                        if(companyInfo.getLevel() > 1){
-                            deliveryList1.add(d);
-                        }
-
-                    }
-                }
-                break;
-            }
-            case 3:{
-                for(Delivery d : deliveryList){
-                    CompanyInfo companyInfo = companyInfoDao.selectByPrimaryKey(d.getCompanyId());
-                    if(companyInfo != null){
-                        if(companyInfo.getLevel() == 3){
-                            deliveryList1.add(d);
-                        }
-
-                    }
-                }
-                break;
-            }
-        }
-        List<Delivery> deliveryList2 = new ArrayList<>();
-        deliveryList2 = deliveryList1;
-
-        return deliveryList2;
+        return deliveryDao.selectDeliveryByCompanyLevel(user);
     }
 
     @Override
@@ -89,45 +52,7 @@ public class DeliveryServiceImpl  implements DeliveryService {
     }
 
     @Override
-    public Page<Delivery> selectByPage(Integer type) {
-        List<Delivery> deliveryList = new ArrayList<>();
-        deliveryList = deliveryDao.selectByExample(null);
-
-        List<Delivery> deliveryList1 = new ArrayList<>();
-        switch (type){
-            case 0:case 1:{
-                deliveryList1 = deliveryList;
-                break;
-            }
-            case 2:{
-                for(Delivery d : deliveryList){
-                    CompanyInfo companyInfo = companyInfoDao.selectByPrimaryKey(d.getCompanyId());
-                    if(companyInfo != null){
-                        if(companyInfo.getLevel() > 1){
-                            deliveryList1.add(d);
-                        }
-
-                    }
-                }
-                break;
-            }
-            case 3:{
-                for(Delivery d : deliveryList){
-                    CompanyInfo companyInfo = companyInfoDao.selectByPrimaryKey(d.getCompanyId());
-                    if(companyInfo != null){
-                        if(companyInfo.getLevel() == 3){
-                            deliveryList1.add(d);
-                        }
-
-                    }
-                }
-                break;
-            }
-        }
-
-        List<Delivery> deliveryList2 = new ArrayList<>();
-        deliveryList2 = deliveryList1;
-
-        return (Page<Delivery>)deliveryList2;
+    public Page<Delivery> selectByPage(User user) {
+        return (Page<Delivery>)deliveryDao.selectDeliveryByCompanyLevel(user);
     }
 }

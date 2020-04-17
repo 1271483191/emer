@@ -3,6 +3,8 @@ package com.yunjing.emer.dao;
 import com.yunjing.emer.entity.CompanyInfo;
 import com.yunjing.emer.entity.CompanyInfoExample;
 import java.util.List;
+
+import com.yunjing.emer.entity.User;
 import org.apache.ibatis.annotations.Param;
 
 public interface CompanyInfoDao {
@@ -15,6 +17,8 @@ public interface CompanyInfoDao {
     int insert(CompanyInfo record);
 
     int insertSelective(CompanyInfo record);
+
+    List<CompanyInfo> selectCompanyInfoByLevel(User user);
 
     List<CompanyInfo> selectByExample(CompanyInfoExample example);
 

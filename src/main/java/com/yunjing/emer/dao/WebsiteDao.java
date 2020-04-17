@@ -17,7 +17,7 @@ public interface WebsiteDao {
 
     int insertSelective(Website record);
 
-    List<Website> selectWebsiteByCompanyLevel(Integer type);
+    List<Website> selectWebsiteByCompanyLevel(User user);
 
     List<Website> selectByExample(WebsiteExample example);
 

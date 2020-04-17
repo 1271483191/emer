@@ -84,6 +84,28 @@
     `location`, activation_status, longitude, latitude, principal, phone, in_day, out_day, 
     save_day
   </sql>
+  <select id="selectCompanyInfoByLevel" parameterType="com.yunjing.emer.entity.User" resultMap="BaseResultMap" >
+    select * from company_info as c
+    where c.level >= #{type}
+    <if test="province != null and type == 1">
+      and c.province = #{province}
+    </if>
+    <if test="province == null">
+      and c.province = 'false'
+    </if>
+    <if test="city != null and type == 2">
+      and c.city = #{city}
+    </if>
+    <if test="city == null">
+      and c.city = 'false'
+    </if>
+    <if test="county != null and type == 3">
+      and c.county = #{county}
+    </if>
+    <if test="county == null">
+      and c.county = 'false'
+    </if>
+  </select>
   <select id="selectByExample" parameterType="com.yunjing.emer.entity.CompanyInfoExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
