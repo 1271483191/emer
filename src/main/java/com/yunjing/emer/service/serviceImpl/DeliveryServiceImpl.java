@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -54,5 +55,11 @@ public class DeliveryServiceImpl  implements DeliveryService {
     @Override
     public Page<Delivery> selectByPage(User user) {
         return (Page<Delivery>)deliveryDao.selectDeliveryByCompanyLevel(user);
+    }
+
+    @Override
+    public Page<Delivery> selectByPageDate(User user, Date time1, Date time2) {
+        return (Page<Delivery>)deliveryDao.selectDeliveryByPageDate(user, time1, time2);
+
     }
 }
