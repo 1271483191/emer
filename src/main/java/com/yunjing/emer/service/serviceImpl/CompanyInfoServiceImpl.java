@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -41,6 +42,22 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
     @Override
     public Page<CompanyInfo> selectByPage(User user) {
         return (Page<CompanyInfo>)companyInfoDao.selectCompanyInfoByLevel(user);
+    }
+
+    public List<CompanyInfo> selectCompanyInfoByStoreage(User user, Date time1, Date time2) {
+        return (List<CompanyInfo>)companyInfoDao.selectCompanyInfoByStoreage(user,time1,time2);
+    }
+    public List<CompanyInfo> selectCompanyInfoByDelivery(User user, Date time1, Date time2) {
+        return (List<CompanyInfo>)companyInfoDao.selectCompanyInfoByDelivery(user,time1,time2);
+    }
+    public List<CompanyInfo> selectCompanyInfoByMachine(User user, Date time1, Date time2) {
+        return (List<CompanyInfo>)companyInfoDao.selectCompanyInfoByMachine(user,time1,time2);
+    }
+    public List<CompanyInfo> selectCompanyInfoByWebsite(User user, Date time1, Date time2) {
+        return (List<CompanyInfo>)companyInfoDao.selectCompanyInfoByWebsite(user,time1,time2);
+    }
+    public List<CompanyInfo> selectCompanyInfoByAll(User user, Date time1, Date time2) {
+        return (List<CompanyInfo>)companyInfoDao.selectCompanyInfoByAll(user,time1,time2);
     }
 
 }

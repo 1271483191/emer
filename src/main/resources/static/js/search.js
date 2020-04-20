@@ -4,7 +4,7 @@
 $("#search").click(function(){
 
      var time1=$("#time1").val();
-     var time2=$("#time1").val();
+     var time2=$("#time2").val();
      var select=document.getElementById("form-field-select-4");
      var pro = [];
      for(var i=0;i<select.length;i++){
@@ -13,10 +13,10 @@ $("#search").click(function(){
          }
      }
      var totalpro=JSON.stringify(pro);
-    alert(totalpro)
+    alert(totalpro+"---"+time1+"----"+time2)
     $.ajax({
         type: "POST",
-        url: "companysearch",
+        url: "companysearchBytime",
         data: {time1:time1,time2:time2,totalpro:totalpro},
         async:false,
         success: function(data){

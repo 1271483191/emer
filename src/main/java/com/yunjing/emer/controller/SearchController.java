@@ -16,10 +16,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created by yinwenyao on 20/4/17.
@@ -101,37 +100,47 @@ public class SearchController {
     }
 
 
-    @RequestMapping("/companysearch")
+    @RequestMapping("/companysearchBytime")
     @ResponseBody
-    public ModelAndView companySearch1(String totalpro,String time1,String time2,HttpServletRequest request){
+    public ModelAndView companysearchBytime(String totalpro,String time1,String time2,HttpServletRequest request)throws ParseException {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("search");
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-        System.out.print("---------"+totalpro+time1+time2);
-        List<Storeage> storeageList = storeageService.selectAll(user);
-        List<Machine> machineList = machineService.selectAll(user);
-        List<Website> websiteList = websiteService.selectAll(user);
-        List<Delivery> deliveryList = deliveryService.selectAll(user);
+        System.out.print("---------"+totalpro+"|"+time1+"|"+time2);
+        System.out.print("---------"+user.getName());
         List<CompanyInfo> companyInfoList = new ArrayList<>();
-        if(totalpro!=null){
+        if(totalpro!=null&&time1!=null&&time2!=null){
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date date1 = simpleDateFormat.parse(time1);
+            Date date2 = simpleDateFormat.parse(time2);
             companyInfoList = new ArrayList<>();
             //String ins = totalpro.replace("[\"", "").replace("\",\"", ",").replace("\"]", "");
             if(totalpro.contains("3")){
-                for(Storeage e : storeageList){
-                    companyInfoList.add(companyInfoService.selectById(e.getCompanyId()));
+                System.out.print("-----"+user);
+                List<CompanyInfo> list=companyInfoService.selectCompanyInfoByStoreage(user,date1,date2);
+                for(CompanyInfo e : list){
+                    companyInfoList.add(e);
                 }
             }else if(totalpro.contains("4")){
-                for(Machine e : machineList){
-                    companyInfoList.add(companyInfoService.selectById(e.getCompanyId()));
+                List<CompanyInfo> list=companyInfoService.selectCompanyInfoByMachine(user,date1,date2);
+                for(CompanyInfo e : list){
+                    companyInfoList.add(e);
                 }
             }else if(totalpro.contains("1")){
-                for(Website e : websiteList){
-                    companyInfoList.add(companyInfoService.selectById(e.getCompanyId()));
+                List<CompanyInfo> list=companyInfoService.selectCompanyInfoByWebsite(user,date1,date2);
+                for(CompanyInfo e : list){
+                    companyInfoList.add(e);
                 }
             }else if(totalpro.contains("2")){
-                for(Delivery e : deliveryList){
-                    companyInfoList.add(companyInfoService.selectById(e.getCompanyId()));
+                List<CompanyInfo> list=companyInfoService.selectCompanyInfoByDelivery(user,date1,date2);
+                for(CompanyInfo e : list){
+                    companyInfoList.add(e);
+                }
+            }else if(totalpro.contains("0")){
+                List<CompanyInfo> list=companyInfoService.selectCompanyInfoByAll(user,date1,date2);
+                for(CompanyInfo e : list){
+                    companyInfoList.add(e);
                 }
             }
         } else{

@@ -2,6 +2,8 @@ package com.yunjing.emer.dao;
 
 import com.yunjing.emer.entity.CompanyInfo;
 import com.yunjing.emer.entity.CompanyInfoExample;
+
+import java.util.Date;
 import java.util.List;
 
 import com.yunjing.emer.entity.User;
@@ -40,6 +42,14 @@ public interface CompanyInfoDao {
 
     long countByMachine(CompanyInfoExample example);
 
-    List<CompanyInfo> selectCompanyInfoByDelivey(User user);
+    List<CompanyInfo> selectCompanyInfoByStoreage(@Param("user") User user, @Param("time1") Date time1, @Param("time2") Date time2);
+
+    List<CompanyInfo> selectCompanyInfoByDelivery(@Param("user") User user, @Param("time1") Date time1,@Param("time2") Date time2);
+
+    List<CompanyInfo> selectCompanyInfoByWebsite(@Param("user") User user, @Param("time1") Date time1,@Param("time2") Date time2);
+
+    List<CompanyInfo> selectCompanyInfoByMachine(@Param("user") User user,@Param("time1") Date time1,@Param("time2") Date time2);
+
+    List<CompanyInfo> selectCompanyInfoByAll(@Param("user") User user,@Param("time1") Date time1,@Param("time2") Date time2);
 
 }
