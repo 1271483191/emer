@@ -1,7 +1,9 @@
 package com.yunjing.emer.controller;
 
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import com.yunjing.emer.entity.*;
 import com.yunjing.emer.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +41,35 @@ public class PageController {
 
     @Autowired
     LoginService loginService;
+
+    @RequestMapping("/toJurAdmin")
+    public ModelAndView toJurAdmin(HttpServletRequest request, Integer page){
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("jur-admin");
+
+        if(page == null){
+            page = 1;
+        }
+
+        PageHelper.startPage(page,20);
+        PageInfo<User> userList = new PageInfo<>(userService.selectUserByPass(user));
+        modelAndView.addObject("users", userList);
+
+        return modelAndView;
+    }
+
+    @RequestMapping("/toPassUser")
+    public String toPassUser(String userId, String page){
+
+        Integer userIds = userId == null ? 0 : Integer.parseInt(userId.trim());
+        boolean result = userService.passUser(userIds);
+        System.out.println(result);
+
+
+        return "redirect:/toJurAdmin?page=" + page;
+    }
 
     @RequestMapping("/toCompanyInfo")
     @ResponseBody
