@@ -741,5 +741,14 @@ public class PageController {
 
     }
 
+    @RequestMapping("/toDeliveryStatistics")
+    @ResponseBody
+    public ModelAndView toDeliveryStatistics(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("deliver-statistics");
+
+
+        return modelAndView;
+    }
 }
 

@@ -60,4 +60,30 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
         return (List<CompanyInfo>)companyInfoDao.selectCompanyInfoByAll(user,time1,time2);
     }
 
+    public List<CompanyInfo> selectCompanyInfoByStoreageDate2(User user,  Date time2) {
+        return (List<CompanyInfo>)companyInfoDao.selectCompanyInfoByStoreageDate2(user,time2);
+    }
+    public List<CompanyInfo> selectCompanyInfoByDeliveryDate2(User user, Date time2) {
+        return (List<CompanyInfo>)companyInfoDao.selectCompanyInfoByDeliveryDate2(user,time2);
+    }
+    public List<CompanyInfo> selectCompanyInfoByMachineDate2(User user, Date time2) {
+        return (List<CompanyInfo>)companyInfoDao.selectCompanyInfoByMachineDate2(user,time2);
+    }
+    public List<CompanyInfo> selectCompanyInfoByWebsiteDate2(User user, Date time2) {
+        return (List<CompanyInfo>)companyInfoDao.selectCompanyInfoByWebsiteDate2(user,time2);
+    }
+
+    public List<CompanyInfo> selectCompanyInfoByStoreageDate1(User user, Date time1) {
+        return (List<CompanyInfo>)companyInfoDao.selectCompanyInfoByStoreageDate1(user,time1);
+    }
+    public List<CompanyInfo> selectCompanyInfoByDeliveryDate1(User user, Date time1) {
+        return (List<CompanyInfo>)companyInfoDao.selectCompanyInfoByDeliveryDate1(user,time1);
+    }
+    public List<CompanyInfo> selectCompanyInfoByMachineDate1(User user, Date time1) {
+        return (List<CompanyInfo>)companyInfoDao.selectCompanyInfoByMachineDate1(user,time1);
+    }
+    public List<CompanyInfo> selectCompanyInfoByWebsiteDate1(User user, Date time1) {
+        return (List<CompanyInfo>)companyInfoDao.selectCompanyInfoByWebsiteDate1(user,time1);
+    }
+
 }

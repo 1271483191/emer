@@ -18,4 +18,13 @@ public interface CompanyInfoService {
     List<CompanyInfo>  selectCompanyInfoByMachine(User user, Date time1, Date time2);
     List<CompanyInfo>  selectCompanyInfoByWebsite(User user, Date time1, Date time2);
     List<CompanyInfo>  selectCompanyInfoByAll(User user, Date time1, Date time2);
+    List<CompanyInfo>  selectCompanyInfoByStoreageDate2(User user, Date time2);
+    List<CompanyInfo>  selectCompanyInfoByDeliveryDate2(User user, Date time2);
+    List<CompanyInfo>  selectCompanyInfoByMachineDate2(User user,  Date time2);
+    List<CompanyInfo>  selectCompanyInfoByWebsiteDate2(User user,  Date time2);
+    List<CompanyInfo>  selectCompanyInfoByStoreageDate1(User user, Date time1);
+    List<CompanyInfo>  selectCompanyInfoByDeliveryDate1(User user, Date time1);
+    List<CompanyInfo>  selectCompanyInfoByMachineDate1(User user,  Date time1);
+    List<CompanyInfo>  selectCompanyInfoByWebsiteDate1(User user,  Date time1);
+
 }

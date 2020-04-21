@@ -110,40 +110,124 @@ public class SearchController {
         System.out.print("---------"+totalpro+"|"+time1+"|"+time2);
         System.out.print("---------"+user.getName());
         List<CompanyInfo> companyInfoList = new ArrayList<>();
-        if(totalpro!=null&&time1!=null&&time2!=null){
+        if(!totalpro.equals("[]")){
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            Date date1 = simpleDateFormat.parse(time1);
-            Date date2 = simpleDateFormat.parse(time2);
-            companyInfoList = new ArrayList<>();
-            //String ins = totalpro.replace("[\"", "").replace("\",\"", ",").replace("\"]", "");
-            if(totalpro.contains("3")){
-                System.out.print("-----"+user);
-                List<CompanyInfo> list=companyInfoService.selectCompanyInfoByStoreage(user,date1,date2);
-                for(CompanyInfo e : list){
-                    companyInfoList.add(e);
+            if(time1!=""&&time2!=""){
+                System.out.print("tnum,time1num,time2num");
+                Date date1 = simpleDateFormat.parse(time1);
+                Date date2 = simpleDateFormat.parse(time2);
+                companyInfoList = new ArrayList<>();
+                //String ins = totalpro.replace("[\"", "").replace("\",\"", ",").replace("\"]", "");
+                if(totalpro.contains("3")){
+                    List<CompanyInfo> list=companyInfoService.selectCompanyInfoByStoreage(user,date1,date2);
+                    for(CompanyInfo e : list){
+                        companyInfoList.add(e);
+                    }
                 }
-            }else if(totalpro.contains("4")){
-                List<CompanyInfo> list=companyInfoService.selectCompanyInfoByMachine(user,date1,date2);
-                for(CompanyInfo e : list){
-                    companyInfoList.add(e);
+                if(totalpro.contains("4")){
+                    List<CompanyInfo> list=companyInfoService.selectCompanyInfoByMachine(user,date1,date2);
+                    for(CompanyInfo e : list){
+                        companyInfoList.add(e);
+                    }
                 }
-            }else if(totalpro.contains("1")){
-                List<CompanyInfo> list=companyInfoService.selectCompanyInfoByWebsite(user,date1,date2);
-                for(CompanyInfo e : list){
-                    companyInfoList.add(e);
+                if(totalpro.contains("1")){
+                    List<CompanyInfo> list=companyInfoService.selectCompanyInfoByWebsite(user,date1,date2);
+                    for(CompanyInfo e : list){
+                        companyInfoList.add(e);
+                    }
                 }
-            }else if(totalpro.contains("2")){
-                List<CompanyInfo> list=companyInfoService.selectCompanyInfoByDelivery(user,date1,date2);
-                for(CompanyInfo e : list){
-                    companyInfoList.add(e);
+                if(totalpro.contains("2")){
+                    List<CompanyInfo> list=companyInfoService.selectCompanyInfoByDelivery(user,date1,date2);
+                    for(CompanyInfo e : list){
+                        companyInfoList.add(e);
+                    }
                 }
-            }else if(totalpro.contains("0")){
-                List<CompanyInfo> list=companyInfoService.selectCompanyInfoByAll(user,date1,date2);
-                for(CompanyInfo e : list){
-                    companyInfoList.add(e);
+            }else if(time1==""&&time2!=""){
+                System.out.print("tnum,time1null,time2num");
+                Date date2 = simpleDateFormat.parse(time2);
+                companyInfoList = new ArrayList<>();
+                if(totalpro.contains("3")){
+                    List<CompanyInfo> list=companyInfoService.selectCompanyInfoByStoreageDate2(user,date2);
+                    for(CompanyInfo e : list){
+                        companyInfoList.add(e);
+                    }
+                }
+                if(totalpro.contains("4")){
+                    List<CompanyInfo> list=companyInfoService.selectCompanyInfoByMachineDate2(user,date2);
+                    for(CompanyInfo e : list){
+                        companyInfoList.add(e);
+                    }
+                }
+                if(totalpro.contains("1")){
+                    List<CompanyInfo> list=companyInfoService.selectCompanyInfoByWebsiteDate2(user,date2);
+                    for(CompanyInfo e : list){
+                        companyInfoList.add(e);
+                    }
+                }
+                if(totalpro.contains("2")){
+                    List<CompanyInfo> list=companyInfoService.selectCompanyInfoByDeliveryDate2(user,date2);
+                    for(CompanyInfo e : list){
+                        companyInfoList.add(e);
+                    }
+                }
+            }else if(time1!=""&&time2==""){
+                System.out.print("tnum,time1num,time2ull");
+                Date date1 = simpleDateFormat.parse(time1);
+                companyInfoList = new ArrayList<>();
+                if(totalpro.contains("3")){
+                    List<CompanyInfo> list=companyInfoService.selectCompanyInfoByStoreageDate1(user,date1);
+                    for(CompanyInfo e : list){
+                        companyInfoList.add(e);
+                    }
+                }
+                if(totalpro.contains("4")){
+                    List<CompanyInfo> list=companyInfoService.selectCompanyInfoByMachineDate1(user,date1);
+                    for(CompanyInfo e : list){
+                        companyInfoList.add(e);
+                    }
+                }
+                if(totalpro.contains("1")){
+                    List<CompanyInfo> list=companyInfoService.selectCompanyInfoByWebsiteDate1(user,date1);
+                    for(CompanyInfo e : list){
+                        companyInfoList.add(e);
+                    }
+                }
+                if(totalpro.contains("2")){
+                    List<CompanyInfo> list=companyInfoService.selectCompanyInfoByDeliveryDate1(user,date1);
+                    for(CompanyInfo e : list){
+                        companyInfoList.add(e);
+                    }
+                }
+            }else if(time1==""&&time2==""){
+                System.out.print("tnum,time1null,time2null");
+                List<Storeage> storeageList = storeageService.selectAll(user);
+                List<Machine> machineList = machineService.selectAll(user);
+                List<Website> websiteList = websiteService.selectAll(user);
+                List<Delivery> deliveryList = deliveryService.selectAll(user);
+                companyInfoList = new ArrayList<>();
+                if(totalpro.contains("3")){
+                    for(Storeage e : storeageList){
+                        companyInfoList.add(companyInfoService.selectById(e.getCompanyId()));
+                    }
+                }
+                if(totalpro.contains("4")){
+                    for(Machine e : machineList){
+                        companyInfoList.add(companyInfoService.selectById(e.getCompanyId()));
+                    }
+                }
+                if(totalpro.contains("1")){
+                    for(Website e : websiteList){
+                        companyInfoList.add(companyInfoService.selectById(e.getCompanyId()));
+                    }
+                }
+                if(totalpro.contains("2")){
+                    for(Delivery e : deliveryList){
+                        companyInfoList.add(companyInfoService.selectById(e.getCompanyId()));
+                    }
                 }
             }
         } else{
+            System.out.print("tnull,time1null,time2null");
             companyInfoList = new ArrayList<>();
             companyInfoList=companyInfoService.selectAll(user);
         }

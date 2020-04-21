@@ -602,4 +602,207 @@
     </if>
   </select>
 
+  <select id="selectCompanyInfoByDeliveryDate2"  resultMap="BaseResultMap" >
+    select * from emer.company_info c left outer join emer.delivery b on(c.company_id=b.company_id)
+    where c.company_id=b.company_id
+    and c.level >= #{user.type}
+    and c.time &lt;= #{time2}
+    <if test="user.province != null and user.type == 1">
+      and c.province = #{user.province}
+    </if>
+    <if test="user.province == null">
+      and c.province = 'false'
+    </if>
+    <if test="user.city != null and user.type == 2">
+      and c.city = #{user.city}
+    </if>
+    <if test="user.city == null">
+      and c.city = 'false'
+    </if>
+    <if test="user.county != null and user.type == 3">
+      and c.county = #{user.county}
+    </if>
+    <if test="user.county == null">
+      and c.county = 'false'
+    </if>
+  </select>
+
+  <select id="selectCompanyInfoByStoreageDate2"  resultMap="BaseResultMap" >
+    select * from emer.company_info c left outer join emer.storeage b on(c.company_id=b.company_id)
+    where c.company_id=b.company_id
+    and c.level >= #{user.type}
+    and c.time &lt;= #{time2}
+    <if test="user.province != null and user.type == 1">
+      and c.province = #{user.province}
+    </if>
+    <if test="user.province == null">
+      and c.province = 'false'
+    </if>
+    <if test="user.city != null and user.type == 2">
+      and c.city = #{user.city}
+    </if>
+    <if test="user.city == null">
+      and c.city = 'false'
+    </if>
+    <if test="user.county != null and user.type == 3">
+      and c.county = #{user.county}
+    </if>
+    <if test="user.county == null">
+      and c.county = 'false'
+    </if>
+  </select>
+
+  <select id="selectCompanyInfoByWebsiteDate2"  resultMap="BaseResultMap" >
+    select * from emer.company_info c left outer join emer.website b on(c.company_id=b.company_id)
+    where c.company_id=b.company_id
+    and c.level >= #{user.type}
+    and c.time &lt;= #{time2}
+    <if test="user.province != null and user.type == 1">
+      and c.province = #{user.province}
+    </if>
+    <if test="user.province == null">
+      and c.province = 'false'
+    </if>
+    <if test="user.city != null and user.type == 2">
+      and c.city = #{user.city}
+    </if>
+    <if test="user.city == null">
+      and c.city = 'false'
+    </if>
+    <if test="user.county != null and user.type == 3">
+      and c.county = #{user.county}
+    </if>
+    <if test="user.county == null">
+      and c.county = 'false'
+    </if>
+  </select>
+
+  <select id="selectCompanyInfoByMachineDate2"  resultMap="BaseResultMap" >
+    select * from emer.company_info c left outer join emer.machine b on(c.company_id=b.company_id)
+    where c.company_id=b.company_id
+    and c.level >= #{user.type}
+    and c.time &lt;= #{time2}
+    <if test="user.province != null and user.type == 1">
+      and c.province = #{user.province}
+    </if>
+    <if test="user.province == null">
+      and c.province = 'false'
+    </if>
+    <if test="user.city != null and user.type == 2">
+      and c.city = #{user.city}
+    </if>
+    <if test="user.city == null">
+      and c.city = 'false'
+    </if>
+    <if test="user.county != null and user.type == 3">
+      and c.county = #{user.county}
+    </if>
+    <if test="user.county == null">
+      and c.county = 'false'
+    </if>
+  </select>
+
+
+
+
+
+  <select id="selectCompanyInfoByDeliveryDate1"  resultMap="BaseResultMap" >
+    select * from emer.company_info c left outer join emer.delivery b on(c.company_id=b.company_id)
+    where c.company_id=b.company_id
+    and c.level >= #{user.type}
+    and c.time &gt;= #{time1}
+    <if test="user.province != null and user.type == 1">
+      and c.province = #{user.province}
+    </if>
+    <if test="user.province == null">
+      and c.province = 'false'
+    </if>
+    <if test="user.city != null and user.type == 2">
+      and c.city = #{user.city}
+    </if>
+    <if test="user.city == null">
+      and c.city = 'false'
+    </if>
+    <if test="user.county != null and user.type == 3">
+      and c.county = #{user.county}
+    </if>
+    <if test="user.county == null">
+      and c.county = 'false'
+    </if>
+  </select>
+
+  <select id="selectCompanyInfoByStoreageDate1"  resultMap="BaseResultMap" >
+    select * from emer.company_info c left outer join emer.storeage b on(c.company_id=b.company_id)
+    where c.company_id=b.company_id
+    and c.level >= #{user.type}
+    and c.time &gt;= #{time1}
+    <if test="user.province != null and user.type == 1">
+      and c.province = #{user.province}
+    </if>
+    <if test="user.province == null">
+      and c.province = 'false'
+    </if>
+    <if test="user.city != null and user.type == 2">
+      and c.city = #{user.city}
+    </if>
+    <if test="user.city == null">
+      and c.city = 'false'
+    </if>
+    <if test="user.county != null and user.type == 3">
+      and c.county = #{user.county}
+    </if>
+    <if test="user.county == null">
+      and c.county = 'false'
+    </if>
+  </select>
+
+  <select id="selectCompanyInfoByWebsiteDate1"  resultMap="BaseResultMap" >
+    select * from emer.company_info c left outer join emer.website b on(c.company_id=b.company_id)
+    where c.company_id=b.company_id
+    and c.level >= #{user.type}
+    and c.time &gt;= #{time1}
+    <if test="user.province != null and user.type == 1">
+      and c.province = #{user.province}
+    </if>
+    <if test="user.province == null">
+      and c.province = 'false'
+    </if>
+    <if test="user.city != null and user.type == 2">
+      and c.city = #{user.city}
+    </if>
+    <if test="user.city == null">
+      and c.city = 'false'
+    </if>
+    <if test="user.county != null and user.type == 3">
+      and c.county = #{user.county}
+    </if>
+    <if test="user.county == null">
+      and c.county = 'false'
+    </if>
+  </select>
+
+  <select id="selectCompanyInfoByMachineDate1"  resultMap="BaseResultMap" >
+    select * from emer.company_info c left outer join emer.machine b on(c.company_id=b.company_id)
+    where c.company_id=b.company_id
+    and c.level >= #{user.type}
+    and c.time &gt;= #{time1}
+    <if test="user.province != null and user.type == 1">
+      and c.province = #{user.province}
+    </if>
+    <if test="user.province == null">
+      and c.province = 'false'
+    </if>
+    <if test="user.city != null and user.type == 2">
+      and c.city = #{user.city}
+    </if>
+    <if test="user.city == null">
+      and c.city = 'false'
+    </if>
+    <if test="user.county != null and user.type == 3">
+      and c.county = #{user.county}
+    </if>
+    <if test="user.county == null">
+      and c.county = 'false'
+    </if>
+  </select>
 </mapper>

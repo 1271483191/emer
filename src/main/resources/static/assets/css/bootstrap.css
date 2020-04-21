@@ -6200,4 +6200,82 @@ button.close {
     display: none !important;
   }
 }
+btn-yellow, .btn-yellow.focus, .btn-yellow:focus {
+  background-color: #FEE188!important;
+  border-color: #FEE188;
+}
+.btn-yellow {
+  color: #963!important;
+  text-shadow: 0 -1px 0 rgba(255,255,255,.4)!important;
+}
+
+element.style {
+}
+.btn-group>.btn:first-child:not(:last-child):not(.dropdown-toggle) {
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+.btn-group>.btn, .btn-group>.btn+.btn, .btn-group>.btn:first-child {
+  margin: 0 1px 0 0;
+}
+.btn .caret, .btn-group>.btn:first-child {
+  margin-left: 0;
+}
+.btn-group-vertical>.btn.active, .btn-group-vertical>.btn:active, .btn-group-vertical>.btn:focus, .btn-group-vertical>.btn:hover, .btn-group>.btn.active, .btn-group>.btn:active, .btn-group>.btn:focus, .btn-group>.btn:hover {
+  z-index: 2;
+}
+.btn-group+.btn-mini, .btn-group+.btn-minier, .btn-group+.btn-xs, .btn-group>.btn-mini, .btn-group>.btn-minier, .btn-group>.btn-xs, .btn.btn-white {
+  border-width: 1px;
+}
+.btn-group+.btn, .btn-group>.btn {
+  margin: 0 1px 0 0;
+  border-width: 3px;
+}
+.btn-yellow.active, .btn-yellow.focus, .btn-yellow:focus, .btn-yellow:hover, .open>.btn-yellow.active.dropdown-toggle, .open>.btn-yellow.dropdown-toggle {
+  color: #963;
+}
+.btn-yellow.active, .btn-yellow.active:focus, .btn-yellow.active:hover, .btn-yellow.focus.active, .open>.btn-yellow.dropdown-toggle.active {
+  background-color: #fbd972!important;
+  border-color: #f9cf4f;
+}
+.btn-default.active, .btn-default.active:focus, .btn-default.active:hover, .btn-default.focus.active, .btn.active, .btn.active:focus, .btn.active:hover, .btn.focus.active, .open>.btn-default.dropdown-toggle.active, .open>.btn.dropdown-toggle.active {
+  background-color: #9baab3!important;
+  border-color: #8799a4;
+}
+.btn.active, .open>.btn.active.dropdown-toggle {
+  box-shadow: none;
+}
+.btn-group-vertical>.btn, .btn-group>.btn {
+  position: relative;
+  float: left;
+}
+.btn.active, .btn:active {
+  outline: 0;
+  -webkit-box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
+  box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
+}
+.btn-group>.btn-group, .btn-toolbar .btn, .btn-toolbar .btn-group, .btn-toolbar .input-group, .dropdown-menu {
+  float: left;
+}
+.btn, .btn-danger.active, .btn-danger:active, .btn-default.active, .btn-default:active, .btn-info.active, .btn-info:active, .btn-primary.active, .btn-primary:active, .btn-warning.active, .btn-warning:active, .btn.active, .btn:active, .dropdown-menu>.disabled>a:focus, .dropdown-menu>.disabled>a:hover, .form-control, .navbar-toggle, .open>.dropdown-toggle.btn-danger, .open>.dropdown-toggle.btn-default, .open>.dropdown-toggle.btn-info, .open>.dropdown-toggle.btn-primary, .open>.dropdown-toggle.btn-warning {
+  background-image: none;
+}
+.btn-yellow, .btn-yellow.focus, .btn-yellow:focus {
+  background-color: #FEE188!important;
+  border-color: #FEE188;
+}
+.btn-yellow {
+  color: #963!important;
+  text-shadow: 0 -1px 0 rgba(255,255,255,.4)!important;
+}
+.btn, .btn-default, .btn-default.focus, .btn-default:focus, .btn.focus, .btn:focus {
+  background-color: #ABBAC3!important;
+  border-color: #ABBAC3;
+}
+.btn-group-xs>.btn, .btn-xs {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  border-width: 3px;
+}
+
 /*# sourceMappingURL=bootstrap.css.map */

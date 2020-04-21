@@ -52,4 +52,21 @@ public interface CompanyInfoDao {
 
     List<CompanyInfo> selectCompanyInfoByAll(@Param("user") User user,@Param("time1") Date time1,@Param("time2") Date time2);
 
+    List<CompanyInfo> selectCompanyInfoByStoreageDate2(@Param("user") User user, @Param("time2") Date time2);
+
+    List<CompanyInfo> selectCompanyInfoByDeliveryDate2(@Param("user") User user, @Param("time2") Date time2);
+
+    List<CompanyInfo> selectCompanyInfoByWebsiteDate2(@Param("user") User user, @Param("time2") Date time2);
+
+    List<CompanyInfo> selectCompanyInfoByMachineDate2(@Param("user") User user, @Param("time2") Date time2);
+
+    List<CompanyInfo> selectCompanyInfoByStoreageDate1(@Param("user") User user, @Param("time1") Date time1);
+
+    List<CompanyInfo> selectCompanyInfoByDeliveryDate1(@Param("user") User user, @Param("time1") Date time1);
+
+    List<CompanyInfo> selectCompanyInfoByWebsiteDate1(@Param("user") User user, @Param("time1") Date time1);
+
+    List<CompanyInfo> selectCompanyInfoByMachineDate1(@Param("user") User user, @Param("time1") Date time1);
+
+
 }
