@@ -84,7 +84,7 @@
                     </a>
                 </li>
                 <li class="sub-menu">
-                    <a class="active" href="javascript:void(0);" >
+                    <a href="javascript:void(0);" >
                         <i class="fa fa-book"></i>
                         <span style="font-size: 1.5rem">应急供应网点</span>
                     </a>
@@ -125,7 +125,7 @@
                     </ul>
                 </li>
                 <li class="sub-menu">
-                    <a href="javascript:void(0);" >
+                    <a class="active" href="javascript:void(0);" >
                         <i class="fa fa-users"></i>
                         <span style="font-size: 1.5rem">权限管理</span>
                     </a>
@@ -152,82 +152,73 @@
 
             <div class="row">
                 <div class="col-lg-12 main-chart">
-                    <h3><i class="fa fa-angle-right"></i>全国供应网点列表展示</h3>
+                    <h3><i class="fa fa-angle-right"></i>权限审核</h3>
                     <hr>
-                    <div class="sear">
-                        <h5 style="display: inline">时间查询：</h5><span><br></span>
-                        <input type="date" id="time1" value="time1" style="border-radius: 0.9rem">&emsp;至 &emsp;
-                        <input type="date" id="time2" value="time2" style="border-radius: 0.9rem">
-                        <span><br></span>
-                        <button onclick="serach()" class="pull-right searchbutt">查询</button>
-                        <script>
-                            function serach(){
-                                var time1 = $("#time1").val();
-                                var time2 = $("#time2").val();
-                                console.log(time1 + ":" + time2);
-                                if(time1 == "" || time2 == ""){
-                                    console.log("选择时间");
-                                    alert("请选择正确的时间范围");
-                                }else{
-                                    var curWwwPath=window.document.location.href;
-                                    var pathName=window.document.location.pathname;
-                                    var localhostPaht;
-                                    var pos = curWwwPath.indexOf(pathName);
-                                    localhostPaht = curWwwPath.substring(0,pos);
-                                    localhostPaht += "/";
-
-                                    var href = localhostPaht + "toSupplyShowByDate?time1=" + time1 + "&time2=" + time2;
-                                    //console.log(href);
-                                    location.href = href;
-                                }
-                            }
-                        </script>
-                    </div>
                     <div class="row mt">
                         <div class="col-lg-12">
                             <div class="content-panel">
                                 <section id="no-more-tables1">
                                     <table class="table table-bordered table-striped table-condensed cf" style="color: #5e5e5e">
                                         <thead class="cf">
-                                        <tr>
-                                            <th>网点编号</th>
-                                            <th>网点名称</th>
-                                            <th class="numeric">生产状态</th>
-                                            <th class="numeric">停用</th>
-
-                                        </tr>
+                                            <tr>
+                                                <th>用户名</th>
+                                                <th>姓名</th>
+                                                <th>电话</th>
+                                                <th>所在省</th>
+                                                <th>所在市</th>
+                                                <th>所在县</th>
+                                                <th>公司</th>
+                                                <th>权限</th>
+                                                <th>通过</th>
+                                            </tr>
                                         </thead>
                                         <tbody>
-                                        <tr th:each="website,websiteStat : ${websites.getList()}">
+                                        <tr th:each="user,userStat : ${users.getList()}">
+                                            <td th:text="${user.getUsername()}"></td>
+                                            <td th:text="${user.getName()}"></td>
+                                            <td th:text="${user.getPhone()}"></td>
+                                            <td th:text="${user.getProvince()}"></td>
+                                            <td th:text="${user.getCity()}"></td>
+                                            <td th:text="${user.getCounty()}"></td>
+                                            <td th:text="${user.getCompany()}"></td>
+                                            <span th:switch="${user.getType()}">
+                                                <td th:case="0">国家级</td>
+                                                <td th:case="1">省级</td>
+                                                <td th:case="2">市级</td>
+                                                <td th:case="3">县级</td>
+                                            </span>
                                             <td>
-                                                <a  th:text="${website.getWebsiteId()}" th:href="@{'/toWebSite2?websiteId='+${website.getWebsiteId()}}"></a>
+                                                <button th:onclick="'javascript:passUser('+${user.getUserId()}+','+${users.getPageNum()}+')'">通过</button>
+                                               <!-- <a th:href="@{'/toPassUser?userId='+${user.getUserId()}+'&page='+${users.getPageNum()}}">通过</a>-->
                                             </td>
-                                            <td th:text="${companys.get(websiteStat.index).getName()}"></td>
-                                            <span th:switch="${website.getState()}">
-                                                <td th:case="1">生产中</td>
-                                                <td th:case="0">停产</td>
-                                            </span>
-
-                                            <span th:switch="${website.getState()}">
-                                                <td th:case="1"><button>停用</button></td>
-                                                <td th:case="0">已停产</td>
-                                            </span>
                                         </tr>
+                                        <script>
+                                            function passUser(userId, page){
+                                                console.log(userId);
+                                                var curWwwPath=window.document.location.href;
+                                                var pathName=window.document.location.pathname;
+                                                var localhostPaht;
+                                                var pos = curWwwPath.indexOf(pathName);
+                                                localhostPaht = curWwwPath.substring(0,pos);
+                                                localhostPaht += "/";
+                                                var href = localhostPaht + "toPassUser?userId=" + userId + "&page=" + page;
+                                                console.log(href);
+                                                if (confirm("是否确定通过审核？")==true){
+                                                    location.href = href;
+                                                }
+                                            }
+                                        </script>
 
                                         </tbody>
                                     </table>
 
                                 </section>
-                                <div th:switch='${dateMap.get("date")}'>
-                                    <div th:case="0" style="font-size: 1.7rem;margin-top: 10px;padding-bottom: 10px;text-align: center" >
-                                        <a th:href="@{'/toSupplyShow?page='+${websites.getPageNum() - 1}}">上一页</a><span th:text="'&nbsp;&nbsp;第' + ${websites.getPageNum()} + '页&nbsp;'"></span>
-                                        <a th:href="@{'/toSupplyShow?page='+${websites.getPageNum() + 1}}">下一页</a><br/>
-                                    </div>
-                                    <div th:case="1" style="font-size: 1.7rem;margin-top: 10px;padding-bottom: 10px;text-align: center" >
-                                        <a th:href="@{'/toSupplyShowByDate?page='+${websites.getPageNum() - 1} + '&time1=' + ${dateMap.get('time1')} + '&time2=' + ${dateMap.get('time2')}}">上一页</a><span th:text="'&nbsp;&nbsp;第' + ${websites.getPageNum()} + '页&nbsp;'"></span>
-                                        <a th:href="@{'/toSupplyShowByDate?page='+${websites.getPageNum() + 1} + '&time1=' + ${dateMap.get('time1')} + '&time2=' + ${dateMap.get('time2')}}">下一页</a><br/>
-                                    </div>
+
+                                <div style="font-size: 1.7rem;margin-top: 10px;padding-bottom: 10px;text-align: center" >
+                                    <a th:href="@{'/toJurAdmin?page='+${users.getPageNum() - 1}}">上一页</a><span th:text="'&nbsp;&nbsp;第' + ${users.getPageNum()} + '页&nbsp;'"></span>
+                                    <a th:href="@{'/toJurAdmin?page='+${users.getPageNum() + 1}}">下一页</a><br/>
                                 </div>
+
                             </div><!-- /content-panel -->
                         </div><!-- /col-lg-12 -->
                     </div><!-- /row -->
