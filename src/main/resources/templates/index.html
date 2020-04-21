@@ -278,53 +278,53 @@
                     </div><!-- /row -->
 
 
-					<div class="row">
-						<div class="col-lg-12 main-chart">
-							<h3><i class="fa fa-angle-right"></i>全国粮食应急保障企业信息简表</h3>
-							<hr>
+					<!--<div class="row">-->
+						<!--<div class="col-lg-12 main-chart">-->
+							<!--<h3><i class="fa fa-angle-right"></i>全国粮食应急保障企业信息简表</h3>-->
+							<!--<hr>-->
 
-						<!-- TWITTER PANEL -->
-						<div class="col-md-12 mb">
-                      		<div class="darkblue-panel ">
-								<hr>
-								<div class="content-panel">
-									<section id="no-more-tables">
-										<table border="1" id="example" class="display" cellspacing="0" width="100%">
-											<div>
-												<tr>
-													<th style="text-align: center; font-size: 1.5rem" >公司编号</th>
-													<th style="text-align: center; font-size: 1.5rem" >公司名称</th>
-													<th style="text-align: center; font-size: 1.5rem" >省</th>
-													<th style="text-align: center; font-size: 1.5rem" >市</th>
-													<th style="text-align: center; font-size: 1.5rem" >县</th>
-													<th style="text-align: center; font-size: 1.5rem" >负责人</th>
-													<th style="text-align: center; font-size: 1.5rem" >联系电话</th>
-												</tr>
-											</div>
-											<div th:each="company,companyStat : ${baseInfoMap.get('companyInfoList').getList()}">
-												<tr>
-													<th style="text-align: center; font-size: 1.5rem" th:text="${company.getCompanyId()}"></th>
-													<th style="text-align: center; font-size: 1.5rem" th:text="${company.getName()}"></th>
-													<th style="text-align: center; font-size: 1.5rem" th:text="${company.getProvince()}"></th>
-													<th style="text-align: center; font-size: 1.5rem" th:text="${company.getCity()}"></th>
-													<th style="text-align: center; font-size: 1.5rem" th:text="${company.getCounty()}"></th>
-													<th style="text-align: center; font-size: 1.5rem" th:text="${company.getPrincipal()}"></th>
-													<th style="text-align: center; font-size: 1.5rem" th:text="${company.getPhone()}"></th>
-												</tr>
-											</div>
-										</table>
-									</section>
+						<!--&lt;!&ndash; TWITTER PANEL &ndash;&gt;-->
+						<!--<div class="col-md-12 mb">-->
+                      		<!--<div class="darkblue-panel ">-->
+								<!--<hr>-->
+								<!--<div class="content-panel">-->
+									<!--<section id="no-more-tables">-->
+										<!--<table border="1" id="example" class="display" cellspacing="0" width="100%">-->
+											<!--<div>-->
+												<!--<tr>-->
+													<!--<th style="text-align: center; font-size: 1.5rem" >公司编号</th>-->
+													<!--<th style="text-align: center; font-size: 1.5rem" >公司名称</th>-->
+													<!--<th style="text-align: center; font-size: 1.5rem" >省</th>-->
+													<!--<th style="text-align: center; font-size: 1.5rem" >市</th>-->
+													<!--<th style="text-align: center; font-size: 1.5rem" >县</th>-->
+													<!--<th style="text-align: center; font-size: 1.5rem" >负责人</th>-->
+													<!--<th style="text-align: center; font-size: 1.5rem" >联系电话</th>-->
+												<!--</tr>-->
+											<!--</div>-->
+											<!--<div th:each="company,companyStat : ${baseInfoMap.get('companyInfoList').getList()}">-->
+												<!--<tr>-->
+													<!--<th style="text-align: center; font-size: 1.5rem" th:text="${company.getCompanyId()}"></th>-->
+													<!--<th style="text-align: center; font-size: 1.5rem" th:text="${company.getName()}"></th>-->
+													<!--<th style="text-align: center; font-size: 1.5rem" th:text="${company.getProvince()}"></th>-->
+													<!--<th style="text-align: center; font-size: 1.5rem" th:text="${company.getCity()}"></th>-->
+													<!--<th style="text-align: center; font-size: 1.5rem" th:text="${company.getCounty()}"></th>-->
+													<!--<th style="text-align: center; font-size: 1.5rem" th:text="${company.getPrincipal()}"></th>-->
+													<!--<th style="text-align: center; font-size: 1.5rem" th:text="${company.getPhone()}"></th>-->
+												<!--</tr>-->
+											<!--</div>-->
+										<!--</table>-->
+									<!--</section>-->
 
 
-								</div><!-- /content-panel -->
+								<!--</div>&lt;!&ndash; /content-panel &ndash;&gt;-->
 
-									<div class="pull-right">
-										<h4 style="margin-right: 15px;"><a class="fa fa-download download" href="#" download="全国粮食应急保障企业信息简表">下载</a></h4>
-									</div>
-                      		</div>
-						</div><!-- /col-md-4 -->
-					</div><!-- /row -->
-					</div>
+									<!--<div class="pull-right">-->
+										<!--<h4 style="margin-right: 15px;"><a class="fa fa-download download" href="#" download="全国粮食应急保障企业信息简表">下载</a></h4>-->
+									<!--</div>-->
+                      		<!--</div>-->
+						<!--</div>&lt;!&ndash; /col-md-4 &ndash;&gt;-->
+					<!--</div>&lt;!&ndash; /row &ndash;&gt;-->
+					<!--</div>-->
 
 						<div class="row">
 							<div class="col-lg-12 main-chart">
@@ -352,7 +352,7 @@
 								  <div class="content-panel">
 									  <h4><i class="fa fa-angle-right"></i>京津冀</h4>
 									  <div class="panel-body text-center">
-										  <canvas id="doughnut" height="230" width="400"></canvas>
+										  <div id="doughnut" style="height: 230px;width:400px"></div>
 
 									  </div>
 								  </div>
@@ -361,7 +361,7 @@
 								  <div class="content-panel">
 									  <h4><i class="fa fa-angle-right"></i>云贵川</h4>
 									  <div class="panel-body text-center">
-										  <canvas id="line" height="230" width="400"></canvas>
+										  <div id="line" style="height: 230px;width:400px"></div>
 
 									  </div>
 								  </div>
@@ -373,7 +373,7 @@
 							  <div class="content-panel">
 								  <h4><i class="fa fa-angle-right"></i>长三角</h4>
 								  <div class="panel-body text-center">
-									  <canvas id="radar" height="230" width="400"></canvas>
+									  <div id="radar" style="height: 230px;width:400px"></div>
 
 								  </div>
 							  </div>
@@ -382,7 +382,7 @@
 							  <div class="content-panel">
 								  <h4><i class="fa fa-angle-right"></i>珠三角</h4>
 								  <div class="panel-body text-center">
-									  <canvas id="polarArea" height="230" width="400"></canvas>
+									  <div id="polarArea" style="height: 230px;width:400px"></div>
 
 								  </div>
 							  </div>
@@ -400,7 +400,7 @@
 	  <!--footer start-->
 	  <footer class="site-footer">
 		  <div class="text-center">
-			  2020.<a href="http://www.winginbi.com" target="_blank">winginbi</a>
+			  2020.<a href="http://www.lswz.gov.cn" target="_blank">国家粮食和物质储备局</a>
 		  </div>
 	  </footer>
 	  <!--footer end-->
@@ -582,10 +582,10 @@
 //
 //      };
 
-      new Chart(document.getElementById("doughnut").getContext("2d")).Doughnut();
-      new Chart(document.getElementById("line").getContext("2d")).Line();
-      new Chart(document.getElementById("radar").getContext("2d")).Radar();
-      new Chart(document.getElementById("polarArea").getContext("2d")).PolarArea();
+//      new Chart(document.getElementById("doughnut").getContext("2d")).Doughnut();
+//      new Chart(document.getElementById("line").getContext("2d")).Line();
+//      new Chart(document.getElementById("radar").getContext("2d")).Radar();
+//      new Chart(document.getElementById("polarArea").getContext("2d")).PolarArea();
       //new Chart(document.getElementById("bar").getContext("2d")).Bar(barChartData);
      // new Chart(document.getElementById("pie").getContext("2d")).Pie(pieData);
 

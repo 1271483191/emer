@@ -25,7 +25,7 @@ public interface WebsiteDao {
 
     List<Website> selectByExample(WebsiteExample example);
 
-    List<Website> selectWebsiteByPageDate(User user, Date time1, Date time2);
+    List<Website> selectWebsiteByPageDate(@Param("user") User user,@Param("time1") Date time1,@Param("time2") Date time2);
 
     Website selectByPrimaryKey(Integer websiteId);
 

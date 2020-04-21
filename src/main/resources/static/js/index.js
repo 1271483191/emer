@@ -55,6 +55,7 @@ function homemap(data){
     };
     //使用制定的配置项和数据显示图表
     myChart.setOption(optionMap);
+    window.onresize = myChart.resize;
 }
 
 function homepie_jjj(data){
@@ -64,20 +65,34 @@ function homepie_jjj(data){
             trigger: 'item',
             formatter: '{a} <br/>{b}: {c} ({d}%)'
         },
+        toolbox : {
+            show : true,
+            feature: {
+                mark: {show: true},
+                dataView: {show: true, readOnly: false},
+                magicType: {
+                    show: true,
+                    type: ['pie', 'funnel']
+                },
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+        },
         legend: {
             orient: 'vertical',
-            left: 10,
+            left: 5,
             data: ['供应网点', '配送中心', '储运企业', '应急加工']
         },
         series: [
             {
                 name: '应急企业',
                 type: 'pie',
-                radius: ['60%', '80%'],
+                radius: ['60%', '70%'],
+                center : [ '60%', '50%' ],
                 avoidLabelOverlap: false,
                 label: {
                     show: false,
-                    position: 'center'
+                    position: 'right'
                 },
                 emphasis: {
                     label: {
@@ -94,6 +109,7 @@ function homepie_jjj(data){
         ]
     };
     myChart.setOption(option);
+    window.onresize = myChart.resize;
 }
 
 function homepie_ygc(data){
@@ -104,6 +120,19 @@ function homepie_ygc(data){
             trigger: 'item',
             formatter: '{a} <br/>{b} : {c} ({d}%)'
         },
+        toolbox : {
+            show : true,
+            feature: {
+                mark: {show: true},
+                dataView: {show: true, readOnly: false},
+                magicType: {
+                    show: true,
+                    type: ['pie', 'funnel']
+                },
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+        },
         legend: {
             orient: 'vertical',
             left: 'left',
@@ -111,9 +140,9 @@ function homepie_ygc(data){
         },
         series: [
             {
-                name: '访问来源',
+                name: '企业来源',
                 type: 'pie',
-                radius: '50%',
+                radius: '70%',
                 center: ['60%', '50%'],
                 data: new Function("return" + data)(),
                 emphasis: {
@@ -128,6 +157,7 @@ function homepie_ygc(data){
     };
 
     myChart.setOption(option);
+    window.onresize = myChart.resize;
 
 }
 
@@ -144,7 +174,19 @@ function homepie_csj(data){
                 color: '#ccc'
             }
         },
-
+        toolbox : {
+            show : true,
+            feature: {
+                mark: {show: true},
+                dataView: {show: true, readOnly: false},
+                magicType: {
+                    show: true,
+                    type: ['pie', 'funnel']
+                },
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+        },
         tooltip: {
             trigger: 'item',
             formatter: '{a} <br/>{b} : {c} ({d}%)'
@@ -162,14 +204,9 @@ function homepie_csj(data){
             {
                 name: '访问来源',
                 type: 'pie',
-                radius: '65%',
-                center: ['40%', '60%'],
-                data: [
-                    {value: 335, name: '供应网点'},
-                    {value: 310, name: '配送中心'},
-                    {value: 274, name: '储运企业'},
-                    {value: 235, name: '应急加工'}
-                ].sort(function (a, b) { return a.value - b.value; }),
+                radius: '70%',
+                center: ['50%', '50%'],
+                data: new Function("return" + data)().sort(function (a, b) { return a.value - b.value; }),
                 roseType: 'radius',
                 label: {
                     color: 'rgba(255, 255, 255, 0.3)'
@@ -198,6 +235,7 @@ function homepie_csj(data){
     };
 
     myChart.setOption(option);
+    window.onresize = myChart.resize;
 }
 
 function homepie_zsj(data){
@@ -208,7 +246,7 @@ function homepie_zsj(data){
             formatter: '{a} <br/>{b} : {c} ({d}%)'
         },
         legend: {
-            left: 'left',
+            left: 50,
             top: 'bottom',
             data: ['供应网点', '配送中心', '储运企业', '应急加工']
         },
@@ -229,8 +267,8 @@ function homepie_zsj(data){
             {
                 name: '半径模式',
                 type: 'pie',
-                radius: [20, 60],
-                center: ['50%', '50%'],
+                radius: [30, 70],
+                center: ['60%', '40%'],
                 roseType: 'radius',
                 label: {
                     show: false
@@ -246,4 +284,5 @@ function homepie_zsj(data){
         ]
     };
     myChart.setOption(option);
+    window.onresize = myChart.resize;
 }

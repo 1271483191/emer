@@ -22,7 +22,7 @@ public interface MachineDao {
 
     List<Machine> selectMachineByCompanyLevel(User user);
 
-    List<Machine> selectMachineByPageDate(User user, Date time1, Date time2);
+    List<Machine> selectMachineByPageDate(@Param("user") User user,@Param("time1") Date time1,@Param("time2") Date time2);
 
     List<Machine> selectByExample(MachineExample example);
 

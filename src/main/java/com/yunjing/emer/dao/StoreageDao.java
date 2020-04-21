@@ -23,7 +23,7 @@ public interface StoreageDao {
 
     List<Storeage> selectStoreageByCompanyLevel(User user);
 
-    List<Storeage> selectStoreageByPageDate(User user, Date time1, Date time2);
+    List<Storeage> selectStoreageByPageDate(@Param("user") User user,@Param("time1") Date time1,@Param("time2") Date time2);
 
     List<Storeage> selectByExample(StoreageExample example);
 

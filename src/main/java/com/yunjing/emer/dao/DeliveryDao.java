@@ -22,7 +22,7 @@ public interface DeliveryDao {
 
     List<Delivery> selectDeliveryByCompanyLevel(User user);
 
-    List<Delivery> selectDeliveryByPageDate(User user, Date time1, Date time2);
+    List<Delivery> selectDeliveryByPageDate(@Param("user") User user,@Param("time1") Date time1,@Param("time2") Date time2);
 
     List<Delivery> selectByExample(DeliveryExample example);
 

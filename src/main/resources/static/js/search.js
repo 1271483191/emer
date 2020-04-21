@@ -96,26 +96,31 @@ jQuery(function($) {
                     buttons: [
                         {
                             "extend": "colvis",
-                            "text": "<i class='fa fa-search bigger-110 blue'></i> <span class='hidden'>Show/hide columns</span>",
+                            "text": "<i class='fa fa-search bigger-110 blue'></i> <span class='hidden'>展示/隐藏 列名</span>",
                             "className": "btn btn-white btn-primary btn-bold",
                             columns: ':not(:first)'
                         },
                         {
                             "extend": "copy",
-                            "text": "<i class='fa fa-copy bigger-110 pink'></i> <span class='hidden'>Copy to clipboard</span>",
+                            "text": "<i class='fa fa-copy bigger-110 pink'></i> <span class='hidden'>复制到剪贴板</span>",
                             "className": "btn btn-white btn-primary btn-bold"
                         },
                         {
                             "extend": "csv",
-                            "text": "<i class='fa fa-database bigger-110 orange'></i> <span class='hidden'>Export to CSV</span>",
+                            "text": "<i class='fa fa-database bigger-110 orange'></i> <span class='hidden'>导出CSV文件</span>",
                             "className": "btn btn-white btn-primary btn-bold",
                             "sCharSet": "utf16le",
                             "bBomInc": true,
                             "sFieldSeperator": "\t"
                         },
+                        // {
+                        //     "extend": "excel",
+                        //     "text": "<i class='fa fa-file-excel-o bigger-110 green'></i> <span class='hidden'>导出Excel文件</span>",
+                        //     "className": "btn btn-white btn-primary btn-bold"
+                        // },
                         {
                             "extend": "print",
-                            "text": "<i class='fa fa-print bigger-110 grey'></i> <span class='hidden'>Print</span>",
+                            "text": "<i class='fa fa-print bigger-110 grey'></i> <span class='hidden'>打印</span>",
                             "className": "btn btn-white btn-primary btn-bold",
                             autoPrint: false,
                             message: 'This print was produced using the Print button for DataTables'
@@ -230,33 +235,44 @@ jQuery(function($) {
         buttons: [
             {
                 "extend": "colvis",
-                "text": "<i class='fa fa-search bigger-110 blue'></i> <span class='hidden'>Show/hide columns</span>",
+                "text": "<i class='fa fa-search bigger-110 blue'></i> <span class='hidden'>展示/隐藏 列名</span>",
                 "className": "btn btn-white btn-primary btn-bold",
                 columns: ':not(:first):not(:last)'
             },
             {
                 "extend": "copy",
-                "text": "<i class='fa fa-copy bigger-110 pink'></i> <span class='hidden'>Copy to clipboard</span>",
+                "text": "<i class='fa fa-copy bigger-110 pink'></i> <span class='hidden'>复制到剪贴板</span>",
                 "className": "btn btn-white btn-primary btn-bold"
             },
             {
                 "extend": "csv",
-                "text": "<i class='fa fa-database bigger-110 orange'></i> <span class='hidden'>Export to CSV</span>",
+                "text": "<i class='fa fa-database bigger-110 orange'></i> <span class='hidden'>导出CSV文件</span>",
                 "className": "btn btn-white btn-primary btn-bold"
             },
-            /*  {
-             "extend": "excel",
-             "text": "<i class='fa fa-file-excel-o bigger-110 green'></i> <span class='hidden'>Export to Excel</span>",
-             "className": "btn btn-white btn-primary btn-bold"
-             }, */
             // {
-            //     "extend": "pdf",
-            //     "text": "<i class='fa fa-file-pdf-o bigger-110 red'></i> <span class='hidden'>Export to PDF</span>",
-            //     "className": "btn btn-white btn-primary btn-bold"
+            //      "extend": "excel",
+            //      "text": "<i class='fa fa-file-excel-o bigger-110 green'></i> <span class='hidden'>导出Excel文件</span>",
+            //      "className": "btn btn-white btn-primary btn-bold",
+            //     exportOptions: { //从DataTable中选择要收集的数据。这包括列、行、排序和搜索的选项。
+            //         "columns": [0, 1, 3, 4, 5, 6, 7, 8],//设置需要导出的列索引
+            //         'format': { //用于导出将使用的单元格格式化函数的容器对象 format有三个子标签，header，body和foot
+            //             'header': function (data, columnIdx) {
+            //                 return data;
+            //             },
+            //             "body": function (data, columnIndex, rowIndex, node) { //body区域的function，可以操作需要导出excel的数据格式
+            //                 if (columnIndex > 2 && (data == "" || data == null)) {
+            //                     return "3";
+            //                 } else {
+            //                     return data;
+            //                 }
+            //             }
+            //         }
+            //     }
+            //
             // },
             {
                 "extend": "print",
-                "text": "<i class='fa fa-print bigger-110 grey'></i> <span class='hidden'>Print</span>",
+                "text": "<i class='fa fa-print bigger-110 grey'></i> <span class='hidden'>打印</span>",
                 "className": "btn btn-white btn-primary btn-bold",
                 autoPrint: false,
                 message: 'This print was produced using the Print button for DataTables'
