@@ -5,7 +5,7 @@
 $(document).ready(function(){
     // $.post("deliverBar",function(data){deliverBar(data);});
     companyBar();
-    deliverBar();
+    storeageBar();
     statusBar();
 });
 
@@ -127,7 +127,7 @@ function companyBar(){
         },
         options: [
             {
-                title: {text: '2020全国粮食应急配送中心企业指标'},
+                title: {text: '2020全国粮食储运企业指标'},
                 series: [
                     {data: dataMap.dataPI['2020']},
                     {data: dataMap.dataSI['2020']},
@@ -146,9 +146,9 @@ function companyBar(){
     myChart.setOption(option);
 }
 
-function deliverBar(){
+function storeageBar(){
     // 基于准备好的dom，初始化echarts实例
-    var myChart = echarts.init(document.getElementById('deliverBar'));
+    var myChart = echarts.init(document.getElementById('storeageBar'));
     var dataMap = {};
     function dataFormatter(obj) {
         var pList = ['北京','天津','河北','山西','内蒙古','辽宁','吉林','黑龙江','上海','江苏','浙江','安徽','福建','江西','山东','河南','湖北','湖南','广东','广西','海南','重庆','四川','贵州','云南','西藏','陕西','甘肃','青海','宁夏','新疆'];
@@ -210,7 +210,7 @@ function deliverBar(){
             },
             legend: {
                 left: 'right',
-                data: ['仓储能力', '日运输能力', '实际日供应量'],
+                data: ['日运输能力', '运输车辆数量', '实际日供应量'],
 
             },
             calculable : true,
@@ -250,11 +250,11 @@ function deliverBar(){
                 }
             ],
             series: [
-                {name: '仓储能力', type: 'bar'},
                 {name: '日运输能力', type: 'bar'},
+                {name: '运输车辆数量', type: 'bar'},
                 {name: '实际日供应量', type: 'bar'},
                 {
-                    name: '企业指标占比',
+                    name: '物流能力指标占比',
                     type: 'pie',
                     center: ['75%', '35%'],
                     radius: '28%',
@@ -264,7 +264,7 @@ function deliverBar(){
         },
         options: [
             {
-                title: {text: '2020全国粮食应急配送中心相关能力指标'},
+                title: {text: '2020全国粮食储运企业物流能力指标'},
                 series: [
                     {data: dataMap.dataPI['2020']},
                     {data: dataMap.dataSI['2020']},
@@ -400,7 +400,7 @@ function statusBar(){
         },
         options: [
             {
-                title: {text: '2020全国粮食应急配送中心企业生产状态'},
+                title: {text: '2020全国粮食储运企业生产状态'},
                 series: [
                     {data: dataMap.dataPI['2020']},
                     {data: dataMap.dataSI['2020']},

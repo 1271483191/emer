@@ -199,7 +199,7 @@
                             <div class="content-panel">
                                 <h4><i class="fa fa-angle-right"></i> 企业指标</h4>
                                 <div class="panel-body">
-                                    <div id="deliverBar" style="height: 600px;width:1000px"></div>
+                                    <div id="companyBar" style="height: 600px;width:1000px"></div>
                                 </div>
                             </div>
                         </div>
@@ -241,22 +241,22 @@
             <div class="row">
                 <div class="col-lg-12 main-chart">
                     <div class="row mt">
-                        <div class="col-lg-3">
+                        <div class="col-lg-12">
                             <div class="content-panel">
-                                <h4><i class="fa fa-angle-right"></i>配送中心</h4>
+                                <h4><i class="fa fa-angle-right"></i>仓储、配送、物流能力</h4>
                                 <div class="panel-body">
-                                    <div id="number1" class="graph"></div>
+                                    <div id="deliverBar" style="height: 600px;width:1000px"></div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-3">
-                            <div class="content-panel">
-                                <h4><i class="fa fa-angle-right"></i>企业数量</h4>
-                                <div class="panel-body">
-                                    <div id="number2" class="graph"></div>
-                                </div>
-                            </div>
-                        </div>
+                        <!--<div class="col-lg-3">-->
+                            <!--<div class="content-panel">-->
+                                <!--<h4><i class="fa fa-angle-right"></i>企业数量</h4>-->
+                                <!--<div class="panel-body">-->
+                                    <!--<div id="number2" class="graph"></div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
                 </div>
             </div>
             </div>
@@ -265,58 +265,58 @@
             <div class="row">
                 <div class="col-lg-12 main-chart">
                     <div class="row mt">
-                        <div class="col-lg-4">
+                        <div class="col-lg-12">
                             <div class="content-panel">
-                                <h4><i class="fa fa-angle-right"></i>日入库量/日销量/日库存</h4>
+                                <h4><i class="fa fa-angle-right"></i>企业生产状态</h4>
                                 <div class="panel-body text-center">
-                                    <div id="input" style="height: 320px;"></div>
+                                    <div id="statusBar" style="height: 600px;width:1000px"></div>
                                 </div>
-                                <script>
-                                    var in_day = ($("#in_day").val()==null)?0:$("#in_day").val();
-                                    var out_day = ($("#out_day").val()==null)?0:$("#out_day").val();
-                                    var save_day = ($("#save_day").val()==null)?0:$("#save_day").val();
-                                    var myChart = echarts.init(document.getElementById('input'));
-                                    var option = {
-                                        color: ['#99CCFF', '#ac92ec', '#50b7c1'],
-                                        tooltip: {
-                                            trigger: 'item',
-                                            formatter: '{a} <br/>{b}: {c} ({d}%)'
-                                        },
-                                        legend: {
-                                            orient: 'vertical',
-                                            left: 10,
-                                            data: ['日入库量', '日销量', '日库存'],
-                                        },
-                                        series: [
-                                            {
-                                                name: '应急供应网点',
-                                                type: 'pie',
-                                                radius: ['60%', '80%'],
-                                                avoidLabelOverlap: false,
-                                                label: {
-                                                    show: false,
-                                                    position: 'center'
-                                                },
-                                                emphasis: {
-                                                    label: {
-                                                        show: true,
-                                                        fontSize: '30',
-                                                        fontWeight: 'bold'
-                                                    }
-                                                },
-                                                labelLine: {
-                                                    show: false
-                                                },
-                                                data: [
-                                                    {value: in_day, name: '日入库量'},
-                                                    {value: out_day, name: '日销量'},
-                                                    {value: save_day, name: '日库存'},
-                                                ],
-                                            }
-                                        ]
-                                    };
-                                    myChart.setOption(option);
-                                </script>
+                                <!--<script>-->
+                                    <!--var in_day = ($("#in_day").val()==null)?0:$("#in_day").val();-->
+                                    <!--var out_day = ($("#out_day").val()==null)?0:$("#out_day").val();-->
+                                    <!--var save_day = ($("#save_day").val()==null)?0:$("#save_day").val();-->
+                                    <!--var myChart = echarts.init(document.getElementById('input'));-->
+                                    <!--var option = {-->
+                                        <!--color: ['#99CCFF', '#ac92ec', '#50b7c1'],-->
+                                        <!--tooltip: {-->
+                                            <!--trigger: 'item',-->
+                                            <!--formatter: '{a} <br/>{b}: {c} ({d}%)'-->
+                                        <!--},-->
+                                        <!--legend: {-->
+                                            <!--orient: 'vertical',-->
+                                            <!--left: 10,-->
+                                            <!--data: ['日入库量', '日销量', '日库存'],-->
+                                        <!--},-->
+                                        <!--series: [-->
+                                            <!--{-->
+                                                <!--name: '应急供应网点',-->
+                                                <!--type: 'pie',-->
+                                                <!--radius: ['60%', '80%'],-->
+                                                <!--avoidLabelOverlap: false,-->
+                                                <!--label: {-->
+                                                    <!--show: false,-->
+                                                    <!--position: 'center'-->
+                                                <!--},-->
+                                                <!--emphasis: {-->
+                                                    <!--label: {-->
+                                                        <!--show: true,-->
+                                                        <!--fontSize: '30',-->
+                                                        <!--fontWeight: 'bold'-->
+                                                    <!--}-->
+                                                <!--},-->
+                                                <!--labelLine: {-->
+                                                    <!--show: false-->
+                                                <!--},-->
+                                                <!--data: [-->
+                                                    <!--{value: in_day, name: '日入库量'},-->
+                                                    <!--{value: out_day, name: '日销量'},-->
+                                                    <!--{value: save_day, name: '日库存'},-->
+                                                <!--],-->
+                                            <!--}-->
+                                        <!--]-->
+                                    <!--};-->
+                                    <!--myChart.setOption(option);-->
+                                <!--</script>-->
                             </div>
                         </div>
                     </div>
