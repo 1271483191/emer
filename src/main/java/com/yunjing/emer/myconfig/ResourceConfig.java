@@ -10,6 +10,6 @@ public class ResourceConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         //第一个方法设置访问路径前缀，第二个方法设置资源路径
-        registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
+        registry.addResourceHandler("**").addResourceLocations("classpath:/static/");
     }
 }

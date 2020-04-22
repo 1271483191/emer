@@ -158,36 +158,42 @@
                         <div class="col-lg-12">
                             <div class="content-panel">
                                 <section id="no-more-tables1">
-                                    <table class="table table-bordered table-striped table-condensed cf" style="color: #5e5e5e">
+                                    <table  border="1" id="dynamic-table" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
                                         <thead class="cf">
                                             <tr>
-                                                <th>用户名</th>
-                                                <th>姓名</th>
-                                                <th>电话</th>
-                                                <th>所在省</th>
-                                                <th>所在市</th>
-                                                <th>所在县</th>
-                                                <th>公司</th>
-                                                <th>权限</th>
-                                                <th>通过</th>
+                                                <th style="text-align: center; font-size: 1.5rem" class="center"><label class="pos-rel"> <input
+                                                        type="checkbox" class="ace" /> <span class="lbl"></span>
+                                                </label></th>
+                                                <th style="text-align: center; font-size: 1.5rem" >用户名</th>
+                                                <th style="text-align: center; font-size: 1.5rem" >姓名</th>
+                                                <th style="text-align: center; font-size: 1.5rem" >电话</th>
+                                                <th style="text-align: center; font-size: 1.5rem" >所在省</th>
+                                                <th style="text-align: center; font-size: 1.5rem" >所在市</th>
+                                                <th style="text-align: center; font-size: 1.5rem" >所在县</th>
+                                                <th style="text-align: center; font-size: 1.5rem" >公司</th>
+                                                <th style="text-align: center; font-size: 1.5rem" >权限</th>
+                                                <th style="text-align: center; font-size: 1.5rem" >通过</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                         <tr th:each="user,userStat : ${users.getList()}">
-                                            <td th:text="${user.getUsername()}"></td>
-                                            <td th:text="${user.getName()}"></td>
-                                            <td th:text="${user.getPhone()}"></td>
-                                            <td th:text="${user.getProvince()}"></td>
-                                            <td th:text="${user.getCity()}"></td>
-                                            <td th:text="${user.getCounty()}"></td>
-                                            <td th:text="${user.getCompany()}"></td>
+                                            <td style="text-align: center; font-size: 1.5rem" class="center"><label class="pos-rel"> <input
+                                                    type="checkbox" class="ace" /> <span class="lbl"></span>
+                                            </label></td>
+                                            <td style="text-align: center; font-size: 1.5rem"  th:text="${user.getUsername()}"></td>
+                                            <td style="text-align: center; font-size: 1.5rem"  th:text="${user.getName()}"></td>
+                                            <td style="text-align: center; font-size: 1.5rem"  th:text="${user.getPhone()}"></td>
+                                            <td style="text-align: center; font-size: 1.5rem"  th:text="${user.getProvince()}"></td>
+                                            <td style="text-align: center; font-size: 1.5rem"  th:text="${user.getCity()}"></td>
+                                            <td style="text-align: center; font-size: 1.5rem"  th:text="${user.getCounty()}"></td>
+                                            <td style="text-align: center; font-size: 1.5rem"  th:text="${user.getCompany()}"></td>
                                             <span th:switch="${user.getType()}">
-                                                <td th:case="0">国家级</td>
-                                                <td th:case="1">省级</td>
-                                                <td th:case="2">市级</td>
-                                                <td th:case="3">县级</td>
+                                                <td style="text-align: center; font-size: 1.5rem"  th:case="0">国家级</td>
+                                                <td style="text-align: center; font-size: 1.5rem"  th:case="1">省级</td>
+                                                <td style="text-align: center; font-size: 1.5rem"  th:case="2">市级</td>
+                                                <td style="text-align: center; font-size: 1.5rem"  th:case="3">县级</td>
                                             </span>
-                                            <td>
+                                            <td style="text-align: center; font-size: 1.5rem" >
                                                 <button th:onclick="'javascript:passUser('+${user.getUserId()}+','+${users.getPageNum()}+')'">通过</button>
                                                <!-- <a th:href="@{'/toPassUser?userId='+${user.getUserId()}+'&page='+${users.getPageNum()}}">通过</a>-->
                                             </td>
