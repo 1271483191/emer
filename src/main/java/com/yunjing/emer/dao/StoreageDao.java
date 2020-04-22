@@ -36,4 +36,6 @@ public interface StoreageDao {
     int updateByPrimaryKeySelective(Storeage record);
 
     int updateByPrimaryKey(Storeage record);
+
+    Storeage sumByProvince(List<String> provinces);
 }

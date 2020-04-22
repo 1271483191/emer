@@ -35,4 +35,6 @@ public interface DeliveryDao {
     int updateByPrimaryKeySelective(Delivery record);
 
     int updateByPrimaryKey(Delivery record);
+
+    Delivery sumByProvince(List<String> provinces);
 }

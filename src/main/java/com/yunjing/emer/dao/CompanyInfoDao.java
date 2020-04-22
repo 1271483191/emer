@@ -68,5 +68,11 @@ public interface CompanyInfoDao {
 
     List<CompanyInfo> selectCompanyInfoByMachineDate1(@Param("user") User user, @Param("time1") Date time1);
 
+    CompanyInfo sumByWebsite(CompanyInfoExample example);
 
+    CompanyInfo sumByMachine(CompanyInfoExample example);
+
+    CompanyInfo sumByDelivery(CompanyInfoExample example);
+
+    CompanyInfo sumByStoreage(CompanyInfoExample example);
 }

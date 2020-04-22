@@ -805,4 +805,32 @@
       and c.county = 'false'
     </if>
   </select>
+  <select id="sumByWebsite" parameterType="com.yunjing.emer.entity.CompanyInfoExample" resultMap="BaseResultMap">
+    select sum(a.in_day) as in_day,sum(a.out_day) as out_day,sum(a.save_day) as save_day from emer.company_info a
+    left outer join emer.website b on(a.company_id=b.company_id)
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <select id="sumByMachine" parameterType="com.yunjing.emer.entity.CompanyInfoExample" resultMap="BaseResultMap">
+    select sum(a.in_day) as in_day,sum(a.out_day) as out_day,sum(a.save_day) as save_day from emer.company_info a
+    left outer join emer.machine b on(a.company_id=b.company_id)
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <select id="sumByDelivery" parameterType="com.yunjing.emer.entity.CompanyInfoExample" resultMap="BaseResultMap">
+    select sum(a.in_day) as in_day,sum(a.out_day) as out_day,sum(a.save_day) as save_day from emer.company_info a
+    left outer join emer.delivery b on(a.company_id=b.company_id)
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <select id="sumByStoreage" parameterType="com.yunjing.emer.entity.CompanyInfoExample" resultMap="BaseResultMap">
+    select sum(a.in_day) as in_day,sum(a.out_day) as out_day,sum(a.save_day) as save_day from emer.company_info a
+    left outer join emer.storeage b on(a.company_id=b.company_id)
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
 </mapper>

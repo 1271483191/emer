@@ -367,4 +367,13 @@
       `state` = #{state,jdbcType=INTEGER}
     where website_id = #{websiteId,jdbcType=INTEGER}
   </update>
+  <select id="sumByExample" parameterType="com.yunjing.emer.entity.WebsiteExample" resultMap="BaseResultMap">
+    select sum(flour_exp) as flour_exp,sum(rice_exp) as rice_exp,sum(oil_exp) as oil_exp,
+    sum(else_exp) as else_exp,sum(flour_real) as flour_real,sum(rice_real) as rice_real,
+    sum(oil_real) as oil_real,sum(else_real) as else_real
+    from website
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
 </mapper>
