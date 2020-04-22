@@ -93,7 +93,7 @@
                     </a>
                 </li>
                 <li class="sub-menu">
-                    <a class="active" href="javascript:void(0);" >
+                    <a href="javascript:void(0);" >
                         <i class="fa fa-book"></i>
                         <span style="font-size: 1.5rem">应急供应网点</span>
                     </a>
@@ -123,7 +123,7 @@
                     </ul>
                 </li>
                 <li class="sub-menu">
-                    <a href="javascript:void(0);" >
+                    <a class="active" href="javascript:void(0);" >
                         <i class=" fa fa-bar-chart-o"></i>
                         <span style="font-size: 1.5rem">应急加工企业</span>
                     </a>
@@ -156,14 +156,18 @@
     <!--main content start-->
     <section id="main-content">
         <section class="wrapper">
-            <input id="flour_exp" type="hidden" th:value="${Webstatic.getFlourExp()}" />
-            <input id="flour_real" type="hidden" th:value="${Webstatic.getFlourReal()}" />
-            <input id="rice_exp" type="hidden" th:value="${Webstatic.getRiceExp()}" />
-            <input id="rice_real" type="hidden" th:value="${Webstatic.getRiceReal()}" />
-            <input id="oil_exp" type="hidden" th:value="${Webstatic.getOilExp()}" />
-            <input id="oil_real" type="hidden" th:value="${Webstatic.getOilReal()}" />
-            <input id="else_exp" type="hidden" th:value="${Webstatic.getElseExp()}" />
-            <input id="else_real" type="hidden" th:value="${Webstatic.getElseReal()}" />
+            <input id="wheatDay" type="hidden" th:value="${Machinestatic.getWheatDay()}" />
+            <input id="paddyDay" type="hidden" th:value="${Machinestatic.getPaddyDay()}" />
+            <input id="oilDay" type="hidden" th:value="${Machinestatic.getOilDay()}" />
+            <input id="oilConciseDay" type="hidden" th:value="${Machinestatic.getOilConciseDay()}" />
+            <input id="oilSubpDay" type="hidden" th:value="${Machinestatic.getOilSubpDay()}" />
+            <input id="elseDay" type="hidden" th:value="${Machinestatic.getElseDay()}" />
+            <input id="wheatDayReal" type="hidden" th:value="${Machinestatic.getWheatDayReal()}" />
+            <input id="paddyDayReal" type="hidden" th:value="${Machinestatic.getPaddyDayReal()}" />
+            <input id="oilDayReal" type="hidden" th:value="${Machinestatic.getOilDayReal()}" />
+            <input id="oilConciseDayReal" type="hidden" th:value="${Machinestatic.getOilConciseDayReal()}" />
+            <input id="oilSubpDayReal" type="hidden" th:value="${Machinestatic.getOilSubpDayReal()}" />
+            <input id="elseDayReal" type="hidden" th:value="${Machinestatic.getElseDayReal()}" />
             <input id="usenum" type="hidden" th:value="${usenum}" />
             <input id="stopnum" type="hidden" th:value="${stopnum}" />
             <input id="newnum" type="hidden" th:value="${newnum}" />
@@ -173,13 +177,13 @@
             <input id="save_day" type="hidden" th:value="${save_day}" />
             <div class="row">
                 <div class="col-lg-12 main-chart">
-                    <h3><i class="fa fa-angle-right"></i>供应能力统计</h3>
+                    <h3><i class="fa fa-angle-right"></i>加工能力统计</h3>
                     <hr>
 
                     <div class="row mt">
                         <div class="col-lg-3">
                             <div class="content-panel">
-                                <h4><i class="fa fa-angle-right"></i> 面粉</h4>
+                                <h4><i class="fa fa-angle-right"></i> 小麦</h4>
                                 <div class="panel-body">
                                     <div id="powder" class="graph"></div>
                                 </div>
@@ -187,7 +191,7 @@
                         </div>
                         <div class="col-lg-3">
                             <div class="content-panel">
-                                <h4><i class="fa fa-angle-right"></i> 大米</h4>
+                                <h4><i class="fa fa-angle-right"></i> 稻谷</h4>
                                 <div class="panel-body">
                                     <div id="rice" class="graph"></div>
                                 </div>
@@ -198,9 +202,25 @@
 
                         <div class="col-lg-3">
                             <div class="content-panel">
-                                <h4><i class="fa fa-angle-right"></i> 食用油</h4>
+                                <h4><i class="fa fa-angle-right"></i> 油料处理</h4>
                                 <div class="panel-body">
                                     <div id="oil" class="graph"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="content-panel">
+                                <h4><i class="fa fa-angle-right"></i> 油料精炼</h4>
+                                <div class="panel-body">
+                                    <div id="oil_concise" class="graph"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="content-panel">
+                                <h4><i class="fa fa-angle-right"></i> 油料分装</h4>
+                                <div class="panel-body">
+                                    <div id="oil_subp" class="graph"></div>
                                 </div>
                             </div>
                         </div>
@@ -225,7 +245,7 @@
                     <div class="row mt">
                         <div class="col-lg-3">
                             <div class="content-panel">
-                                <h4><i class="fa fa-angle-right"></i>供应网点</h4>
+                                <h4><i class="fa fa-angle-right"></i>加工企业</h4>
                                 <div class="panel-body">
                                     <div id="number1" class="graph"></div>
                                 </div>
@@ -239,8 +259,8 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
                 </div>
+            </div>
             </div>
             <hr>
 
@@ -271,7 +291,7 @@
                                         },
                                         series: [
                                             {
-                                                name: '应急供应网点',
+                                                name: '应急加工网点',
                                                 type: 'pie',
                                                 radius: ['60%', '80%'],
                                                 avoidLabelOverlap: false,
@@ -334,14 +354,18 @@
 <script src="assets/js/zabuto_calendar.js"></script>
 <script src="assets/js/morris-conf.js"></script>
 <script>
-    var flour_exp = ($("#flour_exp").val()==null)?0:$("#flour_exp").val();
-    var flour_real = ($("#flour_real").val()==null)?0:$("#flour_real").val();
-    var rice_exp = ($("#rice_exp").val()==null)?0:$("#rice_exp").val();
-    var rice_real = ($("#rice_real").val()==null)?0:$("#rice_real").val();
-    var oil_exp = ($("#oil_exp").val()==null)?0:$("#oil_exp").val();
-    var oil_real = ($("#oil_real").val()==null)?0:$("#oil_real").val();
-    var else_exp = ($("#else_exp").val()==null)?0:$("#else_exp").val();
-    var else_real = ($("#else_real").val()==null)?0:$("#else_real").val();
+    var wheatDay = ($("#wheatDay").val()==null)?0:$("#wheatDay").val();
+    var paddyDay = ($("#paddyDay").val()==null)?0:$("#paddyDay").val();
+    var oilDay = ($("#oilDay").val()==null)?0:$("#oilDay").val();
+    var oilConciseDay = ($("#oilConciseDay").val()==null)?0:$("#oilConciseDay").val();
+    var oilSubpDay = ($("#oilSubpDay").val()==null)?0:$("#oilSubpDay").val();
+    var elseDay = ($("#elseDay").val()==null)?0:$("#elseDay").val();
+    var wheatDayReal = ($("#wheatDayReal").val()==null)?0:$("#wheatDayReal").val();
+    var paddyDayReal = ($("#paddyDayReal").val()==null)?0:$("#paddyDayReal").val();
+    var oilDayReal = ($("#oilDayReal").val()==null)?0:$("#oilDayReal").val();
+    var oilConciseDayReal = ($("#oilConciseDayReal").val()==null)?0:$("#oilConciseDayReal").val();
+    var oilSubpDayReal = ($("#oilSubpDayReal").val()==null)?0:$("#oilSubpDayReal").val();
+    var elseDayReal = ($("#elseDayReal").val()==null)?0:$("#elseDayReal").val();
     var usenum = ($("#usenum").val()==null)?0:$("#usenum").val();
     var stopnum = ($("#stopnum").val()==null)?0:$("#stopnum").val();
     var newnum = ($("#newnum").val()==null)?0:$("#newnum").val();
@@ -349,8 +373,8 @@
     Morris.Bar({
         element: 'powder',
         data: [
-            {device: '设计', geekbench: flour_exp},
-            {device: '实际', geekbench: flour_real},
+            {device: '日加工', geekbench: wheatDay},
+            {device: '日产量', geekbench: wheatDayReal},
         ],
         xkey: 'device',
         ykeys: ['geekbench'],
@@ -363,8 +387,8 @@
     Morris.Bar({
         element: 'rice',
         data: [
-            {device: '设计', geekbench: rice_exp},
-            {device: '实际', geekbench: rice_real},
+            {device: '日加工', geekbench: paddyDay},
+            {device: '日产量', geekbench: paddyDayReal},
         ],
         xkey: 'device',
         ykeys: ['geekbench'],
@@ -377,8 +401,36 @@
     Morris.Bar({
         element: 'oil',
         data: [
-            {device: '设计', geekbench: oil_exp},
-            {device: '实际', geekbench: oil_real},
+            {device: '日加工', geekbench: oilDay},
+            {device: '日产量', geekbench: oilDayReal},
+        ],
+        xkey: 'device',
+        ykeys: ['geekbench'],
+        labels: ['数值'],
+        barRatio: 0.4,
+        xLabelAngle: 35,
+        hideHover: 'auto',
+        barColors: ['#ac92ec']
+    })
+    Morris.Bar({
+        element: 'oil_concise',
+        data: [
+            {device: '日加工', geekbench: oilConciseDay},
+            {device: '日产量', geekbench: oilConciseDayReal},
+        ],
+        xkey: 'device',
+        ykeys: ['geekbench'],
+        labels: ['数值'],
+        barRatio: 0.4,
+        xLabelAngle: 35,
+        hideHover: 'auto',
+        barColors: ['#ac92ec']
+    })
+    Morris.Bar({
+        element: 'oil_subp',
+        data: [
+            {device: '日加工', geekbench: oilSubpDay},
+            {device: '日产量', geekbench: oilSubpDayReal},
         ],
         xkey: 'device',
         ykeys: ['geekbench'],
@@ -391,8 +443,8 @@
     Morris.Bar({
         element: 'other',
         data: [
-            {device: '设计', geekbench: else_exp},
-            {device: '实际', geekbench: else_real},
+            {device: '日加工', geekbench: elseDay},
+            {device: '日产量', geekbench: elseDayReal},
         ],
         xkey: 'device',
         ykeys: ['geekbench'],

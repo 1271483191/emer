@@ -337,4 +337,13 @@
       `state` = #{state,jdbcType=INTEGER}
     where delivery_id = #{deliveryId,jdbcType=INTEGER}
   </update>
+  <select id="sumByProvince" resultMap="BaseResultMap">
+    select sum(ware_ability) as ware_ability,sum(delivery_day) as delivery_day,
+    sum(car_num) as car_num,sum(delivery_day_real) as delivery_day_real from emer.delivery a
+    left outer join emer.company_info b on(a.company_id=b.company_id)
+    where b.province in
+    <foreach collection="list" item="provinces" index="index" open="(" close=")" separator=",">
+      #{provinces}
+    </foreach>
+  </select>
 </mapper>

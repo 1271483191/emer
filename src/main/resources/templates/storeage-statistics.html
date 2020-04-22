@@ -93,7 +93,7 @@
                     </a>
                 </li>
                 <li class="sub-menu">
-                    <a class="active" href="javascript:void(0);" >
+                    <a href="javascript:void(0);" >
                         <i class="fa fa-book"></i>
                         <span style="font-size: 1.5rem">应急供应网点</span>
                     </a>
@@ -113,7 +113,7 @@
                     </ul>
                 </li>
                 <li class="sub-menu">
-                    <a href="javascript:void(0);" >
+                    <a class="active" href="javascript:void(0);" >
                         <i class="fa fa-th"></i>
                         <span style="font-size: 1.5rem">应急储运企业</span>
                     </a>
@@ -156,14 +156,24 @@
     <!--main content start-->
     <section id="main-content">
         <section class="wrapper">
-            <input id="flour_exp" type="hidden" th:value="${Webstatic.getFlourExp()}" />
-            <input id="flour_real" type="hidden" th:value="${Webstatic.getFlourReal()}" />
-            <input id="rice_exp" type="hidden" th:value="${Webstatic.getRiceExp()}" />
-            <input id="rice_real" type="hidden" th:value="${Webstatic.getRiceReal()}" />
-            <input id="oil_exp" type="hidden" th:value="${Webstatic.getOilExp()}" />
-            <input id="oil_real" type="hidden" th:value="${Webstatic.getOilReal()}" />
-            <input id="else_exp" type="hidden" th:value="${Webstatic.getElseExp()}" />
-            <input id="else_real" type="hidden" th:value="${Webstatic.getElseReal()}" />
+            <input id="hbtransportDay" type="hidden" th:value="${hbstatic.getTransportDay()}" />
+            <input id="dbtransportDay" type="hidden" th:value="${dbstatic.getTransportDay()}" />
+            <input id="hdtransportDay" type="hidden" th:value="${hdstatic.getTransportDay()}" />
+            <input id="zntransportDay" type="hidden" th:value="${znstatic.getTransportDay()}" />
+            <input id="xntransportDay" type="hidden" th:value="${xnstatic.getTransportDay()}" />
+            <input id="xbtransportDay" type="hidden" th:value="${xbstatic.getTransportDay()}" />
+            <input id="hbcarNum" type="hidden" th:value="${hbstatic.getCarNum()}" />
+            <input id="dbcarNum" type="hidden" th:value="${dbstatic.getCarNum()}" />
+            <input id="hdcarNum" type="hidden" th:value="${hdstatic.getCarNum()}" />
+            <input id="zncarNum" type="hidden" th:value="${znstatic.getCarNum()}" />
+            <input id="xncarNum" type="hidden" th:value="${xnstatic.getCarNum()}" />
+            <input id="xbcarNum" type="hidden" th:value="${xbstatic.getCarNum()}" />
+            <input id="hbtransportDayReal" type="hidden" th:value="${hbstatic.getTransportDayReal()}" />
+            <input id="dbtransportDayReal" type="hidden" th:value="${dbstatic.getTransportDayReal()}" />
+            <input id="hdtransportDayReal" type="hidden" th:value="${hdstatic.getTransportDayReal()}" />
+            <input id="zntransportDayReal" type="hidden" th:value="${znstatic.getTransportDayReal()}" />
+            <input id="xntransportDayReal" type="hidden" th:value="${xnstatic.getTransportDayReal()}" />
+            <input id="xbtransportDayReal" type="hidden" th:value="${xbstatic.getTransportDayReal()}" />
             <input id="usenum" type="hidden" th:value="${usenum}" />
             <input id="stopnum" type="hidden" th:value="${stopnum}" />
             <input id="newnum" type="hidden" th:value="${newnum}" />
@@ -173,42 +183,31 @@
             <input id="save_day" type="hidden" th:value="${save_day}" />
             <div class="row">
                 <div class="col-lg-12 main-chart">
-                    <h3><i class="fa fa-angle-right"></i>供应能力统计</h3>
+                    <h3><i class="fa fa-angle-right"></i>储运企业统计</h3>
                     <hr>
 
                     <div class="row mt">
                         <div class="col-lg-3">
                             <div class="content-panel">
-                                <h4><i class="fa fa-angle-right"></i> 面粉</h4>
+                                <h4><i class="fa fa-angle-right"></i> 设计日运输能力</h4>
                                 <div class="panel-body">
-                                    <div id="powder" class="graph"></div>
+                                    <div id="transport_day" class="graph"></div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-3">
                             <div class="content-panel">
-                                <h4><i class="fa fa-angle-right"></i> 大米</h4>
+                                <h4><i class="fa fa-angle-right"></i> 运输车辆数量</h4>
                                 <div class="panel-body">
-                                    <div id="rice" class="graph"></div>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-                        <div class="col-lg-3">
-                            <div class="content-panel">
-                                <h4><i class="fa fa-angle-right"></i> 食用油</h4>
-                                <div class="panel-body">
-                                    <div id="oil" class="graph"></div>
+                                    <div id="car_num" class="graph"></div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-3">
                             <div class="content-panel">
-                                <h4><i class="fa fa-angle-right"></i> 其他</h4>
+                                <h4><i class="fa fa-angle-right"></i> 实际日运输能力</h4>
                                 <div class="panel-body">
-                                    <div id="other" class="graph"></div>
+                                    <div id="transport_day_real" class="graph"></div>
                                 </div>
                             </div>
                         </div>
@@ -225,7 +224,7 @@
                     <div class="row mt">
                         <div class="col-lg-3">
                             <div class="content-panel">
-                                <h4><i class="fa fa-angle-right"></i>供应网点</h4>
+                                <h4><i class="fa fa-angle-right"></i>储运企业</h4>
                                 <div class="panel-body">
                                     <div id="number1" class="graph"></div>
                                 </div>
@@ -239,8 +238,8 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
                 </div>
+            </div>
             </div>
             <hr>
 
@@ -334,23 +333,37 @@
 <script src="assets/js/zabuto_calendar.js"></script>
 <script src="assets/js/morris-conf.js"></script>
 <script>
-    var flour_exp = ($("#flour_exp").val()==null)?0:$("#flour_exp").val();
-    var flour_real = ($("#flour_real").val()==null)?0:$("#flour_real").val();
-    var rice_exp = ($("#rice_exp").val()==null)?0:$("#rice_exp").val();
-    var rice_real = ($("#rice_real").val()==null)?0:$("#rice_real").val();
-    var oil_exp = ($("#oil_exp").val()==null)?0:$("#oil_exp").val();
-    var oil_real = ($("#oil_real").val()==null)?0:$("#oil_real").val();
-    var else_exp = ($("#else_exp").val()==null)?0:$("#else_exp").val();
-    var else_real = ($("#else_real").val()==null)?0:$("#else_real").val();
+    var hbtransportDay = ($("#hbtransportDay").val()==null)?0:$("#hbtransportDay").val();
+    var dbtransportDay = ($("#dbtransportDay").val()==null)?0:$("#dbtransportDay").val();
+    var hdtransportDay = ($("#hdtransportDay").val()==null)?0:$("#hdtransportDay").val();
+    var zntransportDay = ($("#zntransportDay").val()==null)?0:$("#zntransportDay").val();
+    var xntransportDay = ($("#xntransportDay").val()==null)?0:$("#xntransportDay").val();
+    var xbtransportDay = ($("#xbtransportDay").val()==null)?0:$("#xbtransportDay").val();
+    var hbcarNum = ($("#hbcarNum").val()==null)?0:$("#hbcarNum").val();
+    var dbcarNum = ($("#dbcarNum").val()==null)?0:$("#dbcarNum").val();
+    var hdcarNum = ($("#hdcarNum").val()==null)?0:$("#hdcarNum").val();
+    var zncarNum = ($("#zncarNum").val()==null)?0:$("#zncarNum").val();
+    var xncarNum = ($("#xncarNum").val()==null)?0:$("#xncarNum").val();
+    var xbcarNum = ($("#xbcarNum").val()==null)?0:$("#xbcarNum").val();
+    var hbtransportDayReal = ($("#hbtransportDayReal").val()==null)?0:$("#hbtransportDayReal").val();
+    var dbtransportDayReal = ($("#dbtransportDayReal").val()==null)?0:$("#dbtransportDayReal").val();
+    var hdtransportDayReal = ($("#hdtransportDayReal").val()==null)?0:$("#hdtransportDayReal").val();
+    var zntransportDayReal = ($("#zntransportDayReal").val()==null)?0:$("#zntransportDayReal").val();
+    var xntransportDayReal = ($("#xntransportDayReal").val()==null)?0:$("#xntransportDayReal").val();
+    var xbtransportDayReal = ($("#xbtransportDayReal").val()==null)?0:$("#xbtransportDayReal").val();
     var usenum = ($("#usenum").val()==null)?0:$("#usenum").val();
     var stopnum = ($("#stopnum").val()==null)?0:$("#stopnum").val();
     var newnum = ($("#newnum").val()==null)?0:$("#newnum").val();
     var disablenum = ($("#disablenum").val()==null)?0:$("#disablenum").val();
     Morris.Bar({
-        element: 'powder',
+        element: 'transport_day',
         data: [
-            {device: '设计', geekbench: flour_exp},
-            {device: '实际', geekbench: flour_real},
+            {device: '华北', geekbench: hbtransportDay},
+            {device: '东北', geekbench: dbtransportDay},
+            {device: '华东', geekbench: hdtransportDay},
+            {device: '中南', geekbench: zntransportDay},
+            {device: '西南', geekbench: xntransportDay},
+            {device: '西北', geekbench: xbtransportDay},
         ],
         xkey: 'device',
         ykeys: ['geekbench'],
@@ -361,10 +374,14 @@
         barColors: ['#ac92ec']
     })
     Morris.Bar({
-        element: 'rice',
+        element: 'car_num',
         data: [
-            {device: '设计', geekbench: rice_exp},
-            {device: '实际', geekbench: rice_real},
+            {device: '华北', geekbench: hbcarNum},
+            {device: '东北', geekbench: dbcarNum},
+            {device: '华东', geekbench: hdcarNum},
+            {device: '中南', geekbench: zncarNum},
+            {device: '西南', geekbench: xncarNum},
+            {device: '西北', geekbench: xbcarNum},
         ],
         xkey: 'device',
         ykeys: ['geekbench'],
@@ -375,24 +392,14 @@
         barColors: ['#ac92ec']
     })
     Morris.Bar({
-        element: 'oil',
+        element: 'transport_day_real',
         data: [
-            {device: '设计', geekbench: oil_exp},
-            {device: '实际', geekbench: oil_real},
-        ],
-        xkey: 'device',
-        ykeys: ['geekbench'],
-        labels: ['数值'],
-        barRatio: 0.4,
-        xLabelAngle: 35,
-        hideHover: 'auto',
-        barColors: ['#ac92ec']
-    })
-    Morris.Bar({
-        element: 'other',
-        data: [
-            {device: '设计', geekbench: else_exp},
-            {device: '实际', geekbench: else_real},
+            {device: '华北', geekbench: hbtransportDayReal},
+            {device: '东北', geekbench: dbtransportDayReal},
+            {device: '华东', geekbench: hdtransportDayReal},
+            {device: '中南', geekbench: zntransportDayReal},
+            {device: '西南', geekbench: xntransportDayReal},
+            {device: '西北', geekbench: xbtransportDayReal},
         ],
         xkey: 'device',
         ykeys: ['geekbench'],

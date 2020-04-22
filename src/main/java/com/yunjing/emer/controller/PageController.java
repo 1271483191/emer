@@ -750,16 +750,6 @@ public class PageController {
         return modelAndView;
     }
 
-    @RequestMapping("/toSupplyStatistics")
-    @ResponseBody
-    public ModelAndView toSupplyStatistics(){
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("supply-statistics");
-
-
-        return modelAndView;
-    }
-
     @RequestMapping("/toWebSite2")
     @ResponseBody
     public ModelAndView toWebSite2(String websiteId){
@@ -770,16 +760,6 @@ public class PageController {
 
         return modelAndView;
 
-    }
-
-    @RequestMapping("/toDeliveryStatistics")
-    @ResponseBody
-    public ModelAndView toDeliveryStatistics(){
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("deliver-statistics");
-
-
-        return modelAndView;
     }
 }
 

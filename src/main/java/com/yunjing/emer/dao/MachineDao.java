@@ -35,4 +35,6 @@ public interface MachineDao {
     int updateByPrimaryKeySelective(Machine record);
 
     int updateByPrimaryKey(Machine record);
+
+    Machine sumByExample(MachineExample example);
 }

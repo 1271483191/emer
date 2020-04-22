@@ -36,4 +36,6 @@ public interface WebsiteDao {
     int updateByPrimaryKeySelective(Website record);
 
     int updateByPrimaryKey(Website record);
+
+    Website sumByExample(WebsiteExample example);
 }
