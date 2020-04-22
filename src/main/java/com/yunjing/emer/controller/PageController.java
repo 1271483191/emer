@@ -759,7 +759,7 @@ public class PageController {
         return modelAndView;
     }
 
-    @RequestMapping("/toSupplyStatistics")
+    /*@RequestMapping("/toSupplyStatistics")
     @ResponseBody
     public ModelAndView toSupplyStatistics(){
         ModelAndView modelAndView = new ModelAndView();
@@ -767,7 +767,7 @@ public class PageController {
 
 
         return modelAndView;
-    }
+    }*/
 
     @RequestMapping("/toWebSite2")
     @ResponseBody
