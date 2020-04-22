@@ -15,4 +15,5 @@ public interface MachineService {
     boolean update(Machine machine);
     Page<Machine> selectByPage(User user);
     Page<Machine> selectByPageDate(User user, Date time1, Date time2);
+    List<Machine> selectByDate(User user, Date time1, Date time2);
 }

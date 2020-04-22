@@ -18,6 +18,17 @@
     <link rel="stylesheet" type="text/css" href="assets/css/zabuto_calendar.css">
     <link rel="stylesheet" type="text/css" href="assets/js/gritter/css/jquery.gritter.css" />
     <link rel="stylesheet" type="text/css" href="assets/lineicons/style.css">
+    <!-- ace styles -->
+    <link rel="stylesheet" href="assets/css/ace.min.css"
+          class="ace-main-stylesheet" id="main-ace-style" />
+
+    <!--[if lte IE 9]>
+    <link rel="stylesheet" href="assets/css/ace-part2.min.css" class="ace-main-stylesheet" />
+    <![endif]-->
+    <link rel="stylesheet" href="assets/css/ace-skins.min.css" />
+    <link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
+
+    <link rel="stylesheet" href="assets/css/chosen.min.css" />
     <link href="assets/css/style-responsive.css" rel="stylesheet">
 
     <link href="assets/css/table-responsive.css" rel="stylesheet">
@@ -25,6 +36,8 @@
     <!-- Custom styles for this template -->
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/style-responsive.css" rel="stylesheet">
+
+    <script src="assets/js/ace-extra.min.js"></script>
 
     <script src="assets/js/chart-master/Chart.js"></script>
 
@@ -152,92 +165,86 @@
 
             <div class="row">
                 <div class="col-lg-12 main-chart">
-                    <h3><i class="fa fa-angle-right"></i>全国供应网点列表展示</h3>
+                    <br>
+                    <h3><i class="fa fa-angle-right"></i>储运企业搜索</h3>
                     <hr>
+                    <div Style="width: 330px">
+                    </div>
+                    <br>
                     <div class="sear">
                         <h5 style="display: inline">时间查询：</h5><span><br></span>
-                        <input type="date" id="time1" value="time1" style="border-radius: 0.9rem">&emsp;至 &emsp;
-                        <input type="date" id="time2" value="time2" style="border-radius: 0.9rem">
+                        <input type="date" id="time1" value="2020-4-13" style="border-radius: 0.9rem">&emsp;至 &emsp;
+                        <input type="date" id="time2" value="2020-4-16" style="border-radius: 0.9rem">
                         <span><br></span>
-                        <button onclick="serach()" class="pull-right searchbutt">查询</button>
-                        <script>
-                            function serach(){
-                                var time1 = $("#time1").val();
-                                var time2 = $("#time2").val();
-                                console.log(time1 + ":" + time2);
-                                if(time1 == "" || time2 == ""){
-                                    console.log("选择时间");
-                                    alert("请选择正确的时间范围");
-                                }else{
-                                    var curWwwPath=window.document.location.href;
-                                    var pathName=window.document.location.pathname;
-                                    var localhostPaht;
-                                    var pos = curWwwPath.indexOf(pathName);
-                                    localhostPaht = curWwwPath.substring(0,pos);
-                                    localhostPaht += "/";
-
-                                    var href = localhostPaht + "toStoreageShowByDate?time1=" + time1 + "&time2=" + time2;
-                                    //console.log(href);
-                                    location.href = href;
-                                }
-                            }
-                        </script>
+                        <button class="pull-right searchbutt" id="search_storeage">查询</button>
                     </div>
-                    <div class="row mt">
-                        <div class="col-lg-12">
+                    <br>
+                    <div class="col-md-12 mb">
+                        <div class=" ">
+                            <hr>
                             <div class="content-panel">
-                                <section id="no-more-tables1">
+                                <div class="clearfix">
+                                    <i id="bigpro"></i><i id="midpro"></i><i id="smapro"></i>
+                                    <div class="pull-right tableTools-container"></div>
+                                </div>
+                                <section id="no-more-tables">
                                     <table border="1" id="dynamic-table" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
-                                        <thead class="cf">
+                                        <thead>
                                         <tr>
                                             <th style="text-align: center; font-size: 1.5rem" class="center"><label class="pos-rel"> <input
                                                     type="checkbox" class="ace" /> <span class="lbl"></span>
                                             </label></th>
                                             <th style="text-align: center; font-size: 1.5rem">网点编号</th>
                                             <th style="text-align: center; font-size: 1.5rem">网点名称</th>
-                                            <th style="text-align: center; font-size: 1.5rem" class="numeric">生产状态</th>
-                                            <th style="text-align: center; font-size: 1.5rem" class="numeric">停用</th>
-
+                                            <th style="text-align: center; font-size: 1.5rem">日入库量</th>
+                                            <th style="text-align: center; font-size: 1.5rem">日销量</th>
+                                            <th style="text-align: center; font-size: 1.5rem">日库存</th>
+                                            <th style="text-align: center; font-size: 1.5rem">日运输能力</th>
+                                            <th style="text-align: center; font-size: 1.5rem">运输车辆数量</th>
+                                            <th style="text-align: center; font-size: 1.5rem">实际日供应量</th>
+                                            <th style="text-align: center; font-size: 1.5rem">生产状态</th>
+                                            <th style="text-align: center; font-size: 1.5rem">停用</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr th:each="storeage,storeageStat : ${storeages.getList()}">
-                                            <td style="text-align: center; font-size: 1.5rem" class="center"><label class="pos-rel"> <input
-                                                    type="checkbox" class="ace" /> <span class="lbl"></span>
-                                            </label></td>
-                                            <td style="text-align: center; font-size: 1.5rem">
-                                                <a th:text="${storeage.getStoreageId()}" th:href="@{'/toWebSite2?websiteId='+${storeage.getStoreageId()}}"></a>
-                                            </td>
-                                            <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(storeageStat.index).getName()}"></td>
-                                            <span th:switch="${storeage.getState()}">
-                                                <td style="text-align: center; font-size: 1.5rem" th:case="1">生产中</td>
-                                                <td style="text-align: center; font-size: 1.5rem" th:case="0">停产</td>
-                                            </span>
+                                        <div th:each="storeage,storeageStat : ${storeages}">
+                                            <tr>
 
-                                            <span th:switch="${storeage.getState()}">
-                                                <td style="text-align: center; font-size: 1.5rem" th:case="1"><button>停用</button></td>
-                                                <td style="text-align: center; font-size: 1.5rem" th:case="0">已停产</td>
-                                            </span>
-                                        </tr>
-
+                                                <th style="text-align: center; font-size: 1.5rem"><label class="pos-rel"> <input
+                                                        type="checkbox" class="ace" /> <span class="lbl"></span>
+                                                </label></th>
+                                                <th style="text-align: center; font-size: 1.5rem" th:text="${storeage.getStoreageId()}"></th>
+                                                <th style="text-align: center; font-size: 1.5rem" th:text="${companys.get(storeageStat.index).getName()}"></th>
+                                                <th style="text-align: center; font-size: 1.5rem" th:text="${companys.get(storeageStat.index).getInDay()}"></th>
+                                                <th style="text-align: center; font-size: 1.5rem" th:text="${companys.get(storeageStat.index).getOutDay()}"></th>
+                                                <th style="text-align: center; font-size: 1.5rem" th:text="${companys.get(storeageStat.index).getSaveDay()}"></th>
+                                                <th style="text-align: center; font-size: 1.5rem" th:text="${storeage.getTransportDay()}"></th>
+                                                <th style="text-align: center; font-size: 1.5rem" th:text="${storeage.getCarNum()}"></th>
+                                                <th style="text-align: center; font-size: 1.5rem" th:text="${storeage.getTransportDayReal()}"></th>
+                                                <span th:switch="${storeage.getState()}">
+                                                    <td style="text-align: center; font-size: 1.5rem" th:case="0">未选择</td>
+                                                    <td style="text-align: center; font-size: 1.5rem" th:case="1">生产中</td>
+                                                    <td style="text-align: center; font-size: 1.5rem" th:case="2">停产</td>
+                                                </span>
+                                                <span th:switch="${storeage.getState()}">
+                                                    <td style="text-align: center; font-size: 1.5rem" th:case="0">未选择</td>
+                                                    <td style="text-align: center; font-size: 1.5rem" th:case="1"><button>停用</button></td>
+                                                    <td style="text-align: center; font-size: 1.5rem" th:case="2">已停产</td>
+                                                </span>
+                                            </tr>
+                                        </div>
                                         </tbody>
                                     </table>
-
                                 </section>
-                                <div th:switch='${dateMap.get("date")}'>
-                                    <div th:case="0" style="font-size: 1.7rem;margin-top: 10px;padding-bottom: 10px;text-align: center" >
-                                        <a th:href="@{'/toStoreageShow?page='+${storeages.getPageNum() - 1}}">上一页</a><span th:text="'&nbsp;&nbsp;第' + ${storeages.getPageNum()} + '页&nbsp;'"></span>
-                                        <a th:href="@{'/toStoreageShow?page='+${storeages.getPageNum() + 1}}">下一页</a><br/>
-                                    </div>
-                                    <div th:case="1" style="font-size: 1.7rem;margin-top: 10px;padding-bottom: 10px;text-align: center" >
-                                        <a th:href="@{'/toStoreageShowByDate?page='+${storeages.getPageNum() - 1} + '&time1=' + ${dateMap.get('time1')} + '&time2=' + ${dateMap.get('time2')}}">上一页</a><span th:text="'&nbsp;&nbsp;第' + ${storeages.getPageNum()} + '页&nbsp;'"></span>
-                                        <a th:href="@{'/toStoreageShowByDate?page='+${storeages.getPageNum() + 1} + '&time1=' + ${dateMap.get('time1')} + '&time2=' + ${dateMap.get('time2')}}">下一页</a><br/>
-                                    </div>
-                                </div>
+
+
                             </div><!-- /content-panel -->
-                        </div><!-- /col-lg-12 -->
-                    </div><!-- /row -->
-                    <br>
+
+                            <!--<div class="pull-right">-->
+                            <!--<h4 style="margin-right: 15px;"><a class="fa fa-download download" href="#" download="全国粮食应急保障企业信息简表">下载</a></h4>-->
+                            <!--</div>-->
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -265,6 +272,20 @@
 <script src="assets/js/jquery.sparkline.js"></script>
 
 
+<script src="assets/js/jquery.dataTables.min.js"></script>
+<script src="assets/js/jquery.dataTables.bootstrap.min.js"></script>
+<script src="assets/js/dataTables.buttons.min.js"></script>
+<script src="assets/js/buttons.flash.min.js"></script>
+<script src="assets/js/buttons.html5.min.js"></script>
+<script src="assets/js/buttons.print.min.js"></script>
+<script src="assets/js/buttons.colVis.min.js"></script>
+<script src="assets/js/dataTables.select.min.js"></script>
+
+<script src="assets/js/jquery-ui.custom.min.js"></script>
+<script src="assets/js/jquery.ui.touch-punch.min.js"></script>
+<script src="assets/js/chosen.jquery.min.js"></script>
+
+<script src="js/search-storeage.js"></script>
 <!--common script for all pages-->
 <script src="assets/js/common-scripts.js"></script>
 
@@ -430,12 +451,12 @@
         ]
 
     };
-    new Chart(document.getElementById("doughnut").getContext("2d")).Doughnut(doughnutData);
-    new Chart(document.getElementById("line").getContext("2d")).Line(lineChartData);
-    new Chart(document.getElementById("radar").getContext("2d")).Radar(radarChartData);
-    new Chart(document.getElementById("polarArea").getContext("2d")).PolarArea(chartData);
-    new Chart(document.getElementById("bar").getContext("2d")).Bar(barChartData);
-    new Chart(document.getElementById("pie").getContext("2d")).Pie(pieData);
+    // new Chart(document.getElementById("doughnut").getContext("2d")).Doughnut(doughnutData);
+    // new Chart(document.getElementById("line").getContext("2d")).Line(lineChartData);
+    // new Chart(document.getElementById("radar").getContext("2d")).Radar(radarChartData);
+    // new Chart(document.getElementById("polarArea").getContext("2d")).PolarArea(chartData);
+    // new Chart(document.getElementById("bar").getContext("2d")).Bar(barChartData);
+    // new Chart(document.getElementById("pie").getContext("2d")).Pie(pieData);
 
 
 </script>

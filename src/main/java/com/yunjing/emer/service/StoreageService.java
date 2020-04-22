@@ -15,5 +15,6 @@ public interface StoreageService {
     boolean update(Storeage storeage);
     Page<Storeage> selectByPage(User user);
     Page<Storeage> selectByPageDate(User user, Date time1, Date time2);
+    List<Storeage> selectByDate(User user, Date time1, Date time2);
 
 }

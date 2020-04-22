@@ -64,4 +64,9 @@ public class WebsiteServiceImpl implements WebsiteService {
     public Page<Website> selectByPageDate(User user, Date time1, Date time2) {
         return (Page<Website>)websiteDao.selectWebsiteByPageDate(user, time1, time2);
     }
+
+    @Override
+    public List<Website> selectByDate(User user, Date time1, Date time2) {
+        return websiteDao.selectWebsiteByPageDate(user, time1, time2);
+    }
 }

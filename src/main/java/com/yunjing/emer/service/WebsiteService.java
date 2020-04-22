@@ -18,4 +18,5 @@ public interface WebsiteService {
     Page<Website> selectByPage(User user);
     Website selectById(String websiteId);
     Page<Website> selectByPageDate(User user, Date time1, Date time2);
+    List<Website> selectByDate(User user, Date time1, Date time2);
 }

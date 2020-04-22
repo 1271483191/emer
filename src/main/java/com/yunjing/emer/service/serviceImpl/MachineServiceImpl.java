@@ -60,4 +60,9 @@ public class MachineServiceImpl implements MachineService {
         return (Page<Machine>)machineDao.selectMachineByPageDate(user, time1, time2);
 
     }
+
+    @Override
+    public List<Machine> selectByDate(User user, Date time1, Date time2) {
+        return machineDao.selectMachineByPageDate(user, time1, time2);
+    }
 }

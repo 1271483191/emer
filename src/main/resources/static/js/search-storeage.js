@@ -34,22 +34,14 @@ jQuery(function($) {
         });
     }
 
-    $("#search").click(function(){
+    $("#search_storeage").click(function(){
 
         var time1=$("#time1").val();
         var time2=$("#time2").val();
-        var select=document.getElementById("form-field-select-4");
-        var pro = [];
-        for(var i=0;i<select.length;i++){
-            if(select.options[i].selected){
-                pro.push(select[i].value);
-            }
-        }
-        var totalpro=JSON.stringify(pro);
         $.ajax({
             type: "POST",
-            url: "companysearchBytime",
-            data: {time1:time1,time2:time2,totalpro:totalpro},
+            url: "toStoreageShowByDate",
+            data: {time1:time1,time2:time2},
             async:false,
             success: function(data){
                 $("#dynamic-table").html($(data).find("#dynamic-table").html());
@@ -83,7 +75,7 @@ jQuery(function($) {
                         bAutoWidth: false,
                         "aoColumns": [
                             { "bSortable": false },
-                            null, null,null, null, null,null,null
+                            null, null,null, null, null,null,null, null, null,null
                         ],
                         "aaSorting": [],
                         select: {
@@ -191,7 +183,7 @@ jQuery(function($) {
 
     var myTable =
         $('#dynamic-table')
-        //.wrap("<div class='dataTables_borderWrap' />")   //if you are applying horizontal scrolling (sScrollX)
+            //.wrap("<div class='dataTables_borderWrap' />")   //if you are applying horizontal scrolling (sScrollX)
             .DataTable( {
                 language: {
                     "sProcessing": "处理中...",
@@ -220,7 +212,7 @@ jQuery(function($) {
                 bAutoWidth: false,
                 "aoColumns": [
                     { "bSortable": false },
-                    null, null,null, null, null,null,null
+                    null, null,null, null, null,null,null, null, null,null
                 ],
                 "aaSorting": [],
 

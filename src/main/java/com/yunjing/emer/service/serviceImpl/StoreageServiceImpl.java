@@ -60,4 +60,9 @@ public class StoreageServiceImpl implements StoreageService {
     public Page<Storeage> selectByPageDate(User user, Date time1, Date time2) {
         return (Page<Storeage>)storeageDao.selectStoreageByPageDate(user, time1, time2);
     }
+
+    @Override
+    public List<Storeage> selectByDate(User user, Date time1, Date time2) {
+        return storeageDao.selectStoreageByPageDate(user, time1, time2);
+    }
 }

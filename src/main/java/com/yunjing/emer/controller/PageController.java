@@ -273,6 +273,7 @@ public class PageController {
 
 
 
+
     @RequestMapping("/deleteStoreage")
     public String deleteStoreage(String companyId){
         int id = companyId.trim() == null ? 0 : Integer.parseInt(companyId.trim());
@@ -454,17 +455,18 @@ public class PageController {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
 
-        if(page == null){
+        /*if(page == null){
             page = 1;
         }
 
         PageHelper.startPage(page,10);
-        PageInfo<Delivery> deliveryList = new PageInfo<>(deliveryService.selectByPage(user));
+        PageInfo<Delivery> deliveryList = new PageInfo<>(deliveryService.selectByPage(user));*/
         //System.out.println(companyInfoList);
 
+        List<Delivery> deliveryList = deliveryService.selectAll(user);
         List<CompanyInfo> companyInfoList = new ArrayList<>();
 
-        for(Delivery e : deliveryList.getList()){
+        for(Delivery e : deliveryList){
             companyInfoList.add(companyInfoService.selectById(e.getCompanyId()));
         }
 
@@ -500,17 +502,18 @@ public class PageController {
         dateMap.put("time1", time1);
         dateMap.put("time2", time2);
 
-        if(page == null){
+        /*if(page == null){
             page = 1;
         }
 
         PageHelper.startPage(page,10);
         PageInfo<Delivery> deliveryList = new PageInfo<>(deliveryService.selectByPageDate(user, times1, times2));
-        //System.out.println(companyInfoList);
+        //System.out.println(companyInfoList);*/
 
+        List<Delivery> deliveryList = deliveryService.selectByDate(user, times1, times2);
         List<CompanyInfo> companyInfoList = new ArrayList<>();
 
-        for(Delivery e : deliveryList.getList()){
+        for(Delivery e : deliveryList){
             System.out.println(e);
             companyInfoList.add(companyInfoService.selectById(e.getCompanyId()));
         }
@@ -534,13 +537,14 @@ public class PageController {
             page = 1;
         }
 
-        PageHelper.startPage(page,10);
-        PageInfo<Storeage> storeageList = new PageInfo<>(storeageService.selectByPage(user));
+        /*PageHelper.startPage(page,10);
+        PageInfo<Storeage> storeageList = new PageInfo<>(storeageService.selectByPage(user));*/
         //System.out.println(companyInfoList);
+        List<Storeage> storeageList = storeageService.selectAll(user);
 
         List<CompanyInfo> companyInfoList = new ArrayList<>();
 
-        for(Storeage e : storeageList.getList()){
+        for(Storeage e : storeageList){
             companyInfoList.add(companyInfoService.selectById(e.getCompanyId()));
         }
 
@@ -580,13 +584,14 @@ public class PageController {
             page = 1;
         }
 
-        PageHelper.startPage(page,10);
-        PageInfo<Storeage> storeageList = new PageInfo<>(storeageService.selectByPageDate(user, times1, times2));
+        /*PageHelper.startPage(page,10);
+        PageInfo<Storeage> storeageList = new PageInfo<>(storeageService.selectByPageDate(user, times1, times2));*/
         //System.out.println(companyInfoList);
+        List<Storeage> storeageList = storeageService.selectByDate(user, times1, times2);
 
         List<CompanyInfo> companyInfoList = new ArrayList<>();
 
-        for(Storeage e : storeageList.getList()){
+        for(Storeage e : storeageList){
             System.out.println(e);
             companyInfoList.add(companyInfoService.selectById(e.getCompanyId()));
         }
@@ -606,17 +611,18 @@ public class PageController {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
 
-        if(page == null){
+        /*if(page == null){
             page = 1;
         }
 
         PageHelper.startPage(page,10);
-        PageInfo<Website> websiteList = new PageInfo<>(websiteService.selectByPage(user));
+        PageInfo<Website> websiteList = new PageInfo<>(websiteService.selectByPage(user));*/
         //System.out.println(companyInfoList);
+        List<Website> websiteList = websiteService.selectAll(user);
 
         List<CompanyInfo> companyInfoList = new ArrayList<>();
 
-        for(Website e : websiteList.getList()){
+        for(Website e : websiteList){
             companyInfoList.add(companyInfoService.selectById(e.getCompanyId()));
         }
         Map dateMap = new HashMap();
@@ -651,17 +657,18 @@ public class PageController {
         dateMap.put("time1", time1);
         dateMap.put("time2", time2);
 
-        if(page == null){
+        /*if(page == null){
             page = 1;
         }
 
         PageHelper.startPage(page,10);
-        PageInfo<Website> websiteList = new PageInfo<>(websiteService.selectByPageDate(user, times1, times2));
+        PageInfo<Website> websiteList = new PageInfo<>(websiteService.selectByPageDate(user, times1, times2));*/
         //System.out.println(companyInfoList);
+        List<Website> websiteList = websiteService.selectByDate(user, times1, times2);
 
         List<CompanyInfo> companyInfoList = new ArrayList<>();
 
-        for(Website e : websiteList.getList()){
+        for(Website e : websiteList){
             companyInfoList.add(companyInfoService.selectById(e.getCompanyId()));
         }
 
@@ -686,13 +693,14 @@ public class PageController {
             page = 1;
         }
 
-        PageHelper.startPage(page,10);
-        PageInfo<Machine> machineList = new PageInfo<>(machineService.selectByPage(user));
+        /*PageHelper.startPage(page,10);
+        PageInfo<Machine> machineList = new PageInfo<>(machineService.selectByPage(user));*/
         //System.out.println(companyInfoList);
+        List<Machine> machineList = machineService.selectAll(user);
 
         List<CompanyInfo> companyInfoList = new ArrayList<>();
 
-        for(Machine e : machineList.getList()){
+        for(Machine e : machineList){
             companyInfoList.add(companyInfoService.selectById(e.getCompanyId()));
         }
 
@@ -728,17 +736,18 @@ public class PageController {
         dateMap.put("time1", time1);
         dateMap.put("time2", time2);
 
-        if(page == null){
+        /*if(page == null){
             page = 1;
         }
 
         PageHelper.startPage(page,10);
-        PageInfo<Machine> machineList = new PageInfo<>(machineService.selectByPageDate(user, times1, times2));
+        PageInfo<Machine> machineList = new PageInfo<>(machineService.selectByPageDate(user, times1, times2));*/
         //System.out.println(companyInfoList);
+        List<Machine> machineList = machineService.selectByDate(user, times1, times2);
 
         List<CompanyInfo> companyInfoList = new ArrayList<>();
 
-        for(Machine e : machineList.getList()){
+        for(Machine e : machineList){
             System.out.println(e);
             companyInfoList.add(companyInfoService.selectById(e.getCompanyId()));
         }
@@ -763,6 +772,18 @@ public class PageController {
     @RequestMapping("/toWebSite2")
     @ResponseBody
     public ModelAndView toWebSite2(String websiteId){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("website2");
+        Website website = websiteService.selectById(websiteId);
+        modelAndView.addObject("website", website);
+
+        return modelAndView;
+
+    }
+
+    @RequestMapping("/toStoreageStatistics2")
+    @ResponseBody
+    public ModelAndView toStoreageStatistics2(String websiteId){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("website2");
         Website website = websiteService.selectById(websiteId);

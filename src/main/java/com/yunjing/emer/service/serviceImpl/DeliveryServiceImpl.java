@@ -62,4 +62,9 @@ public class DeliveryServiceImpl  implements DeliveryService {
         return (Page<Delivery>)deliveryDao.selectDeliveryByPageDate(user, time1, time2);
 
     }
+
+    @Override
+    public List<Delivery> selectByDate(User user, Date time1, Date time2) {
+        return deliveryDao.selectDeliveryByPageDate(user, time1, time2);
+    }
 }
