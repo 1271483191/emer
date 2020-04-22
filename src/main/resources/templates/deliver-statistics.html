@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -42,6 +43,7 @@
     <script src="assets/js/jquery.nicescroll.js" type="text/javascript"></script>
     <script src="assets/js/jquery.sparkline.js"></script>
     <script src="static/js/echarts.min.js"></script>
+    <script src="static/js/deliver.js"></script>
 </head>
 
 <body>
@@ -193,41 +195,41 @@
                     <hr>
 
                     <div class="row mt">
-                        <div class="col-lg-3">
+                        <div class="col-lg-12">
                             <div class="content-panel">
-                                <h4><i class="fa fa-angle-right"></i> 仓储能力</h4>
+                                <h4><i class="fa fa-angle-right"></i> 企业指标</h4>
                                 <div class="panel-body">
-                                    <div id="ware_ability" class="graph"></div>
+                                    <div id="deliverBar" style="height: 600px;width:1000px"></div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-3">
-                            <div class="content-panel">
-                                <h4><i class="fa fa-angle-right"></i> 设计日配送能力</h4>
-                                <div class="panel-body">
-                                    <div id="delivery_day" class="graph"></div>
-                                </div>
-                            </div>
-                        </div>
+                        <!--<div class="col-lg-3">-->
+                            <!--<div class="content-panel">-->
+                                <!--<h4><i class="fa fa-angle-right"></i> 设计日配送能力</h4>-->
+                                <!--<div class="panel-body">-->
+                                    <!--<div id="delivery_day" class="graph"></div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
 
 
 
-                        <div class="col-lg-3">
-                            <div class="content-panel">
-                                <h4><i class="fa fa-angle-right"></i> 运输车辆数量</h4>
-                                <div class="panel-body">
-                                    <div id="car_num" class="graph"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="content-panel">
-                                <h4><i class="fa fa-angle-right"></i> 实例日配送能力</h4>
-                                <div class="panel-body">
-                                    <div id="delivery_day_real" class="graph"></div>
-                                </div>
-                            </div>
-                        </div>
+                        <!--<div class="col-lg-3">-->
+                            <!--<div class="content-panel">-->
+                                <!--<h4><i class="fa fa-angle-right"></i> 运输车辆数量</h4>-->
+                                <!--<div class="panel-body">-->
+                                    <!--<div id="car_num" class="graph"></div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="col-lg-3">-->
+                            <!--<div class="content-panel">-->
+                                <!--<h4><i class="fa fa-angle-right"></i> 实例日配送能力</h4>-->
+                                <!--<div class="panel-body">-->
+                                    <!--<div id="delivery_day_real" class="graph"></div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
                     </div>
 
 
@@ -378,106 +380,106 @@
     var stopnum = ($("#stopnum").val()==null)?0:$("#stopnum").val();
     var newnum = ($("#newnum").val()==null)?0:$("#newnum").val();
     var disablenum = ($("#disablenum").val()==null)?0:$("#disablenum").val();
-    Morris.Bar({
-        element: 'ware_ability',
-        data: [
-            {device: '华北', geekbench: hbwareAbility},
-            {device: '东北', geekbench: dbwareAbility},
-            {device: '华东', geekbench: hdwareAbility},
-            {device: '中南', geekbench: znwareAbility},
-            {device: '西南', geekbench: xnwareAbility},
-            {device: '西北', geekbench: xbwareAbility},
-        ],
-        xkey: 'device',
-        ykeys: ['geekbench'],
-        labels: ['数值'],
-        barRatio: 0.4,
-        xLabelAngle: 35,
-        hideHover: 'auto',
-        barColors: ['#ac92ec']
-    })
-    Morris.Bar({
-        element: 'delivery_day',
-        data: [
-            {device: '华北', geekbench: hbdeliveryDay},
-            {device: '东北', geekbench: dbdeliveryDay},
-            {device: '华东', geekbench: hddeliveryDay},
-            {device: '中南', geekbench: zndeliveryDay},
-            {device: '西南', geekbench: xndeliveryDay},
-            {device: '西北', geekbench: xbdeliveryDay},
-        ],
-        xkey: 'device',
-        ykeys: ['geekbench'],
-        labels: ['数值'],
-        barRatio: 0.4,
-        xLabelAngle: 35,
-        hideHover: 'auto',
-        barColors: ['#ac92ec']
-    })
-    Morris.Bar({
-        element: 'car_num',
-        data: [
-            {device: '华北', geekbench: hbcarNum},
-            {device: '东北', geekbench: dbcarNum},
-            {device: '华东', geekbench: hdcarNum},
-            {device: '中南', geekbench: zncarNum},
-            {device: '西南', geekbench: xncarNum},
-            {device: '西北', geekbench: xbcarNum},
-        ],
-        xkey: 'device',
-        ykeys: ['geekbench'],
-        labels: ['数值'],
-        barRatio: 0.4,
-        xLabelAngle: 35,
-        hideHover: 'auto',
-        barColors: ['#ac92ec']
-    })
-    Morris.Bar({
-        element: 'delivery_day_real',
-        data: [
-            {device: '华北', geekbench: hbdeliveryDayReal},
-            {device: '东北', geekbench: dbdeliveryDayReal},
-            {device: '华东', geekbench: hddeliveryDayReal},
-            {device: '中南', geekbench: zndeliveryDayReal},
-            {device: '西南', geekbench: xndeliveryDayReal},
-            {device: '西北', geekbench: xbdeliveryDayReal},
-        ],
-        xkey: 'device',
-        ykeys: ['geekbench'],
-        labels: ['数值'],
-        barRatio: 0.4,
-        xLabelAngle: 35,
-        hideHover: 'auto',
-        barColors: ['#ac92ec']
-    })
-    Morris.Bar({
-        element: 'number1',
-        data: [
-            {device: '在产', geekbench: usenum},
-            {device: '停产', geekbench: stopnum},
-        ],
-        xkey: 'device',
-        ykeys: ['geekbench'],
-        labels: ['数值'],
-        barRatio: 0.4,
-        xLabelAngle: 35,
-        hideHover: 'auto',
-        barColors: ['#50b7c1']
-    })
-    Morris.Bar({
-        element: 'number2',
-        data: [
-            {device: '新增', geekbench: newnum},
-            {device: '停用', geekbench: disablenum},
-        ],
-        xkey: 'device',
-        ykeys: ['geekbench'],
-        labels: ['数值'],
-        barRatio: 0.4,
-        xLabelAngle: 35,
-        hideHover: 'auto',
-        barColors: ['#50b7c1']
-    })
+//    Morris.Bar({
+//        element: 'ware_ability',
+//        data: [
+//            {device: '华北', geekbench: hbwareAbility},
+//            {device: '东北', geekbench: dbwareAbility},
+//            {device: '华东', geekbench: hdwareAbility},
+//            {device: '中南', geekbench: znwareAbility},
+//            {device: '西南', geekbench: xnwareAbility},
+//            {device: '西北', geekbench: xbwareAbility},
+//        ],
+//        xkey: 'device',
+//        ykeys: ['geekbench'],
+//        labels: ['数值'],
+//        barRatio: 0.4,
+//        xLabelAngle: 35,
+//        hideHover: 'auto',
+//        barColors: ['#ac92ec']
+//    })
+//    Morris.Bar({
+//        element: 'delivery_day',
+//        data: [
+//            {device: '华北', geekbench: hbdeliveryDay},
+//            {device: '东北', geekbench: dbdeliveryDay},
+//            {device: '华东', geekbench: hddeliveryDay},
+//            {device: '中南', geekbench: zndeliveryDay},
+//            {device: '西南', geekbench: xndeliveryDay},
+//            {device: '西北', geekbench: xbdeliveryDay},
+//        ],
+//        xkey: 'device',
+//        ykeys: ['geekbench'],
+//        labels: ['数值'],
+//        barRatio: 0.4,
+//        xLabelAngle: 35,
+//        hideHover: 'auto',
+//        barColors: ['#ac92ec']
+//    })
+//    Morris.Bar({
+//        element: 'car_num',
+//        data: [
+//            {device: '华北', geekbench: hbcarNum},
+//            {device: '东北', geekbench: dbcarNum},
+//            {device: '华东', geekbench: hdcarNum},
+//            {device: '中南', geekbench: zncarNum},
+//            {device: '西南', geekbench: xncarNum},
+//            {device: '西北', geekbench: xbcarNum},
+//        ],
+//        xkey: 'device',
+//        ykeys: ['geekbench'],
+//        labels: ['数值'],
+//        barRatio: 0.4,
+//        xLabelAngle: 35,
+//        hideHover: 'auto',
+//        barColors: ['#ac92ec']
+//    })
+//    Morris.Bar({
+//        element: 'delivery_day_real',
+//        data: [
+//            {device: '华北', geekbench: hbdeliveryDayReal},
+//            {device: '东北', geekbench: dbdeliveryDayReal},
+//            {device: '华东', geekbench: hddeliveryDayReal},
+//            {device: '中南', geekbench: zndeliveryDayReal},
+//            {device: '西南', geekbench: xndeliveryDayReal},
+//            {device: '西北', geekbench: xbdeliveryDayReal},
+//        ],
+//        xkey: 'device',
+//        ykeys: ['geekbench'],
+//        labels: ['数值'],
+//        barRatio: 0.4,
+//        xLabelAngle: 35,
+//        hideHover: 'auto',
+//        barColors: ['#ac92ec']
+//    })
+//    Morris.Bar({
+//        element: 'number1',
+//        data: [
+//            {device: '在产', geekbench: usenum},
+//            {device: '停产', geekbench: stopnum},
+//        ],
+//        xkey: 'device',
+//        ykeys: ['geekbench'],
+//        labels: ['数值'],
+//        barRatio: 0.4,
+//        xLabelAngle: 35,
+//        hideHover: 'auto',
+//        barColors: ['#50b7c1']
+//    })
+//    Morris.Bar({
+//        element: 'number2',
+//        data: [
+//            {device: '新增', geekbench: newnum},
+//            {device: '停用', geekbench: disablenum},
+//        ],
+//        xkey: 'device',
+//        ykeys: ['geekbench'],
+//        labels: ['数值'],
+//        barRatio: 0.4,
+//        xLabelAngle: 35,
+//        hideHover: 'auto',
+//        barColors: ['#50b7c1']
+//    })
 </script>
 
 
