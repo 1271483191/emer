@@ -425,4 +425,17 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
+  <select id="sumByProvince" resultMap="BaseResultMap">
+    select sum(wheat_day) as wheat_day,sum(paddy_day) as paddy_day,sum(oil_day) as oil_day,
+    sum(oil_concise_day) as oil_concise_day,sum(oil_subp_day) as oil_subp_day,sum(else_day) as else_day,
+    sum(wheat_day_real) as wheat_day_real,sum(paddy_day_real) as paddy_day_real,sum(oil_day_real) as oil_day_real,
+    sum(oil_concise_day_real) as oil_concise_day_real,sum(oil_subp_day_real) as oil_subp_day_real,sum(else_day_real) as else_day_real
+    from emer.machine a left outer join emer.company_info b on(a.company_id=b.company_id)
+    where b.province = #{province}
+  </select>
+  <select id="countByProvinceState" resultType="java.lang.Long">
+    select count(*)
+    from emer.machine a left outer join emer.company_info b on(a.company_id=b.company_id)
+    where b.province = #{province} and a.state = #{state}
+  </select>
 </mapper>

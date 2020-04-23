@@ -3,13 +3,13 @@
  */
 
 $(document).ready(function(){
-    // $.post("deliverBar",function(data){deliverBar(data);});
-    companyBar();
-    deliverBar();
-    statusBar();
+    $.post("deliverCompanyBar",function(data){companyBar(data);});
+    $.post("deliverBar",function(data){deliverBar(data);});
+    $.post("deliverStatusBar",function(data){statusBar(data);});
 });
 
-function companyBar(){
+function companyBar(data){
+    var copdata = data.split("~");
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('companyBar'));
     var dataMap = {};
@@ -37,18 +37,18 @@ function companyBar(){
 
     dataMap.dataPI = dataFormatter({
         //max : 4000,
-        2020:[136.27,159.72,2905.73,641.42,1306.3,1915.57,1277.44,1701.5,124.94,3064.78,1583.04,2015.31,1612.24,1391.07,3973.85,3512.24,2569.3,2768.03,2665.2,2047.23,659.23,844.52,2983.51,726.22,1411.01,74.47,1220.9,678.75,155.08,184.14,1139.03]
+        2020:new Function("return" + copdata[0])()
     });
 
     dataMap.dataSI = dataFormatter({
         //max : 26600,
-        2020:[3752.48,5928.32,13126.86,6635.26,8037.69,12152.15,5611.48,5962.41,7927.89,25203.28,16555.58,8309.38,9069.2,6390.55,24017.11,15427.08,9815.94,9361.99,26447.38,5675.32,714.5,5543.04,11029.13,2194.33,3780.32,208.79,6935.59,2377.83,975.18,1056.15,3225.9]
+        2020:new Function("return" + copdata[1])()
 
     });
 
     dataMap.dataTI = dataFormatter({
         //max : 25000,
-        2020:[12363.18,5219.24,8483.17,3960.87,5015.89,8158.98,3679.91,4918.09,11142.86,20842.21,14180.23,4975.96,6878.74,3921.2,17370.89,7991.72,7247.02,7539.54,24097.7,3998.33,1148.93,3623.81,7014.04,2781.29,3701.79,322.57,4355.81,1963.79,540.18,861.92,2245.12]
+        2020:new Function("return" + copdata[2])()
     });
 
    var option = {
@@ -146,7 +146,8 @@ function companyBar(){
     myChart.setOption(option);
 }
 
-function deliverBar(){
+function deliverBar(data){
+    var copdata = data.split("~");
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('deliverBar'));
     var dataMap = {};
@@ -174,18 +175,18 @@ function deliverBar(){
 
     dataMap.dataPI = dataFormatter({
         //max : 4000,
-        2020:[136.27,159.72,2905.73,641.42,1306.3,1915.57,1277.44,1701.5,124.94,3064.78,1583.04,2015.31,1612.24,1391.07,3973.85,3512.24,2569.3,2768.03,2665.2,2047.23,659.23,844.52,2983.51,726.22,1411.01,74.47,1220.9,678.75,155.08,184.14,1139.03]
+        2020:new Function("return" + copdata[0])()
     });
 
     dataMap.dataSI = dataFormatter({
         //max : 26600,
-        2020:[3752.48,5928.32,13126.86,6635.26,8037.69,12152.15,5611.48,5962.41,7927.89,25203.28,16555.58,8309.38,9069.2,6390.55,24017.11,15427.08,9815.94,9361.99,26447.38,5675.32,714.5,5543.04,11029.13,2194.33,3780.32,208.79,6935.59,2377.83,975.18,1056.15,3225.9]
+        2020:new Function("return" + copdata[1])()
 
     });
 
     dataMap.dataTI = dataFormatter({
         //max : 25000,
-        2020:[12363.18,5219.24,8483.17,3960.87,5015.89,8158.98,3679.91,4918.09,11142.86,20842.21,14180.23,4975.96,6878.74,3921.2,17370.89,7991.72,7247.02,7539.54,24097.7,3998.33,1148.93,3623.81,7014.04,2781.29,3701.79,322.57,4355.81,1963.79,540.18,861.92,2245.12]
+        2020:new Function("return" + copdata[2])()
     });
 
     var option = {
@@ -283,7 +284,8 @@ function deliverBar(){
     myChart.setOption(option);
 }
 
-function statusBar(){
+function statusBar(data){
+    var copdata = data.split("~");
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('statusBar'));
     var dataMap = {};
@@ -311,12 +313,12 @@ function statusBar(){
 
     dataMap.dataPI = dataFormatter({
         //max : 4000,
-        2020:[136.27,159.72,2905.73,641.42,1306.3,1915.57,1277.44,1701.5,124.94,3064.78,1583.04,2015.31,1612.24,1391.07,3973.85,3512.24,2569.3,2768.03,2665.2,2047.23,659.23,844.52,2983.51,726.22,1411.01,74.47,1220.9,678.75,155.08,184.14,1139.03]
+        2020:new Function("return" + copdata[0])()
     });
 
     dataMap.dataSI = dataFormatter({
         //max : 26600,
-        2020:[3752.48,5928.32,13126.86,6635.26,8037.69,12152.15,5611.48,5962.41,7927.89,25203.28,16555.58,8309.38,9069.2,6390.55,24017.11,15427.08,9815.94,9361.99,26447.38,5675.32,714.5,5543.04,11029.13,2194.33,3780.32,208.79,6935.59,2377.83,975.18,1056.15,3225.9]
+        2020:new Function("return" + copdata[1])()
 
     });
 

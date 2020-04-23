@@ -37,5 +37,9 @@ public interface StoreageDao {
 
     int updateByPrimaryKey(Storeage record);
 
-    Storeage sumByProvince(List<String> provinces);
+    Storeage sumByProvinceList(List<String> provinces);
+
+    Storeage sumByProvince(@Param("province")String province);
+
+    long countByProvinceState(@Param("province")String province,@Param("state")Integer state);
 }
