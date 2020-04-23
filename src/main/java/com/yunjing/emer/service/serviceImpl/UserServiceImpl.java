@@ -94,6 +94,29 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<User> selectUserListByPass(User user) {
+        UserExample example = new UserExample();
+        UserExample.Criteria criteria = example.createCriteria();
+        criteria.andPassEqualTo(0);
+        criteria.andTypeBetween(user.getType() - 1, 3);
+
+        if(user.getType() >= 1){
+            criteria.andProvinceEqualTo(user.getProvince());
+        }
+        if(user.getType() >= 2){
+            criteria.andCityEqualTo(user.getCity());
+        }
+        if(user.getType() == 3){
+            criteria.andCountyEqualTo(user.getCounty());
+        }
+
+        List<User> userList = userDao.selectByExample(example);
+
+        System.out.println("userList:" + userList);
+        return userList;
+    }
+
+    @Override
     public boolean passUser(Integer userId) {
         User user = new User();
         user.setUserId(userId);

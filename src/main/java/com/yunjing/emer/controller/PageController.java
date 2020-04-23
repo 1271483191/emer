@@ -802,5 +802,36 @@ public class PageController {
 
         return modelAndView;
     }
+
+    @RequestMapping("/toUserAdmin")
+    public ModelAndView toUserAdmin(HttpServletRequest request, Integer page){
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("user-admin");
+
+        /*if(page == null){
+            page = 1;
+        }
+
+        PageHelper.startPage(page,20);
+        PageInfo<User> userList = new PageInfo<>(userService.selectUserByPass(user));
+        modelAndView.addObject("users", userList);*/
+        modelAndView.addObject("user", user);
+
+        return modelAndView;
+    }
+
+    @RequestMapping("/changeUser")
+    public String changeUser(User user, HttpServletRequest request){
+        System.out.println(user);
+        userService.update(user);
+        HttpSession session = request.getSession();
+        User rUser = (User) session.getAttribute("user");
+        User newUser = loginService.getUser(rUser.getUsername(),rUser.getPassword());
+        System.out.println(newUser);
+        session.setAttribute("user", newUser);
+        return "redirect:toUserAdmin";
+    }
 }
 

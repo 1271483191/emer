@@ -13,5 +13,6 @@ public interface UserService {
     boolean update(User user);
     Page<User> selectByPage();
     Page<User> selectUserByPass(User user);
+    List<User> selectUserListByPass(User user);
     boolean passUser(Integer userId);
 }
