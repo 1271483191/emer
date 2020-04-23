@@ -18,6 +18,17 @@
     <link rel="stylesheet" type="text/css" href="assets/css/zabuto_calendar.css">
     <link rel="stylesheet" type="text/css" href="assets/js/gritter/css/jquery.gritter.css" />
     <link rel="stylesheet" type="text/css" href="assets/lineicons/style.css">
+    <!-- ace styles -->
+    <link rel="stylesheet" href="assets/css/ace.min.css"
+          class="ace-main-stylesheet" id="main-ace-style" />
+
+    <!--[if lte IE 9]>
+    <link rel="stylesheet" href="assets/css/ace-part2.min.css" class="ace-main-stylesheet" />
+    <![endif]-->
+    <link rel="stylesheet" href="assets/css/ace-skins.min.css" />
+    <link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
+
+    <link rel="stylesheet" href="assets/css/chosen.min.css" />
     <link href="assets/css/style-responsive.css" rel="stylesheet">
 
     <link href="assets/css/table-responsive.css" rel="stylesheet">
@@ -25,6 +36,8 @@
     <!-- Custom styles for this template -->
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/style-responsive.css" rel="stylesheet">
+
+    <script src="assets/js/ace-extra.min.js"></script>
 
     <script src="assets/js/chart-master/Chart.js"></script>
 
@@ -131,6 +144,7 @@
                     </a>
                     <ul class="sub">
                         <li><a  href="toUserAdmin">个人信息</a></li>
+                        <li><a  href="toUserListAdmin">用户管理</a></li>
                         <li><a  href="toJurAdmin">权限管理</a></li>
                     </ul>
 
@@ -151,7 +165,7 @@
 
             <div class="row">
                 <div class="col-lg-12 main-chart">
-                    <h3><i class="fa fa-angle-right"></i>权限审核</h3>
+                    <!--<h3><i class="fa fa-angle-right"></i>权限审核</h3>
                     <hr>
                     <div class="row mt">
                         <div class="col-lg-12">
@@ -194,7 +208,7 @@
                                             </span>
                                             <td style="text-align: center; font-size: 1.5rem" >
                                                 <button th:onclick="'javascript:passUser('+${user.getUserId()}+','+${users.getPageNum()}+')'">通过</button>
-                                               <!-- <a th:href="@{'/toPassUser?userId='+${user.getUserId()}+'&page='+${users.getPageNum()}}">通过</a>-->
+                                               &lt;!&ndash; <a th:href="@{'/toPassUser?userId='+${user.getUserId()}+'&page='+${users.getPageNum()}}">通过</a>&ndash;&gt;
                                             </td>
                                         </tr>
                                         <script>
@@ -224,10 +238,101 @@
                                     <a th:href="@{'/toJurAdmin?page='+${users.getPageNum() + 1}}">下一页</a><br/>
                                 </div>
 
-                            </div><!-- /content-panel -->
-                        </div><!-- /col-lg-12 -->
-                    </div><!-- /row -->
+                            </div>&lt;!&ndash; /content-panel &ndash;&gt;
+                        </div>&lt;!&ndash; /col-lg-12 &ndash;&gt;
+                    </div>&lt;!&ndash; /row &ndash;&gt;
+                    <br>-->
                     <br>
+                    <h3><i class="fa fa-angle-right"></i>权限管理</h3>
+                    <hr>
+                    <div Style="width: 330px">
+                    </div>
+                    <br>
+                    <!--<div class="sear">
+                        <h5 style="display: inline">时间查询：</h5><span><br></span>
+                        <input type="date" id="time1" value="2020-4-13" style="border-radius: 0.9rem">&emsp;至 &emsp;
+                        <input type="date" id="time2" value="2020-4-16" style="border-radius: 0.9rem">
+                        <span><br></span>
+                        <button class="pull-right searchbutt" id="search_jur">查询</button>
+                    </div>
+                    <br>-->
+                    <div class="col-md-12 mb">
+                        <div class=" ">
+                            <!--<hr>-->
+                            <div class="content-panel">
+                                <div class="clearfix">
+                                    <i id="bigpro"></i><i id="midpro"></i><i id="smapro"></i>
+                                    <div class="pull-right tableTools-container"></div>
+                                </div>
+                                <section id="no-more-tables">
+                                    <table border="1" id="dynamic-table" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+                                        <thead class="cf">
+                                        <tr>
+                                            <th style="text-align: center; font-size: 1.5rem" class="center"><label class="pos-rel"> <input
+                                                    type="checkbox" class="ace" /> <span class="lbl"></span>
+                                            </label></th>
+                                            <th style="text-align: center; font-size: 1.5rem" >用户名</th>
+                                            <th style="text-align: center; font-size: 1.5rem" >姓名</th>
+                                            <th style="text-align: center; font-size: 1.5rem" >电话</th>
+                                            <th style="text-align: center; font-size: 1.5rem" >所在省</th>
+                                            <th style="text-align: center; font-size: 1.5rem" >所在市</th>
+                                            <th style="text-align: center; font-size: 1.5rem" >所在县</th>
+                                            <th style="text-align: center; font-size: 1.5rem" >公司</th>
+                                            <th style="text-align: center; font-size: 1.5rem" >权限</th>
+                                            <th style="text-align: center; font-size: 1.5rem" >通过</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="user,userStat : ${users}">
+                                            <td style="text-align: center; font-size: 1.5rem" class="center"><label class="pos-rel"> <input
+                                                    type="checkbox" class="ace" /> <span class="lbl"></span>
+                                            </label></td>
+                                            <td style="text-align: center; font-size: 1.5rem"  th:text="${user.getUsername()}"></td>
+                                            <td style="text-align: center; font-size: 1.5rem"  th:text="${user.getName()}"></td>
+                                            <td style="text-align: center; font-size: 1.5rem"  th:text="${user.getPhone()}"></td>
+                                            <td style="text-align: center; font-size: 1.5rem"  th:text="${user.getProvince()}"></td>
+                                            <td style="text-align: center; font-size: 1.5rem"  th:text="${user.getCity()}"></td>
+                                            <td style="text-align: center; font-size: 1.5rem"  th:text="${user.getCounty()}"></td>
+                                            <td style="text-align: center; font-size: 1.5rem"  th:text="${user.getCompany()}"></td>
+                                            <span th:switch="${user.getType()}">
+                                                <td style="text-align: center; font-size: 1.5rem"  th:case="0">国家级</td>
+                                                <td style="text-align: center; font-size: 1.5rem"  th:case="1">省级</td>
+                                                <td style="text-align: center; font-size: 1.5rem"  th:case="2">市级</td>
+                                                <td style="text-align: center; font-size: 1.5rem"  th:case="3">县级</td>
+                                            </span>
+                                            <td style="text-align: center; font-size: 1.5rem" >
+                                                <button th:onclick="'javascript:passUser('+${user.getUserId()}+')'">通过</button>
+                                                <!--&lt;!&ndash; <a th:href="@{'/toPassUser?userId='+${user.getUserId()}+'&page='+${users.getPageNum()}}">通过</a>&ndash;&gt;-->
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </section>
+                                <script>
+                                    function passUser(userId){
+                                        console.log(userId);
+                                        var curWwwPath=window.document.location.href;
+                                        var pathName=window.document.location.pathname;
+                                        var localhostPaht;
+                                        var pos = curWwwPath.indexOf(pathName);
+                                        localhostPaht = curWwwPath.substring(0,pos);
+                                        localhostPaht += "/";
+                                        var href = localhostPaht + "toPassUser?userId=" + userId;
+                                        console.log(href);
+                                        if (confirm("是否确定通过审核？")==true){
+                                            location.href = href;
+                                        }
+                                    }
+                                </script>
+
+
+                            </div><!-- /content-panel -->
+
+                            <!--<div class="pull-right">-->
+                            <!--<h4 style="margin-right: 15px;"><a class="fa fa-download download" href="#" download="全国粮食应急保障企业信息简表">下载</a></h4>-->
+                            <!--</div>-->
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -255,6 +360,20 @@
 <script src="assets/js/jquery.sparkline.js"></script>
 
 
+<script src="assets/js/jquery.dataTables.min.js"></script>
+<script src="assets/js/jquery.dataTables.bootstrap.min.js"></script>
+<script src="assets/js/dataTables.buttons.min.js"></script>
+<script src="assets/js/buttons.flash.min.js"></script>
+<script src="assets/js/buttons.html5.min.js"></script>
+<script src="assets/js/buttons.print.min.js"></script>
+<script src="assets/js/buttons.colVis.min.js"></script>
+<script src="assets/js/dataTables.select.min.js"></script>
+
+<script src="assets/js/jquery-ui.custom.min.js"></script>
+<script src="assets/js/jquery.ui.touch-punch.min.js"></script>
+<script src="assets/js/chosen.jquery.min.js"></script>
+
+<script src="js/search-jur.js"></script>
 <!--common script for all pages-->
 <script src="assets/js/common-scripts.js"></script>
 
@@ -420,12 +539,12 @@
         ]
 
     };
-    new Chart(document.getElementById("doughnut").getContext("2d")).Doughnut(doughnutData);
+/*    new Chart(document.getElementById("doughnut").getContext("2d")).Doughnut(doughnutData);
     new Chart(document.getElementById("line").getContext("2d")).Line(lineChartData);
     new Chart(document.getElementById("radar").getContext("2d")).Radar(radarChartData);
     new Chart(document.getElementById("polarArea").getContext("2d")).PolarArea(chartData);
     new Chart(document.getElementById("bar").getContext("2d")).Bar(barChartData);
-    new Chart(document.getElementById("pie").getContext("2d")).Pie(pieData);
+    new Chart(document.getElementById("pie").getContext("2d")).Pie(pieData);*/
 
 
 </script>

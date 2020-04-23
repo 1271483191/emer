@@ -94,11 +94,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> selectUserListByPass(User user) {
+    public List<User> selectUserListByPass(User user, Integer pass) {
         UserExample example = new UserExample();
         UserExample.Criteria criteria = example.createCriteria();
-        criteria.andPassEqualTo(0);
-        criteria.andTypeBetween(user.getType() - 1, 3);
+        criteria.andPassEqualTo(pass);
+        criteria.andTypeBetween(user.getType() - 1, 4);
 
         if(user.getType() >= 1){
             criteria.andProvinceEqualTo(user.getProvince());

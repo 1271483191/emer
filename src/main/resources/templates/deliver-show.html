@@ -144,6 +144,7 @@
                     </a>
                     <ul class="sub">
                         <li><a  href="toUserAdmin">个人信息</a></li>
+                        <li><a  href="toUserListAdmin">用户管理</a></li>
                         <li><a  href="toJurAdmin">权限管理</a></li>
                     </ul>
 
@@ -319,11 +320,29 @@
                                                 </span>
                                                 <span th:switch="${deliverie.getState()}">
                                                     <td style="text-align: center; font-size: 1.5rem" th:case="0">未选择</td>
-                                                    <td style="text-align: center; font-size: 1.5rem" th:case="1"><button>停用</button></td>
+                                                    <td style="text-align: center; font-size: 1.5rem" th:case="1">
+                                                        <button th:onclick="'javascript:stopCompany(' + ${deliverie.getDeliveryId()} + ')'">停用</button>
+                                                    </td>
                                                     <td style="text-align: center; font-size: 1.5rem" th:case="2">已停产</td>
                                                 </span>
                                             </tr>
                                         </div>
+                                        <script>
+                                            function stopCompany(id){
+                                                console.log(id);
+                                                var curWwwPath=window.document.location.href;
+                                                var pathName=window.document.location.pathname;
+                                                var localhostPaht;
+                                                var pos = curWwwPath.indexOf(pathName);
+                                                localhostPaht = curWwwPath.substring(0,pos);
+                                                localhostPaht += "/";
+                                                var href = localhostPaht + "toStopDelivery?deliveryId=" + id;
+                                                console.log(href);
+                                                if (confirm("是否确定停用该企业？")==true){
+                                                    location.href = href;
+                                                }
+                                            }
+                                        </script>
                                         </tbody>
                                     </table>
                                 </section>

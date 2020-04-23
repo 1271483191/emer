@@ -43,32 +43,27 @@ public class PageController {
     LoginService loginService;
 
     @RequestMapping("/toJurAdmin")
-    public ModelAndView toJurAdmin(HttpServletRequest request, Integer page){
+    public ModelAndView toJurAdmin(HttpServletRequest request){
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("jur-admin");
 
-        if(page == null){
-            page = 1;
-        }
-
-        PageHelper.startPage(page,20);
-        PageInfo<User> userList = new PageInfo<>(userService.selectUserByPass(user));
+        List<User> userList = userService.selectUserListByPass(user, 0);
         modelAndView.addObject("users", userList);
 
         return modelAndView;
     }
 
     @RequestMapping("/toPassUser")
-    public String toPassUser(String userId, String page){
+    public String toPassUser(String userId){
 
         Integer userIds = userId == null ? 0 : Integer.parseInt(userId.trim());
         boolean result = userService.passUser(userIds);
         System.out.println(result);
 
 
-        return "redirect:/toJurAdmin?page=" + page;
+        return "redirect:toJurAdmin";
     }
 
     @RequestMapping("/toCompanyInfo")
@@ -98,7 +93,7 @@ public class PageController {
     public String updateCompanyInfo(CompanyInfo companyInfo){
         companyInfoService.update(companyInfo);
 
-        return "redirect:/toCompanyInfo";
+        return "redirect:toCompanyInfo";
     }
 
     @RequestMapping("/toDelivery")
@@ -136,7 +131,7 @@ public class PageController {
         System.out.println(id);
         System.out.println(result);
 
-        return "redirect:/toDelivery";
+        return "redirect:toDelivery";
     }
 
     @RequestMapping("/updateDelivery")
@@ -144,7 +139,7 @@ public class PageController {
         System.out.println(delivery);
         deliveryService.update(delivery);
 
-        return "redirect:/toDelivery";
+        return "redirect:toDelivery";
     }
 
     @RequestMapping("/")
@@ -229,7 +224,7 @@ public class PageController {
         System.out.println(id);
         System.out.println(result);
 
-        return "redirect:/toMachine";
+        return "redirect:toMachine";
     }
 
     @RequestMapping("/updateMachine")
@@ -237,7 +232,7 @@ public class PageController {
         System.out.println(machine);
         machineService.update(machine);
 
-        return "redirect:/toMachine";
+        return "redirect:toMachine";
     }
 
     @RequestMapping("/toStoreage")
@@ -281,7 +276,7 @@ public class PageController {
         System.out.println(id);
         System.out.println(result);
 
-        return "redirect:/toStoreage";
+        return "redirect:toStoreage";
     }
 
     @RequestMapping("/updateStoreage")
@@ -289,7 +284,7 @@ public class PageController {
         System.out.println(storeage);
         storeageService.update(storeage);
 
-        return "redirect:/toStoreage";
+        return "redirect:toStoreage";
     }
 
     @RequestMapping("/toUser")
@@ -317,7 +312,7 @@ public class PageController {
         System.out.println(id);
         System.out.println(result);
 
-        return "redirect:/toUser";
+        return "redirect:toUser";
     }
 
     @RequestMapping("/updateUser")
@@ -325,7 +320,7 @@ public class PageController {
         System.out.println(user);
         userService.update(user);
 
-        return "redirect:/toUser";
+        return "redirect:toUser";
     }
 
     @RequestMapping("/toWebsite")
@@ -363,7 +358,7 @@ public class PageController {
         System.out.println(id);
         System.out.println(result);
 
-        return "redirect:/toWebsite";
+        return "redirect:toWebsite";
     }
 
     @RequestMapping("/updateWebsite")
@@ -371,7 +366,7 @@ public class PageController {
         System.out.println(website);
         websiteService.update(website);
 
-        return "redirect:/toWebsite";
+        return "redirect:toWebsite";
     }
 
     @RequestMapping("/toInsertUser")
@@ -389,7 +384,7 @@ public class PageController {
         System.out.println(result);
 
         if(result){
-            src = "redirect:/toLogin";
+            src = "redirect:toLogin";
         }
 
         return src;
@@ -413,7 +408,7 @@ public class PageController {
     @RequestMapping("/login")
     public String login(String username, String password, HttpServletRequest request){
 
-        String src = "redirect:/toLogin";
+        String src = "redirect:toLogin";
         System.out.println("username:" + username + ",password:" + password);
         int result = loginService.login(username, password);
         System.out.println("result:" + result);
@@ -425,7 +420,7 @@ public class PageController {
                 src = "pass_false";
                 break;
             case 1:{
-                src = "redirect:/toIndex";
+                src = "redirect:toIndex";
                 HttpSession session = request.getSession();
                 User user = loginService.getUser(username,password);
                 System.out.println(user);
@@ -832,6 +827,94 @@ public class PageController {
         System.out.println(newUser);
         session.setAttribute("user", newUser);
         return "redirect:toUserAdmin";
+    }
+
+    @RequestMapping("/toChangeUser")
+    public String toChangeUser(User user, HttpServletRequest request){
+        System.out.println(user);
+        userService.update(user);
+        HttpSession session = request.getSession();
+        User rUser = (User) session.getAttribute("user");
+        User newUser = loginService.getUser(rUser.getUsername(),rUser.getPassword());
+        System.out.println(newUser);
+        session.setAttribute("user", newUser);
+        return "redirect:toUserListAdmin";
+    }
+
+    @RequestMapping("/toUserListAdmin")
+    public ModelAndView toUserListAdmin(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("userlist-admin");
+
+        List<User> userList = userService.selectUserListByPass(user, 1);
+        modelAndView.addObject("users", userList);
+
+        return modelAndView;
+    }
+
+    @RequestMapping("/toDeleteUser")
+    public String toDeleteUser(Integer userId){
+
+        System.out.println("UserID:" + userId);
+        boolean result = userService.deleteById(userId);
+        System.out.println(result);
+        return "redirect:toUserListAdmin";
+    }
+
+    @RequestMapping("/toStopWebsite")
+    public String toStopWebsite(Website website){
+        website.setState(2);
+        boolean result = websiteService.update(website);
+        System.out.println(result);
+
+        return "redirect:toSupplyShow";
+    }
+
+    @RequestMapping("/toStopStoreage")
+    public String toStopStoreage(Storeage storeage){
+
+        storeage.setState(2);
+        boolean result = storeageService.update(storeage);
+        System.out.println(result);
+        return "redirect:toStoreageShow";
+    }
+
+    @RequestMapping("/toStopMachine")
+    public String toStopMachine(Machine machine){
+        machine.setState(2);
+        boolean result = machineService.update(machine);
+        System.out.println(result);
+        return "redirect:toMachineShow";
+    }
+
+    @RequestMapping("/toStopDelivery")
+    public String toStopDelivery(Delivery delivery){
+        delivery.setState(2);
+        boolean result = deliveryService.update(delivery);
+        System.out.println(result);
+        return "redirect:toDeliverShow";
+    }
+
+    @RequestMapping("/toAddUser")
+    public String toAddUser(){
+        return "add-user";
+    }
+
+    @RequestMapping("/addUser")
+    public String addUser(User user){
+        String src = "insert_false";
+        System.out.println(user);
+        user.setPass(1);
+        boolean result = userService.insertUser(user);
+        System.out.println(result);
+
+        if(result){
+            src = "redirect:toUserListAdmin";
+        }
+
+        return src;
     }
 }
 

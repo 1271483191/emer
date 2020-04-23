@@ -91,7 +91,7 @@
                 </li>
 
                 <li class="sub-menu">
-                    <a href="companysearch">
+                    <a href="toSearch">
                         <i class="fa fa-cogs"></i>
                         <span style="font-size: 1.5rem">统计查询</span>
                     </a>
@@ -108,7 +108,7 @@
                     </ul>
                 </li>
                 <li class="sub-menu">
-                    <a  href="javascript:void(0);" >
+                    <a href="javascript:void(0);" >
                         <i class="fa fa-tasks"></i>
                         <span style="font-size: 1.5rem">应急配送中心</span>
                     </a>
@@ -128,7 +128,7 @@
                     </ul>
                 </li>
                 <li class="sub-menu">
-                    <a  class="active" href="javascript:void(0);" >
+                    <a href="javascript:void(0);" >
                         <i class=" fa fa-bar-chart-o"></i>
                         <span style="font-size: 1.5rem">应急加工企业</span>
                     </a>
@@ -138,7 +138,7 @@
                     </ul>
                 </li>
                 <li class="sub-menu">
-                    <a href="javascript:void(0);" >
+                    <a class="active" href="javascript:void(0);" >
                         <i class="fa fa-users"></i>
                         <span style="font-size: 1.5rem">权限管理</span>
                     </a>
@@ -165,88 +165,77 @@
 
             <div class="row">
                 <div class="col-lg-12 main-chart">
-                    <!--<h3><i class="fa fa-angle-right"></i>全国供应网点列表展示</h3>
+                    <!--<h3><i class="fa fa-angle-right"></i>权限审核</h3>
                     <hr>
-
-                    <div class="sear">
-                        <h5 style="display: inline">时间查询：</h5><span><br></span>
-                        <input type="date" id="time1" value="time1" style="border-radius: 0.9rem">&emsp;至 &emsp;
-                        <input type="date" id="time2" value="time2" style="border-radius: 0.9rem">
-                        <span><br></span>
-                        <button onclick="serach()" class="pull-right searchbutt">查询</button>
-                        <script>
-                            function serach(){
-                                var time1 = $("#time1").val();
-                                var time2 = $("#time2").val();
-                                console.log(time1 + ":" + time2);
-                                if(time1 == "" || time2 == ""){
-                                    console.log("选择时间");
-                                    alert("请选择正确的时间范围");
-                                }else{
-                                    var curWwwPath=window.document.location.href;
-                                    var pathName=window.document.location.pathname;
-                                    var localhostPaht;
-                                    var pos = curWwwPath.indexOf(pathName);
-                                    localhostPaht = curWwwPath.substring(0,pos);
-                                    localhostPaht += "/";
-
-                                    var href = localhostPaht + "toMachineShowByDate?time1=" + time1 + "&time2=" + time2;
-                                    //console.log(href);
-                                    location.href = href;
-                                }
-                            }
-                        </script>
-                    </div>
                     <div class="row mt">
                         <div class="col-lg-12">
                             <div class="content-panel">
                                 <section id="no-more-tables1">
-                                    <table border="1" id="dynamic-table" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+                                    <table  border="1" id="dynamic-table" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
                                         <thead class="cf">
-                                        <tr>
-                                            <th style="text-align: center; font-size: 1.5rem" class="center"><label class="pos-rel"> <input
-                                                    type="checkbox" class="ace" /> <span class="lbl"></span>
-                                            </label></th>
-                                            <th style="text-align: center; font-size: 1.5rem">网点编号</th>
-                                            <th style="text-align: center; font-size: 1.5rem">网点名称</th>
-                                            <th style="text-align: center; font-size: 1.5rem" class="numeric">生产状态</th>
-                                            <th style="text-align: center; font-size: 1.5rem" class="numeric">停用</th>
-
-                                        </tr>
+                                            <tr>
+                                                <th style="text-align: center; font-size: 1.5rem" class="center"><label class="pos-rel"> <input
+                                                        type="checkbox" class="ace" /> <span class="lbl"></span>
+                                                </label></th>
+                                                <th style="text-align: center; font-size: 1.5rem" >用户名</th>
+                                                <th style="text-align: center; font-size: 1.5rem" >姓名</th>
+                                                <th style="text-align: center; font-size: 1.5rem" >电话</th>
+                                                <th style="text-align: center; font-size: 1.5rem" >所在省</th>
+                                                <th style="text-align: center; font-size: 1.5rem" >所在市</th>
+                                                <th style="text-align: center; font-size: 1.5rem" >所在县</th>
+                                                <th style="text-align: center; font-size: 1.5rem" >公司</th>
+                                                <th style="text-align: center; font-size: 1.5rem" >权限</th>
+                                                <th style="text-align: center; font-size: 1.5rem" >通过</th>
+                                            </tr>
                                         </thead>
                                         <tbody>
-                                        <tr th:each="machine,machineStat : ${machines.getList()}">
+                                        <tr th:each="user,userStat : ${users.getList()}">
                                             <td style="text-align: center; font-size: 1.5rem" class="center"><label class="pos-rel"> <input
                                                     type="checkbox" class="ace" /> <span class="lbl"></span>
                                             </label></td>
-                                            <td style="text-align: center; font-size: 1.5rem">
-                                                <a  th:text="${machine.getMachineId()}" th:href="@{'/toWebSite2?websiteId='+${machine.getMachineId()}}"></a>
+                                            <td style="text-align: center; font-size: 1.5rem"  th:text="${user.getUsername()}"></td>
+                                            <td style="text-align: center; font-size: 1.5rem"  th:text="${user.getName()}"></td>
+                                            <td style="text-align: center; font-size: 1.5rem"  th:text="${user.getPhone()}"></td>
+                                            <td style="text-align: center; font-size: 1.5rem"  th:text="${user.getProvince()}"></td>
+                                            <td style="text-align: center; font-size: 1.5rem"  th:text="${user.getCity()}"></td>
+                                            <td style="text-align: center; font-size: 1.5rem"  th:text="${user.getCounty()}"></td>
+                                            <td style="text-align: center; font-size: 1.5rem"  th:text="${user.getCompany()}"></td>
+                                            <span th:switch="${user.getType()}">
+                                                <td style="text-align: center; font-size: 1.5rem"  th:case="0">国家级</td>
+                                                <td style="text-align: center; font-size: 1.5rem"  th:case="1">省级</td>
+                                                <td style="text-align: center; font-size: 1.5rem"  th:case="2">市级</td>
+                                                <td style="text-align: center; font-size: 1.5rem"  th:case="3">县级</td>
+                                            </span>
+                                            <td style="text-align: center; font-size: 1.5rem" >
+                                                <button th:onclick="'javascript:passUser('+${user.getUserId()}+','+${users.getPageNum()}+')'">通过</button>
+                                               &lt;!&ndash; <a th:href="@{'/toPassUser?userId='+${user.getUserId()}+'&page='+${users.getPageNum()}}">通过</a>&ndash;&gt;
                                             </td>
-                                            <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(machineStat.index).getName()}"></td>
-                                            <span th:switch="${machine.getState()}">
-                                                <td style="text-align: center; font-size: 1.5rem" th:case="1">生产中</td>
-                                                <td style="text-align: center; font-size: 1.5rem" th:case="0">停产</td>
-                                            </span>
-
-                                            <span th:switch="${machine.getState()}">
-                                                <td style="text-align: center; font-size: 1.5rem" th:case="1"><button>停用</button></td>
-                                                <td style="text-align: center; font-size: 1.5rem" th:case="0">已停产</td>
-                                            </span>
                                         </tr>
+                                        <script>
+                                            function passUser(userId, page){
+                                                console.log(userId);
+                                                var curWwwPath=window.document.location.href;
+                                                var pathName=window.document.location.pathname;
+                                                var localhostPaht;
+                                                var pos = curWwwPath.indexOf(pathName);
+                                                localhostPaht = curWwwPath.substring(0,pos);
+                                                localhostPaht += "/";
+                                                var href = localhostPaht + "toPassUser?userId=" + userId + "&page=" + page;
+                                                console.log(href);
+                                                if (confirm("是否确定通过审核？")==true){
+                                                    location.href = href;
+                                                }
+                                            }
+                                        </script>
 
                                         </tbody>
                                     </table>
 
                                 </section>
-                                <div th:switch='${dateMap.get("date")}'>
-                                    <div th:case="0" style="font-size: 1.7rem;margin-top: 10px;padding-bottom: 10px;text-align: center" >
-                                        <a th:href="@{'/toMachineShow?page='+${machines.getPageNum() - 1}}">上一页</a><span th:text="'&nbsp;&nbsp;第' + ${machines.getPageNum()} + '页&nbsp;'"></span>
-                                        <a th:href="@{'/toMachineShow?page='+${machines.getPageNum() + 1}}">下一页</a><br/>
-                                    </div>
-                                    <div th:case="1" style="font-size: 1.7rem;margin-top: 10px;padding-bottom: 10px;text-align: center" >
-                                        <a th:href="@{'/toMachineShowByDate?page='+${machines.getPageNum() - 1} + '&time1=' + ${dateMap.get('time1')} + '&time2=' + ${dateMap.get('time2')}}">上一页</a><span th:text="'&nbsp;&nbsp;第' + ${machines.getPageNum()} + '页&nbsp;'"></span>
-                                        <a th:href="@{'/toMachineShowByDate?page='+${machines.getPageNum() + 1} + '&time1=' + ${dateMap.get('time1')} + '&time2=' + ${dateMap.get('time2')}}">下一页</a><br/>
-                                    </div>
+
+                                <div style="font-size: 1.7rem;margin-top: 10px;padding-bottom: 10px;text-align: center" >
+                                    <a th:href="@{'/toJurAdmin?page='+${users.getPageNum() - 1}}">上一页</a><span th:text="'&nbsp;&nbsp;第' + ${users.getPageNum()} + '页&nbsp;'"></span>
+                                    <a th:href="@{'/toJurAdmin?page='+${users.getPageNum() + 1}}">下一页</a><br/>
                                 </div>
 
                             </div>&lt;!&ndash; /content-panel &ndash;&gt;
@@ -254,22 +243,22 @@
                     </div>&lt;!&ndash; /row &ndash;&gt;
                     <br>-->
                     <br>
-                    <h3><i class="fa fa-angle-right"></i>加工企业搜索</h3>
+                    <h3><i class="fa fa-angle-right"></i>用户管理</h3>
                     <hr>
                     <div Style="width: 330px">
                     </div>
                     <br>
-                    <div class="sear">
+                    <!--<div class="sear">
                         <h5 style="display: inline">时间查询：</h5><span><br></span>
                         <input type="date" id="time1" value="2020-4-13" style="border-radius: 0.9rem">&emsp;至 &emsp;
                         <input type="date" id="time2" value="2020-4-16" style="border-radius: 0.9rem">
                         <span><br></span>
-                        <button class="pull-right searchbutt" id="search_machine">查询</button>
+                        <button class="pull-right searchbutt" id="search_jur">查询</button>
                     </div>
-                    <br>
+                    <br>-->
                     <div class="col-md-12 mb">
                         <div class=" ">
-                            <hr>
+                            <!--<hr>-->
                             <div class="content-panel">
                                 <div class="clearfix">
                                     <i id="bigpro"></i><i id="midpro"></i><i id="smapro"></i>
@@ -277,89 +266,99 @@
                                 </div>
                                 <section id="no-more-tables">
                                     <table border="1" id="dynamic-table" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
-                                        <thead>
+                                        <thead class="cf">
                                         <tr>
                                             <th style="text-align: center; font-size: 1.5rem" class="center"><label class="pos-rel"> <input
                                                     type="checkbox" class="ace" /> <span class="lbl"></span>
                                             </label></th>
-                                            <th style="text-align: center; font-size: 1.5rem">网点编号</th>
-                                            <th style="text-align: center; font-size: 1.5rem">网点名称</th>
-                                            <th style="text-align: center; font-size: 1.5rem">日入库量</th>
-                                            <th style="text-align: center; font-size: 1.5rem">日销量</th>
-                                            <th style="text-align: center; font-size: 1.5rem">日库存</th>
-                                            <th style="text-align: center; font-size: 1.5rem">小麦（日）</th>
-                                            <th style="text-align: center; font-size: 1.5rem">稻谷（日）</th>
-                                            <th style="text-align: center; font-size: 1.5rem">油料处理（日）</th>
-                                            <th style="text-align: center; font-size: 1.5rem">油脂精炼（日）</th>
-                                            <th style="text-align: center; font-size: 1.5rem">油脂分装（日）</th>
-                                            <th style="text-align: center; font-size: 1.5rem">其它（日）</th>
-                                            <th style="text-align: center; font-size: 1.5rem">小麦实际（日）</th>
-                                            <th style="text-align: center; font-size: 1.5rem">稻谷实际（日）</th>
-                                            <th style="text-align: center; font-size: 1.5rem">油料处理实际（日）</th>
-                                            <th style="text-align: center; font-size: 1.5rem">油脂精炼实际（日）</th>
-                                            <th style="text-align: center; font-size: 1.5rem">油脂分装实际（日）</th>
-                                            <th style="text-align: center; font-size: 1.5rem">其它实际（日）</th>
-                                            <th style="text-align: center; font-size: 1.5rem">生产状态</th>
-                                            <th style="text-align: center; font-size: 1.5rem">停用</th>
+                                            <th style="text-align: center; font-size: 1.5rem" >用户名</th>
+                                            <th style="text-align: center; font-size: 1.5rem" >姓名</th>
+                                            <th style="text-align: center; font-size: 1.5rem" >电话</th>
+                                            <th style="text-align: center; font-size: 1.5rem" >所在省</th>
+                                            <th style="text-align: center; font-size: 1.5rem" >所在市</th>
+                                            <th style="text-align: center; font-size: 1.5rem" >所在县</th>
+                                            <th style="text-align: center; font-size: 1.5rem" >公司</th>
+                                            <th style="text-align: center; font-size: 1.5rem" >权限</th>
+                                            <th style="text-align: center; font-size: 1.5rem" >删除</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <div th:each="machine,machineStat : ${machines}">
-                                            <tr>
+                                        <tr th:each="user,userStat : ${users}">
+                                            <td style="text-align: center; font-size: 1.5rem" class="center"><label class="pos-rel"> <input
+                                                    type="checkbox" class="ace" /> <span class="lbl"></span>
+                                            </label></td>
+                                            <td style="text-align: center; font-size: 1.5rem"  th:text="${user.getUsername()}"></td>
+                                            <td th:onclick="'javascript:changeUser('+${user.getUserId()}+',\'name\')'" style="text-align: center; font-size: 1.5rem"><a href="javascript:void(0)" th:text="${user.getName()}"></a></td>
+                                            <td th:onclick="'javascript:changeUser('+${user.getUserId()}+',\'phone\')'" style="text-align: center; font-size: 1.5rem"><a href="javascript:void(0)" th:text="${user.getPhone()}"></a></td>
+                                            <td th:onclick="'javascript:changeUser('+${user.getUserId()}+',\'province\')'" style="text-align: center; font-size: 1.5rem"><a href="javascript:void(0)" th:text="${user.getProvince()}"></a></td>
+                                            <td th:onclick="'javascript:changeUser('+${user.getUserId()}+',\'city\')'" style="text-align: center; font-size: 1.5rem"><a href="javascript:void(0)" th:text="${user.getCity()}"></a></td>
+                                            <td th:onclick="'javascript:changeUser('+${user.getUserId()}+',\'county\')'" style="text-align: center; font-size: 1.5rem"><a href="javascript:void(0)" th:text="${user.getCounty()}"></a></td>
+                                            <td th:onclick="'javascript:changeUser('+${user.getUserId()}+',\'company\')'" style="text-align: center; font-size: 1.5rem"><a href="javascript:void(0)" th:text="${user.getCompany()}"></a></td>
+                                            <span th:switch="${user.getType()}">
+                                                <td style="text-align: center; font-size: 1.5rem"  th:case="0">国家级</td>
+                                                <td style="text-align: center; font-size: 1.5rem"  th:case="1">省级</td>
+                                                <td style="text-align: center; font-size: 1.5rem"  th:case="2">市级</td>
+                                                <td style="text-align: center; font-size: 1.5rem"  th:case="3">县级</td>
+                                            </span>
+                                            <td style="text-align: center; font-size: 1.5rem" >
+                                                <button th:onclick="'javascript:deleteUser(' + ${user.getUserId()} + ')'">删除</button>
+                                                <!--&lt;!&ndash; <a th:href="@{'/toPassUser?userId='+${user.getUserId()}+'&page='+${users.getPageNum()}}">通过</a>&ndash;&gt;-->
+                                            </td>
+                                        </tr>
 
-                                                <th style="text-align: center; font-size: 1.5rem"><label class="pos-rel"> <input
-                                                        type="checkbox" class="ace" /> <span class="lbl"></span>
-                                                </label></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${machine.getMachineId()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${companys.get(machineStat.index).getName()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${companys.get(machineStat.index).getInDay()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${companys.get(machineStat.index).getOutDay()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${companys.get(machineStat.index).getSaveDay()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${machine.getWheatDay()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${machine.getPaddyDay()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${machine.getOilDay()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${machine.getOilConciseDay()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${machine.getOilSubpDay()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${machine.getElseDay()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${machine.getWheatDayReal()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${machine.getPaddyDayReal()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${machine.getOilDayReal()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${machine.getOilConciseDayReal()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${machine.getOilSubpDayReal()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${machine.getElseDayReal()}"></th>
-                                                <span th:switch="${machine.getState()}">
-                                                    <td style="text-align: center; font-size: 1.5rem" th:case="0">未选择</td>
-                                                    <td style="text-align: center; font-size: 1.5rem" th:case="1">生产中</td>
-                                                    <td style="text-align: center; font-size: 1.5rem" th:case="2">停产</td>
-                                                </span>
-                                                <span th:switch="${machine.getState()}">
-                                                    <td style="text-align: center; font-size: 1.5rem" th:case="0">未选择</td>
-                                                    <td style="text-align: center; font-size: 1.5rem" th:case="1">
-                                                        <button th:onclick="'javascript:stopCompany(' + ${machine.getMachineId()} + ')'">停用</button>
-                                                    </td>
-                                                    <td style="text-align: center; font-size: 1.5rem" th:case="2">已停产</td>
-                                                </span>
-                                            </tr>
-                                        </div>
                                         <script>
-                                            function stopCompany(id){
-                                                console.log(id);
+                                            function changeUser(userId, flag){
+                                                console.log(userId);
+                                                console.log(flag)
                                                 var curWwwPath=window.document.location.href;
                                                 var pathName=window.document.location.pathname;
                                                 var localhostPaht;
                                                 var pos = curWwwPath.indexOf(pathName);
                                                 localhostPaht = curWwwPath.substring(0,pos);
                                                 localhostPaht += "/";
-                                                var href = localhostPaht + "toStopMachine?machineId=" + id;
-                                                console.log(href);
-                                                if (confirm("是否确定停用该企业？")==true){
-                                                    location.href = href;
+
+                                                var text = prompt("请输入","");
+                                                if(text == null || text == ""){
+                                                    alert("修改值不能为空")
+                                                }else{
+                                                    var href = localhostPaht + "toChangeUser?userId=" + userId + "&" + flag + "=" + text;
+                                                    if(confirm("是否确定要修改该选项")){
+                                                        if(flag == "phone"){
+                                                            if((/^1[3456789]\d{9}$/.test(text))){
+                                                                console.log(href);
+                                                                location.href = href;
+                                                            }else{
+                                                                alert("手机号格式不正确")
+                                                            }
+                                                        }else{
+                                                            console.log(href);
+                                                            location.href = href;
+                                                        }
+                                                    }
                                                 }
+
+
                                             }
                                         </script>
                                         </tbody>
                                     </table>
                                 </section>
+                                <script>
+                                    function deleteUser(userId){
+                                        console.log(userId);
+                                        var curWwwPath=window.document.location.href;
+                                        var pathName=window.document.location.pathname;
+                                        var localhostPaht;
+                                        var pos = curWwwPath.indexOf(pathName);
+                                        localhostPaht = curWwwPath.substring(0,pos);
+                                        localhostPaht += "/";
+                                        var href = localhostPaht + "toDeleteUser?userId=" + userId;
+                                        console.log(href);
+                                        if (confirm("是否确定删除该用户？")==true){
+                                            location.href = href;
+                                        }
+                                    }
+                                </script>
 
 
                             </div><!-- /content-panel -->
@@ -380,7 +379,7 @@
     <!--footer start-->
     <footer class="site-footer">
         <div class="text-center">
-            2020.<a href="http://www.lswz.gov.cn" target="_blank">国家粮食和物质储备局</a>
+            2020.<a href="http://www.winginbi.com" target="_blank">winginbi</a>
         </div>
     </footer>
     <!--footer end-->
@@ -409,7 +408,7 @@
 <script src="assets/js/jquery.ui.touch-punch.min.js"></script>
 <script src="assets/js/chosen.jquery.min.js"></script>
 
-<script src="js/search-machine.js"></script>
+<script src="js/search-userlist.js"></script>
 <!--common script for all pages-->
 <script src="assets/js/common-scripts.js"></script>
 
@@ -575,12 +574,12 @@
         ]
 
     };
-    new Chart(document.getElementById("doughnut").getContext("2d")).Doughnut(doughnutData);
-    new Chart(document.getElementById("line").getContext("2d")).Line(lineChartData);
-    new Chart(document.getElementById("radar").getContext("2d")).Radar(radarChartData);
-    new Chart(document.getElementById("polarArea").getContext("2d")).PolarArea(chartData);
-    new Chart(document.getElementById("bar").getContext("2d")).Bar(barChartData);
-    new Chart(document.getElementById("pie").getContext("2d")).Pie(pieData);
+    /*    new Chart(document.getElementById("doughnut").getContext("2d")).Doughnut(doughnutData);
+        new Chart(document.getElementById("line").getContext("2d")).Line(lineChartData);
+        new Chart(document.getElementById("radar").getContext("2d")).Radar(radarChartData);
+        new Chart(document.getElementById("polarArea").getContext("2d")).PolarArea(chartData);
+        new Chart(document.getElementById("bar").getContext("2d")).Bar(barChartData);
+        new Chart(document.getElementById("pie").getContext("2d")).Pie(pieData);*/
 
 
 </script>

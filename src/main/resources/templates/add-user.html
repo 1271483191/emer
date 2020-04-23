@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Dashboard">
+    <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="js/cityAndPro.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+
+    <title>粮食应急保障企业信息统计</title>
+    <link rel="icon" type="image/x-icon" href="img/logo.png" />
+
+    <!-- Bootstrap core CSS -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <!--external css-->
+    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/style-responsive.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<!-- **********************************************************************************************************************************************************
+MAIN CONTENT
+*********************************************************************************************************************************************************** -->
+
+<div id="login-page">
+    <div class="container">
+
+        <form class="form-login" action="addUser">
+            <h2 class="form-login-heading">添加用户</h2>
+            <div class="login-wrap">
+                <input name="username" id="username" type="text" class="form-control" placeholder="用户名" autofocus>
+                <br>
+                <input name="password" id="password" type="password" class="form-control" placeholder="密码">
+                <br>
+                <input id="password2" type="password" class="form-control" placeholder="确认密码">
+                <br>
+                <input name="name" id="name" type="text" class="form-control" placeholder="姓名" autofocus>
+                <br>
+                <input name="phone" id="phone" type="text" class="form-control" placeholder="联系电话" autofocus>
+                <br>
+                <input name="company" id="company" type="text" class="form-control" placeholder="单位" autofocus>
+                <br>
+                <div>
+                    <label for="addr-show">所在地区：
+                        <input type="hidden" value="" id="addr-show"/>
+                    </label>
+                    <input name="province" type="hidden" value="" id="provinces"/>
+                    <input name="city" type="hidden" value="" id="cities"/>
+                    <input name="county" type="hidden" value="" id="counties"/>
+                    <br/>
+
+                    <div>
+                        <!--省份选择-->
+                        <select class="form-control" id="prov" onchange="showCity(this)">
+                            <option>=请选择省份=</option>
+                        </select>
+                    </div>
+                    <br/>
+
+                    <div>
+                        <!--城市选择-->
+                        <select class="form-control" id="city" onchange="showCountry(this)">
+                            <option>=请选择城市=</option>
+                        </select>
+                    </div>
+                    <br/>
+
+                    <div>
+                        <!--县区选择-->
+                        <select class="form-control" id="country" onchange="selecCountry(this)">
+                            <option>=请选择县区=</option>
+                        </select>
+                    </div>
+                    <br/>
+                </div>
+                <div>
+                    <div>选择权限：</div>
+                    <input value="0" name="type" type="radio" checked="checked"/><span style="margin-right: 10px;margin-left: 5px">国家级</span>
+                    <input value="1" name="type" type="radio"/><span style="margin-right: 10px;margin-left: 5px">省级</span>
+                    <input value="2" name="type" type="radio"/><span style="margin-right: 10px;margin-left: 5px">市级</span>
+                    <input value="3" name="type" type="radio"/><span style="margin-right: 10px;margin-left: 5px">县级</span>
+                </div>
+                &emsp;
+                <button class="btn btn-theme btn-block" href="toIndex" type="submit"><i class="fa fa-angle-right"></i>添加用户</button>
+                <br>
+
+
+            </div>
+
+
+            <!-- myModal -->
+
+        </form>
+
+    </div>
+</div>
+
+<!-- js placed at the end of the document so the pages load faster -->
+<script src="assets/js/jquery.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/three/city.js"></script>
+<script src="assets/three/city02.js"></script>
+<script src="assets/three/method01.js"></script>
+
+<!--BACKSTRETCH-->
+<!-- You can use an image of whatever size. This script will stretch to fit in any screen size.-->
+<script type="text/javascript" src="assets/js/jquery.backstretch.min.js"></script>
+<script>
+    $.backstretch("assets/img/bg.jpg", {speed: 500});
+</script>
+
+
+</body>
+</html>
