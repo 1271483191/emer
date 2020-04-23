@@ -376,4 +376,16 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
+  <select id="sumByProvince" resultMap="BaseResultMap">
+    select sum(flour_exp) as flour_exp,sum(rice_exp) as rice_exp,sum(oil_exp) as oil_exp,
+    sum(else_exp) as else_exp,sum(flour_real) as flour_real,sum(rice_real) as rice_real,
+    sum(oil_real) as oil_real,sum(else_real) as else_real
+    from emer.website a left outer join emer.company_info b on(a.company_id=b.company_id)
+    where b.province = #{province}
+  </select>
+  <select id="countByProvinceState" resultType="java.lang.Long">
+    select count(*)
+    from emer.website a left outer join emer.company_info b on(a.company_id=b.company_id)
+    where b.province = #{province} and a.state = #{state}
+  </select>
 </mapper>

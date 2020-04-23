@@ -42,6 +42,7 @@
     <script src="assets/js/jquery.nicescroll.js" type="text/javascript"></script>
     <script src="assets/js/jquery.sparkline.js"></script>
     <script src="static/js/echarts.min.js"></script>
+    <script src="static/js/supply.js"></script>
 </head>
 
 <body>
@@ -154,65 +155,21 @@
     <!--main content start-->
     <section id="main-content">
         <section class="wrapper">
-            <input id="flour_exp" type="hidden" th:value="${Webstatic.getFlourExp()}" />
-            <input id="flour_real" type="hidden" th:value="${Webstatic.getFlourReal()}" />
-            <input id="rice_exp" type="hidden" th:value="${Webstatic.getRiceExp()}" />
-            <input id="rice_real" type="hidden" th:value="${Webstatic.getRiceReal()}" />
-            <input id="oil_exp" type="hidden" th:value="${Webstatic.getOilExp()}" />
-            <input id="oil_real" type="hidden" th:value="${Webstatic.getOilReal()}" />
-            <input id="else_exp" type="hidden" th:value="${Webstatic.getElseExp()}" />
-            <input id="else_real" type="hidden" th:value="${Webstatic.getElseReal()}" />
-            <input id="usenum" type="hidden" th:value="${usenum}" />
-            <input id="stopnum" type="hidden" th:value="${stopnum}" />
-            <input id="newnum" type="hidden" th:value="${newnum}" />
-            <input id="disablenum" type="hidden" th:value="${disablenum}" />
-            <input id="in_day" type="hidden" th:value="${in_day}" />
-            <input id="out_day" type="hidden" th:value="${out_day}" />
-            <input id="save_day" type="hidden" th:value="${save_day}" />
             <div class="row">
                 <div class="col-lg-12 main-chart">
-                    <h3><i class="fa fa-angle-right"></i>供应能力统计</h3>
+                    <h3><i class="fa fa-angle-right"></i>供应网点统计</h3>
                     <hr>
 
                     <div class="row mt">
-                        <div class="col-lg-3">
+                        <div class="col-lg-12">
                             <div class="content-panel">
-                                <h4><i class="fa fa-angle-right"></i> 面粉</h4>
+                                <h4><i class="fa fa-angle-right"></i> 企业指标</h4>
                                 <div class="panel-body">
-                                    <div id="powder" class="graph"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="content-panel">
-                                <h4><i class="fa fa-angle-right"></i> 大米</h4>
-                                <div class="panel-body">
-                                    <div id="rice" class="graph"></div>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-                        <div class="col-lg-3">
-                            <div class="content-panel">
-                                <h4><i class="fa fa-angle-right"></i> 食用油</h4>
-                                <div class="panel-body">
-                                    <div id="oil" class="graph"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="content-panel">
-                                <h4><i class="fa fa-angle-right"></i> 其他</h4>
-                                <div class="panel-body">
-                                    <div id="other" class="graph"></div>
+                                    <div id="supplyBar1" style="height: 600px;width:1000px"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-
 
                 </div>
             </div>
@@ -221,19 +178,11 @@
             <div class="row">
                 <div class="col-lg-12 main-chart">
                     <div class="row mt">
-                        <div class="col-lg-3">
+                        <div class="col-lg-12">
                             <div class="content-panel">
-                                <h4><i class="fa fa-angle-right"></i>供应网点</h4>
+                                <h4><i class="fa fa-angle-right"></i>企业能力</h4>
                                 <div class="panel-body">
-                                    <div id="number1" class="graph"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="content-panel">
-                                <h4><i class="fa fa-angle-right"></i>企业数量</h4>
-                                <div class="panel-body">
-                                    <div id="number2" class="graph"></div>
+                                    <div id="supplyBar2" style="height: 600px;width:1000px"></div>
                                 </div>
                             </div>
                         </div>
@@ -245,58 +194,12 @@
             <div class="row">
                 <div class="col-lg-12 main-chart">
                     <div class="row mt">
-                        <div class="col-lg-4">
+                        <div class="col-lg-12">
                             <div class="content-panel">
-                                <h4><i class="fa fa-angle-right"></i>日入库量/日销量/日库存</h4>
+                                <h4><i class="fa fa-angle-right"></i>生产状态</h4>
                                 <div class="panel-body text-center">
-                                    <div id="input" style="height: 320px;"></div>
+                                    <div id="supplyBar3" style="height: 600px;width:1000px"></div>
                                 </div>
-                                <script>
-                                    var in_day = ($("#in_day").val()==null)?0:$("#in_day").val();
-                                    var out_day = ($("#out_day").val()==null)?0:$("#out_day").val();
-                                    var save_day = ($("#save_day").val()==null)?0:$("#save_day").val();
-                                    var myChart = echarts.init(document.getElementById('input'));
-                                    var option = {
-                                        color: ['#99CCFF', '#ac92ec', '#50b7c1'],
-                                        tooltip: {
-                                            trigger: 'item',
-                                            formatter: '{a} <br/>{b}: {c} ({d}%)'
-                                        },
-                                        legend: {
-                                            orient: 'vertical',
-                                            left: 10,
-                                            data: ['日入库量', '日销量', '日库存'],
-                                        },
-                                        series: [
-                                            {
-                                                name: '应急供应网点',
-                                                type: 'pie',
-                                                radius: ['60%', '80%'],
-                                                avoidLabelOverlap: false,
-                                                label: {
-                                                    show: false,
-                                                    position: 'center'
-                                                },
-                                                emphasis: {
-                                                    label: {
-                                                        show: true,
-                                                        fontSize: '30',
-                                                        fontWeight: 'bold'
-                                                    }
-                                                },
-                                                labelLine: {
-                                                    show: false
-                                                },
-                                                data: [
-                                                    {value: in_day, name: '日入库量'},
-                                                    {value: out_day, name: '日销量'},
-                                                    {value: save_day, name: '日库存'},
-                                                ],
-                                            }
-                                        ]
-                                    };
-                                    myChart.setOption(option);
-                                </script>
                             </div>
                         </div>
                     </div>
@@ -321,7 +224,7 @@
 <!--common script for all pages-->
 <script src="assets/js/common-scripts.js"></script>
 <script src="js/raphael-min.js"></script>
-<script src="js/morris-0.4.3.min.js"></script>
+<!--<script src="js/morris-0.4.3.min.js"></script>-->
 
 
 <script type="text/javascript" src="assets/js/gritter/js/jquery.gritter.js"></script>
@@ -330,105 +233,7 @@
 <!--script for this page-->
 <script src="assets/js/sparkline-chart.js"></script>
 <script src="assets/js/zabuto_calendar.js"></script>
-<script src="assets/js/morris-conf.js"></script>
-<script>
-    var flour_exp = ($("#flour_exp").val()==null)?0:$("#flour_exp").val();
-    var flour_real = ($("#flour_real").val()==null)?0:$("#flour_real").val();
-    var rice_exp = ($("#rice_exp").val()==null)?0:$("#rice_exp").val();
-    var rice_real = ($("#rice_real").val()==null)?0:$("#rice_real").val();
-    var oil_exp = ($("#oil_exp").val()==null)?0:$("#oil_exp").val();
-    var oil_real = ($("#oil_real").val()==null)?0:$("#oil_real").val();
-    var else_exp = ($("#else_exp").val()==null)?0:$("#else_exp").val();
-    var else_real = ($("#else_real").val()==null)?0:$("#else_real").val();
-    var usenum = ($("#usenum").val()==null)?0:$("#usenum").val();
-    var stopnum = ($("#stopnum").val()==null)?0:$("#stopnum").val();
-    var newnum = ($("#newnum").val()==null)?0:$("#newnum").val();
-    var disablenum = ($("#disablenum").val()==null)?0:$("#disablenum").val();
-    Morris.Bar({
-        element: 'powder',
-        data: [
-            {device: '设计', geekbench: flour_exp},
-            {device: '实际', geekbench: flour_real},
-        ],
-        xkey: 'device',
-        ykeys: ['geekbench'],
-        labels: ['数值'],
-        barRatio: 0.4,
-        xLabelAngle: 35,
-        hideHover: 'auto',
-        barColors: ['#ac92ec']
-    })
-    Morris.Bar({
-        element: 'rice',
-        data: [
-            {device: '设计', geekbench: rice_exp},
-            {device: '实际', geekbench: rice_real},
-        ],
-        xkey: 'device',
-        ykeys: ['geekbench'],
-        labels: ['数值'],
-        barRatio: 0.4,
-        xLabelAngle: 35,
-        hideHover: 'auto',
-        barColors: ['#ac92ec']
-    })
-    Morris.Bar({
-        element: 'oil',
-        data: [
-            {device: '设计', geekbench: oil_exp},
-            {device: '实际', geekbench: oil_real},
-        ],
-        xkey: 'device',
-        ykeys: ['geekbench'],
-        labels: ['数值'],
-        barRatio: 0.4,
-        xLabelAngle: 35,
-        hideHover: 'auto',
-        barColors: ['#ac92ec']
-    })
-    Morris.Bar({
-        element: 'other',
-        data: [
-            {device: '设计', geekbench: else_exp},
-            {device: '实际', geekbench: else_real},
-        ],
-        xkey: 'device',
-        ykeys: ['geekbench'],
-        labels: ['数值'],
-        barRatio: 0.4,
-        xLabelAngle: 35,
-        hideHover: 'auto',
-        barColors: ['#ac92ec']
-    })
-    Morris.Bar({
-        element: 'number1',
-        data: [
-            {device: '在产', geekbench: usenum},
-            {device: '停产', geekbench: stopnum},
-        ],
-        xkey: 'device',
-        ykeys: ['geekbench'],
-        labels: ['数值'],
-        barRatio: 0.4,
-        xLabelAngle: 35,
-        hideHover: 'auto',
-        barColors: ['#50b7c1']
-    })
-    Morris.Bar({
-        element: 'number2',
-        data: [
-            {device: '新增', geekbench: newnum},
-            {device: '停用', geekbench: disablenum},
-        ],
-        xkey: 'device',
-        ykeys: ['geekbench'],
-        labels: ['数值'],
-        barRatio: 0.4,
-        xLabelAngle: 35,
-        hideHover: 'auto',
-        barColors: ['#50b7c1']
-    })
-</script>
+<!--<script src="assets/js/morris-conf.js"></script>-->
 
 
 

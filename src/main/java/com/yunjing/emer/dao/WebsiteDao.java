@@ -38,4 +38,8 @@ public interface WebsiteDao {
     int updateByPrimaryKey(Website record);
 
     Website sumByExample(WebsiteExample example);
+
+    Website sumByProvince(@Param("province")String province);
+
+    long countByProvinceState(@Param("province")String province,@Param("state")Integer state);
 }

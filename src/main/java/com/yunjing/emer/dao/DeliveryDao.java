@@ -36,5 +36,9 @@ public interface DeliveryDao {
 
     int updateByPrimaryKey(Delivery record);
 
-    Delivery sumByProvince(List<String> provinces);
+    Delivery sumByProvinceList(List<String> provinces);
+
+    Delivery sumByProvince(@Param("province")String province);
+
+    long countByProvinceState(@Param("province")String province,@Param("state")Integer state);
 }

@@ -158,25 +158,6 @@
     <!--main content start-->
     <section id="main-content">
         <section class="wrapper">
-            <input id="wheatDay" type="hidden" th:value="${Machinestatic.getWheatDay()}" />
-            <input id="paddyDay" type="hidden" th:value="${Machinestatic.getPaddyDay()}" />
-            <input id="oilDay" type="hidden" th:value="${Machinestatic.getOilDay()}" />
-            <input id="oilConciseDay" type="hidden" th:value="${Machinestatic.getOilConciseDay()}" />
-            <input id="oilSubpDay" type="hidden" th:value="${Machinestatic.getOilSubpDay()}" />
-            <input id="elseDay" type="hidden" th:value="${Machinestatic.getElseDay()}" />
-            <input id="wheatDayReal" type="hidden" th:value="${Machinestatic.getWheatDayReal()}" />
-            <input id="paddyDayReal" type="hidden" th:value="${Machinestatic.getPaddyDayReal()}" />
-            <input id="oilDayReal" type="hidden" th:value="${Machinestatic.getOilDayReal()}" />
-            <input id="oilConciseDayReal" type="hidden" th:value="${Machinestatic.getOilConciseDayReal()}" />
-            <input id="oilSubpDayReal" type="hidden" th:value="${Machinestatic.getOilSubpDayReal()}" />
-            <input id="elseDayReal" type="hidden" th:value="${Machinestatic.getElseDayReal()}" />
-            <input id="usenum" type="hidden" th:value="${usenum}" />
-            <input id="stopnum" type="hidden" th:value="${stopnum}" />
-            <input id="newnum" type="hidden" th:value="${newnum}" />
-            <input id="disablenum" type="hidden" th:value="${disablenum}" />
-            <input id="in_day" type="hidden" th:value="${in_day}" />
-            <input id="out_day" type="hidden" th:value="${out_day}" />
-            <input id="save_day" type="hidden" th:value="${save_day}" />
             <div class="row">
                 <div class="col-lg-12 main-chart">
                     <h3><i class="fa fa-angle-right"></i>应急加工企业统计</h3>
@@ -353,7 +334,7 @@
 <!--common script for all pages-->
 <script src="assets/js/common-scripts.js"></script>
 <script src="js/raphael-min.js"></script>
-<script src="js/morris-0.4.3.min.js"></script>
+<!--<script src="js/morris-0.4.3.min.js"></script>-->
 
 
 <script type="text/javascript" src="assets/js/gritter/js/jquery.gritter.js"></script>
@@ -362,137 +343,7 @@
 <!--script for this page-->
 <script src="assets/js/sparkline-chart.js"></script>
 <script src="assets/js/zabuto_calendar.js"></script>
-<script src="assets/js/morris-conf.js"></script>
-<script>
-    var wheatDay = ($("#wheatDay").val()==null)?0:$("#wheatDay").val();
-    var paddyDay = ($("#paddyDay").val()==null)?0:$("#paddyDay").val();
-    var oilDay = ($("#oilDay").val()==null)?0:$("#oilDay").val();
-    var oilConciseDay = ($("#oilConciseDay").val()==null)?0:$("#oilConciseDay").val();
-    var oilSubpDay = ($("#oilSubpDay").val()==null)?0:$("#oilSubpDay").val();
-    var elseDay = ($("#elseDay").val()==null)?0:$("#elseDay").val();
-    var wheatDayReal = ($("#wheatDayReal").val()==null)?0:$("#wheatDayReal").val();
-    var paddyDayReal = ($("#paddyDayReal").val()==null)?0:$("#paddyDayReal").val();
-    var oilDayReal = ($("#oilDayReal").val()==null)?0:$("#oilDayReal").val();
-    var oilConciseDayReal = ($("#oilConciseDayReal").val()==null)?0:$("#oilConciseDayReal").val();
-    var oilSubpDayReal = ($("#oilSubpDayReal").val()==null)?0:$("#oilSubpDayReal").val();
-    var elseDayReal = ($("#elseDayReal").val()==null)?0:$("#elseDayReal").val();
-    var usenum = ($("#usenum").val()==null)?0:$("#usenum").val();
-    var stopnum = ($("#stopnum").val()==null)?0:$("#stopnum").val();
-    var newnum = ($("#newnum").val()==null)?0:$("#newnum").val();
-    var disablenum = ($("#disablenum").val()==null)?0:$("#disablenum").val();
-    Morris.Bar({
-        element: 'powder',
-        data: [
-            {device: '日加工', geekbench: wheatDay},
-            {device: '日产量', geekbench: wheatDayReal},
-        ],
-        xkey: 'device',
-        ykeys: ['geekbench'],
-        labels: ['数值'],
-        barRatio: 0.4,
-        xLabelAngle: 35,
-        hideHover: 'auto',
-        barColors: ['#ac92ec']
-    })
-    Morris.Bar({
-        element: 'rice',
-        data: [
-            {device: '日加工', geekbench: paddyDay},
-            {device: '日产量', geekbench: paddyDayReal},
-        ],
-        xkey: 'device',
-        ykeys: ['geekbench'],
-        labels: ['数值'],
-        barRatio: 0.4,
-        xLabelAngle: 35,
-        hideHover: 'auto',
-        barColors: ['#ac92ec']
-    })
-    Morris.Bar({
-        element: 'oil',
-        data: [
-            {device: '日加工', geekbench: oilDay},
-            {device: '日产量', geekbench: oilDayReal},
-        ],
-        xkey: 'device',
-        ykeys: ['geekbench'],
-        labels: ['数值'],
-        barRatio: 0.4,
-        xLabelAngle: 35,
-        hideHover: 'auto',
-        barColors: ['#ac92ec']
-    })
-    Morris.Bar({
-        element: 'oil_concise',
-        data: [
-            {device: '日加工', geekbench: oilConciseDay},
-            {device: '日产量', geekbench: oilConciseDayReal},
-        ],
-        xkey: 'device',
-        ykeys: ['geekbench'],
-        labels: ['数值'],
-        barRatio: 0.4,
-        xLabelAngle: 35,
-        hideHover: 'auto',
-        barColors: ['#ac92ec']
-    })
-    Morris.Bar({
-        element: 'oil_subp',
-        data: [
-            {device: '日加工', geekbench: oilSubpDay},
-            {device: '日产量', geekbench: oilSubpDayReal},
-        ],
-        xkey: 'device',
-        ykeys: ['geekbench'],
-        labels: ['数值'],
-        barRatio: 0.4,
-        xLabelAngle: 35,
-        hideHover: 'auto',
-        barColors: ['#ac92ec']
-    })
-    Morris.Bar({
-        element: 'other',
-        data: [
-            {device: '日加工', geekbench: elseDay},
-            {device: '日产量', geekbench: elseDayReal},
-        ],
-        xkey: 'device',
-        ykeys: ['geekbench'],
-        labels: ['数值'],
-        barRatio: 0.4,
-        xLabelAngle: 35,
-        hideHover: 'auto',
-        barColors: ['#ac92ec']
-    })
-    Morris.Bar({
-        element: 'number1',
-        data: [
-            {device: '在产', geekbench: usenum},
-            {device: '停产', geekbench: stopnum},
-        ],
-        xkey: 'device',
-        ykeys: ['geekbench'],
-        labels: ['数值'],
-        barRatio: 0.4,
-        xLabelAngle: 35,
-        hideHover: 'auto',
-        barColors: ['#50b7c1']
-    })
-    Morris.Bar({
-        element: 'number2',
-        data: [
-            {device: '新增', geekbench: newnum},
-            {device: '停用', geekbench: disablenum},
-        ],
-        xkey: 'device',
-        ykeys: ['geekbench'],
-        labels: ['数值'],
-        barRatio: 0.4,
-        xLabelAngle: 35,
-        hideHover: 'auto',
-        barColors: ['#50b7c1']
-    })
-</script>
+<!--<script src="assets/js/morris-conf.js"></script>-->
 
 
 

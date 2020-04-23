@@ -37,4 +37,8 @@ public interface MachineDao {
     int updateByPrimaryKey(Machine record);
 
     Machine sumByExample(MachineExample example);
+
+    Machine sumByProvince(@Param("province")String province);
+
+    long countByProvinceState(@Param("province")String province,@Param("state")Integer state);
 }
