@@ -40,31 +40,31 @@ public class StatisticsController {
     public ModelAndView toSupplyStatistics(){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("supply-statistics");
-        WebsiteExample websiteExample = new WebsiteExample();
-        websiteExample.createCriteria().andStateEqualTo(1);
-        Website Webstatic = websiteDao.sumByExample(websiteExample);
-        modelAndView.addObject("Webstatic", Webstatic);
-        websiteExample = new WebsiteExample();
-        websiteExample.createCriteria().andStateEqualTo(1);
-        long usenum = websiteDao.countByExample(websiteExample);
-        modelAndView.addObject("usenum", usenum);
-        websiteExample = new WebsiteExample();
-        websiteExample.createCriteria().andStateEqualTo(0);
-        long stopnum = websiteDao.countByExample(websiteExample);
-        modelAndView.addObject("stopnum", stopnum);
-        CompanyInfoExample companyExample = new CompanyInfoExample();
-        companyExample.createCriteria().andCompanyTypeEqualTo(1);
-        long newnum = companyInfoDao.countByWebsite(companyExample);
-        modelAndView.addObject("newnum", newnum);
-        companyExample = new CompanyInfoExample();
-        companyExample.createCriteria().andCompanyTypeEqualTo(0);
-        long disablenum = companyInfoDao.countByWebsite(companyExample);
-        modelAndView.addObject("disablenum", disablenum);
-        companyExample = new CompanyInfoExample();
-        CompanyInfo companystatic = companyInfoDao.sumByWebsite(companyExample);
-        modelAndView.addObject("in_day",companystatic.getInDay());
-        modelAndView.addObject("out_day",companystatic.getOutDay());
-        modelAndView.addObject("save_day",companystatic.getSaveDay());
+//        WebsiteExample websiteExample = new WebsiteExample();
+//        websiteExample.createCriteria().andStateEqualTo(1);
+//        Website Webstatic = websiteDao.sumByExample(websiteExample);
+//        modelAndView.addObject("Webstatic", Webstatic);
+//        websiteExample = new WebsiteExample();
+//        websiteExample.createCriteria().andStateEqualTo(1);
+//        long usenum = websiteDao.countByExample(websiteExample);
+//        modelAndView.addObject("usenum", usenum);
+//        websiteExample = new WebsiteExample();
+//        websiteExample.createCriteria().andStateEqualTo(0);
+//        long stopnum = websiteDao.countByExample(websiteExample);
+//        modelAndView.addObject("stopnum", stopnum);
+//        CompanyInfoExample companyExample = new CompanyInfoExample();
+//        companyExample.createCriteria().andCompanyTypeEqualTo(1);
+//        long newnum = companyInfoDao.countByWebsite(companyExample);
+//        modelAndView.addObject("newnum", newnum);
+//        companyExample = new CompanyInfoExample();
+//        companyExample.createCriteria().andCompanyTypeEqualTo(0);
+//        long disablenum = companyInfoDao.countByWebsite(companyExample);
+//        modelAndView.addObject("disablenum", disablenum);
+//        companyExample = new CompanyInfoExample();
+//        CompanyInfo companystatic = companyInfoDao.sumByWebsite(companyExample);
+//        modelAndView.addObject("in_day",companystatic.getInDay());
+//        modelAndView.addObject("out_day",companystatic.getOutDay());
+//        modelAndView.addObject("save_day",companystatic.getSaveDay());
         return modelAndView;
     }
 
@@ -255,6 +255,121 @@ public class StatisticsController {
         modelAndView.addObject("out_day",companystatic.getOutDay());
         modelAndView.addObject("save_day",companystatic.getSaveDay());
         return modelAndView;
+    }
+
+    @RequestMapping("/supplyBar1")
+    @ResponseBody
+    public String supplyBar1() {
+        List<Provinces> list = new ArrayList<Provinces>();
+        ProvincesExample provexample = new ProvincesExample();
+        StringBuffer promap1 = new StringBuffer();
+        StringBuffer promap2 = new StringBuffer();
+        StringBuffer promap3 = new StringBuffer();
+        promap1.append("[");
+        promap2.append("[");
+        promap3.append("[");
+        list = provincesDao.selectByExample(provexample);
+        for (int i = 0; i < list.size(); i++) {
+            CompanyInfoExample companyInfoExample = new CompanyInfoExample();
+            companyInfoExample.createCriteria().andProvinceEqualTo(list.get(i).getName().toString());
+            CompanyInfo temp = companyInfoDao.sumByWebsite(companyInfoExample);
+            if(temp == null){
+                promap1.append(0.0+",");
+                promap2.append(0.0+",");
+                promap3.append(0.0+",");
+            }else{
+                promap1.append(temp.getInDay()+",");
+                promap2.append(temp.getOutDay()+",");
+                promap3.append(temp.getSaveDay()+",");
+            }
+
+        }
+        promap1.append("]");
+        promap2.append("]");
+        promap3.append("]");
+        System.out.println("promap1:"+promap1.toString());
+        System.out.println("promap2:"+promap2.toString());
+        System.out.println("promap3:"+promap3.toString());
+        return promap1.toString()+"~"+promap2.toString()+"~"+promap3.toString();
+    }
+
+    @RequestMapping("/supplyBar2")
+    @ResponseBody
+    public String supplyBar2() {
+        List<Provinces> list = new ArrayList<Provinces>();
+        ProvincesExample provexample = new ProvincesExample();
+        StringBuffer promap1 = new StringBuffer();
+        StringBuffer promap2 = new StringBuffer();
+        StringBuffer promap3 = new StringBuffer();
+        StringBuffer promap4 = new StringBuffer();
+        StringBuffer promap5 = new StringBuffer();
+        StringBuffer promap6 = new StringBuffer();
+        StringBuffer promap7 = new StringBuffer();
+        StringBuffer promap8 = new StringBuffer();
+        promap1.append("[");
+        promap2.append("[");
+        promap3.append("[");
+        promap4.append("[");
+        promap5.append("[");
+        promap6.append("[");
+        promap7.append("[");
+        promap8.append("[");
+        list = provincesDao.selectByExample(provexample);
+        for (int i = 0; i < list.size(); i++) {
+            Website temp = websiteDao.sumByProvince(list.get(i).getName().toString());
+            if(temp == null){
+                promap1.append(0.0+",");
+                promap2.append(0.0+",");
+                promap3.append(0.0+",");
+                promap4.append(0.0+",");
+                promap5.append(0.0+",");
+                promap6.append(0.0+",");
+                promap7.append(0.0+",");
+                promap8.append(0.0+",");
+            }else{
+                promap1.append(temp.getFlourExp()+",");
+                promap2.append(temp.getRiceExp()+",");
+                promap3.append(temp.getOilExp()+",");
+                promap4.append(temp.getElseExp()+",");
+                promap5.append(temp.getFlourReal()+",");
+                promap6.append(temp.getRiceReal()+",");
+                promap7.append(temp.getOilReal()+",");
+                promap8.append(temp.getElseReal()+",");
+            }
+
+        }
+        promap1.append("]");
+        promap2.append("]");
+        promap3.append("]");
+        promap4.append("]");
+        promap5.append("]");
+        promap6.append("]");
+        promap7.append("]");
+        promap8.append("]");
+        return promap1.toString()+"~"+promap2.toString()+"~"+promap3.toString()+"~"+promap4.toString()+"~"+promap5.toString()+"~"+promap6.toString()+"~"+promap7.toString()+"~"+promap8.toString();
+    }
+
+    @RequestMapping("/supplyBar3")
+    @ResponseBody
+    public String supplyBar3() {
+        List<Provinces> list = new ArrayList<Provinces>();
+        ProvincesExample provexample = new ProvincesExample();
+        StringBuffer promap1 = new StringBuffer();
+        StringBuffer promap2 = new StringBuffer();
+        promap1.append("[");
+        promap2.append("[");
+        list = provincesDao.selectByExample(provexample);
+        for (int i = 0; i < list.size(); i++) {
+            long state1 = websiteDao.countByProvinceState(list.get(i).getName().toString(),1);
+            long state0 = websiteDao.countByProvinceState(list.get(i).getName().toString(),0);
+            promap1.append(state1+",");
+            promap2.append(state0+",");
+        }
+        promap1.append("]");
+        promap2.append("]");
+        System.out.println("promap1:"+promap1.toString());
+        System.out.println("promap2:"+promap2.toString());
+        return promap1.toString()+"~"+promap2.toString();
     }
 
 }
