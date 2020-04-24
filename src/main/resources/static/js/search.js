@@ -56,6 +56,9 @@ jQuery(function($) {
                 var myTable = $('#dynamic-table')
                     .DataTable( {
                         destroy : true,
+                        scrollX: true,
+                        scrollCollapse: true,
+                        bPaginate: true,
                         language: {
                             "sProcessing": "处理中...",
                             "sLengthMenu": "显示 _MENU_ 项结果",
@@ -193,6 +196,9 @@ jQuery(function($) {
         $('#dynamic-table')
         //.wrap("<div class='dataTables_borderWrap' />")   //if you are applying horizontal scrolling (sScrollX)
             .DataTable( {
+                scrollX: true,
+                scrollCollapse: true,
+                bPaginate: true,
                 language: {
                     "sProcessing": "处理中...",
                     "sLengthMenu": "显示 _MENU_ 项结果",

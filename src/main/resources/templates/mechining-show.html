@@ -36,6 +36,20 @@
     <!-- Custom styles for this template -->
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/style-responsive.css" rel="stylesheet">
+    <link href="assets/css/responsive.dataTables.min.css">
+    <style>
+        td{
+
+            white-space:nowrap;/*文本不会换行，文本会在在同一行上继续，直到遇到 <br> 标签为止。*/
+
+            overflow:hidden;/*隐藏多余的内容*/
+
+            text-overflow:ellipsis;/*超出部分以省略号显示*/
+
+            word-break:keep-all;
+
+        }
+    </style>
 
     <script src="assets/js/ace-extra.min.js"></script>
 
@@ -276,7 +290,7 @@
                                     <div class="pull-right tableTools-container"></div>
                                 </div>
                                 <section id="no-more-tables">
-                                    <table border="1" id="dynamic-table" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+                                    <table border="1" id="dynamic-table" class="table table-striped table-bordered table-hover" width="100%" cellspacing="0">
                                         <thead>
                                         <tr>
                                             <th style="text-align: center; font-size: 1.5rem" class="center"><label class="pos-rel"> <input
@@ -301,32 +315,32 @@
                                             <th style="text-align: center; font-size: 1.5rem">其它实际（日）</th>
                                             <th style="text-align: center; font-size: 1.5rem">生产状态</th>
                                             <th style="text-align: center; font-size: 1.5rem">停用</th>
+
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <div th:each="machine,machineStat : ${machines}">
                                             <tr>
-
-                                                <th style="text-align: center; font-size: 1.5rem"><label class="pos-rel"> <input
+                                                <td style="text-align: center; font-size: 1.5rem"><label class="pos-rel"> <input
                                                         type="checkbox" class="ace" /> <span class="lbl"></span>
-                                                </label></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${machine.getMachineId()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${companys.get(machineStat.index).getName()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${companys.get(machineStat.index).getInDay()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${companys.get(machineStat.index).getOutDay()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${companys.get(machineStat.index).getSaveDay()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${machine.getWheatDay()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${machine.getPaddyDay()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${machine.getOilDay()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${machine.getOilConciseDay()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${machine.getOilSubpDay()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${machine.getElseDay()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${machine.getWheatDayReal()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${machine.getPaddyDayReal()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${machine.getOilDayReal()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${machine.getOilConciseDayReal()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${machine.getOilSubpDayReal()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${machine.getElseDayReal()}"></th>
+                                                </label></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${machine.getMachineId()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(machineStat.index).getName()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(machineStat.index).getInDay()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(machineStat.index).getOutDay()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(machineStat.index).getSaveDay()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${machine.getWheatDay()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${machine.getPaddyDay()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${machine.getOilDay()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${machine.getOilConciseDay()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${machine.getOilSubpDay()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${machine.getElseDay()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${machine.getWheatDayReal()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${machine.getPaddyDayReal()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${machine.getOilDayReal()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${machine.getOilConciseDayReal()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${machine.getOilSubpDayReal()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${machine.getElseDayReal()}"></td>
                                                 <span th:switch="${machine.getState()}">
                                                     <td style="text-align: center; font-size: 1.5rem" th:case="0">未选择</td>
                                                     <td style="text-align: center; font-size: 1.5rem" th:case="1">生产中</td>
@@ -341,6 +355,7 @@
                                                 </span>
                                             </tr>
                                         </div>
+
                                         <script>
                                             function stopCompany(id){
                                                 console.log(id);
@@ -395,7 +410,7 @@
 <script src="assets/js/jquery.nicescroll.js" type="text/javascript"></script>
 <script src="assets/js/jquery.sparkline.js"></script>
 
-
+<script src="assets/js/dataTables.responsive.min.js"></script>
 <script src="assets/js/jquery.dataTables.min.js"></script>
 <script src="assets/js/jquery.dataTables.bootstrap.min.js"></script>
 <script src="assets/js/dataTables.buttons.min.js"></script>

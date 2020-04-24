@@ -36,6 +36,19 @@
     <!-- Custom styles for this template -->
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/style-responsive.css" rel="stylesheet">
+    <style>
+        td{
+
+            white-space:nowrap;/*文本不会换行，文本会在在同一行上继续，直到遇到 <br> 标签为止。*/
+
+            overflow:hidden;/*隐藏多余的内容*/
+
+            text-overflow:ellipsis;/*超出部分以省略号显示*/
+
+            word-break:keep-all;
+
+        }
+    </style>
 
     <script src="assets/js/ace-extra.min.js"></script>
 
@@ -298,21 +311,21 @@
                                         <div th:each="deliverie,deliverieStat : ${deliveries}">
                                             <tr>
 
-                                                <th style="text-align: center; font-size: 1.5rem"><label class="pos-rel"> <input
+                                                <td style="text-align: center; font-size: 1.5rem"><label class="pos-rel"> <input
                                                         type="checkbox" class="ace" /> <span class="lbl"></span>
-                                                </label></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${deliverie.getDeliveryId()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${companys.get(deliverieStat.index).getName()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${companys.get(deliverieStat.index).getInDay()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${companys.get(deliverieStat.index).getOutDay()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${companys.get(deliverieStat.index).getSaveDay()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${deliverie.getWareAbility()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${deliverie.getDeliveryDay()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${deliverie.getRange()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${deliverie.getRadius()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${deliverie.getDeliveryNum()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${deliverie.getCarNum()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${deliverie.getDeliveryDayReal()}"></th>
+                                                </label></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${deliverie.getDeliveryId()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(deliverieStat.index).getName()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(deliverieStat.index).getInDay()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(deliverieStat.index).getOutDay()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(deliverieStat.index).getSaveDay()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${deliverie.getWareAbility()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${deliverie.getDeliveryDay()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${deliverie.getRange()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${deliverie.getRadius()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${deliverie.getDeliveryNum()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${deliverie.getCarNum()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${deliverie.getDeliveryDayReal()}"></td>
                                                 <span th:switch="${deliverie.getState()}">
                                                     <td style="text-align: center; font-size: 1.5rem" th:case="0">未选择</td>
                                                     <td style="text-align: center; font-size: 1.5rem" th:case="1">生产中</td>

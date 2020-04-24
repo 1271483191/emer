@@ -36,6 +36,19 @@
     <!-- Custom styles for this template -->
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/style-responsive.css" rel="stylesheet">
+    <style>
+        td{
+
+            white-space:nowrap;/*文本不会换行，文本会在在同一行上继续，直到遇到 <br> 标签为止。*/
+
+            overflow:hidden;/*隐藏多余的内容*/
+
+            text-overflow:ellipsis;/*超出部分以省略号显示*/
+
+            word-break:keep-all;
+
+        }
+    </style>
 
     <script src="assets/js/ace-extra.min.js"></script>
 
@@ -213,14 +226,14 @@
                                                 <th style="text-align: center; font-size: 1.5rem"><label class="pos-rel"> <input
                                                         type="checkbox" class="ace" /> <span class="lbl"></span>
                                                 </label></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${storeage.getStoreageId()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${companys.get(storeageStat.index).getName()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${companys.get(storeageStat.index).getInDay()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${companys.get(storeageStat.index).getOutDay()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${companys.get(storeageStat.index).getSaveDay()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${storeage.getTransportDay()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${storeage.getCarNum()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${storeage.getTransportDayReal()}"></th>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${storeage.getStoreageId()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(storeageStat.index).getName()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(storeageStat.index).getInDay()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(storeageStat.index).getOutDay()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(storeageStat.index).getSaveDay()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${storeage.getTransportDay()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${storeage.getCarNum()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${storeage.getTransportDayReal()}"></td>
                                                 <span th:switch="${storeage.getState()}">
                                                     <td style="text-align: center; font-size: 1.5rem" th:case="0">未选择</td>
                                                     <td style="text-align: center; font-size: 1.5rem" th:case="1">生产中</td>

@@ -35,6 +35,19 @@
     <!-- Custom styles for this template -->
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/style-responsive.css" rel="stylesheet">
+    <style>
+        td{
+
+            white-space:nowrap;/*文本不会换行，文本会在在同一行上继续，直到遇到 <br> 标签为止。*/
+
+            overflow:hidden;/*隐藏多余的内容*/
+
+            text-overflow:ellipsis;/*超出部分以省略号显示*/
+
+            word-break:keep-all;
+
+        }
+    </style>
 
     <script src="assets/js/ace-extra.min.js"></script>
 
@@ -393,16 +406,16 @@
                                         <div th:each="company,companyStat : ${companys}">
                                             <tr>
 
-                                                <th style="text-align: center; font-size: 1.5rem"><label class="pos-rel"> <input
+                                                <td style="text-align: center; font-size: 1.5rem"><label class="pos-rel"> <input
                                                         type="checkbox" class="ace" /> <span class="lbl"></span>
-                                                </label></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${company.getCompanyId()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${company.getName()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${company.getProvince()}+','+${company.getCity()}+','+${company.getCounty()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${company.getSocialId()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${company.getLocation()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${company.getPrincipal()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${company.getPhone()}"></th>
+                                                </label></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${company.getCompanyId()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${company.getName()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${company.getProvince()}+','+${company.getCity()}+','+${company.getCounty()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${company.getSocialId()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${company.getLocation()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${company.getPrincipal()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${company.getPhone()}"></td>
                                             </tr>
                                         </div>
                                         </tbody>

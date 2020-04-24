@@ -36,6 +36,19 @@
     <!-- Custom styles for this template -->
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/style-responsive.css" rel="stylesheet">
+    <style>
+        td{
+
+            white-space:nowrap;/*文本不会换行，文本会在在同一行上继续，直到遇到 <br> 标签为止。*/
+
+            overflow:hidden;/*隐藏多余的内容*/
+
+            text-overflow:ellipsis;/*超出部分以省略号显示*/
+
+            word-break:keep-all;
+
+        }
+    </style>
 
     <script src="assets/js/ace-extra.min.js"></script>
 
@@ -293,20 +306,20 @@
                                         <div th:each="website,websiteStat : ${websites}">
                                             <tr>
 
-                                                <th style="text-align: center; font-size: 1.5rem"><label class="pos-rel"> <input
+                                                <td style="text-align: center; font-size: 1.5rem"><label class="pos-rel"> <input
                                                         type="checkbox" class="ace" /> <span class="lbl"></span>
-                                                </label></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${website.getWebsiteId()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${companys.get(websiteStat.index).getName()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${companys.get(websiteStat.index).getInDay()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${companys.get(websiteStat.index).getOutDay()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${companys.get(websiteStat.index).getSaveDay()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${website.getFlourExp()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${website.getRiceExp()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${website.getOilExp()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${website.getFlourReal()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${website.getRiceReal()}"></th>
-                                                <th style="text-align: center; font-size: 1.5rem" th:text="${website.getOilReal()}"></th>
+                                                </label></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${website.getWebsiteId()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(websiteStat.index).getName()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(websiteStat.index).getInDay()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(websiteStat.index).getOutDay()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(websiteStat.index).getSaveDay()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${website.getFlourExp()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${website.getRiceExp()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${website.getOilExp()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${website.getFlourReal()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${website.getRiceReal()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${website.getOilReal()}"></td>
                                                 <span th:switch="${website.getState()}">
                                                     <td style="text-align: center; font-size: 1.5rem" th:case="0">未选择</td>
                                                     <td style="text-align: center; font-size: 1.5rem" th:case="1">生产中</td>
