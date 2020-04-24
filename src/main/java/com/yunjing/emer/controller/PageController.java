@@ -847,6 +847,7 @@ public class PageController {
         User user = (User) session.getAttribute("user");
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("userlist-admin");
+        System.out.println(user);
 
         List<User> userList = userService.selectUserListByPass(user, 1);
         modelAndView.addObject("users", userList);

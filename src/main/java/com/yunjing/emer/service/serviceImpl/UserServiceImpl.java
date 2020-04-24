@@ -75,7 +75,7 @@ public class UserServiceImpl implements UserService {
         UserExample example = new UserExample();
         UserExample.Criteria criteria = example.createCriteria();
         criteria.andPassEqualTo(0);
-        criteria.andTypeBetween(user.getType() - 1, 3);
+        criteria.andTypeBetween(user.getType() + 1, 3);
 
         if(user.getType() >= 1){
             criteria.andProvinceEqualTo(user.getProvince());
@@ -98,7 +98,7 @@ public class UserServiceImpl implements UserService {
         UserExample example = new UserExample();
         UserExample.Criteria criteria = example.createCriteria();
         criteria.andPassEqualTo(pass);
-        criteria.andTypeBetween(user.getType() - 1, 4);
+        criteria.andTypeBetween(user.getType() + 1, 3);
 
         if(user.getType() >= 1){
             criteria.andProvinceEqualTo(user.getProvince());
@@ -110,8 +110,9 @@ public class UserServiceImpl implements UserService {
             criteria.andCountyEqualTo(user.getCounty());
         }
 
-        List<User> userList = userDao.selectByExample(example);
 
+        List<User> userList = userDao.selectByExample(example);
+        System.out.println(user.getType());
         System.out.println("userList:" + userList);
         return userList;
     }

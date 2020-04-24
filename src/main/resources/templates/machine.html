@@ -8,7 +8,29 @@
 <body>
     machine<br/>
     <table border="1">
+
+        <tr>
+            <th>1</th>
+            <th>2</th>
+            <th>3</th>
+            <th>4</th>
+            <th>5</th>
+            <th>6</th>
+            <th>7</th>
+            <th>8</th>
+            <th>9</th>
+            <th>10</th>
+            <th>11</th>
+            <th>12</th>
+            <th>13</th>
+            <th>14</th>
+            <th>15</th>
+        </tr>
+
+
         <div th:each="machine,machineStat : ${machines.getList()}">
+
+            <tbody>
             <tr>
                 <td width="100px" th:text="${machine.getCompanyId()}"></td>
                 <td width="100px"><a th:text="${machine.getState()}" th:onclick="'javascript:updateMachine(\'state\', \'' + ${machine.getMachineId()} + '\');'" href="javascript:void(0)"> </a></td>
@@ -28,6 +50,7 @@
 
                 <td><button th:onclick="'javascript:deleteMachine(\''+${machine.getCompanyId()}+'\');'">删除</button></td>
             </tr>
+            </tbody>
         </div>
     </table>
     <a th:href="@{'/toMachine?page='+${machines.getPageNum() - 1}}">上一页</a><span th:text="'&nbsp;&nbsp;第' + ${machines.getPageNum()} + '页&nbsp;'"></span>
