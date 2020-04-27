@@ -439,7 +439,7 @@ public class PageController {
 
     @RequestMapping("/toSearch")
     public String toSearch(){
-        return "search";
+        return "count";
     }
 
     @RequestMapping("/toDeliverShow")

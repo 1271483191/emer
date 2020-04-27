@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Dashboard">
+    <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+
+    <title>粮食应急保障企业信息统计</title>
+    <link rel="icon" type="image/x-icon" href="img/logo.png" />
+
+    <!-- Bootstrap core CSS -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <!--external css-->
+    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="assets/css/zabuto_calendar.css">
+    <link rel="stylesheet" type="text/css" href="assets/js/gritter/css/jquery.gritter.css" />
+    <link rel="stylesheet" type="text/css" href="assets/lineicons/style.css">
+    <link rel="stylesheet" type="text/css" media="all" href="ztree/css/zTreeStyle.css"/>
+    <link rel="stylesheet" type="text/css" media="all" href="core/treeSelect.css"/>
+    <!-- ace styles -->
+    <link rel="stylesheet" href="assets/css/ace.min.css"
+          class="ace-main-stylesheet" id="main-ace-style" />
+
+    <!--[if lte IE 9]>
+    <link rel="stylesheet" href="assets/css/ace-part2.min.css" class="ace-main-stylesheet" />
+    <![endif]-->
+    <link rel="stylesheet" href="assets/css/ace-skins.min.css" />
+    <link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
+
+    <link rel="stylesheet" href="assets/css/chosen.min.css" />
+    <link href="assets/css/style-responsive.css" rel="stylesheet">
+
+    <link href="assets/css/table-responsive.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/style-responsive.css" rel="stylesheet">
+
+    <script src="assets/js/ace-extra.min.js"></script>
+
+    <script src="assets/js/chart-master/Chart.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+<section id="container" >
+    <!-- **********************************************************************************************************************************************************
+    TOP BAR CONTENT & NOTIFICATIONS
+    *********************************************************************************************************************************************************** -->
+    <!--header start-->
+    <header class="header blue-bg">
+        <div class="sidebar-toggle-box">
+            <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"> </div>
+        </div>
+        <!--logo start-->
+        <a href="toIndex" class="logo"><b>粮食应急保障企业信息统计</b></a>
+
+        <div class="top-menu">
+            <ul class="nav pull-right top-menu">
+                <li><a class="logout" href="toLogin">注销</a></li>
+            </ul>
+        </div>
+    </header>
+    <!--header end-->
+
+    <!-- **********************************************************************************************************************************************************
+    MAIN SIDEBAR MENU
+    *********************************************************************************************************************************************************** -->
+    <!--sidebar start-->
+    <aside>
+        <div id="sidebar"  class="nav-collapse ">
+            <!-- sidebar menu start-->
+            <ul class="sidebar-menu" id="nav-accordion">
+                <p class="logoname hidden-lg hidden-md " style="font-size: 2rem;color: white;text-align: center;font-weight: bolder">粮食应急保障企业信息统计</p>
+
+                <p class="centered"><a href="profile.html"><img src="assets/img/user.png" class="img-circle" width="60"></a></p>
+                <h5 class="centered">云境商务智能研究所</h5>
+
+                <li class="mt">
+                    <a  href="toIndex">
+                        <i class="fa fa-dashboard"></i>
+                        <span style="font-size: 1.5rem">首页</span>
+                    </a>
+                </li>
+
+                <li class="sub-menu">
+                    <a href="javascript:void(0);" >
+                        <i class="fa fa-book"></i>
+                        <span style="font-size: 1.5rem">统计汇总</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a  href="toSupplyStatistics" >信息统计</a></li>
+                        <li><a class="active" href="companysearch">企业搜索</a></li>
+
+                    </ul>
+                    <!--<a class="active" href="companysearch">-->
+                        <!--<i class="fa fa-cogs"></i>-->
+                        <!--<span style="font-size: 1.5rem">统计查询</span>-->
+                    <!--</a>-->
+                </li>
+                <li class="sub-menu">
+                    <a href="javascript:void(0);" >
+                        <i class="fa fa-book"></i>
+                        <span style="font-size: 1.5rem">应急供应网点</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a  href="toSupplyStatistics" >供应网点统计</a></li>
+                        <li><a  href="toSupplyShow" >全国供应网点列表展示</a></li>
+
+                    </ul>
+                </li>
+                <li class="sub-menu">
+                    <a  href="javascript:void(0);" >
+                        <i class="fa fa-tasks"></i>
+                        <span style="font-size: 1.5rem">应急配送中心</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a  href="toDeliverStatistics">配送中心统计</a></li>
+                        <li><a  href="toDeliverShow">配送中心列表展示</a></li>
+                    </ul>
+                </li>
+                <li class="sub-menu">
+                    <a href="javascript:void(0);" >
+                        <i class="fa fa-th"></i>
+                        <span style="font-size: 1.5rem">应急储运企业</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a  href="toStoreageStatistics">储运企业统计</a></li>
+                        <li><a  href="toStoreageShow">储运企业列表展示</a></li>
+                    </ul>
+                </li>
+                <li class="sub-menu">
+                    <a href="javascript:void(0);" >
+                        <i class=" fa fa-bar-chart-o"></i>
+                        <span style="font-size: 1.5rem">应急加工企业</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a  href="toMachiningStatistics">加工企业统计</a></li>
+                        <li><a  href="toMachineShow">加工企业列表展示</a></li>
+                    </ul>
+                </li>
+                <li class="sub-menu">
+                    <a href="javascript:void(0);" >
+                        <i class="fa fa-users"></i>
+                        <span style="font-size: 1.5rem">权限管理</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a  href="user-admin.html">用户管理</a></li>
+                        <li><a  href="role-admin.html">角色管理</a></li>
+                        <li><a  href="toJurAdmin">权限管理</a></li>
+                    </ul>
+
+                </li>
+
+            </ul>
+            <!-- sidebar menu end-->
+        </div>
+    </aside>
+    <!--sidebar end-->
+
+    <!-- **********************************************************************************************************************************************************
+    MAIN CONTENT
+    *********************************************************************************************************************************************************** -->
+    <!--main content start-->
+    <section id="main-content">
+        <section class="wrapper">
+
+            <div class="row">
+                <div class="col-lg-12 main-chart">
+
+                    <h3><i class="fa fa-angle-right"></i>统计分析</h3>
+                    <hr>
+                    <div Style="width: 330px">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="treeSelect" style="width: 350px;"></div>
+                            </div>
+                            <!-- /.span -->
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb">
+                        <div class=" ">
+                            <hr>
+                            <div class="content-panel">
+                                <div class="clearfix">
+                                    <i id="bigpro"></i><i id="midpro"></i><i id="smapro"></i>
+                                    <div class="pull-right tableTools-container"></div>
+                                </div>
+                                <section id="no-more-tables">
+                                    <table border="1" id="dynamic-table" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th class="center"><label class="pos-rel"> <input
+                                                        type="checkbox" class="ace" /> <span class="lbl"></span>
+                                                </label></th>
+                                                <th style="text-align: center; font-size: 1.5rem" >公司编号</th>
+                                                <th style="text-align: center; font-size: 1.5rem" >公司名称</th>
+                                                <th style="text-align: center; font-size: 1.5rem" >所在区域</th>
+                                                <th style="text-align: center; font-size: 1.5rem" >组织代码</th>
+                                                <th style="text-align: center; font-size: 1.5rem" >公司地址</th>
+                                                <th style="text-align: center; font-size: 1.5rem" >负责人</th>
+                                                <th style="text-align: center; font-size: 1.5rem" >联系电话</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <div th:each="company,companyStat : ${companys}">
+                                            <tr>
+
+                                                <th style="text-align: center; font-size: 1.5rem"><label class="pos-rel"> <input
+                                                        type="checkbox" class="ace" /> <span class="lbl"></span>
+                                                </label></th>
+                                                <th style="text-align: center; font-size: 1.5rem" th:text="${company.getCompanyId()}"></th>
+                                                <th style="text-align: center; font-size: 1.5rem" th:text="${company.getName()}"></th>
+                                                <th style="text-align: center; font-size: 1.5rem" th:text="${company.getProvince()}+','+${company.getCity()}+','+${company.getCounty()}"></th>
+                                                <th style="text-align: center; font-size: 1.5rem" th:text="${company.getSocialId()}"></th>
+                                                <th style="text-align: center; font-size: 1.5rem" th:text="${company.getLocation()}"></th>
+                                                <th style="text-align: center; font-size: 1.5rem" th:text="${company.getPrincipal()}"></th>
+                                                <th style="text-align: center; font-size: 1.5rem" th:text="${company.getPhone()}"></th>
+                                            </tr>
+                                        </div>
+                                        </tbody>
+                                    </table>
+                                </section>
+
+
+                            </div><!-- /content-panel -->
+
+                            <!--<div class="pull-right">-->
+                                <!--<h4 style="margin-right: 15px;"><a class="fa fa-download download" href="#" download="全国粮食应急保障企业信息简表">下载</a></h4>-->
+                            <!--</div>-->
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </section>
+    </section>
+
+
+
+    <!--main content end-->
+    <!--footer start-->
+    <footer class="site-footer">
+        <div class="text-center">
+            2020.<a href="http://www.lswz.gov.cn" target="_blank">国家粮食和物质储备局</a>
+        </div>
+    </footer>
+    <!--footer end-->
+</section>
+
+<!-- js placed at the end of the document so the pages load faster -->
+<script src="assets/js/jquery.js"></script>
+<script src="assets/js/jquery-1.8.3.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script class="include" type="text/javascript" src="assets/js/jquery.dcjqaccordion.2.7.js"></script>
+<script src="assets/js/jquery.scrollTo.min.js"></script>
+<script src="assets/js/jquery.nicescroll.js" type="text/javascript"></script>
+<script src="assets/js/jquery.sparkline.js"></script>
+<script src="ztree/js/jquery.ztree.all.min.js"></script>
+<script src="core/treeSelect.js"></script>
+
+<script src="assets/js/jquery.dataTables.min.js"></script>
+<script src="assets/js/jquery.dataTables.bootstrap.min.js"></script>
+<script src="assets/js/dataTables.buttons.min.js"></script>
+<script src="assets/js/buttons.flash.min.js"></script>
+<script src="assets/js/buttons.html5.min.js"></script>
+<script src="assets/js/buttons.print.min.js"></script>
+<script src="assets/js/buttons.colVis.min.js"></script>
+<script src="assets/js/dataTables.select.min.js"></script>
+
+<script src="assets/js/jquery-ui.custom.min.js"></script>
+<script src="assets/js/jquery.ui.touch-punch.min.js"></script>
+<script src="assets/js/chosen.jquery.min.js"></script>
+
+<script src="js/search.js"></script>
+<!--common script for all pages-->
+<script src="assets/js/common-scripts.js"></script>
+
+<script type="text/javascript" src="assets/js/gritter/js/jquery.gritter.js"></script>
+<script type="text/javascript" src="assets/js/gritter-conf.js"></script>
+
+<!--script for this page-->
+<script src="assets/js/sparkline-chart.js"></script>
+<script src="assets/js/zabuto_calendar.js"></script>
+<script type="application/javascript">
+
+    data = [{"name":"哈尔滨铁路局","pId":0,"id":86,"type":"0"},{"name":"哈尔滨机务段","pId":86,"id":85,"type":"1"},{"name":"齐齐哈尔机务段","pId":86,"id":84,"type":"1"},{"name":"牡丹江机务段","pId":86,"id":83,"type":"1"},{"name":"佳木斯机务段","pId":86,"id":82,"type":"1"},{"name":"三棵树机务段","pId":86,"id":81,"type":"1"},{"name":"沈阳铁路局","pId":0,"id":80,"type":"0"},{"name":"沈阳机务段","pId":80,"id":79,"type":"1"},{"name":"苏家屯机务段","pId":80,"id":78,"type":"1"},{"name":"锦州机务段","pId":80,"id":77,"type":"1"},{"name":"吉林机务段","pId":80,"id":76,"type":"1"},{"name":"通辽机务段","pId":80,"id":75,"type":"1"},{"name":"白城机务段","pId":80,"id":74,"type":"1"},{"name":"梅河口机务段","pId":80,"id":73,"type":"1"},{"name":"大连机务段","pId":80,"id":72,"type":"1"},{"name":"呼和浩特铁路局","pId":0,"id":71,"type":"0"},{"name":"包头西机务段","pId":71,"id":70,"type":"1"},{"name":"集宁机务段","pId":71,"id":69,"type":"1"},{"name":"北京铁路局","pId":0,"id":68,"type":"0"},{"name":"怀柔北机务段","pId":68,"id":67,"type":"1"},{"name":"北京机务段","pId":68,"id":66,"type":"1"},{"name":"丰台机务段","pId":68,"id":65,"type":"1"},{"name":"天津机务段","pId":68,"id":64,"type":"1"},{"name":"唐山机务段","pId":68,"id":63,"type":"1"},{"name":"石家庄电力机务段","pId":68,"id":62,"type":"1"},{"name":"邯郸机务段","pId":68,"id":61,"type":"1"},{"name":"太原铁路局","pId":0,"id":60,"type":"0"},{"name":"太原机务段","pId":60,"id":59,"type":"1"},{"name":"湖东电力机务段","pId":60,"id":58,"type":"1"},{"name":"侯马北电力机务段","pId":60,"id":57,"type":"1"},{"name":"济南铁路局","pId":0,"id":56,"type":"0"},{"name":"济南机务段","pId":56,"id":55,"type":"1"},{"name":"济南西机务段","pId":56,"id":54,"type":"1"},{"name":"青岛机务段","pId":56,"id":53,"type":"1"},{"name":"郑州铁路局","pId":0,"id":52,"type":"0"},{"name":"郑州机务段","pId":52,"id":51,"type":"1"},{"name":"新乡机务段","pId":52,"id":50,"type":"1"},{"name":"洛阳机务段","pId":52,"id":49,"type":"1"},{"name":"上海铁路局","pId":0,"id":48,"type":"0"},{"name":"上海机务段","pId":48,"id":47,"type":"1"},{"name":"南京东机务段","pId":48,"id":46,"type":"1"},{"name":"杭州机务段","pId":48,"id":45,"type":"1"},{"name":"合肥机务段","pId":48,"id":44,"type":"1"},{"name":"徐州机务段","pId":48,"id":43,"type":"1"},{"name":"武汉铁路局","pId":0,"id":42,"type":"0"},{"name":"武昌南机务段","pId":42,"id":41,"type":"1"},{"name":"江岸机务段","pId":42,"id":40,"type":"1"},{"name":"襄阳机务段","pId":42,"id":39,"type":"1"},{"name":"西安铁路局","pId":0,"id":38,"type":"0"},{"name":"西安机务段","pId":38,"id":37,"type":"1"},{"name":"新丰镇机务段","pId":38,"id":36,"type":"1"},{"name":"安康机务段","pId":38,"id":35,"type":"1"},{"name":"乌鲁木齐铁路局","pId":0,"id":34,"type":"0"},{"name":"乌鲁木齐机务段","pId":34,"id":33,"type":"1"},{"name":"库尔勒机务段","pId":34,"id":32,"type":"1"},{"name":"哈密机务段","pId":34,"id":31,"type":"1"},{"name":"南昌铁路局","pId":0,"id":30,"type":"0"},{"name":"南昌机务段","pId":30,"id":29,"type":"1"},{"name":"福州机务段","pId":30,"id":28,"type":"1"},{"name":"向塘机务段","pId":30,"id":27,"type":"1"},{"name":"鹰潭机务段","pId":30,"id":26,"type":"1"},{"name":"成都铁路局","pId":0,"id":25,"type":"0"},{"name":"重庆机务段","pId":25,"id":24,"type":"1"},{"name":"贵阳机务段","pId":25,"id":23,"type":"1"},{"name":"西昌机务段","pId":25,"id":22,"type":"1"},{"name":"成都机务段","pId":25,"id":21,"type":"1"},{"name":"兰州铁路局","pId":0,"id":20,"type":"0"},{"name":"兰州西机务段","pId":20,"id":19,"type":"1"},{"name":"嘉峪关机务段","pId":20,"id":18,"type":"1"},{"name":"迎水桥机务段","pId":20,"id":17,"type":"1"},{"name":"南宁铁路局","pId":0,"id":16,"type":"0"},{"name":"南宁机务段","pId":16,"id":15,"type":"1"},{"name":"柳州机务段","pId":16,"id":14,"type":"1"},{"name":"昆明铁路局","pId":0,"id":13,"type":"0"},{"name":"昆明机务段","pId":13,"id":12,"type":"1"},{"name":"开远机务段","pId":13,"id":11,"type":"1"},{"name":"广州铁路集团公司","pId":0,"id":10,"type":"0"},{"name":"广州机务段","pId":10,"id":9,"type":"1"},{"name":"长沙机务段","pId":10,"id":8,"type":"1"},{"name":"株洲机务段","pId":10,"id":7,"type":"1"},{"name":"怀化机务段","pId":10,"id":6,"type":"1"},{"name":"龙川机务段","pId":10,"id":5,"type":"1"},{"name":"海口机务段","pId":10,"id":4,"type":"1"},{"name":"青藏铁路公司","pId":0,"id":3,"type":"0"},{"name":"西宁机务段","pId":3,"id":2,"type":"1"},{"name":"格尔木机务段","pId":3,"id":1,"type":"1"},{"name":"HXD3C0668","pId":84,"id":1,"type":"2"},{"name":"test1","pId":85,"id":7,"type":"2"}]
+
+    $(function () {
+        $(".treeSelect").treeSelect({
+            data:data,
+            inputId:"txt"
+        })
+    });
+
+    $(document).ready(function () {
+        $("#date-popover").popover({html: true, trigger: "manual"});
+        $("#date-popover").hide();
+        $("#date-popover").click(function (e) {
+            $(this).hide();
+        });
+
+        $("#my-calendar").zabuto_calendar({
+            action: function () {
+                return myDateFunction(this.id, false);
+            },
+            action_nav: function () {
+                return myNavFunction(this.id);
+            },
+            ajax: {
+                url: "show_data.php?action=1",
+                modal: true
+            },
+            legend: [
+                {type: "text", label: "Special event", badge: "00"},
+                {type: "block", label: "Regular event", }
+            ]
+        });
+    });
+
+
+    function myNavFunction(id) {
+        $("#date-popover").hide();
+        var nav = $("#" + id).data("navigation");
+        var to = $("#" + id).data("to");
+        console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
+    }
+</script>
+<script>
+    var doughnutData = [
+        {
+            value: 30,
+            color:"#1abc9c"
+        },
+        {
+            value : 50,
+            color : "#2ecc71"
+        },
+        {
+            value : 100,
+            color : "#3498db"
+        },
+        {
+            value : 40,
+            color : "#9b59b6"
+        },
+        {
+            value : 120,
+            color : "#34495e"
+        }
+
+    ];
+    var lineChartData = {
+        labels : ["","","","","","",""],
+        datasets : [
+            {
+                fillColor : "rgba(220,220,220,0.5)",
+                strokeColor : "rgba(220,220,220,1)",
+                pointColor : "rgba(220,220,220,1)",
+                pointStrokeColor : "#fff",
+                data : [65,59,90,81,56,55,40]
+            },
+            {
+                fillColor : "rgba(151,187,205,0.5)",
+                strokeColor : "rgba(151,187,205,1)",
+                pointColor : "rgba(151,187,205,1)",
+                pointStrokeColor : "#fff",
+                data : [28,48,40,19,96,27,100]
+            }
+        ]
+
+    };
+    var pieData = [
+        {
+            value: 30,
+            color:"#1abc9c"
+        },
+        {
+            value : 50,
+            color : "#16a085"
+        },
+        {
+            value : 100,
+            color : "#27ae60"
+        }
+
+    ];
+    var barChartData = {
+        labels : ["January","February","March","April","May","June","July"],
+        datasets : [
+            {
+                fillColor : "rgba(220,220,220,0.5)",
+                strokeColor : "rgba(220,220,220,1)",
+                data : [65,59,90,81,56,55,40]
+            },
+            {
+                fillColor : "rgba(151,187,205,0.5)",
+                strokeColor : "rgba(151,187,205,1)",
+                data : [28,48,40,19,96,27,100]
+            }
+        ]
+
+    };
+    var chartData = [
+        {
+            value : Math.random(),
+            color: "#D97041"
+        },
+        {
+            value : Math.random(),
+            color: "#C7604C"
+        },
+        {
+            value : Math.random(),
+            color: "#21323D"
+        },
+        {
+            value : Math.random(),
+            color: "#9D9B7F"
+        },
+        {
+            value : Math.random(),
+            color: "#7D4F6D"
+        },
+        {
+            value : Math.random(),
+            color: "#584A5E"
+        }
+    ];
+    var radarChartData = {
+        labels : ["","","","","","",""],
+        datasets : [
+            {
+                fillColor : "rgba(220,220,220,0.5)",
+                strokeColor : "rgba(220,220,220,1)",
+                pointColor : "rgba(220,220,220,1)",
+                pointStrokeColor : "#fff",
+                data : [65,59,90,81,56,55,40]
+            },
+            {
+                fillColor : "rgba(151,187,205,0.5)",
+                strokeColor : "rgba(151,187,205,1)",
+                pointColor : "rgba(151,187,205,1)",
+                pointStrokeColor : "#fff",
+                data : [28,48,40,19,96,27,100]
+            }
+        ]
+
+    };
+//    new Chart(document.getElementById("doughnut").getContext("2d")).Doughnut();
+//    new Chart(document.getElementById("line").getContext("2d")).Line();
+//    new Chart(document.getElementById("radar").getContext("2d")).Radar();
+//    new Chart(document.getElementById("polarArea").getContext("2d")).PolarArea();
+//    new Chart(document.getElementById("bar").getContext("2d")).Bar(barChartData);
+//    new Chart(document.getElementById("pie").getContext("2d")).Pie(pieData);
+
+
+</script>
+
+
+
+
+</body>
+</html>
