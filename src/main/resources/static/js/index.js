@@ -55,7 +55,6 @@ function homemap(data){
     };
     //使用制定的配置项和数据显示图表
     myChart.setOption(optionMap);
-    window.onresize = myChart.resize;
 }
 
 function homepie_jjj(data){
@@ -109,7 +108,9 @@ function homepie_jjj(data){
         ]
     };
     myChart.setOption(option);
-    window.onresize = myChart.resize;
+    $(window).resize(function() {//这是能够让图表自适应的代码
+        myChart.resize();
+    });
 }
 
 function homepie_ygc(data){
