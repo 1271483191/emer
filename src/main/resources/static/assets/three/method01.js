@@ -2,18 +2,18 @@
 //****************所使用的数据是city.js******************//
 
 /*根据id获取对象*/
-function $(str) {
+function $get(str) {
     return document.getElementById(str);
 }
 
-var addrShow = $('addr-show');
-var provinces = $('provinces');
-var cityes = $('cities');
-var counties = $('counties');
+var addrShow = $get('addr-show');
+var provinces = $get('provinces');
+var cityes = $get('cities');
+var counties = $get('counties');
 //var btn = document.getElementsByClassName('met1')[0];
-var prov = $('prov');
-var city = $('city');
-var country = $('country');
+var prov = $get('prov');
+var city = $get('city');
+var country = $get('country');
 
 
 /*用于保存当前所选的省市区*/

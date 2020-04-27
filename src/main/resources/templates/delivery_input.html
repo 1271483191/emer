@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Dashboard">
+    <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+
+    <title>粮食应急保障企业信息统计</title>
+    <link rel="icon" type="image/x-icon" href="img/logo.png" />
+
+    <!-- Bootstrap core CSS -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <!--external css-->
+    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="assets/css/zabuto_calendar.css">
+    <link rel="stylesheet" type="text/css" href="assets/js/gritter/css/jquery.gritter.css" />
+    <link rel="stylesheet" type="text/css" href="assets/lineicons/style.css">
+    <link href="assets/css/style-responsive.css" rel="stylesheet">
+
+    <link href="assets/css/table-responsive.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/style-responsive.css" rel="stylesheet">
+
+    <script src="assets/js/chart-master/Chart.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.15/css/jquery.dataTables.css">
+
+    <!-- jQuery -->
+    <script type="text/javascript" charset="utf8" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+
+    <!-- DataTables -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+<section id="container" class="">
+    <!-- **********************************************************************************************************************************************************
+    TOP BAR CONTENT & NOTIFICATIONS
+    *********************************************************************************************************************************************************** -->
+    <!--header start-->
+    <header class="header blue-bg">
+        <div class="sidebar-toggle-box">
+            <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"> </div>
+        </div>
+        <!--logo start-->
+        <a href="toIndex" class="logo"><b>粮食应急保障企业信息统计</b></a>
+
+        <div class="top-menu">
+            <ul class="nav pull-right top-menu">
+                <li><a class="logout" href="toLogin">注销</a></li>
+            </ul>
+        </div>
+    </header>
+    <!--header end-->
+
+    <!-- **********************************************************************************************************************************************************
+    MAIN SIDEBAR MENU
+    *********************************************************************************************************************************************************** -->
+    <!--sidebar start-->
+    <aside>
+        <div id="sidebar"  class="nav-collapse ">
+            <!-- sidebar menu start-->
+            <ul class="sidebar-menu" id="nav-accordion">
+                <p class="logoname hidden-lg hidden-md " style="font-size: 2rem;color: white;text-align: center;font-weight: bolder">粮食应急保障企业信息统计</p>
+
+                <p class="centered"><a href="#"><img src="assets/img/user.png" class="img-circle" width="60"></a></p>
+                <h5 class="centered">云境商务智能研究所</h5>
+
+                <li class="mt">
+                    <a href="toIndex">
+                        <i class="fa fa-dashboard"></i>
+                        <span style="font-size: 1.5rem">首页</span>
+                    </a>
+                </li>
+
+                <li class="sub-menu">
+                    <a href="companysearch">
+                        <i class="fa fa-cogs"></i>
+                        <span style="font-size: 1.5rem">统计查询</span>
+                    </a>
+                </li>
+                <li class="sub-menu">
+                    <a href="javascript:void(0);" >
+                        <i class="fa fa-book"></i>
+                        <span style="font-size: 1.5rem">应急供应网点</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a  href="toSupplyStatistics" >供应网点统计</a></li>
+                        <li><a  href="toSupplyShow" >全国供应网点列表展示</a></li>
+
+                    </ul>
+                </li>
+                <li class="sub-menu">
+                    <a href="javascript:void(0);" >
+                        <i class="fa fa-tasks"></i>
+                        <span style="font-size: 1.5rem">应急配送中心</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a  href="toDeliverStatistics">配送中心统计</a></li>
+                        <li><a  href="toDeliverShow">配送中心列表展示</a></li>
+                    </ul>
+                </li>
+                <li class="sub-menu">
+                    <a href="javascript:void(0);" >
+                        <i class="fa fa-th"></i>
+                        <span style="font-size: 1.5rem">应急储运企业</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a  href="toStoreageStatistics">储运企业统计</a></li>
+                        <li><a  href="toStoreageShow">储运企业列表展示</a></li>
+                    </ul>
+                </li>
+                <li class="sub-menu">
+                    <a href="javascript:void(0);" >
+                        <i class=" fa fa-bar-chart-o"></i>
+                        <span style="font-size: 1.5rem">应急加工企业</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a  href="toMachiningStatistics">加工企业统计</a></li>
+                        <li><a  href="toMachineShow">加工企业列表展示</a></li>
+                    </ul>
+                </li>
+                <li class="sub-menu">
+                    <a class="active" href="javascript:void(0);" >
+                        <i class=" fa fa-bar-chart-o"></i>
+                        <span style="font-size: 1.5rem">信息录入</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a  href="toSupplyInput">供应网点信息录入</a></li>
+                        <li><a  href="toDeliverInput">配送中心信息录入</a></li>
+                        <li><a  href="toStoreageInput">储运企业信息录入</a></li>
+                        <li><a  href="toMachiningInput">加工企业信息录入</a></li>
+                    </ul>
+                </li>
+                <li class="sub-menu">
+                    <a href="javascript:void(0);" >
+                        <i class="fa fa-users"></i>
+                        <span style="font-size: 1.5rem">权限管理</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a  href="toUserAdmin">个人信息</a></li>
+                        <li><a  href="toUserListAdmin">用户管理</a></li>
+                        <li><a  href="toJurAdmin">权限管理</a></li>
+                    </ul>
+
+                </li>
+
+            </ul>
+            <!-- sidebar menu end-->
+        </div>
+    </aside>
+    <!--sidebar end-->
+
+    <!-- **********************************************************************************************************************************************************
+    MAIN CONTENT
+    *********************************************************************************************************************************************************** -->
+    <!--main content start-->
+    <section id="main-content">
+        <section class="wrapper">
+
+            <div class="row">
+                <div class="col-lg-12 main-chart">
+                    <h3><i class="fa fa-angle-right"></i>配送中心信息录入</h3>
+                    <!-- BASIC FORM ELELEMNTS -->
+                    <div class="row mt">
+                        <div class="col-lg-12">
+                            <div class="form-panel">
+                                <form class="form-horizontal style-form" method="get">
+
+                                    <!--企业基本信息-->
+                                    <h4 class="mb"><i class="fa fa-angle-right"></i>企业基本信息</h4>
+                                    <hr/>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">企业名称</label>
+                                        <div class="col-sm-10">
+                                            <input id="name" name="name" type="text"  class="form-control" placeholder="请输入企业名称">
+                                            <div id="nameText" style="color: red; display: none">企业名不能为空</div>
+                                            <script>
+                                                $("#name").blur(function(){
+                                                    console.log("leave")
+                                                    nameValidate();
+
+                                                });
+                                                const name = $("#name");
+                                                const nameText = $("#nameText");
+
+                                                function nameValidate(){
+
+                                                    if(name.val() == null || name.val().length==0)
+                                                    {
+                                                        nameText.attr("style","color: red;display:block;");
+                                                        return false;
+                                                    }else{
+                                                        console.log("true")
+                                                        nameText.attr("style","display:none;");
+                                                        return true;
+                                                    }
+                                                }
+
+                                            </script>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">统一社会信用代码</label>
+                                        <div class="col-sm-10">
+                                            <input id="socialId" name="socialId" type="text"  class="form-control" placeholder="请按企业营业执照标准填写">
+                                            <div id="socialIdText" style="color: red; display: none">请按企业营业执照标准填写</div>
+                                            <script>
+                                                $("#socialId").blur(function(){
+                                                    console.log("leave")
+                                                    socialIdValidate();
+
+                                                });
+                                                const socialId = $("#socialId");
+                                                const socialIdText = $("#socialIdText");
+
+                                                function socialIdValidate(){
+
+                                                    if(socialId.val() == null || socialId.val().length==0)
+                                                    {
+                                                        console.log("block")
+                                                        socialIdText.attr("style","color: red;display:block;");
+                                                        return false;
+                                                    }else{
+                                                        socialIdText.attr("style","display:none;");
+                                                    }
+
+                                                    var pattern=/[^_IOZSVa-z\W]{2}\d{6}[^_IOZSVa-z\W]{10}$/;
+                                                    if(!pattern.test(socialId.val()))
+                                                    {
+                                                        socialIdText.attr("style","color: red;display:block;");
+                                                        return false;
+                                                    }else{
+                                                        socialIdText.attr("style","display:none;");
+                                                        console.log("true")
+                                                        return true;
+                                                    }
+                                                }
+
+                                            </script>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label" for="addr-show">所在地区：
+                                            <input type="hidden" value="" id="addr-show"/>
+                                        </label>
+
+                                        <input  name="province" style="width: 30%" type="hidden" value="" id="provinces"/>
+                                        <input  name="city" style="width: 30%" type="hidden" value="" id="cities"/>
+                                        <input name="county" style="width: 30%" type="hidden" value="" id="counties"/>
+
+                                        <div class="col-sm-10">
+                                            <!--省份选择-->
+                                            <select style="width: 30%" class="form-control" id="prov" onchange="showCity(this)">
+                                                <option>=请选择省份=</option>
+                                            </select>
+                                            <select style="width: 30%" class="form-control" id="city" onchange="showCountry(this)">
+                                                <option>=请选择城市=</option>
+                                            </select>
+                                            <select style="width: 30%" class="form-control" id="country" onchange="selecCountry(this)">
+                                                <option>=请选择县区=</option>
+                                            </select>
+                                        </div>
+                                        <br/>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">实际经营地址</label>
+                                        <div class="col-sm-10">
+                                            <input id="locations" name="location" type="text"  class="form-control" placeholder="请输入地址">
+                                            <div id="locationsText" style="color: red; display: none">请输入地址</div>
+                                            <script>
+                                                $("#locations").blur(function(){
+                                                    console.log("leave")
+                                                    locationValidate();
+
+                                                });
+                                                const locations = $("#locations");
+                                                const locationText = $("#locationsText");
+
+                                                function locationValidate(){
+
+                                                    if(locations.val() == null || locations.val().length==0)
+                                                    {
+                                                        locationText.attr("style","color: red;display:block;");
+                                                        return false;
+                                                    }else{
+                                                        console.log("true")
+                                                        locationText.attr("style","display:none;");
+                                                        return true;
+                                                    }
+                                                }
+                                            </script>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">经纬度</label>
+                                        <div class="col-sm-10">
+                                            <input id="ll" type="text"  class="form-control" placeholder="如:111,222">
+                                            <div id="llText" style="color: red; display: none">请输入正确的经纬度格式</div>
+                                            <script>
+                                                $("#ll").blur(function(){
+                                                    console.log("leave")
+                                                    llValidate();
+
+                                                });
+                                                const ll = $("#ll");
+                                                const llText = $("#llText");
+                                                let ls = "";
+
+                                                function llValidate(){
+
+                                                    if(ll.val() == null || ll.val().length==0)
+                                                    {
+                                                        llText.attr("style","color: red;display:block;");
+                                                        return false;
+                                                    }else{
+                                                        llText.attr("style","display:none;");
+                                                    }
+
+
+                                                    if(ll != null){
+                                                        ls = ll.val().split(",");
+                                                        if(ls.length != 2){
+                                                            ls = ll.val().split("，");
+                                                            if(ls.length != 2){
+                                                                llText.attr("style","color: red;display:block;");
+                                                            }
+                                                        }
+                                                    }
+
+                                                    var patrn = /^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$/;
+                                                    if (!patrn.test(ls[0]) || !patrn.test(ls[1])){
+                                                        llText.attr("style","color: red;display:block;");
+                                                        return false;
+                                                    }else{
+                                                        console.log("true")
+                                                        return true;
+                                                    }
+                                                }
+                                            </script>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">企业性质</label>
+                                        <div class="col-sm-10">
+                                            <input value="1" name="activationStatus" type="radio" checked="checked"/><span style="margin-right: 10px;margin-left: 5px">国有企业</span>
+                                            <input value="2" name="activationStatus" type="radio"/><span style="margin-right: 10px;margin-left: 5px">集体所有制</span>
+                                            <input value="3" name="activationStatus" type="radio"/><span style="margin-right: 10px;margin-left: 5px">私营企业</span>
+                                            <input value="4" name="activationStatus" type="radio"/><span style="margin-right: 10px;margin-left: 5px">股份有限公司</span>
+                                            <input value="3" name="activationStatus" type="radio"/><span style="margin-right: 10px;margin-left: 5px">有限责任公司</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">应急级别</label>
+                                        <div class="col-sm-10">
+                                            <input value="1" name="level" type="radio" checked="checked"/><span style="margin-right: 10px;margin-left: 5px">省级</span>
+                                            <input value="2" name="level" type="radio"/><span style="margin-right: 10px;margin-left: 5px">市级</span>
+                                            <input value="3" name="level" type="radio"/><span style="margin-right: 10px;margin-left: 5px">县级</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">负责人姓名</label>
+                                        <div class="col-sm-10">
+                                            <input id="principal" type="text"  class="form-control" placeholder="请输入姓名">
+                                            <div id="principalText" style="color: red; display: none">姓名不能为空</div>
+                                            <script>
+                                                $("#principal").blur(function(){
+                                                    console.log("leave")
+                                                    principalValidate();
+
+                                                });
+                                                const principal = $("#principal");
+                                                const principalText = $("#principalText");
+
+                                                function principalValidate(){
+
+                                                    if(principal.val() == null || principal.val().length==0)
+                                                    {
+                                                        principalText.attr("style","color: red;display:block;");
+                                                        return false;
+                                                    }else{
+                                                        console.log("true")
+                                                        principalText.attr("style","display:none;");
+                                                        return true;
+                                                    }
+                                                }
+                                            </script>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">联系电话</label>
+                                        <div class="col-sm-10">
+                                            <input id="phone" type="text"  class="form-control" placeholder="请输入11位手机号">
+                                            <div id="phoneText" style="color: red; display: none">请输入11位手机号</div>
+                                            <script>
+                                                $("#phone").blur(function(){
+                                                    console.log("leave")
+                                                    phoneValidate();
+
+                                                });
+                                                const phone = $("#phone");
+                                                const phoneText = $("#phoneText");
+
+                                                function phoneValidate(){
+
+                                                    if(phone.val() == null || phone.val().length==0)
+                                                    {
+                                                        phoneText.attr("style","color: red;display:block;");
+                                                        return false;
+                                                    }else{
+                                                        phoneText.attr("style","display:none;");
+                                                    }
+
+                                                    var pattern=/^1[3456789]\d{9}$/;
+                                                    if(!pattern.test(phone.val()))
+                                                    {
+                                                        phoneText.attr("style","color: red;display:block;");
+                                                        return false;
+                                                    }else{
+                                                        phoneText.attr("style","display:none;");
+                                                        console.log("true")
+                                                        return true;
+                                                    }
+                                                }
+
+                                            </script>
+                                        </div>
+                                    </div>
+                                    <!--企业基本信息结束-->
+
+                                    <br/>
+                                    <!--企业指标-->
+                                    <h4 class="mb"><i class="fa fa-angle-right"></i>企业指标</h4>
+                                    <hr/>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">日入库量</label>
+                                        <div class="col-sm-10">
+                                            <input id="inDay" type="text"  class="form-control" placeholder="请输入重量">
+                                            <div id="inDayText" style="color: red; display: none">请输入正确的重量</div>
+                                            <script>
+                                                $("#inDay").blur(function(){
+                                                    console.log("leave")
+                                                    inDayValidate();
+
+                                                });
+                                                const inDay = $("#inDay");
+                                                const inDayText = $("#inDayText");
+
+                                                function inDayValidate(){
+
+                                                    if(inDay.val() == null || inDay.val().length==0)
+                                                    {
+                                                        console.log("block")
+                                                        inDayText.attr("style","color: red;display:block;");
+                                                        return false;
+                                                    }else{
+                                                        console.log("none")
+                                                        inDayText.attr("style","display:none;");
+                                                    }
+
+                                                    var pattern=/^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$/;
+                                                    if(!pattern.test(inDay.val()))
+                                                    {
+                                                        inDayText.attr("style","color: red;display:block;");
+                                                        return false;
+                                                    }else{
+                                                        inDayText.attr("style","display:none;");
+                                                        console.log("true")
+                                                        return true;
+                                                    }
+                                                }
+
+                                            </script>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">日销量</label>
+                                        <div class="col-sm-10">
+                                            <input id="outDay" type="text"  class="form-control" placeholder="请输入重量">
+                                            <div id="outDayText" style="color: red; display: none">请输入正确的重量</div>
+                                            <script>
+                                                $("#outDay").blur(function(){
+                                                    console.log("leave")
+                                                    outDayValidate();
+
+                                                });
+                                                const outDay = $("#outDay");
+                                                const outDayText = $("#outDayText");
+
+                                                function outDayValidate(){
+
+                                                    if(outDay.val() == null || outDay.val().length==0)
+                                                    {
+                                                        console.log("block")
+                                                        outDayText.attr("style","color: red;display:block;");
+                                                        return false;
+                                                    }else{
+                                                        console.log("none")
+                                                        outDayText.attr("style","display:none;");
+                                                    }
+
+                                                    var pattern=/^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$/;
+                                                    if(!pattern.test(outDay.val()))
+                                                    {
+                                                        outDayText.attr("style","color: red;display:block;");
+                                                        return false;
+                                                    }else{
+                                                        outDayText.attr("style","display:none;");
+                                                        console.log("true")
+                                                        return true;
+                                                    }
+                                                }
+
+                                            </script>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">日库存</label>
+                                        <div class="col-sm-10">
+                                            <input id="saveDay" type="text"  class="form-control" placeholder="请输入重量">
+                                            <div id="saveDayText" style="color: red; display: none">请输入正确的重量</div>
+                                            <script>
+                                                $("#saveDay").blur(function(){
+                                                    console.log("leave")
+                                                    saveDayValidate();
+
+                                                });
+                                                const saveDay = $("#saveDay");
+                                                const saveDayText = $("#saveDayText");
+
+                                                function saveDayValidate(){
+
+                                                    if(saveDay.val() == null || saveDay.val().length==0)
+                                                    {
+                                                        console.log("block")
+                                                        saveDayText.attr("style","color: red;display:block;");
+                                                        return false;
+                                                    }else{
+                                                        console.log("none")
+                                                        saveDayText.attr("style","display:none;");
+                                                    }
+
+                                                    var pattern=/^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$/;
+                                                    if(!pattern.test(saveDay.val()))
+                                                    {
+                                                        saveDayText.attr("style","color: red;display:block;");
+                                                        return false;
+                                                    }else{
+                                                        saveDayText.attr("style","display:none;");
+                                                        console.log("true")
+                                                        return true;
+                                                    }
+                                                }
+
+                                            </script>
+                                        </div>
+                                    </div>
+                                    <!--企业指标结束-->
+
+                                    <br/>
+                                    <!--仓储能力-->
+                                    <h4 class="mb"><i class="fa fa-angle-right"></i>仓储能力</h4>
+                                    <hr/>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">仓储能力（吨）</label>
+                                        <div class="col-sm-10">
+                                            <input id="wareAbility" type="text"  class="form-control" placeholder="请输入重量">
+                                            <div id="wareAbilityText" style="color: red; display: none">请输入正确的重量</div>
+                                            <script>
+                                                $("#wareAbility").blur(function(){
+                                                    console.log("leave")
+                                                    wareAbilityValidate();
+
+                                                });
+                                                const wareAbility = $("#wareAbility");
+                                                const wareAbilityText = $("#wareAbilityText");
+
+                                                function wareAbilityValidate(){
+
+                                                    if(wareAbility.val() == null || wareAbility.val().length==0)
+                                                    {
+                                                        console.log("block")
+                                                        wareAbilityText.attr("style","color: red;display:block;");
+                                                        return false;
+                                                    }else{
+                                                        console.log("none")
+                                                        wareAbilityText.attr("style","display:none;");
+                                                    }
+
+                                                    var pattern=/^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$/;
+                                                    if(!pattern.test(wareAbility.val()))
+                                                    {
+                                                        wareAbilityText.attr("style","color: red;display:block;");
+                                                        return false;
+                                                    }else{
+                                                        wareAbilityText.attr("style","display:none;");
+                                                        console.log("true")
+                                                        return true;
+                                                    }
+                                                }
+
+                                            </script>
+                                        </div>
+                                    </div>
+                                    <!--仓储能力结束-->
+                                    <br/>
+
+                                    <!--仓储能力-->
+                                    <h4 class="mb"><i class="fa fa-angle-right"></i>配送能力</h4>
+                                    <hr/>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">日运输能力（吨/天）</label>
+                                        <div class="col-sm-10">
+                                            <input id="deliveryDay" type="text"  class="form-control" placeholder="请输入重量">
+                                            <div id="deliveryDayText" style="color: red; display: none">请输入正确的重量</div>
+                                            <script>
+                                                $("#deliveryDay").blur(function(){
+                                                    console.log("leave")
+                                                    deliveryDayValidate();
+
+                                                });
+                                                const deliveryDay = $("#deliveryDay");
+                                                const deliveryDayText = $("#deliveryDayText");
+
+                                                function deliveryDayValidate(){
+
+                                                    if(deliveryDay.val() == null || deliveryDay.val().length==0)
+                                                    {
+                                                        console.log("block")
+                                                        deliveryDayText.attr("style","color: red;display:block;");
+                                                        return false;
+                                                    }else{
+                                                        console.log("none")
+                                                        deliveryDayText.attr("style","display:none;");
+                                                    }
+
+                                                    var pattern=/^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$/;
+                                                    if(!pattern.test(deliveryDay.val()))
+                                                    {
+                                                        deliveryDayText.attr("style","color: red;display:block;");
+                                                        return false;
+                                                    }else{
+                                                        deliveryDayText.attr("style","display:none;");
+                                                        console.log("true")
+                                                        return true;
+                                                    }
+                                                }
+
+                                            </script>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">辐射范围</label>
+                                        <div class="col-sm-10">
+                                            <input id="range" type="text"  class="form-control" placeholder="请输入范围">
+                                            <div id="rangeText" style="color: red; display: none">请输入正确的范围</div>
+                                            <script>
+                                                $("#range").blur(function(){
+                                                    console.log("leave")
+                                                    rangeValidate();
+
+                                                });
+                                                const range = $("#range");
+                                                const rangeText = $("#rangeText");
+
+                                                function rangeValidate(){
+
+                                                    if(range.val() == null || range.val().length==0)
+                                                    {
+                                                        rangeText.attr("style","color: red;display:block;");
+                                                        return false;
+                                                    }else{
+                                                        rangeText.attr("style","display:none;");
+                                                    }
+
+                                                    var pattern=/^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$/;
+                                                    if(!pattern.test(range.val()))
+                                                    {
+                                                        rangeText.attr("style","color: red;display:block;");
+                                                        return false;
+                                                    }else{
+                                                        rangeText.attr("style","display:none;");
+                                                        console.log("true")
+                                                        return true;
+                                                    }
+                                                }
+
+                                            </script>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">辐射半径（公里）</label>
+                                        <div class="col-sm-10">
+                                            <input id="radius" type="text"  class="form-control" placeholder="请输入公里数">
+                                            <div id="radiusText" style="color: red; display: none">请输入正确的公里数</div>
+                                            <script>
+                                                $("#radius").blur(function(){
+                                                    console.log("leave")
+                                                    radiusValidate();
+
+                                                });
+                                                const radius = $("#radius");
+                                                const radiusText = $("#radiusText");
+
+                                                function radiusValidate(){
+
+                                                    if(radius.val() == null || radius.val().length==0)
+                                                    {
+                                                        radiusText.attr("style","color: red;display:block;");
+                                                        return false;
+                                                    }else{
+                                                        radiusText.attr("style","display:none;");
+                                                    }
+
+                                                    var pattern=/^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$/;
+                                                    if(!pattern.test(radius.val()))
+                                                    {
+                                                        radiusText.attr("style","color: red;display:block;");
+                                                        return false;
+                                                    }else{
+                                                        radiusText.attr("style","display:none;");
+                                                        console.log("true")
+                                                        return true;
+                                                    }
+                                                }
+
+                                            </script>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">辐射供应网点数量（个）</label>
+                                        <div class="col-sm-10">
+                                            <input id="deliveryNum" type="text"  class="form-control" placeholder="请输入个数">
+                                            <div id="deliveryNumText" style="color: red; display: none">请输入正确的个数</div>
+                                            <script>
+                                                $("#deliveryNum").blur(function(){
+                                                    console.log("leave")
+                                                    deliveryNumValidate();
+
+                                                });
+                                                const deliveryNum = $("#deliveryNum");
+                                                const deliveryNumText = $("#deliveryNumText");
+
+                                                function deliveryNumValidate(){
+
+                                                    if(deliveryNum.val() == null || deliveryNum.val().length==0)
+                                                    {
+                                                        deliveryNumText.attr("style","color: red;display:block;");
+                                                        return false;
+                                                    }else{
+                                                        deliveryNumText.attr("style","display:none;");
+                                                    }
+
+                                                    var pattern=/^\+?[1-9][0-9]*$/;
+                                                    if(!pattern.test(deliveryNum.val()))
+                                                    {
+                                                        deliveryNumText.attr("style","color: red;display:block;");
+                                                        return false;
+                                                    }else{
+                                                        deliveryNumText.attr("style","display:none;");
+                                                        console.log("true")
+                                                        return true;
+                                                    }
+                                                }
+
+                                            </script>
+                                        </div>
+                                    </div>
+                                    <!--仓储能力结束-->
+                                    <br/>
+
+                                    <!--物流能力-->
+                                    <h4 class="mb"><i class="fa fa-angle-right"></i>物流能力</h4>
+                                    <hr/>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">运输车辆个数（个）</label>
+                                        <div class="col-sm-10">
+                                            <input id="carNum" type="text"  class="form-control" placeholder="请输入个数">
+                                            <div id="carNumText" style="color: red; display: none">请输入正确的个数</div>
+                                            <script>
+                                                $("#carNum").blur(function(){
+                                                    console.log("leave")
+                                                    carNumValidate();
+
+                                                });
+                                                const carNum = $("#carNum");
+                                                const carNumText = $("#carNumText");
+
+                                                function carNumValidate(){
+
+                                                    if(carNum.val() == null || carNum.val().length==0)
+                                                    {
+                                                        carNumText.attr("style","color: red;display:block;");
+                                                        return false;
+                                                    }else{
+                                                        carNumText.attr("style","display:none;");
+                                                    }
+
+                                                    var pattern=/^\+?[1-9][0-9]*$/;
+                                                    if(!pattern.test(carNum.val()))
+                                                    {
+                                                        carNumText.attr("style","color: red;display:block;");
+                                                        return false;
+                                                    }else{
+                                                        carNumText.attr("style","display:none;");
+                                                        console.log("true")
+                                                        return true;
+                                                    }
+                                                }
+
+                                            </script>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">实际日供应量（吨/天）</label>
+                                        <div class="col-sm-10">
+                                            <input id="deliveryDayReal" type="text"  class="form-control" placeholder="请输入重量">
+                                            <div id="deliveryDayRealText" style="color: red; display: none">请输入正确的重量</div>
+                                            <script>
+                                                $("#deliveryDayReal").blur(function(){
+                                                    console.log("leave")
+                                                    deliveryDayRealValidate();
+
+                                                });
+                                                const deliveryDayReal = $("#deliveryDayReal");
+                                                const deliveryDayRealText = $("#deliveryDayRealText");
+
+                                                function deliveryDayRealValidate(){
+
+                                                    if(deliveryDayReal.val() == null || deliveryDayReal.val().length==0)
+                                                    {
+                                                        deliveryDayRealText.attr("style","color: red;display:block;");
+                                                        return false;
+                                                    }else{
+                                                        deliveryDayRealText.attr("style","display:none;");
+                                                    }
+
+                                                    var pattern=/^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$/;
+                                                    if(!pattern.test(deliveryDayReal.val()))
+                                                    {
+                                                        deliveryDayRealText.attr("style","color: red;display:block;");
+                                                        return false;
+                                                    }else{
+                                                        deliveryDayRealText.attr("style","display:none;");
+                                                        console.log("true")
+                                                        return true;
+                                                    }
+                                                }
+
+                                            </script>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">生产状态</label>
+                                        <span class="radio col-sm-10">
+                                            <label>
+                                                <input type="radio" name="state" id="optionsRadios1" value="1" checked>
+                                                生产
+                                            </label>
+                                            <label>
+                                                <input type="radio" name="state" id="optionsRadios2" value="2">
+                                                停产
+                                            </label>
+                                        </span>
+                                    </div>
+                                    <!--物流能力结束-->
+                                    <div style="text-align: center" class="form-group">
+                                        <hr/>
+                                        <input class="btn btn-success" type="button" onclick="submitDate()" value="提交"></input>
+                                    </div>
+                                    <script>
+                                        function submitDate(){
+                                            var nameV = nameValidate();
+                                            var socialIdV = socialIdValidate();
+                                            var locationV = locationValidate();
+                                            var llV = llValidate();
+                                            var principalV = principalValidate();
+                                            var phoneV = phoneValidate();
+                                            var inDayV = inDayValidate();
+                                            var outDayV = outDayValidate();
+                                            var saveDayV = saveDayValidate();
+                                            var wareAbilityV = wareAbilityValidate();
+                                            var deliveryDayV = deliveryDayValidate();
+                                            var rangeV = rangeValidate();
+                                            var radiusV = radiusValidate();
+                                            var deliveryNumV = deliveryNumValidate();
+                                            var carNumV = carNumValidate();
+                                            var deliveryDayRealV = deliveryDayRealValidate();
+
+                                            var province = $("#provinces").val();
+                                            var city = $("#cities").val();
+                                            var county = $("#counties").val();
+                                            console.log("text:" + county)
+
+                                            if(province == null || city == null || county == null ||
+                                                province.trim() == "" || city.trim() == "" || county.trim() == "" ||
+                                                typeof(province) == "undefined" || typeof(city) == "undefinee/d" || typeof(county) == "undefined"){
+                                                alert("请选择所在地区")
+                                            }
+
+                                            if(nameV && socialIdV && locationV && llV && principalV
+                                                && phoneV && inDayV && outDayV && saveDayV
+                                                && wareAbilityV && deliveryDayV && rangeV && radiusV
+                                                && deliveryNumV && carNumV && deliveryDayRealV
+                                                && province != null && city != null && county != null){
+
+                                                console.log(true)
+
+                                                var name = $("#name").val();
+                                                var socialId = $("#socialId").val();
+                                                var location = $("#locations").val();
+                                                var ll = $("#ll").val();
+                                                var principal = $("#principal").val();
+                                                var phone = $("#phone").val();
+                                                var inDay = $("#inDay").val();
+                                                var outDay = $("#outDay").val();
+                                                var saveDay = $("#saveDay").val();
+                                                var wareAbility = $("#wareAbility").val();
+                                                var deliveryDay = $("#deliveryDay").val();
+                                                var range = $("#range").val();
+                                                var radius = $("#radius").val();
+                                                var deliveryNum = $("#deliveryNum").val();
+                                                var carNum = $("#carNum").val();
+                                                var deliveryDayReal = $("#deliveryDayReal").val();
+
+
+                                                var longitude = ls[0];
+                                                var latitude = ls[1];
+                                                var activationStatus = $("input[name='activationStatus']:checked").val();
+                                                var level = $("input[name='level']:checked").val();
+                                                var state = $("input[name='state']:checked").val();
+
+                                                console.log("name:" + name);
+                                                console.log("socialId:" + socialId);
+                                                console.log("location:" + location);
+                                                console.log("ll:" + ll);
+                                                console.log("principal:" + principal);
+                                                console.log("phone:" + phone);
+                                                console.log("inDay:" + inDay);
+                                                console.log("outDay:" + outDay);
+                                                console.log("saveDay:" + saveDay);
+                                                console.log("wareAbility:" + wareAbility);
+                                                console.log("deliveryDay:" + deliveryDay);
+                                                console.log("range:" + range);
+                                                console.log("radius:" + radius);
+                                                console.log("deliveryNum:" + deliveryNum);
+                                                console.log("carNum:" + carNum);
+                                                console.log("deliveryDayReal:" + deliveryDayReal);
+                                                console.log("province:" + province);
+                                                console.log("city:" + city);
+                                                console.log("county:" + county);
+                                                console.log("longitude:" + longitude);
+                                                console.log("latitude:" + latitude);
+                                                console.log("activationStatus:" + activationStatus);
+                                                console.log("level:" + level);
+                                                console.log("state:" + state);
+
+
+                                                $.post("/toInsertDelivery",
+                                                    {
+                                                        name:name,
+                                                        socialId:socialId,
+                                                        province:province,
+                                                        city:city,
+                                                        county:county,
+                                                        location:location,
+                                                        longitude:longitude,
+                                                        latitude:latitude,
+                                                        activationStatus:activationStatus,
+                                                        principal:principal,
+                                                        phone:phone,
+                                                        inDay:inDay,
+                                                        outDay:outDay,
+                                                        saveDay:saveDay,
+                                                        wareAbility:wareAbility,
+                                                        deliveryDay:deliveryDay,
+                                                        range:range,
+                                                        radius:radius,
+                                                        deliveryNum:deliveryNum,
+                                                        carNum:carNum,
+                                                        deliveryDayReal:deliveryDayReal,
+                                                        level:level,
+                                                        state:state
+                                                    },
+                                                    function(data,status){
+
+                                                        if(data==true){
+                                                            alert("Data: " + data + "\nStatus: " + status + "\n插入成功");
+                                                            var curWwwPath=window.document.location.href;
+                                                            var pathName=window.document.location.pathname;
+                                                            var localhostPaht;
+                                                            var pos = curWwwPath.indexOf(pathName);
+                                                            localhostPaht = curWwwPath.substring(0,pos);
+                                                            localhostPaht += "/";
+                                                            var href = localhostPaht + "toDeliverShow";
+                                                            console.log(href);
+                                                            window.location.href = href;
+                                                        }
+                                                    });
+                                            }else{
+                                                console.log(false)
+                                            }
+                                        }
+                                    </script>
+
+                                </form>
+                            </div>
+                        </div><!-- col-lg-12-->
+                    </div><!-- /row -->
+                </div>
+            </div>
+        </section>
+    </section>
+
+
+
+    <!--main content end-->
+    <!--footer start-->
+    <footer class="site-footer">
+        <div class="text-center">
+            2020.<a href="http://www.lswz.gov.cn" target="_blank">国家粮食和物质储备局</a>
+        </div>
+    </footer>
+    <!--footer end-->
+</section>
+
+<!-- js placed at the end of the document so the pages load faster -->
+
+<script src="assets/js/jquery.js"></script>
+<script src="assets/js/jquery-1.8.3.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script class="include" type="text/javascript" src="assets/js/jquery.dcjqaccordion.2.7.js"></script>
+<script src="assets/js/jquery.scrollTo.min.js"></script>
+<script src="assets/js/jquery.nicescroll.js" type="text/javascript"></script>
+<script src="assets/js/jquery.sparkline.js"></script>
+
+<script src="assets/three/city.js"></script>
+<script src="assets/three/city02.js"></script>
+<script src="assets/three/method01.js"></script>
+
+
+<!--common script for all pages-->
+<script src="assets/js/common-scripts.js"></script>
+
+<script type="text/javascript" src="assets/js/gritter/js/jquery.gritter.js"></script>
+<script type="text/javascript" src="assets/js/gritter-conf.js"></script>
+
+<!--script for this page-->
+<script src="assets/js/sparkline-chart.js"></script>
+<script src="assets/js/zabuto_calendar.js"></script>
+
+</body>
+</html>

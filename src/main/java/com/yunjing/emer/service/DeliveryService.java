@@ -16,5 +16,7 @@ public interface DeliveryService {
     Page<Delivery> selectByPage(User user);
     Page<Delivery> selectByPageDate(User user, Date time1, Date time2);
     List<Delivery> selectByDate(User user, Date time1, Date time2);
+    public boolean insertDelivery(Delivery delivery);
+    boolean updateByCId(Delivery delivery);
 }
 

@@ -67,4 +67,38 @@ public class DeliveryServiceImpl  implements DeliveryService {
     public List<Delivery> selectByDate(User user, Date time1, Date time2) {
         return deliveryDao.selectDeliveryByPageDate(user, time1, time2);
     }
+
+    @Override
+    public boolean insertDelivery(Delivery delivery) {
+        int i = deliveryDao.insert(delivery);
+        if(i != 0){
+            return true;
+        }
+
+        return false;
+    }
+
+
+    @Override
+    public boolean updateByCId(Delivery delivery) {
+        DeliveryExample deliveryExample = new DeliveryExample();
+        DeliveryExample.Criteria criteria = deliveryExample.createCriteria();
+        criteria.andCompanyIdEqualTo(delivery.getCompanyId());
+        if(deliveryDao.selectByExample(deliveryExample).size() <= 0){
+            int i = deliveryDao.insert(delivery);
+            if(i > 0){
+                return true;
+            }
+
+            return false;
+        }
+        Integer DId = deliveryDao.selectByExample(deliveryExample).get(0).getDeliveryId();
+        delivery.setDeliveryId(DId);
+
+        int i = deliveryDao.updateByExampleSelective(delivery,deliveryExample);
+        if(i > 0){
+            return true;
+        }
+        return false;
+    }
 }

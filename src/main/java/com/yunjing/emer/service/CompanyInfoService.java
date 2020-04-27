@@ -27,4 +27,9 @@ public interface CompanyInfoService {
     List<CompanyInfo>  selectCompanyInfoByMachineDate1(User user,  Date time1);
     List<CompanyInfo>  selectCompanyInfoByWebsiteDate1(User user,  Date time1);
 
+    public boolean insertCompanyInfo(CompanyInfo companyInfo);
+    public List<CompanyInfo> selectBySocialId(String socialId);
+    public boolean updateCompanyInfo(CompanyInfo companyInfo);
+    public List<CompanyInfo> selectAll2();
+
 }
