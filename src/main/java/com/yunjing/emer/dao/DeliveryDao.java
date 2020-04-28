@@ -41,4 +41,12 @@ public interface DeliveryDao {
     Delivery sumByProvince(@Param("province")String province);
 
     long countByProvinceState(@Param("province")String province,@Param("state")Integer state);
+
+    Delivery sumByUser(User user);
+
+    Delivery sumByUserAndProvince(@Param("user")User user,@Param("province") String province);
+
+    Delivery sumByUserAndCity(@Param("user")User user,@Param("city") String city);
+
+    Delivery sumByUserAndCountry(@Param("user")User user,@Param("country") String country);
 }

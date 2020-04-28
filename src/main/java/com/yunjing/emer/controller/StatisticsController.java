@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,9 +26,6 @@ public class StatisticsController {
     CompanyInfoDao companyInfoDao;
 
     @Autowired
-    ProvincesDao provincesDao;
-
-    @Autowired
     DeliveryDao deliveryDao;
 
     @Autowired
@@ -34,6 +33,15 @@ public class StatisticsController {
 
     @Autowired
     StoreageDao storeageDao;
+
+    @Autowired
+    ProvincesDao provincesDao;
+
+    @Autowired
+    CitiesDao citiesDao;
+
+    @Autowired
+    AreasDao areasDao;
 
     @RequestMapping("/toSupplyStatistics")
     @ResponseBody
@@ -570,5 +578,284 @@ public class StatisticsController {
         promap1.append("]");
         promap2.append("]");
         return promap1.toString()+"~"+promap2.toString();
+    }
+
+    @RequestMapping("/toCountStatic")
+    @ResponseBody
+    public ModelAndView toCompanyInfo( HttpServletRequest request){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("count");
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        StringBuffer promap = new StringBuffer();
+        promap.append("[");
+        int type = user.getType();
+        if(type == 0){
+            List<Provinces> list = new ArrayList<Provinces>();
+            ProvincesExample provexample = new ProvincesExample();
+            list = provincesDao.selectByExample(provexample);
+            for (int i = 0; i < list.size(); i++) {
+                promap.append("{'name':'"+list.get(i).getName()+"',"+ "'pId':0,'id':" + list.get(i).getCode() + ",type:'0'},");
+                List<Cities> list2 = new ArrayList<Cities>();
+                CitiesExample citiesExample = new CitiesExample();
+                citiesExample.createCriteria().andProvincecodeEqualTo(list.get(i).getCode());
+                list2 = citiesDao.selectByExample(citiesExample);
+                for (int j = 0; j < list2.size(); j++) {
+                    promap.append("{'name':'"+list2.get(j).getName()+"',"+ "'pId':"+list2.get(j).getProvincecode()+",'id':" + list2.get(j).getCode() + ",type:'1'},");
+                    List<Areas> list3 = new ArrayList<Areas>();
+                    AreasExample areasExample = new AreasExample();
+                    areasExample.createCriteria().andCitycodeEqualTo(list2.get(j).getCode());
+                    list3 = areasDao.selectByExample(areasExample);
+                    for (int k = 0; k < list3.size(); k++) {
+                        promap.append("{'name':'"+list3.get(k).getName()+"',"+ "'pId':"+list3.get(k).getCitycode()+",'id':" + list3.get(k).getCode() + ",type:'2'},");
+                    }
+                }
+            }
+        }
+        if(type == 1){
+            List<Provinces> list = new ArrayList<Provinces>();
+            ProvincesExample provexample = new ProvincesExample();
+            provexample.createCriteria().andNameEqualTo(user.getProvince());
+            list = provincesDao.selectByExample(provexample);
+            promap.append("{'name':'"+list.get(0).getName()+"',"+ "'pId':0,'id':" + list.get(0).getCode() + ",type:'0'},");
+            List<Cities> list2 = new ArrayList<Cities>();
+            CitiesExample citiesExample = new CitiesExample();
+            citiesExample.createCriteria().andProvincecodeEqualTo(list.get(0).getCode());
+            list2 = citiesDao.selectByExample(citiesExample);
+            for (int j = 0; j < list2.size(); j++) {
+                promap.append("{'name':'"+list2.get(j).getName()+"',"+ "'pId':"+list2.get(j).getProvincecode()+",'id':" + list2.get(j).getCode() + ",type:'1'},");
+                List<Areas> list3 = new ArrayList<Areas>();
+                AreasExample areasExample = new AreasExample();
+                areasExample.createCriteria().andCitycodeEqualTo(list2.get(j).getCode());
+                list3 = areasDao.selectByExample(areasExample);
+                for (int k = 0; k < list3.size(); k++) {
+                    promap.append("{'name':'"+list3.get(k).getName()+"',"+ "'pId':"+list3.get(k).getCitycode()+",'id':" + list3.get(k).getCode() + ",type:'2'},");
+                }
+            }
+        }
+        if(type == 2){
+            List<Cities> list2 = new ArrayList<Cities>();
+            CitiesExample citiesExample = new CitiesExample();
+            citiesExample.createCriteria().andNameEqualTo(user.getCity());
+            list2 = citiesDao.selectByExample(citiesExample);
+            promap.append("{'name':'"+list2.get(0).getName()+"',"+ "'pId':0,'id':" + list2.get(0).getCode() + ",type:'0'},");
+            List<Areas> list3 = new ArrayList<Areas>();
+            AreasExample areasExample = new AreasExample();
+            areasExample.createCriteria().andCitycodeEqualTo(list2.get(0).getCode());
+            list3 = areasDao.selectByExample(areasExample);
+            for (int k = 0; k < list3.size(); k++) {
+                promap.append("{'name':'"+list3.get(k).getName()+"',"+ "'pId':"+list3.get(k).getCitycode()+",'id':" + list3.get(k).getCode() + ",type:'1'},");
+            }
+        }
+        if(type == 3){
+            List<Areas> list3 = new ArrayList<Areas>();
+            AreasExample areasExample = new AreasExample();
+            areasExample.createCriteria().andNameEqualTo(user.getCounty());
+            list3 = areasDao.selectByExample(areasExample);
+            promap.append("{'name':'"+list3.get(0).getName()+"',"+ "'pId':0,'id':" + list3.get(0).getCode() + ",type:'0'},");
+        }
+        promap.append("]");
+        modelAndView.addObject("promap", promap.toString());
+        List<CompanyInfo> companys = companyInfoDao.selectCompanyInfoByLevel(user);
+        modelAndView.addObject("companys", companys);
+        Website websiteall = websiteDao.sumByUser(user);
+        if(websiteall == null){
+            websiteall = new Website();
+            websiteall.setFlourExp(0.0);websiteall.setFlourReal(0.0);websiteall.setRiceExp(0.0);websiteall.setRiceReal(0.0);websiteall.setOilExp(0.0);websiteall.setOilReal(0.0);websiteall.setElseExp(0.0);websiteall.setElseReal(0.0);
+        }
+        modelAndView.addObject("websiteall", websiteall);
+        Delivery deliveryall = deliveryDao.sumByUser(user);
+        if(deliveryall == null){
+            deliveryall = new Delivery();
+            deliveryall.setCarNum(0);deliveryall.setDeliveryDay(0.0);deliveryall.setDeliveryDayReal(0.0);deliveryall.setDeliveryNum(0);deliveryall.setRadius(0.0);deliveryall.setWareAbility(0.0);
+        }
+        modelAndView.addObject("deliveryall", deliveryall);
+        Storeage storeageall = storeageDao.sumByUser(user);
+        if(storeageall == null){
+            storeageall = new Storeage();
+            storeageall.setCarNum(0);storeageall.setTransportDay(0.0);storeageall.setTransportDayReal(0.0);
+        }
+        modelAndView.addObject("storeageall", storeageall);
+        Machine machineall = machineDao.sumByUser(user);
+        if(machineall == null){
+            machineall = new Machine();
+            machineall.setWheatDay(0.0);machineall.setWheatDayReal(0.0);machineall.setPaddyDay(0.0);machineall.setPaddyDayReal(0.0);machineall.setOilDay(0.0);machineall.setOilDayReal(0.0);machineall.setOilConciseDay(0.0);machineall.setOilConciseDayReal(0.0);machineall.setOilSubpDay(0.0);machineall.setOilSubpDayReal(0.0);machineall.setElseDay(0.0);machineall.setElseDayReal(0.0);
+        }
+        modelAndView.addObject("machineall", machineall);
+
+        return modelAndView;
+    }
+
+    @RequestMapping("/toTreeSaerch")
+    @ResponseBody
+    public ModelAndView toTreeSaerch( HttpServletRequest request,String level,String txt) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("count");
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        if(level.equals("0")){
+            List<CompanyInfo> companys = companyInfoDao.selectByLevelAndProvince(user,txt);
+            modelAndView.addObject("companys", companys);
+            Website websiteall = websiteDao.sumByUserAndProvince(user,txt);
+            if(websiteall == null){
+                websiteall = new Website();
+                websiteall.setFlourExp(0.0);websiteall.setFlourReal(0.0);websiteall.setRiceExp(0.0);websiteall.setRiceReal(0.0);websiteall.setOilExp(0.0);websiteall.setOilReal(0.0);websiteall.setElseExp(0.0);websiteall.setElseReal(0.0);
+            }
+            modelAndView.addObject("websiteall", websiteall);
+            Delivery deliveryall = deliveryDao.sumByUserAndProvince(user,txt);
+            if(deliveryall == null){
+                deliveryall = new Delivery();
+                deliveryall.setCarNum(0);deliveryall.setDeliveryDay(0.0);deliveryall.setDeliveryDayReal(0.0);deliveryall.setDeliveryNum(0);deliveryall.setRadius(0.0);deliveryall.setWareAbility(0.0);
+            }
+            modelAndView.addObject("deliveryall", deliveryall);
+            Storeage storeageall = storeageDao.sumByUserAndProvince(user,txt);
+            if(storeageall == null){
+                storeageall = new Storeage();
+                storeageall.setCarNum(0);storeageall.setTransportDay(0.0);storeageall.setTransportDayReal(0.0);
+            }
+            modelAndView.addObject("storeageall", storeageall);
+            Machine machineall = machineDao.sumByUserAndProvince(user,txt);
+            if(machineall == null){
+                machineall = new Machine();
+                machineall.setWheatDay(0.0);machineall.setWheatDayReal(0.0);machineall.setPaddyDay(0.0);machineall.setPaddyDayReal(0.0);machineall.setOilDay(0.0);machineall.setOilDayReal(0.0);machineall.setOilConciseDay(0.0);machineall.setOilConciseDayReal(0.0);machineall.setOilSubpDay(0.0);machineall.setOilSubpDayReal(0.0);machineall.setElseDay(0.0);machineall.setElseDayReal(0.0);
+            }
+            modelAndView.addObject("machineall", machineall);
+        }
+        if(level.equals("1")){
+            List<CompanyInfo> companys = companyInfoDao.selectByLevelAndCity(user,txt);
+            modelAndView.addObject("companys", companys);
+            Website websiteall = websiteDao.sumByUserAndCity(user,txt);
+            if(websiteall == null){
+                websiteall = new Website();
+                websiteall.setFlourExp(0.0);websiteall.setFlourReal(0.0);websiteall.setRiceExp(0.0);websiteall.setRiceReal(0.0);websiteall.setOilExp(0.0);websiteall.setOilReal(0.0);websiteall.setElseExp(0.0);websiteall.setElseReal(0.0);
+            }
+            modelAndView.addObject("websiteall", websiteall);
+            Delivery deliveryall = deliveryDao.sumByUserAndCity(user,txt);
+            if(deliveryall == null){
+                deliveryall = new Delivery();
+                deliveryall.setCarNum(0);deliveryall.setDeliveryDay(0.0);deliveryall.setDeliveryDayReal(0.0);deliveryall.setDeliveryNum(0);deliveryall.setRadius(0.0);deliveryall.setWareAbility(0.0);
+            }
+            modelAndView.addObject("deliveryall", deliveryall);
+            Storeage storeageall = storeageDao.sumByUserAndCity(user,txt);
+            if(storeageall == null){
+                storeageall = new Storeage();
+                storeageall.setCarNum(0);storeageall.setTransportDay(0.0);storeageall.setTransportDayReal(0.0);
+            }
+            modelAndView.addObject("storeageall", storeageall);
+            Machine machineall = machineDao.sumByUserAndCity(user,txt);
+            if(machineall == null){
+                machineall = new Machine();
+                machineall.setWheatDay(0.0);machineall.setWheatDayReal(0.0);machineall.setPaddyDay(0.0);machineall.setPaddyDayReal(0.0);machineall.setOilDay(0.0);machineall.setOilDayReal(0.0);machineall.setOilConciseDay(0.0);machineall.setOilConciseDayReal(0.0);machineall.setOilSubpDay(0.0);machineall.setOilSubpDayReal(0.0);machineall.setElseDay(0.0);machineall.setElseDayReal(0.0);
+            }
+            modelAndView.addObject("machineall", machineall);
+        }
+        if(level.equals("2")){
+            List<CompanyInfo> companys = companyInfoDao.selectByLevelAndCounty(user,txt);
+            modelAndView.addObject("companys", companys);
+            Website websiteall = websiteDao.sumByUserAndCountry(user,txt);
+            if(websiteall == null){
+                websiteall = new Website();
+                websiteall.setFlourExp(0.0);websiteall.setFlourReal(0.0);websiteall.setRiceExp(0.0);websiteall.setRiceReal(0.0);websiteall.setOilExp(0.0);websiteall.setOilReal(0.0);websiteall.setElseExp(0.0);websiteall.setElseReal(0.0);
+            }
+            modelAndView.addObject("websiteall", websiteall);
+            Delivery deliveryall = deliveryDao.sumByUserAndCountry(user,txt);
+            if(deliveryall == null){
+                deliveryall = new Delivery();
+                deliveryall.setCarNum(0);deliveryall.setDeliveryDay(0.0);deliveryall.setDeliveryDayReal(0.0);deliveryall.setDeliveryNum(0);deliveryall.setRadius(0.0);deliveryall.setWareAbility(0.0);
+            }
+            modelAndView.addObject("deliveryall", deliveryall);
+            Storeage storeageall = storeageDao.sumByUserAndCountry(user,txt);
+            if(storeageall == null){
+                storeageall = new Storeage();
+                storeageall.setCarNum(0);storeageall.setTransportDay(0.0);storeageall.setTransportDayReal(0.0);
+            }
+            modelAndView.addObject("storeageall", storeageall);
+            Machine machineall = machineDao.sumByUserAndCountry(user,txt);
+            if(machineall == null){
+                machineall = new Machine();
+                machineall.setWheatDay(0.0);machineall.setWheatDayReal(0.0);machineall.setPaddyDay(0.0);machineall.setPaddyDayReal(0.0);machineall.setOilDay(0.0);machineall.setOilDayReal(0.0);machineall.setOilConciseDay(0.0);machineall.setOilConciseDayReal(0.0);machineall.setOilSubpDay(0.0);machineall.setOilSubpDayReal(0.0);machineall.setElseDay(0.0);machineall.setElseDayReal(0.0);
+            }
+            modelAndView.addObject("machineall", machineall);
+        }
+
+        return modelAndView;
+    }
+
+    @RequestMapping("/toTreelist")
+    @ResponseBody
+    public String toTreelist( HttpServletRequest request){
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        StringBuffer promap = new StringBuffer();
+        promap.append("[");
+        int type = user.getType();
+        if(type == 0){
+            List<Provinces> list = new ArrayList<Provinces>();
+            ProvincesExample provexample = new ProvincesExample();
+            list = provincesDao.selectByExample(provexample);
+            for (int i = 0; i < list.size(); i++) {
+                promap.append("{'name':'"+list.get(i).getName()+"',"+ "'pId':0,'id':" + list.get(i).getCode() + ",type:'0'},");
+                List<Cities> list2 = new ArrayList<Cities>();
+                CitiesExample citiesExample = new CitiesExample();
+                citiesExample.createCriteria().andProvincecodeEqualTo(list.get(i).getCode());
+                list2 = citiesDao.selectByExample(citiesExample);
+                for (int j = 0; j < list2.size(); j++) {
+                    promap.append("{'name':'"+list2.get(j).getName()+"',"+ "'pId':"+list2.get(j).getProvincecode()+",'id':" + list2.get(j).getCode() + ",type:'1'},");
+                    List<Areas> list3 = new ArrayList<Areas>();
+                    AreasExample areasExample = new AreasExample();
+                    areasExample.createCriteria().andCitycodeEqualTo(list2.get(j).getCode());
+                    list3 = areasDao.selectByExample(areasExample);
+                    for (int k = 0; k < list3.size(); k++) {
+                        promap.append("{'name':'"+list3.get(k).getName()+"',"+ "'pId':"+list3.get(k).getCitycode()+",'id':" + list3.get(k).getCode() + ",type:'2'},");
+                    }
+                }
+            }
+        }
+        if(type == 1){
+            List<Provinces> list = new ArrayList<Provinces>();
+            ProvincesExample provexample = new ProvincesExample();
+            provexample.createCriteria().andNameEqualTo(user.getProvince());
+            list = provincesDao.selectByExample(provexample);
+            promap.append("{'name':'"+list.get(0).getName()+"',"+ "'pId':0,'id':" + list.get(0).getCode() + ",type:'0'},");
+            List<Cities> list2 = new ArrayList<Cities>();
+            CitiesExample citiesExample = new CitiesExample();
+            citiesExample.createCriteria().andProvincecodeEqualTo(list.get(0).getCode());
+            list2 = citiesDao.selectByExample(citiesExample);
+            for (int j = 0; j < list2.size(); j++) {
+                promap.append("{'name':'"+list2.get(j).getName()+"',"+ "'pId':"+list2.get(j).getProvincecode()+",'id':" + list2.get(j).getCode() + ",type:'1'},");
+                List<Areas> list3 = new ArrayList<Areas>();
+                AreasExample areasExample = new AreasExample();
+                areasExample.createCriteria().andCitycodeEqualTo(list2.get(j).getCode());
+                list3 = areasDao.selectByExample(areasExample);
+                for (int k = 0; k < list3.size(); k++) {
+                    promap.append("{'name':'"+list3.get(k).getName()+"',"+ "'pId':"+list3.get(k).getCitycode()+",'id':" + list3.get(k).getCode() + ",type:'2'},");
+                }
+            }
+        }
+        if(type == 2){
+            List<Cities> list2 = new ArrayList<Cities>();
+            CitiesExample citiesExample = new CitiesExample();
+            citiesExample.createCriteria().andNameEqualTo(user.getCity());
+            list2 = citiesDao.selectByExample(citiesExample);
+            promap.append("{'name':'"+list2.get(0).getName()+"',"+ "'pId':0,'id':" + list2.get(0).getCode() + ",type:'0'},");
+            List<Areas> list3 = new ArrayList<Areas>();
+            AreasExample areasExample = new AreasExample();
+            areasExample.createCriteria().andCitycodeEqualTo(list2.get(0).getCode());
+            list3 = areasDao.selectByExample(areasExample);
+            for (int k = 0; k < list3.size(); k++) {
+                promap.append("{'name':'"+list3.get(k).getName()+"',"+ "'pId':"+list3.get(k).getCitycode()+",'id':" + list3.get(k).getCode() + ",type:'1'},");
+            }
+        }
+        if(type == 3){
+            List<Areas> list3 = new ArrayList<Areas>();
+            AreasExample areasExample = new AreasExample();
+            areasExample.createCriteria().andNameEqualTo(user.getCounty());
+            list3 = areasDao.selectByExample(areasExample);
+            promap.append("{'name':'"+list3.get(0).getName()+"',"+ "'pId':0,'id':" + list3.get(0).getCode() + ",type:'0'},");
+        }
+        promap.deleteCharAt(promap.length() - 1);
+        promap.append("]");
+
+        return  promap.toString();
     }
 }

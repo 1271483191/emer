@@ -833,4 +833,19 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
+  <select id="selectByLevelAndProvince"  resultMap="BaseResultMap" >
+    select * from company_info
+    where level >= #{user.type}
+    and province = #{province}
+  </select>
+  <select id="selectByLevelAndCity"  resultMap="BaseResultMap" >
+    select * from company_info
+    where level >= #{user.type}
+    and city = #{city}
+  </select>
+  <select id="selectByLevelAndCounty"  resultMap="BaseResultMap" >
+    select * from company_info
+    where level >= #{user.type}
+    and county = #{country}
+  </select>
 </mapper>

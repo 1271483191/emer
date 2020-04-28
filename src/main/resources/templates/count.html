@@ -48,6 +48,12 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <style>
+        table { border-collapse: collapse;margin-top: 20px;}
+        table,table tr th, table tr td { border:1px solid #000000; }
+        table,table tr th{text-align: center; font-size: 1.5rem}
+    </style>
+
 </head>
 
 <body>
@@ -98,8 +104,8 @@
                         <span style="font-size: 1.5rem">统计汇总</span>
                     </a>
                     <ul class="sub">
-                        <li><a  href="toSupplyStatistics" >信息统计</a></li>
-                        <li><a class="active" href="companysearch">企业搜索</a></li>
+                        <li><a class="active" href="toCountStatic" >信息统计</a></li>
+                        <li><a href="companysearch">企业搜索</a></li>
 
                     </ul>
                     <!--<a class="active" href="companysearch">-->
@@ -150,6 +156,18 @@
                 </li>
                 <li class="sub-menu">
                     <a href="javascript:void(0);" >
+                        <i class=" fa fa-bar-chart-o"></i>
+                        <span style="font-size: 1.5rem">信息录入</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a  href="toSupplyInput">供应网点信息录入</a></li>
+                        <li><a  href="toDeliverInput">配送中心信息录入</a></li>
+                        <li><a  href="toStoreageInput">储运企业信息录入</a></li>
+                        <li><a  href="toMachiningInput">加工企业信息录入</a></li>
+                    </ul>
+                </li>
+                <li class="sub-menu">
+                    <a href="javascript:void(0);" >
                         <i class="fa fa-users"></i>
                         <span style="font-size: 1.5rem">权限管理</span>
                     </a>
@@ -179,12 +197,119 @@
 
                     <h3><i class="fa fa-angle-right"></i>统计分析</h3>
                     <hr>
-                    <div Style="width: 330px">
+                    <div>
                         <div class="row">
-                            <div class="col-sm-6">
-                                <div class="treeSelect" style="width: 350px;"></div>
+                            <div class="col-sm-12">
+                                <input id="treeSelectHide" type="hidden" th:value="${promap}"/>
+                                <input id="treeType" type="hidden"/>
+                                <div class="treeSelect" style="width: 350px;float: left"></div>
+                                <input type="button" value="查询" style="float:left;height: 24.5px;" onclick="searchTree()"/>
                             </div>
                             <!-- /.span -->
+                        </div>
+                    </div>
+                    <div id="replaceHtml">
+                    <div class="col-md-12 mb">
+                        <hr>
+                        <div>
+                            <table width='100%' id="supplyTable" style="margin-top: 0px;">
+                                <tr>
+                                    <th colspan="4">设计日供应能力（吨）</th>
+                                    <th colspan="4">实际日供应能力（吨）</th>
+                                </tr>
+                                <tr>
+                                    <th>面粉</th>
+                                    <th>大米</th>
+                                    <th>食用油</th>
+                                    <th>其他</th>
+                                    <th>面粉</th>
+                                    <th>大米</th>
+                                    <th>食用油</th>
+                                    <th>其他</th>
+                                </tr>
+                                <tr>
+                                    <td th:text="${websiteall.getFlourExp()}"></td>
+                                    <td th:text="${websiteall.getRiceExp()}"></td>
+                                    <td th:text="${websiteall.getOilExp()}"></td>
+                                    <td th:text="${websiteall.getElseExp()}"></td>
+                                    <td th:text="${websiteall.getFlourReal()}"></td>
+                                    <td th:text="${websiteall.getRiceReal()}"></td>
+                                    <td th:text="${websiteall.getOilReal()}"></td>
+                                    <td th:text="${websiteall.getElseReal()}"></td>
+                                </tr>
+                            </table>
+                            <table width='100%' id="deliveryTable">
+                                <tr>
+                                    <th rowspan="2">仓储能力（吨）</th>
+                                    <th colspan="4">配送能力</th>
+                                    <th rowspan="2">实际日配送能力（吨/天）</th>
+                                </tr>
+                                <tr>
+                                    <th>日配送能力（吨/天）</th>
+                                    <!--<th>辐射范围</th>-->
+                                    <th>辐射半径（公里）</th>
+                                    <th>辐射供应网点数量（个）</th>
+                                    <th>运输车辆数量(个)</th>
+                                </tr>
+                                <tr>
+                                    <td th:text="${deliveryall.getWareAbility()}"></td>
+                                    <td th:text="${deliveryall.getDeliveryDay()}"></td>
+                                    <!--<td></td>-->
+                                    <td th:text="${deliveryall.getRadius()}"></td>
+                                    <td th:text="${deliveryall.getDeliveryNum()}"></td>
+                                    <td th:text="${deliveryall.getCarNum()}"></td>
+                                    <td th:text="${deliveryall.getDeliveryDayReal()}"></td>
+                                </tr>
+                            </table>
+                            <table width='100%' id="storeageTable">
+                                <tr>
+                                    <th colspan="2">物流能力</th>
+                                    <th rowspan="2">实际日运输能力（吨/天）</th>
+                                </tr>
+                                <tr>
+                                    <th>日运输能力（吨/天）</th>
+                                    <th>运输车辆数量(个)</th>
+                                </tr>
+                                <tr>
+                                    <td th:text="${storeageall.getTransportDay()}"></td>
+                                    <td th:text="${storeageall.getCarNum()}"></td>
+                                    <td th:text="${storeageall.getTransportDayReal()}"></td>
+                                </tr>
+                            </table>
+                            <table width='100%' id="machineTable">
+                                <tr>
+                                    <th colspan="6">日加工能力（吨）</th>
+                                    <th colspan="6">实际日产量（吨）</th>
+                                </tr>
+                                <tr>
+                                    <th>小麦</th>
+                                    <th>稻谷</th>
+                                    <th>油料处理</th>
+                                    <th>油脂精炼</th>
+                                    <th>油脂分装</th>
+                                    <th>其他</th>
+                                    <th>小麦</th>
+                                    <th>稻谷</th>
+                                    <th>油料处理</th>
+                                    <th>油脂精炼</th>
+                                    <th>油脂分装</th>
+                                    <th>其他</th>
+                                </tr>
+                                <tr>
+                                    <td th:text="${machineall.getWheatDay()}"></td>
+                                    <td th:text="${machineall.getPaddyDay()}"></td>
+                                    <td th:text="${machineall.getOilDay()}"></td>
+                                    <td th:text="${machineall.getOilConciseDay()}"></td>
+                                    <td th:text="${machineall.getOilSubpDay()}"></td>
+                                    <td th:text="${machineall.getElseDay()}"></td>
+                                    <td th:text="${machineall.getWheatDayReal()}"></td>
+                                    <td th:text="${machineall.getPaddyDayReal()}"></td>
+                                    <td th:text="${machineall.getOilDayReal()}"></td>
+                                    <td th:text="${machineall.getOilConciseDayReal()}"></td>
+                                    <td th:text="${machineall.getOilSubpDayReal()}"></td>
+                                    <td th:text="${machineall.getElseDayReal()}"></td>
+                                </tr>
+                            </table>
                         </div>
                     </div>
                     <div class="col-md-12 mb">
@@ -238,6 +363,7 @@
                                 <!--<h4 style="margin-right: 15px;"><a class="fa fa-download download" href="#" download="全国粮食应急保障企业信息简表">下载</a></h4>-->
                             <!--</div>-->
                         </div>
+                    </div>
                     </div>
 
 
@@ -294,14 +420,172 @@
 <script src="assets/js/zabuto_calendar.js"></script>
 <script type="application/javascript">
 
-    data = [{"name":"哈尔滨铁路局","pId":0,"id":86,"type":"0"},{"name":"哈尔滨机务段","pId":86,"id":85,"type":"1"},{"name":"齐齐哈尔机务段","pId":86,"id":84,"type":"1"},{"name":"牡丹江机务段","pId":86,"id":83,"type":"1"},{"name":"佳木斯机务段","pId":86,"id":82,"type":"1"},{"name":"三棵树机务段","pId":86,"id":81,"type":"1"},{"name":"沈阳铁路局","pId":0,"id":80,"type":"0"},{"name":"沈阳机务段","pId":80,"id":79,"type":"1"},{"name":"苏家屯机务段","pId":80,"id":78,"type":"1"},{"name":"锦州机务段","pId":80,"id":77,"type":"1"},{"name":"吉林机务段","pId":80,"id":76,"type":"1"},{"name":"通辽机务段","pId":80,"id":75,"type":"1"},{"name":"白城机务段","pId":80,"id":74,"type":"1"},{"name":"梅河口机务段","pId":80,"id":73,"type":"1"},{"name":"大连机务段","pId":80,"id":72,"type":"1"},{"name":"呼和浩特铁路局","pId":0,"id":71,"type":"0"},{"name":"包头西机务段","pId":71,"id":70,"type":"1"},{"name":"集宁机务段","pId":71,"id":69,"type":"1"},{"name":"北京铁路局","pId":0,"id":68,"type":"0"},{"name":"怀柔北机务段","pId":68,"id":67,"type":"1"},{"name":"北京机务段","pId":68,"id":66,"type":"1"},{"name":"丰台机务段","pId":68,"id":65,"type":"1"},{"name":"天津机务段","pId":68,"id":64,"type":"1"},{"name":"唐山机务段","pId":68,"id":63,"type":"1"},{"name":"石家庄电力机务段","pId":68,"id":62,"type":"1"},{"name":"邯郸机务段","pId":68,"id":61,"type":"1"},{"name":"太原铁路局","pId":0,"id":60,"type":"0"},{"name":"太原机务段","pId":60,"id":59,"type":"1"},{"name":"湖东电力机务段","pId":60,"id":58,"type":"1"},{"name":"侯马北电力机务段","pId":60,"id":57,"type":"1"},{"name":"济南铁路局","pId":0,"id":56,"type":"0"},{"name":"济南机务段","pId":56,"id":55,"type":"1"},{"name":"济南西机务段","pId":56,"id":54,"type":"1"},{"name":"青岛机务段","pId":56,"id":53,"type":"1"},{"name":"郑州铁路局","pId":0,"id":52,"type":"0"},{"name":"郑州机务段","pId":52,"id":51,"type":"1"},{"name":"新乡机务段","pId":52,"id":50,"type":"1"},{"name":"洛阳机务段","pId":52,"id":49,"type":"1"},{"name":"上海铁路局","pId":0,"id":48,"type":"0"},{"name":"上海机务段","pId":48,"id":47,"type":"1"},{"name":"南京东机务段","pId":48,"id":46,"type":"1"},{"name":"杭州机务段","pId":48,"id":45,"type":"1"},{"name":"合肥机务段","pId":48,"id":44,"type":"1"},{"name":"徐州机务段","pId":48,"id":43,"type":"1"},{"name":"武汉铁路局","pId":0,"id":42,"type":"0"},{"name":"武昌南机务段","pId":42,"id":41,"type":"1"},{"name":"江岸机务段","pId":42,"id":40,"type":"1"},{"name":"襄阳机务段","pId":42,"id":39,"type":"1"},{"name":"西安铁路局","pId":0,"id":38,"type":"0"},{"name":"西安机务段","pId":38,"id":37,"type":"1"},{"name":"新丰镇机务段","pId":38,"id":36,"type":"1"},{"name":"安康机务段","pId":38,"id":35,"type":"1"},{"name":"乌鲁木齐铁路局","pId":0,"id":34,"type":"0"},{"name":"乌鲁木齐机务段","pId":34,"id":33,"type":"1"},{"name":"库尔勒机务段","pId":34,"id":32,"type":"1"},{"name":"哈密机务段","pId":34,"id":31,"type":"1"},{"name":"南昌铁路局","pId":0,"id":30,"type":"0"},{"name":"南昌机务段","pId":30,"id":29,"type":"1"},{"name":"福州机务段","pId":30,"id":28,"type":"1"},{"name":"向塘机务段","pId":30,"id":27,"type":"1"},{"name":"鹰潭机务段","pId":30,"id":26,"type":"1"},{"name":"成都铁路局","pId":0,"id":25,"type":"0"},{"name":"重庆机务段","pId":25,"id":24,"type":"1"},{"name":"贵阳机务段","pId":25,"id":23,"type":"1"},{"name":"西昌机务段","pId":25,"id":22,"type":"1"},{"name":"成都机务段","pId":25,"id":21,"type":"1"},{"name":"兰州铁路局","pId":0,"id":20,"type":"0"},{"name":"兰州西机务段","pId":20,"id":19,"type":"1"},{"name":"嘉峪关机务段","pId":20,"id":18,"type":"1"},{"name":"迎水桥机务段","pId":20,"id":17,"type":"1"},{"name":"南宁铁路局","pId":0,"id":16,"type":"0"},{"name":"南宁机务段","pId":16,"id":15,"type":"1"},{"name":"柳州机务段","pId":16,"id":14,"type":"1"},{"name":"昆明铁路局","pId":0,"id":13,"type":"0"},{"name":"昆明机务段","pId":13,"id":12,"type":"1"},{"name":"开远机务段","pId":13,"id":11,"type":"1"},{"name":"广州铁路集团公司","pId":0,"id":10,"type":"0"},{"name":"广州机务段","pId":10,"id":9,"type":"1"},{"name":"长沙机务段","pId":10,"id":8,"type":"1"},{"name":"株洲机务段","pId":10,"id":7,"type":"1"},{"name":"怀化机务段","pId":10,"id":6,"type":"1"},{"name":"龙川机务段","pId":10,"id":5,"type":"1"},{"name":"海口机务段","pId":10,"id":4,"type":"1"},{"name":"青藏铁路公司","pId":0,"id":3,"type":"0"},{"name":"西宁机务段","pId":3,"id":2,"type":"1"},{"name":"格尔木机务段","pId":3,"id":1,"type":"1"},{"name":"HXD3C0668","pId":84,"id":1,"type":"2"},{"name":"test1","pId":85,"id":7,"type":"2"}]
+    /*$.post("toTreelist",function(treedata){$(function () {
+     data = eval('(' + treedata + ')')
+     $(".treeSelect").treeSelect({
+     data:data,
+     inputId:"txt"
+     })
+     });});*/
 
-    $(function () {
-        $(".treeSelect").treeSelect({
-            data:data,
-            inputId:"txt"
-        })
-    });
+    data = eval('(' + $("#treeSelectHide").val() + ')');
+    $(".treeSelect").treeSelect({
+        data:data,
+        inputId:"txt"
+    })
+
+    function searchTree(){
+        var level = $("#treeType").val();
+        var txt = $("#txt").val();
+        console.log("level:"+level);
+        console.log("txt:"+txt);
+        if(txt==null || txt==""){
+            return;
+        }
+        $.ajax({
+            type: "POST",
+            url: "toTreeSaerch",
+            data: {level:level,txt:txt},
+            async:false,
+            success: function(data){
+                $("#replaceHtml").html($(data).find("#replaceHtml").html());
+                var myTable = $('#dynamic-table')
+                    .DataTable( {
+                        destroy : true,
+                        scrollX: true,
+                        scrollCollapse: true,
+                        bPaginate: true,
+                        language: {
+                            "sProcessing": "处理中...",
+                            "sLengthMenu": "显示 _MENU_ 项结果",
+                            "sZeroRecords": "没有匹配结果",
+                            "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+                            "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+                            "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+                            "sInfoPostFix": "",
+                            "sSearch": "搜索:",
+                            "sUrl": "",
+                            "sEmptyTable": "表中数据为空",
+                            "sLoadingRecords": "载入中...",
+                            "sInfoThousands": ",",
+                            "oPaginate": {
+                                "sFirst": "首页",
+                                "sPrevious": "上页",
+                                "sNext": "下页",
+                                "sLast": "末页"
+                            },
+                            "oAria": {
+                                "sSortAscending": ": 以升序排列此列",
+                                "sSortDescending": ": 以降序排列此列"
+                            }
+                        },
+                        bAutoWidth: false,
+                        "aoColumns": [
+                            { "bSortable": false },
+                            null, null,null, null, null,null,null
+                        ],
+                        "aaSorting": [],
+                        select: {
+                            style: 'multi'
+                        }
+                    } );
+                $.fn.dataTable.Buttons.defaults.dom.container.className = 'dt-buttons btn-overlap btn-group btn-overlap';
+
+                new $.fn.dataTable.Buttons( myTable, {
+                    buttons: [
+                        {
+                            "extend": "colvis",
+                            "text": "<i class='fa fa-search bigger-110 blue'></i> <span class='hidden'>展示/隐藏 列名</span>",
+                            "className": "btn btn-white btn-primary btn-bold",
+                            columns: ':not(:first)'
+                        },
+                        {
+                            "extend": "copy",
+                            "text": "<i class='fa fa-copy bigger-110 pink'></i> <span class='hidden'>复制到剪贴板</span>",
+                            "className": "btn btn-white btn-primary btn-bold"
+                        },
+                        {
+                            "extend": "csv",
+                            "text": "<i class='fa fa-database bigger-110 orange'></i> <span class='hidden'>导出CSV文件</span>",
+                            "className": "btn btn-white btn-primary btn-bold",
+                            "sCharSet": "utf16le",
+                            "bBomInc": true,
+                            "sFieldSeperator": "\t"
+                        },
+                        // {
+                        //     "extend": "excel",
+                        //     "text": "<i class='fa fa-file-excel-o bigger-110 green'></i> <span class='hidden'>导出Excel文件</span>",
+                        //     "className": "btn btn-white btn-primary btn-bold"
+                        // },
+                        {
+                            "extend": "print",
+                            "text": "<i class='fa fa-print bigger-110 grey'></i> <span class='hidden'>打印</span>",
+                            "className": "btn btn-white btn-primary btn-bold",
+                            autoPrint: false,
+                            message: 'This print was produced using the Print button for DataTables'
+                        }
+                    ]
+                } );
+                myTable.buttons().container().appendTo( $('.tableTools-container') );
+
+                //style the message box
+                var defaultCopyAction = myTable.button(1).action();
+                myTable.button(1).action(function (e, dt, button, config) {
+                    defaultCopyAction(e, dt, button, config);
+                    $('.dt-button-info').addClass('gritter-item-wrapper gritter-info gritter-center white');
+                });
+
+
+                var defaultColvisAction = myTable.button(0).action();
+                myTable.button(0).action(function (e, dt, button, config) {
+
+                    defaultColvisAction(e, dt, button, config);
+
+
+                    if($('.dt-button-collection > .dropdown-menu').length == 0) {
+                        $('.dt-button-collection')
+                            .wrapInner('<ul class="dropdown-menu dropdown-light dropdown-caret dropdown-caret" />')
+                            .find('a').attr('href', '#').wrap("<li />")
+                    }
+                    $('.dt-button-collection').appendTo('.tableTools-container .dt-buttons')
+                });
+
+                setTimeout(function() {
+                    $($('.tableTools-container')).find('a.dt-button').each(function() {
+                        var div = $(this).find(' > div').first();
+                        if(div.length == 1) div.tooltip({container: 'body', title: div.parent().text()});
+                        else $(this).tooltip({container: 'body', title: $(this).text()});
+                    });
+                }, 500);
+
+                myTable.on( 'select', function ( e, dt, type, index ) {
+                    if ( type === 'row' ) {
+                        $( myTable.row( index ).node() ).find('input:checkbox').prop('checked', true);
+                    }
+                } );
+                myTable.on( 'deselect', function ( e, dt, type, index ) {
+                    if ( type === 'row' ) {
+                        $( myTable.row( index ).node() ).find('input:checkbox').prop('checked', false);
+                    }
+                } );
+
+                //table checkboxes
+                $('th input[type=checkbox], td input[type=checkbox]').prop('checked', false);
+
+                //select/deselect all rows according to table header checkbox
+                $('#dynamic-table > thead > tr > th input[type=checkbox], #dynamic-table_wrapper input[type=checkbox]').eq(-1).on('click', function(){
+                    var th_checked = this.checked;//checkbox inside "TH" table header
+                    $('#dynamic-table').find('tbody > tr').each(function(){
+                        var row = this;
+                        if(th_checked) myTable.row(row).select();
+                        else  myTable.row(row).deselect();
+                    });
+                });
+
+            }
+
+        });
+    }
 
     $(document).ready(function () {
         $("#date-popover").popover({html: true, trigger: "manual"});
@@ -336,138 +620,6 @@
         console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
     }
 </script>
-<script>
-    var doughnutData = [
-        {
-            value: 30,
-            color:"#1abc9c"
-        },
-        {
-            value : 50,
-            color : "#2ecc71"
-        },
-        {
-            value : 100,
-            color : "#3498db"
-        },
-        {
-            value : 40,
-            color : "#9b59b6"
-        },
-        {
-            value : 120,
-            color : "#34495e"
-        }
-
-    ];
-    var lineChartData = {
-        labels : ["","","","","","",""],
-        datasets : [
-            {
-                fillColor : "rgba(220,220,220,0.5)",
-                strokeColor : "rgba(220,220,220,1)",
-                pointColor : "rgba(220,220,220,1)",
-                pointStrokeColor : "#fff",
-                data : [65,59,90,81,56,55,40]
-            },
-            {
-                fillColor : "rgba(151,187,205,0.5)",
-                strokeColor : "rgba(151,187,205,1)",
-                pointColor : "rgba(151,187,205,1)",
-                pointStrokeColor : "#fff",
-                data : [28,48,40,19,96,27,100]
-            }
-        ]
-
-    };
-    var pieData = [
-        {
-            value: 30,
-            color:"#1abc9c"
-        },
-        {
-            value : 50,
-            color : "#16a085"
-        },
-        {
-            value : 100,
-            color : "#27ae60"
-        }
-
-    ];
-    var barChartData = {
-        labels : ["January","February","March","April","May","June","July"],
-        datasets : [
-            {
-                fillColor : "rgba(220,220,220,0.5)",
-                strokeColor : "rgba(220,220,220,1)",
-                data : [65,59,90,81,56,55,40]
-            },
-            {
-                fillColor : "rgba(151,187,205,0.5)",
-                strokeColor : "rgba(151,187,205,1)",
-                data : [28,48,40,19,96,27,100]
-            }
-        ]
-
-    };
-    var chartData = [
-        {
-            value : Math.random(),
-            color: "#D97041"
-        },
-        {
-            value : Math.random(),
-            color: "#C7604C"
-        },
-        {
-            value : Math.random(),
-            color: "#21323D"
-        },
-        {
-            value : Math.random(),
-            color: "#9D9B7F"
-        },
-        {
-            value : Math.random(),
-            color: "#7D4F6D"
-        },
-        {
-            value : Math.random(),
-            color: "#584A5E"
-        }
-    ];
-    var radarChartData = {
-        labels : ["","","","","","",""],
-        datasets : [
-            {
-                fillColor : "rgba(220,220,220,0.5)",
-                strokeColor : "rgba(220,220,220,1)",
-                pointColor : "rgba(220,220,220,1)",
-                pointStrokeColor : "#fff",
-                data : [65,59,90,81,56,55,40]
-            },
-            {
-                fillColor : "rgba(151,187,205,0.5)",
-                strokeColor : "rgba(151,187,205,1)",
-                pointColor : "rgba(151,187,205,1)",
-                pointStrokeColor : "#fff",
-                data : [28,48,40,19,96,27,100]
-            }
-        ]
-
-    };
-//    new Chart(document.getElementById("doughnut").getContext("2d")).Doughnut();
-//    new Chart(document.getElementById("line").getContext("2d")).Line();
-//    new Chart(document.getElementById("radar").getContext("2d")).Radar();
-//    new Chart(document.getElementById("polarArea").getContext("2d")).PolarArea();
-//    new Chart(document.getElementById("bar").getContext("2d")).Bar(barChartData);
-//    new Chart(document.getElementById("pie").getContext("2d")).Pie(pieData);
-
-
-</script>
-
-
 
 
 </body>

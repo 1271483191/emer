@@ -41,4 +41,12 @@ public interface MachineDao {
     Machine sumByProvince(@Param("province")String province);
 
     long countByProvinceState(@Param("province")String province,@Param("state")Integer state);
+
+    Machine sumByUser(User user);
+
+    Machine sumByUserAndProvince(@Param("user")User user,@Param("province") String province);
+
+    Machine sumByUserAndCity(@Param("user")User user,@Param("city") String city);
+
+    Machine sumByUserAndCountry(@Param("user")User user,@Param("country") String country);
 }

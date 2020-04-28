@@ -75,4 +75,10 @@ public interface CompanyInfoDao {
     CompanyInfo sumByDelivery(CompanyInfoExample example);
 
     CompanyInfo sumByStoreage(CompanyInfoExample example);
+
+    List<CompanyInfo> selectByLevelAndProvince(@Param("user")User user,@Param("province") String province);
+
+    List<CompanyInfo> selectByLevelAndCity(@Param("user")User user,@Param("city") String city);
+
+    List<CompanyInfo> selectByLevelAndCounty(@Param("user")User user,@Param("country") String country);
 }

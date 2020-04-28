@@ -42,4 +42,12 @@ public interface WebsiteDao {
     Website sumByProvince(@Param("province")String province);
 
     long countByProvinceState(@Param("province")String province,@Param("state")Integer state);
+
+    Website sumByUser(User user);
+
+    Website sumByUserAndProvince(@Param("user")User user,@Param("province") String province);
+
+    Website sumByUserAndCity(@Param("user")User user,@Param("city") String city);
+
+    Website sumByUserAndCountry(@Param("user")User user,@Param("country") String country);
 }

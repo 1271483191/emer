@@ -42,4 +42,12 @@ public interface StoreageDao {
     Storeage sumByProvince(@Param("province")String province);
 
     long countByProvinceState(@Param("province")String province,@Param("state")Integer state);
+
+    Storeage sumByUser(User user);
+
+    Storeage sumByUserAndProvince(@Param("user")User user,@Param("province") String province);
+
+    Storeage sumByUserAndCity(@Param("user")User user,@Param("city") String city);
+
+    Storeage sumByUserAndCountry(@Param("user")User user,@Param("country") String country);
 }
