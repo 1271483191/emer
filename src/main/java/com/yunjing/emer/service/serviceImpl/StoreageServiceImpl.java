@@ -65,4 +65,42 @@ public class StoreageServiceImpl implements StoreageService {
     public List<Storeage> selectByDate(User user, Date time1, Date time2) {
         return storeageDao.selectStoreageByPageDate(user, time1, time2);
     }
+
+    @Override
+    public boolean insertStoreage(Storeage storeage) {
+
+        int i = storeageDao.insert(storeage);
+        if(i != 0){
+            return true;
+        }
+
+        return false;
+    }
+
+
+    @Override
+    public boolean updateByCId(Storeage storeage) {
+        StoreageExample storeageExample = new StoreageExample();
+        StoreageExample.Criteria criteria = storeageExample.createCriteria();
+        criteria.andCompanyIdEqualTo(storeage.getCompanyId());
+
+
+        if(storeageDao.selectByExample(storeageExample).size() <= 0){
+            int i = storeageDao.insert(storeage);
+            if(i > 0){
+                return true;
+            }
+
+            return false;
+        }
+
+        Integer SId = storeageDao.selectByExample(storeageExample).get(0).getStoreageId();
+        storeage.setStoreageId(SId);
+
+        int i = storeageDao.updateByExampleSelective(storeage,storeageExample);
+        if(i > 0){
+            return true;
+        }
+        return false;
+    }
 }

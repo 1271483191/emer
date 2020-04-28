@@ -65,4 +65,43 @@ public class MachineServiceImpl implements MachineService {
     public List<Machine> selectByDate(User user, Date time1, Date time2) {
         return machineDao.selectMachineByPageDate(user, time1, time2);
     }
+
+    @Override
+    public boolean insertMachine(Machine machine) {
+
+        int i = machineDao.insert(machine);
+
+        if(i != 0){
+            return true;
+        }
+
+        return false;
+    }
+
+
+    @Override
+    public boolean updateByCId(Machine machine) {
+        MachineExample machineExample = new MachineExample();
+        MachineExample.Criteria criteria = machineExample.createCriteria();
+        criteria.andCompanyIdEqualTo(machine.getCompanyId());
+
+
+        if(machineDao.selectByExample(machineExample).size() <= 0){
+            int i = machineDao.insert(machine);
+            if(i > 0){
+                return true;
+            }
+
+            return false;
+        }
+
+        Integer MId = machineDao.selectByExample(machineExample).get(0).getMachineId();
+        machine.setMachineId(MId);
+
+        int i = machineDao.updateByExampleSelective(machine,machineExample);
+        if(i > 0){
+            return true;
+        }
+        return false;
+    }
 }

@@ -69,4 +69,40 @@ public class WebsiteServiceImpl implements WebsiteService {
     public List<Website> selectByDate(User user, Date time1, Date time2) {
         return websiteDao.selectWebsiteByPageDate(user, time1, time2);
     }
+
+    @Override
+    public boolean insertWebSite(Website website) {
+        int i = websiteDao.insert(website);
+        if(i != 0){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean updateByCId(Website website) {
+
+        WebsiteExample websiteExample = new WebsiteExample();
+        WebsiteExample.Criteria criteria = websiteExample.createCriteria();
+        criteria.andCompanyIdEqualTo(website.getCompanyId());
+
+
+        if(websiteDao.selectByExample(websiteExample).size() <= 0){
+            int i = websiteDao.insert(website);
+            if(i > 0){
+                return true;
+            }
+
+            return false;
+        }
+
+
+        Integer WId = websiteDao.selectByExample(websiteExample).get(0).getWebsiteId();
+        website.setWebsiteId(WId);
+        int i = websiteDao.updateByExampleSelective(website,websiteExample);
+        if(i > 0){
+            return true;
+        }
+        return false;
+    }
 }

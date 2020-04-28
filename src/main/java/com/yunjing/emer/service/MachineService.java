@@ -16,4 +16,6 @@ public interface MachineService {
     Page<Machine> selectByPage(User user);
     Page<Machine> selectByPageDate(User user, Date time1, Date time2);
     List<Machine> selectByDate(User user, Date time1, Date time2);
+    public boolean insertMachine(Machine machine);
+    boolean updateByCId(Machine machine);
 }
