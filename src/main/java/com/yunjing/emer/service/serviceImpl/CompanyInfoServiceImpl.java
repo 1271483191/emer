@@ -5,6 +5,7 @@ import com.yunjing.emer.dao.CompanyInfoDao;
 import com.yunjing.emer.entity.CompanyInfo;
 import com.yunjing.emer.entity.CompanyInfoExample;
 import com.yunjing.emer.entity.User;
+import com.yunjing.emer.entity.UserExample;
 import com.yunjing.emer.service.CompanyInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -141,6 +142,19 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
         companyInfoList = companyInfoDao.selectByExample(null);
 
         return companyInfoList;
+    }
+
+    @Override
+    public List<CompanyInfo> selectCompanyInfoByTime(User user, Date time1, Date time2) {
+        CompanyInfoExample example = new CompanyInfoExample();
+        CompanyInfoExample.Criteria criteria = example.createCriteria();
+        criteria.andTimeBetween(time1,time2);
+
+        criteria.andLevelGreaterThanOrEqualTo(user.getType());
+
+
+
+        return companyInfoDao.selectByExample(example);
     }
 
 }

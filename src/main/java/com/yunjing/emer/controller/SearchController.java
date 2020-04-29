@@ -107,15 +107,17 @@ public class SearchController {
         modelAndView.setViewName("search");
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-        System.out.print("---------"+totalpro+"|"+time1+"|"+time2);
-        System.out.print("---------"+user.getName());
+        System.out.println("---------"+totalpro+"|"+time1+"|"+time2);
+        System.out.println("---------"+user.getName());
         List<CompanyInfo> companyInfoList = new ArrayList<>();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         if(!totalpro.equals("[]")){
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
             if(time1!=""&&time2!=""){
-                System.out.print("tnum,time1num,time2num");
+                System.out.println("tnum,time1num,time2num");
                 Date date1 = simpleDateFormat.parse(time1);
                 Date date2 = simpleDateFormat.parse(time2);
+                System.out.println("date1:" + date1 + "+" + "date2:" + date2);
                 companyInfoList = new ArrayList<>();
                 //String ins = totalpro.replace("[\"", "").replace("\",\"", ",").replace("\"]", "");
                 if(totalpro.contains("3")){
@@ -228,8 +230,20 @@ public class SearchController {
             }
         } else{
             System.out.print("tnull,time1null,time2null");
+            if(time1 == ""){
+                time1 = "0-0-0";
+            }
+            if (time2 == "") {
+
+                time2 = "9999-12-31";
+            }
+
+            Date date1 = simpleDateFormat.parse(time1);
+            Date date2 = simpleDateFormat.parse(time2);
+
+
             companyInfoList = new ArrayList<>();
-            companyInfoList=companyInfoService.selectAll(user);
+            companyInfoList=companyInfoService.selectCompanyInfoByTime(user, date1, date2);
         }
 
         modelAndView.addObject("companys", companyInfoList);

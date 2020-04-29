@@ -32,4 +32,6 @@ public interface CompanyInfoService {
     public boolean updateCompanyInfo(CompanyInfo companyInfo);
     public List<CompanyInfo> selectAll2();
 
+    List<CompanyInfo> selectCompanyInfoByTime(User user, Date time1, Date time2);
+
 }

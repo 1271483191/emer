@@ -55,6 +55,7 @@ public class InputController {
         Date date = new Date();
         System.out.println(date);
         companyInfo.setTime(date);
+        companyInfo.setCompanyType(1);
 
         System.out.println(companyInfo);
         System.out.println(delivery);
@@ -90,6 +91,7 @@ public class InputController {
         Date date = new Date();
         System.out.println(date);
         companyInfo.setTime(date);
+        companyInfo.setCompanyType(1);
 
         System.out.println(companyInfo);
         System.out.println(machine);
@@ -124,6 +126,7 @@ public class InputController {
         Date date = new Date();
         System.out.println(date);
         companyInfo.setTime(date);
+        companyInfo.setCompanyType(1);
 
         System.out.println(companyInfo);
         System.out.println(storeage);
@@ -158,6 +161,7 @@ public class InputController {
         boolean result = false;
         System.out.println(companyInfo);
         System.out.println(website);
+        companyInfo.setCompanyType(1);
 
         Date date = new Date();
         System.out.println(date);
