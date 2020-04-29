@@ -49,7 +49,7 @@
     tSelect.prototype = {
         initInput: function(){
             $_element = this.$element;
-            var _inputDom = '<input type="text" id="'+this.settings.inputId+'">';
+            var _inputDom = '<input type="text" id="'+this.settings.inputId+'" autocomplete="off">';
             $_element.append(_inputDom);
 
             $_textinput = $_element.find("input");

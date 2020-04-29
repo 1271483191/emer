@@ -638,13 +638,13 @@ public class StatisticsController {
             CitiesExample citiesExample = new CitiesExample();
             citiesExample.createCriteria().andNameEqualTo(user.getCity());
             list2 = citiesDao.selectByExample(citiesExample);
-            promap.append("{'name':'"+list2.get(0).getName()+"',"+ "'pId':0,'id':" + list2.get(0).getCode() + ",type:'0'},");
+            promap.append("{'name':'"+list2.get(0).getName()+"',"+ "'pId':0,'id':" + list2.get(0).getCode() + ",type:'1'},");
             List<Areas> list3 = new ArrayList<Areas>();
             AreasExample areasExample = new AreasExample();
             areasExample.createCriteria().andCitycodeEqualTo(list2.get(0).getCode());
             list3 = areasDao.selectByExample(areasExample);
             for (int k = 0; k < list3.size(); k++) {
-                promap.append("{'name':'"+list3.get(k).getName()+"',"+ "'pId':"+list3.get(k).getCitycode()+",'id':" + list3.get(k).getCode() + ",type:'1'},");
+                promap.append("{'name':'"+list3.get(k).getName()+"',"+ "'pId':"+list3.get(k).getCitycode()+",'id':" + list3.get(k).getCode() + ",type:'2'},");
             }
         }
         if(type == 3){
@@ -652,7 +652,7 @@ public class StatisticsController {
             AreasExample areasExample = new AreasExample();
             areasExample.createCriteria().andNameEqualTo(user.getCounty());
             list3 = areasDao.selectByExample(areasExample);
-            promap.append("{'name':'"+list3.get(0).getName()+"',"+ "'pId':0,'id':" + list3.get(0).getCode() + ",type:'0'},");
+            promap.append("{'name':'"+list3.get(0).getName()+"',"+ "'pId':0,'id':" + list3.get(0).getCode() + ",type:'2'},");
         }
         promap.append("]");
         modelAndView.addObject("promap", promap.toString());
