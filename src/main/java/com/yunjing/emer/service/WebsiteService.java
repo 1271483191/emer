@@ -21,4 +21,5 @@ public interface WebsiteService {
     List<Website> selectByDate(User user, Date time1, Date time2);
     public boolean insertWebSite(Website website);
     boolean updateByCId(Website website);
+    List<Website> selectWebsiteByCounty(User user);
 }

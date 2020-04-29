@@ -103,6 +103,7 @@
                     <ul class="sub">
                         <li><a  href="toSupplyStatistics" >供应网点统计</a></li>
                         <li><a  href="toSupplyShow" >全国供应网点列表展示</a></li>
+                        <li><a  href="toSupplyCount" >信息统计</a></li>
 
                     </ul>
                 </li>
@@ -239,9 +240,10 @@
                                                         return false;
                                                     }else{
                                                         socialIdText.attr("style","display:none;");
+                                                        return true;
                                                     }
 
-                                                    var pattern=/[^_IOZSVa-z\W]{2}\d{6}[^_IOZSVa-z\W]{10}$/;
+                                                    /*var pattern=/[^_IOZSVa-z\W]{2}\d{6}[^_IOZSVa-z\W]{10}$/;
                                                     if(!pattern.test(socialId.val()))
                                                     {
                                                         socialIdText.attr("style","color: red;display:block;");
@@ -250,7 +252,7 @@
                                                         socialIdText.attr("style","display:none;");
                                                         console.log("true")
                                                         return true;
-                                                    }
+                                                    }*/
                                                 }
 
                                             </script>
