@@ -366,7 +366,7 @@
                                             <input value="2" name="activationStatus" type="radio"/><span style="margin-right: 10px;margin-left: 5px">集体所有制</span>
                                             <input value="3" name="activationStatus" type="radio"/><span style="margin-right: 10px;margin-left: 5px">私营企业</span>
                                             <input value="4" name="activationStatus" type="radio"/><span style="margin-right: 10px;margin-left: 5px">股份有限公司</span>
-                                            <input value="3" name="activationStatus" type="radio"/><span style="margin-right: 10px;margin-left: 5px">有限责任公司</span>
+                                            <input value="5" name="activationStatus" type="radio"/><span style="margin-right: 10px;margin-left: 5px">有限责任公司</span>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -898,6 +898,7 @@
                                                 var outDay = $("#outDay").val();
                                                 var saveDay = $("#saveDay").val();
 
+
                                                 var riceExp = $("#riceExp").val();
                                                 var flourExp = $("#flourExp").val();
                                                 var oilExp = $("#oilExp").val();
@@ -909,7 +910,25 @@
 
                                                 var longitude = ls[0];
                                                 var latitude = ls[1];
-                                                var activationStatus = $("input[name='activationStatus']:checked").val();
+
+                                                var activationStatusNum = $("input[name='activationStatus']:checked").val();
+                                                var activationStatus = "国有企业";
+                                                if(activationStatusNum == 2){
+                                                    activationStatus = "集体所有制";
+                                                }else if(activationStatusNum == 3){
+                                                    activationStatus = "私营企业";
+                                                }else if(activationStatusNum == 4){
+                                                    activationStatus = "股份有限公司";
+                                                }else if(activationStatusNum == 5){
+                                                    activationStatus = "有限责任公司";
+                                                }
+
+                                                /*<input value="1" name="activationStatus" type="radio" checked="checked"/><span style="margin-right: 10px;margin-left: 5px">国有企业</span>
+                                            <input value="2" name="activationStatus" type="radio"/><span style="margin-right: 10px;margin-left: 5px">集体所有制</span>
+                                            <input value="3" name="activationStatus" type="radio"/><span style="margin-right: 10px;margin-left: 5px">私营企业</span>
+                                            <input value="4" name="activationStatus" type="radio"/><span style="margin-right: 10px;margin-left: 5px">股份有限公司</span>
+                                            <input value="5" name="activationStatus" type="radio"/><span style="margin-right: 10px;margin-left: 5px">有限责任公司</span>*/
+
                                                 var level = $("input[name='level']:checked").val();
                                                 var state = $("input[name='state']:checked").val();
 

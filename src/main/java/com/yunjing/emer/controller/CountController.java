@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -321,12 +322,6 @@ public class CountController {
             }
         }
 
-
-
-
-
-
-
         promap.append("]");
         System.out.println(promap);
         modelAndView.addObject("promap", promap.toString());
@@ -339,6 +334,18 @@ public class CountController {
             companyall.setInDay(0.0);
             companyall.setOutDay(0.0);
             companyall.setSaveDay(0.0);
+            companyall.setSocialId("无");
+            companyall.setLocation("无");
+            companyall.setLatitude(new BigDecimal(0));
+            companyall.setLongitude(new BigDecimal(0));
+            companyall.setCompanyType(-1);
+            companyall.setProvince("无");
+            companyall.setCity("无");
+            companyall.setCounty("无");
+            companyall.setPrincipal("无");
+            companyall.setPhone("无");
+            companyall.setLevel(-1);
+            companyall.setActivationStatus("无");
         }
         modelAndView.addObject("companyall", companyall);
 
@@ -351,6 +358,7 @@ public class CountController {
             websiteall.setFlourExp(0.0);websiteall.setFlourReal(0.0);websiteall.setRiceExp(0.0);websiteall.setRiceReal(0.0);websiteall.setOilExp(0.0);websiteall.setOilReal(0.0);websiteall.setElseExp(0.0);websiteall.setElseReal(0.0);
         }
         modelAndView.addObject("websiteall", websiteall);
+        modelAndView.addObject("flag", false);//是否为单个企业
 
         /*计时结束*/
         Date date2 = new Date();
@@ -379,7 +387,7 @@ public class CountController {
         User user = (User) session.getAttribute("user");
         if(level.equals("0")){
 
-            /*List<CompanyInfo> companys = companyInfoDao.selectByLevelAndProvince(user,txt);
+            List<CompanyInfo> companys = companyInfoDao.selectByLevelAndProvince(user,txt);
             modelAndView.addObject("companys", companys);
 
             CompanyInfo companyall = companyInfoDao.sumByUserAndProvince(user,txt);
@@ -400,13 +408,14 @@ public class CountController {
 
             modelAndView.addObject("companyall", companyall);
             modelAndView.addObject("websiteall", websiteall);
-            System.out.println(0);*/
-            ModelAndView mv = new ModelAndView("redirect:/toSupplyCount");
-            return mv;
+            modelAndView.addObject("flag", false);//是否为单个企业
+            System.out.println(0);
+            /*ModelAndView mv = new ModelAndView("redirect:/toSupplyCount");
+            return mv;*/
         }
         if(level.equals("1")){
 
-            /*List<CompanyInfo> companys = companyInfoDao.selectByLevelAndCity(user,txt);
+            List<CompanyInfo> companys = companyInfoDao.selectByLevelAndCity(user,txt);
             modelAndView.addObject("companys", companys);
 
 
@@ -428,14 +437,15 @@ public class CountController {
 
             modelAndView.addObject("companyall", companyall);
             modelAndView.addObject("websiteall", websiteall);
-            System.out.println(1);*/
+            modelAndView.addObject("flag", false);//是否为单个企业
+            System.out.println(1);
 
-            ModelAndView mv = new ModelAndView("redirect:/toSupplyCount");
-            return mv;
+            /*ModelAndView mv = new ModelAndView("redirect:/toSupplyCount");
+            return mv;*/
         }
         if(level.equals("2")){
 
-            /*List<CompanyInfo> companys = companyInfoDao.selectByLevelAndCounty(user,txt);
+            List<CompanyInfo> companys = companyInfoDao.selectByLevelAndCounty(user,txt);
             modelAndView.addObject("companys", companys);
 
             CompanyInfo companyall = companyInfoDao.sumByUserAndCountry(user,txt);
@@ -456,10 +466,11 @@ public class CountController {
             modelAndView.addObject("companyall", companyall);
 
             modelAndView.addObject("websiteall", websiteall);
-            System.out.println(2);*/
+            modelAndView.addObject("flag", false);//是否为单个企业
+            System.out.println(2);
 
-            ModelAndView mv = new ModelAndView("redirect:/toSupplyCount");
-            return mv;
+            /*ModelAndView mv = new ModelAndView("redirect:/toSupplyCount");
+            return mv;*/
         }
         if(level.equals("3")){
 
@@ -493,10 +504,12 @@ public class CountController {
             modelAndView.addObject("companyall", companyall);
 
             modelAndView.addObject("websiteall", websiteall);
+            System.out.println(websiteall.getState());
+            modelAndView.addObject("flag", true);//是否为单个企业
             System.out.println(3);
         }
 
-        System.out.println(promap);
+        //System.out.println();
 
         modelAndView.addObject("promap", promap);
 
