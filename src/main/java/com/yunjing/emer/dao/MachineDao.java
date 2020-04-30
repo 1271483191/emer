@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.yunjing.emer.entity.User;
+import com.yunjing.emer.entity.Website;
 import org.apache.ibatis.annotations.Param;
 
 public interface MachineDao {
@@ -49,4 +50,6 @@ public interface MachineDao {
     Machine sumByUserAndCity(@Param("user")User user,@Param("city") String city);
 
     Machine sumByUserAndCountry(@Param("user")User user,@Param("country") String country);
+
+    List<Machine> selectMachineByCounty(User user);
 }

@@ -1,10 +1,7 @@
 package com.yunjing.emer.service;
 
 import com.github.pagehelper.Page;
-import com.yunjing.emer.entity.Delivery;
-import com.yunjing.emer.entity.Machine;
-import com.yunjing.emer.entity.Storeage;
-import com.yunjing.emer.entity.User;
+import com.yunjing.emer.entity.*;
 
 import java.util.Date;
 import java.util.List;
@@ -18,4 +15,5 @@ public interface MachineService {
     List<Machine> selectByDate(User user, Date time1, Date time2);
     public boolean insertMachine(Machine machine);
     boolean updateByCId(Machine machine);
+    List<Machine> selectMachineByCounty(User user);
 }

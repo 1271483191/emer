@@ -104,4 +104,9 @@ public class MachineServiceImpl implements MachineService {
         }
         return false;
     }
+
+    @Override
+    public List<Machine> selectMachineByCounty(User user) {
+        return machineDao.selectMachineByCounty(user);
+    }
 }

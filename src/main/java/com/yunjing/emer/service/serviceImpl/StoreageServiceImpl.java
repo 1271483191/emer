@@ -103,4 +103,9 @@ public class StoreageServiceImpl implements StoreageService {
         }
         return false;
     }
+
+    @Override
+    public List<Storeage> selectStoreageByCounty(User user) {
+        return storeageDao.selectStoreageByCounty(user);
+    }
 }

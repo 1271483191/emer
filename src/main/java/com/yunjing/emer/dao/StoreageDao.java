@@ -1,13 +1,10 @@
 package com.yunjing.emer.dao;
 
-import com.yunjing.emer.entity.Storeage;
-import com.yunjing.emer.entity.StoreageExample;
+import com.yunjing.emer.entity.*;
 
 import java.util.Date;
 import java.util.List;
 
-import com.yunjing.emer.entity.User;
-import com.yunjing.emer.entity.Website;
 import org.apache.ibatis.annotations.Param;
 
 public interface StoreageDao {
@@ -50,4 +47,8 @@ public interface StoreageDao {
     Storeage sumByUserAndCity(@Param("user")User user,@Param("city") String city);
 
     Storeage sumByUserAndCountry(@Param("user")User user,@Param("country") String country);
+
+    List<Storeage> selectStoreageByCounty(User user);
+
+    Storeage sumByExample(StoreageExample example);
 }
