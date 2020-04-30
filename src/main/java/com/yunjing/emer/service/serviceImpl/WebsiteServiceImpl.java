@@ -105,4 +105,9 @@ public class WebsiteServiceImpl implements WebsiteService {
         }
         return false;
     }
+
+    @Override
+    public List<Website> selectWebsiteByCounty(User user) {
+        return websiteDao.selectWebsiteByCounty(user);
+    }
 }

@@ -78,7 +78,7 @@ jQuery(function($) {
                         bAutoWidth: false,
                         "aoColumns": [
                             { "bSortable": false },
-                            null, null,null, null, null,null,null, null, null,null, null, null,null
+                            null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null
                         ],
                         "aaSorting": [],
                         select: {
@@ -218,7 +218,7 @@ jQuery(function($) {
                 bAutoWidth: false,
                 "aoColumns": [
                     { "bSortable": false },
-                    null, null,null, null, null,null,null, null, null,null, null, null,null
+                    null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null
                 ],
                 "aaSorting": [],
 

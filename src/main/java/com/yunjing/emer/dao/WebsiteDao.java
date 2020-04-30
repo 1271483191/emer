@@ -50,4 +50,6 @@ public interface WebsiteDao {
     Website sumByUserAndCity(@Param("user")User user,@Param("city") String city);
 
     Website sumByUserAndCountry(@Param("user")User user,@Param("country") String country);
+
+    List<Website> selectWebsiteByCounty(User user);
 }

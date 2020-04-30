@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.yunjing.emer.entity.User;
+import com.yunjing.emer.entity.Website;
 import org.apache.ibatis.annotations.Param;
 
 public interface CompanyInfoDao {
@@ -81,4 +82,12 @@ public interface CompanyInfoDao {
     List<CompanyInfo> selectByLevelAndCity(@Param("user")User user,@Param("city") String city);
 
     List<CompanyInfo> selectByLevelAndCounty(@Param("user")User user,@Param("country") String country);
+
+    CompanyInfo sumByUser(User user);
+
+    CompanyInfo sumByUserAndProvince(@Param("user")User user, @Param("province") String province);
+
+    CompanyInfo sumByUserAndCity(@Param("user")User user,@Param("city") String city);
+
+    CompanyInfo sumByUserAndCountry(@Param("user")User user,@Param("country") String country);
 }

@@ -84,6 +84,47 @@
     `location`, activation_status, longitude, latitude, principal, phone, in_day, out_day, 
     save_day
   </sql>
+  <select id="sumByUser" resultMap="BaseResultMap">
+    select sum(in_day) as in_day,sum(out_day) as out_day,sum(save_day) as save_day
+    from emer.company_info c
+    where c.level >= #{type}
+    <if test="province != null and type == 1">
+      and c.province = #{province}
+    </if>
+    <if test="province == null">
+      and c.province = 'false'
+    </if>
+    <if test="city != null and type == 2">
+      and c.city = #{city}
+    </if>
+    <if test="city == null">
+      and c.city = 'false'
+    </if>
+    <if test="county != null and type == 3">
+      and c.county = #{county}
+    </if>
+    <if test="county == null">
+      and c.county = 'false'
+    </if>
+  </select>
+  <select id="sumByUserAndProvince" resultMap="BaseResultMap">
+    select sum(in_day) as in_day,sum(out_day) as out_day,sum(save_day) as save_day
+    from emer.company_info c
+    where c.level >= #{user.type}
+    and c.province = #{province}
+  </select>
+  <select id="sumByUserAndCity" resultMap="BaseResultMap">
+    select sum(in_day) as in_day,sum(out_day) as out_day,sum(save_day) as save_day
+    from emer.company_info c
+    where c.level >= #{user.type}
+    and c.city = #{city}
+  </select>
+  <select id="sumByUserAndCountry" resultMap="BaseResultMap">
+    select sum(in_day) as in_day,sum(out_day) as out_day,sum(save_day) as save_day
+    from emer.company_info c
+    where c.level >= #{user.type}
+    and c.county = #{country}
+  </select>
   <select id="selectCompanyInfoByLevel" parameterType="com.yunjing.emer.entity.User" resultMap="BaseResultMap" >
     select * from company_info as c
     where c.level >= #{type}

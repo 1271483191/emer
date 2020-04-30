@@ -100,6 +100,28 @@
       and c.county = 'false'
     </if>
   </select>
+  <select id="selectWebsiteByCounty" parameterType="com.yunjing.emer.entity.User" resultMap="BaseResultMap" >
+    select * from website as w,company_info as c
+    where w.company_id = c.company_id
+    <if test="province != null and type == 1">
+      and c.province = #{province}
+    </if>
+    <if test="province == null">
+      and c.province = 'false'
+    </if>
+    <if test="city != null and type == 2">
+      and c.city = #{city}
+    </if>
+    <if test="city == null">
+      and c.city = 'false'
+    </if>
+    <if test="county != null and type == 3">
+      and c.county = #{county}
+    </if>
+    <if test="county == null">
+      and c.county = 'false'
+    </if>
+  </select>
   <select id="selectWebsiteByPageDate" resultMap="BaseResultMap" >
     select * from website as w,company_info as c
     where w.company_id = c.company_id
