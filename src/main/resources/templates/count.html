@@ -126,7 +126,6 @@
                     <ul class="sub">
                         <li><a  href="toSupplyStatistics" >供应网点统计</a></li>
                         <li><a  href="toSupplyShow" >全国供应网点列表展示</a></li>
-                        <li><a  href="toSupplyCount" >信息统计</a></li>
 
                     </ul>
                 </li>
@@ -402,7 +401,7 @@
                                 </section>
 
 
-                            </div>&lt;!&ndash; /content-panel &ndash;&gt;
+                            </div><!-- /content-panel -->
 
                         </div>
                     </div>-->
@@ -496,11 +495,6 @@
                 if(level=="3"){
                     $("#companyTable").css("display","table")
                 }
-                console.log("dropdown-menu:"+$(".dropdown-menu").children("li").size());
-                console.log("1:"+$(".dropdown-menu").children("li").eq(0).hasClass("selected"));
-                console.log("2:"+$(".dropdown-menu").children("li").eq(1).hasClass("selected"));
-                console.log("3:"+$(".dropdown-menu").children("li").eq(2).hasClass("selected"));
-                console.log("4:"+$(".dropdown-menu").children("li").eq(3).hasClass("selected"));
                 if($(".dropdown-menu").children("li").eq(0).hasClass("selected")){
                     $("#supplyTable").css("display","table")
                 }else{
