@@ -114,7 +114,7 @@
                     <!--</a>-->
                 </li>
                 <li class="sub-menu">
-                    <a class="active" href="javascript:void(0);" >
+                    <a href="javascript:void(0);" >
                         <i class="fa fa-book"></i>
                         <span style="font-size: 1.5rem">应急供应网点</span>
                     </a>
@@ -133,11 +133,11 @@
                     <ul class="sub">
                         <li><a  href="toDeliverStatistics">配送中心统计</a></li>
                         <li><a  href="toDeliverShow">配送中心列表展示</a></li>
-                        <li><a  href="toDeliveryCount" >信息统计</a></li>
+                        <li><a  href="toDeliverCount" >信息统计</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu">
-                    <a href="javascript:void(0);" >
+                    <a class="active" href="javascript:void(0);" >
                         <i class="fa fa-th"></i>
                         <span style="font-size: 1.5rem">应急储运企业</span>
                     </a>
@@ -217,29 +217,82 @@
                         <div class="col-md-12 mb">
                             <hr>
                             <div>
-                                <table width='100%' id="supplyTable" style="margin-top: 0px;">
-                                    <tr>
-                                        <th colspan="3">企业指标</th>
-                                        <th colspan="4">设计日供应能力（吨）</th>
-                                        <th colspan="4">实际日供应能力（吨）</th>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="2">物流能力</th>
-                                        <th rowspan="2">实际日运输能力（吨/天）</th>
-                                    </tr>
-                                    <tr>
-                                        <th>日运输能力（吨/天）</th>
-                                        <th>运输车辆数量(个)</th>
-                                    </tr>
-                                    <tr>
-                                        <td th:text="${companyall.getInDay()}"></td>
-                                        <td th:text="${companyall.getOutDay()}"></td>
-                                        <td th:text="${companyall.getSaveDay()}"></td>
-                                        <td th:text="${storeageall.getTransportDay()}"></td>
-                                        <td th:text="${storeageall.getCarNum()}"></td>
-                                        <td th:text="${storeageall.getTransportDayReal()}"></td>
-                                    </tr>
-                                </table>
+                                <span th:switch="${flag}">
+                                    <table th:case="true" width='100%' id="supplyTable" style="margin-top: 0px;">
+                                        <tr>
+                                            <th>统一社会信用代码</th>
+                                            <th>实际所在地区</th>
+                                            <th>实际经营地址</th>
+                                            <th>经纬度</th>
+                                            <th>企业性质</th>
+                                            <th>应急级别</th>
+                                            <th>负责人</th>
+                                            <th>联系电话</th>
+                                            <th colspan="3">企业指标</th>
+                                            <th colspan="2">物流能力</th>
+                                            <th>实际日运输能力（吨/天）</th>
+                                            <th>生产状态</th>
+                                        </tr>
+                                        <tr>
+                                            <th rowspan="2" th:text="${companyall.getSocialId()}"></th>
+                                            <th rowspan="2" th:text="${companyall.getCounty()}"></th>
+                                            <th rowspan="2" th:text="${companyall.getLocation()}"></th>
+                                            <th rowspan="2" th:text="${companyall.getLatitude()} + ',' + ${companyall.getLongitude()}"></th>
+                                            <th rowspan="2" th:text="${companyall.getActivationStatus()}"></th>
+                                            <span th:switch="${companyall.getLevel()}">
+                                                <th rowspan="2" th:case="0">国家级</th>
+                                                <th rowspan="2" th:case="1">省级</th>
+                                                <th rowspan="2" th:case="2">市级</th>
+                                                <th rowspan="2" th:case="2">县级</th>
+                                            </span>
+                                            <th rowspan="2" th:text="${companyall.getPrincipal()}"></th>
+                                            <th rowspan="2" th:text="${companyall.getPhone()}"></th>
+                                            <th>日入库量</th>
+                                            <th>日销量</th>
+                                            <th>日库存</th>
+                                            <th>日运输能力（吨/天）</th>
+                                            <th>运输车辆数量(个)</th>
+                                            <span th:switch="${storeageall.getState()}">
+                                                <th th:case="0" rowspan="2">未选择</th>
+                                                <th th:case="1" rowspan="2">生产</th>
+                                                <th th:case="2" rowspan="2">停产</th>
+                                            </span>
+
+                                        </tr>
+                                        <tr>
+                                            <td th:text="${companyall.getInDay()}"></td>
+                                            <td th:text="${companyall.getOutDay()}"></td>
+                                            <td th:text="${companyall.getSaveDay()}"></td>
+                                            <td th:text="${storeageall.getTransportDay()}"></td>
+                                            <td th:text="${storeageall.getCarNum()}"></td>
+                                            <td rowspan="2" th:text="${storeageall.getTransportDayReal()}"></td>
+                                        </tr>
+                                    </table>
+
+                                    <table th:case="false" width='100%' id="supplyTable2" style="margin-top: 0px;">
+                                        <tr>
+                                            <th colspan="3">企业指标</th>
+                                            <th colspan="2">物流能力</th>
+                                            <th>实际日运输能力（吨/天）</th>
+                                        </tr>
+                                        <tr>
+                                           <th>日入库量</th>
+                                            <th>日销量</th>
+                                            <th>日库存</th>
+                                            <th>日运输能力（吨/天）</th>
+                                            <th>运输车辆数量(个)</th>
+                                        </tr>
+                                        <tr>
+                                            <td th:text="${companyall.getInDay()}"></td>
+                                            <td th:text="${companyall.getOutDay()}"></td>
+                                            <td th:text="${companyall.getSaveDay()}"></td>
+                                            <td th:text="${storeageall.getTransportDay()}"></td>
+                                            <td th:text="${storeageall.getCarNum()}"></td>
+                                            <td rowspan="2" th:text="${storeageall.getTransportDayReal()}"></td>
+                                        </tr>
+                                    </table>
+                                </span>
+
                             </div>
                         </div>
                         <!--统计分析结束-->
@@ -286,7 +339,7 @@
 <script src="assets/js/jquery.ui.touch-punch.min.js"></script>
 <script src="assets/js/chosen.jquery.min.js"></script>
 
-<script src="js/search.js"></script>
+<!--<script src="js/search.js"></script>-->
 <!--common script for all pages-->
 <script src="assets/js/common-scripts.js"></script>
 
@@ -306,6 +359,8 @@
      })
      });});*/
 
+    console.log($("#treeSelectHide").val());
+
     data = eval('(' + $("#treeSelectHide").val() + ')');
     $(".treeSelect").treeSelect({
         data:data,
@@ -316,6 +371,10 @@
         var promap = $("#treeSelectHide").val();
         var level = $("#treeType").val();
         var txt = $("#txt").val();
+
+        //点击省市县区不执行任何操作，只有点击企业才会去查询相关企业信息
+        //if(level != "3") return;
+
         console.log("promap:"+promap);
         console.log("level:"+level);
         console.log("txt:"+txt);
@@ -324,7 +383,7 @@
         }
 
         var temp = document.createElement("form");
-        temp.action = "/toSupplyTreeSaerch";
+        temp.action = "/toStoreageTreeSaerch";
         temp.method = "post";
         temp.style.display = "none";
 
@@ -352,166 +411,166 @@
 
 
         /*$.post("/toSupplyTreeSaerch",
-            {
-                level:level,txt:txt,promap:promap
-            },
-            function(data,status){
+         {
+         level:level,txt:txt,promap:promap
+         },
+         function(data,status){
 
-                console.log("success")
-                /!*var curWwwPath=window.document.location.href;
-                var pathName=window.document.location.pathname;
-                var localhostPaht;
-                var pos = curWwwPath.indexOf(pathName);
-                localhostPaht = curWwwPath.substring(0,pos);
-                localhostPaht += "/";
-                var href = localhostPaht + "toSupplyTreeSaerch?level=" + level + "&txt=" + txt + "&promap=" + promap;
-                console.log(href);
-                window.location.href = href;*!/
-            });*/
+         console.log("success")
+         /!*var curWwwPath=window.document.location.href;
+         var pathName=window.document.location.pathname;
+         var localhostPaht;
+         var pos = curWwwPath.indexOf(pathName);
+         localhostPaht = curWwwPath.substring(0,pos);
+         localhostPaht += "/";
+         var href = localhostPaht + "toSupplyTreeSaerch?level=" + level + "&txt=" + txt + "&promap=" + promap;
+         console.log(href);
+         window.location.href = href;*!/
+         });*/
 
         /*$.ajax({
-            type: "POST",
-            url: "toSupplyTreeSaerch",
-            data: {level:level,txt:txt},
-            async:false,
-            success: function(data){
-                $("#replaceHtml").html($(data).find("#replaceHtml").html());
-                var myTable = $('#dynamic-table')
-                    .DataTable( {
-                        destroy : true,
-                        scrollX: true,
-                        scrollCollapse: true,
-                        bPaginate: true,
-                        language: {
-                            "sProcessing": "处理中...",
-                            "sLengthMenu": "显示 _MENU_ 项结果",
-                            "sZeroRecords": "没有匹配结果",
-                            "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
-                            "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
-                            "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
-                            "sInfoPostFix": "",
-                            "sSearch": "搜索:",
-                            "sUrl": "",
-                            "sEmptyTable": "表中数据为空",
-                            "sLoadingRecords": "载入中...",
-                            "sInfoThousands": ",",
-                            "oPaginate": {
-                                "sFirst": "首页",
-                                "sPrevious": "上页",
-                                "sNext": "下页",
-                                "sLast": "末页"
-                            },
-                            "oAria": {
-                                "sSortAscending": ": 以升序排列此列",
-                                "sSortDescending": ": 以降序排列此列"
-                            }
-                        },
-                        bAutoWidth: false,
-                        "aoColumns": [
-                            { "bSortable": false },
-                            null, null,null, null, null,null,null
-                        ],
-                        "aaSorting": [],
-                        select: {
-                            style: 'multi'
-                        }
-                    } );
-                $.fn.dataTable.Buttons.defaults.dom.container.className = 'dt-buttons btn-overlap btn-group btn-overlap';
+         type: "POST",
+         url: "toSupplyTreeSaerch",
+         data: {level:level,txt:txt},
+         async:false,
+         success: function(data){
+         $("#replaceHtml").html($(data).find("#replaceHtml").html());
+         var myTable = $('#dynamic-table')
+         .DataTable( {
+         destroy : true,
+         scrollX: true,
+         scrollCollapse: true,
+         bPaginate: true,
+         language: {
+         "sProcessing": "处理中...",
+         "sLengthMenu": "显示 _MENU_ 项结果",
+         "sZeroRecords": "没有匹配结果",
+         "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+         "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+         "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+         "sInfoPostFix": "",
+         "sSearch": "搜索:",
+         "sUrl": "",
+         "sEmptyTable": "表中数据为空",
+         "sLoadingRecords": "载入中...",
+         "sInfoThousands": ",",
+         "oPaginate": {
+         "sFirst": "首页",
+         "sPrevious": "上页",
+         "sNext": "下页",
+         "sLast": "末页"
+         },
+         "oAria": {
+         "sSortAscending": ": 以升序排列此列",
+         "sSortDescending": ": 以降序排列此列"
+         }
+         },
+         bAutoWidth: false,
+         "aoColumns": [
+         { "bSortable": false },
+         null, null,null, null, null,null,null
+         ],
+         "aaSorting": [],
+         select: {
+         style: 'multi'
+         }
+         } );
+         $.fn.dataTable.Buttons.defaults.dom.container.className = 'dt-buttons btn-overlap btn-group btn-overlap';
 
-                new $.fn.dataTable.Buttons( myTable, {
-                    buttons: [
-                        {
-                            "extend": "colvis",
-                            "text": "<i class='fa fa-search bigger-110 blue'></i> <span class='hidden'>展示/隐藏 列名</span>",
-                            "className": "btn btn-white btn-primary btn-bold",
-                            columns: ':not(:first)'
-                        },
-                        {
-                            "extend": "copy",
-                            "text": "<i class='fa fa-copy bigger-110 pink'></i> <span class='hidden'>复制到剪贴板</span>",
-                            "className": "btn btn-white btn-primary btn-bold"
-                        },
-                        {
-                            "extend": "csv",
-                            "text": "<i class='fa fa-database bigger-110 orange'></i> <span class='hidden'>导出CSV文件</span>",
-                            "className": "btn btn-white btn-primary btn-bold",
-                            "sCharSet": "utf16le",
-                            "bBomInc": true,
-                            "sFieldSeperator": "\t"
-                        },
-                        // {
-                        //     "extend": "excel",
-                        //     "text": "<i class='fa fa-file-excel-o bigger-110 green'></i> <span class='hidden'>导出Excel文件</span>",
-                        //     "className": "btn btn-white btn-primary btn-bold"
-                        // },
-                        {
-                            "extend": "print",
-                            "text": "<i class='fa fa-print bigger-110 grey'></i> <span class='hidden'>打印</span>",
-                            "className": "btn btn-white btn-primary btn-bold",
-                            autoPrint: false,
-                            message: 'This print was produced using the Print button for DataTables'
-                        }
-                    ]
-                } );
-                myTable.buttons().container().appendTo( $('.tableTools-container') );
+         new $.fn.dataTable.Buttons( myTable, {
+         buttons: [
+         {
+         "extend": "colvis",
+         "text": "<i class='fa fa-search bigger-110 blue'></i> <span class='hidden'>展示/隐藏 列名</span>",
+         "className": "btn btn-white btn-primary btn-bold",
+         columns: ':not(:first)'
+         },
+         {
+         "extend": "copy",
+         "text": "<i class='fa fa-copy bigger-110 pink'></i> <span class='hidden'>复制到剪贴板</span>",
+         "className": "btn btn-white btn-primary btn-bold"
+         },
+         {
+         "extend": "csv",
+         "text": "<i class='fa fa-database bigger-110 orange'></i> <span class='hidden'>导出CSV文件</span>",
+         "className": "btn btn-white btn-primary btn-bold",
+         "sCharSet": "utf16le",
+         "bBomInc": true,
+         "sFieldSeperator": "\t"
+         },
+         // {
+         //     "extend": "excel",
+         //     "text": "<i class='fa fa-file-excel-o bigger-110 green'></i> <span class='hidden'>导出Excel文件</span>",
+         //     "className": "btn btn-white btn-primary btn-bold"
+         // },
+         {
+         "extend": "print",
+         "text": "<i class='fa fa-print bigger-110 grey'></i> <span class='hidden'>打印</span>",
+         "className": "btn btn-white btn-primary btn-bold",
+         autoPrint: false,
+         message: 'This print was produced using the Print button for DataTables'
+         }
+         ]
+         } );
+         myTable.buttons().container().appendTo( $('.tableTools-container') );
 
-                //style the message box
-                var defaultCopyAction = myTable.button(1).action();
-                myTable.button(1).action(function (e, dt, button, config) {
-                    defaultCopyAction(e, dt, button, config);
-                    $('.dt-button-info').addClass('gritter-item-wrapper gritter-info gritter-center white');
-                });
-
-
-                var defaultColvisAction = myTable.button(0).action();
-                myTable.button(0).action(function (e, dt, button, config) {
-
-                    defaultColvisAction(e, dt, button, config);
+         //style the message box
+         var defaultCopyAction = myTable.button(1).action();
+         myTable.button(1).action(function (e, dt, button, config) {
+         defaultCopyAction(e, dt, button, config);
+         $('.dt-button-info').addClass('gritter-item-wrapper gritter-info gritter-center white');
+         });
 
 
-                    if($('.dt-button-collection > .dropdown-menu').length == 0) {
-                        $('.dt-button-collection')
-                            .wrapInner('<ul class="dropdown-menu dropdown-light dropdown-caret dropdown-caret" />')
-                            .find('a').attr('href', '#').wrap("<li />")
-                    }
-                    $('.dt-button-collection').appendTo('.tableTools-container .dt-buttons')
-                });
+         var defaultColvisAction = myTable.button(0).action();
+         myTable.button(0).action(function (e, dt, button, config) {
 
-                setTimeout(function() {
-                    $($('.tableTools-container')).find('a.dt-button').each(function() {
-                        var div = $(this).find(' > div').first();
-                        if(div.length == 1) div.tooltip({container: 'body', title: div.parent().text()});
-                        else $(this).tooltip({container: 'body', title: $(this).text()});
-                    });
-                }, 500);
+         defaultColvisAction(e, dt, button, config);
 
-                myTable.on( 'select', function ( e, dt, type, index ) {
-                    if ( type === 'row' ) {
-                        $( myTable.row( index ).node() ).find('input:checkbox').prop('checked', true);
-                    }
-                } );
-                myTable.on( 'deselect', function ( e, dt, type, index ) {
-                    if ( type === 'row' ) {
-                        $( myTable.row( index ).node() ).find('input:checkbox').prop('checked', false);
-                    }
-                } );
 
-                //table checkboxes
-                $('th input[type=checkbox], td input[type=checkbox]').prop('checked', false);
+         if($('.dt-button-collection > .dropdown-menu').length == 0) {
+         $('.dt-button-collection')
+         .wrapInner('<ul class="dropdown-menu dropdown-light dropdown-caret dropdown-caret" />')
+         .find('a').attr('href', '#').wrap("<li />")
+         }
+         $('.dt-button-collection').appendTo('.tableTools-container .dt-buttons')
+         });
 
-                //select/deselect all rows according to table header checkbox
-                $('#dynamic-table > thead > tr > th input[type=checkbox], #dynamic-table_wrapper input[type=checkbox]').eq(-1).on('click', function(){
-                    var th_checked = this.checked;//checkbox inside "TH" table header
-                    $('#dynamic-table').find('tbody > tr').each(function(){
-                        var row = this;
-                        if(th_checked) myTable.row(row).select();
-                        else  myTable.row(row).deselect();
-                    });
-                });
+         setTimeout(function() {
+         $($('.tableTools-container')).find('a.dt-button').each(function() {
+         var div = $(this).find(' > div').first();
+         if(div.length == 1) div.tooltip({container: 'body', title: div.parent().text()});
+         else $(this).tooltip({container: 'body', title: $(this).text()});
+         });
+         }, 500);
 
-            }
+         myTable.on( 'select', function ( e, dt, type, index ) {
+         if ( type === 'row' ) {
+         $( myTable.row( index ).node() ).find('input:checkbox').prop('checked', true);
+         }
+         } );
+         myTable.on( 'deselect', function ( e, dt, type, index ) {
+         if ( type === 'row' ) {
+         $( myTable.row( index ).node() ).find('input:checkbox').prop('checked', false);
+         }
+         } );
 
-        });*/
+         //table checkboxes
+         $('th input[type=checkbox], td input[type=checkbox]').prop('checked', false);
+
+         //select/deselect all rows according to table header checkbox
+         $('#dynamic-table > thead > tr > th input[type=checkbox], #dynamic-table_wrapper input[type=checkbox]').eq(-1).on('click', function(){
+         var th_checked = this.checked;//checkbox inside "TH" table header
+         $('#dynamic-table').find('tbody > tr').each(function(){
+         var row = this;
+         if(th_checked) myTable.row(row).select();
+         else  myTable.row(row).deselect();
+         });
+         });
+
+         }
+
+         });*/
     }
 
     $(document).ready(function () {
