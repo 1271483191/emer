@@ -325,6 +325,9 @@
         var promap = $("#treeSelectHide").val();
         var level = $("#treeType").val();
         var txt = $("#txt").val();
+
+        if(level != "3") return;
+
         console.log("promap:"+promap);
         console.log("level:"+level);
         console.log("txt:"+txt);
