@@ -75,6 +75,33 @@
     delivery_id, company_id, ware_ability, delivery_day, `range`, radius, delivery_num, 
     car_num, delivery_day_real, `state`
   </sql>
+ <!-- <select id="sumByExample" parameterType="integer" resultMap="BaseResultMap">
+    select *
+    from delivery
+    where company_id = #{cid}
+  </select>-->
+  <select id="selectDeliveryByCounty" parameterType="com.yunjing.emer.entity.User" resultMap="BaseResultMap" >
+    select * from delivery as d,company_info as c
+    where d.company_id = c.company_id
+    <if test="province != null and type == 1">
+      and c.province = #{province}
+    </if>
+    <if test="province == null">
+      and c.province = 'false'
+    </if>
+    <if test="city != null and type == 2">
+      and c.city = #{city}
+    </if>
+    <if test="city == null">
+      and c.city = 'false'
+    </if>
+    <if test="county != null and type == 3">
+      and c.county = #{county}
+    </if>
+    <if test="county == null">
+      and c.county = 'false'
+    </if>
+  </select>
   <select id="selectDeliveryByCompanyLevel" parameterType="com.yunjing.emer.entity.User" resultMap="BaseResultMap" >
     select * from delivery as d,company_info as c
     where d.company_id = c.company_id

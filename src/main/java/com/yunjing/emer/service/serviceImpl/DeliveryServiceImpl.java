@@ -101,4 +101,9 @@ public class DeliveryServiceImpl  implements DeliveryService {
         }
         return false;
     }
+
+    @Override
+    public List<Delivery> selectDeliveryByCounty(User user) {
+        return deliveryDao.selectDeliveryByCounty(user);
+    }
 }

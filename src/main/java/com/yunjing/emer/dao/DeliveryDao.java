@@ -1,12 +1,10 @@
 package com.yunjing.emer.dao;
 
-import com.yunjing.emer.entity.Delivery;
-import com.yunjing.emer.entity.DeliveryExample;
+import com.yunjing.emer.entity.*;
 
 import java.util.Date;
 import java.util.List;
 
-import com.yunjing.emer.entity.User;
 import org.apache.ibatis.annotations.Param;
 
 public interface DeliveryDao {
@@ -49,4 +47,8 @@ public interface DeliveryDao {
     Delivery sumByUserAndCity(@Param("user")User user,@Param("city") String city);
 
     Delivery sumByUserAndCountry(@Param("user")User user,@Param("country") String country);
+
+    Delivery sumByExample(@Param("cid")Integer cid);
+
+    List<Delivery> selectDeliveryByCounty(User user);
 }
