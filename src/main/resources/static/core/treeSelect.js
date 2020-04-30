@@ -37,6 +37,7 @@
                 $_textinput.val(treeNode.name);
                 $_element.removeClass("show");
                 $("#treeType").val(treeNode.type);
+                $("#treeId").val(treeNode.id);
             }
         };
         //将一个新的空对象做为$.extend的第一个参数，defaults和用户传递的参数对象紧随其后，

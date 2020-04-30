@@ -608,6 +608,11 @@ public class StatisticsController {
                     list3 = areasDao.selectByExample(areasExample);
                     for (int k = 0; k < list3.size(); k++) {
                         promap.append("{'name':'"+list3.get(k).getName()+"',"+ "'pId':"+list3.get(k).getCitycode()+",'id':" + list3.get(k).getCode() + ",type:'2'},");
+                        List<CompanyInfo> list4 = new ArrayList<CompanyInfo>();
+                        list4 = companyInfoDao.selectByLevelAndCounty(user,list3.get(k).getName());
+                        for(int l = 0; l < list4.size(); l++){
+                            promap.append("{'name':'"+list4.get(l).getName().replace("'","\'")+"',"+ "'pId':"+list3.get(k).getCode()+",'id':" + list4.get(l).getCompanyId() + ",type:'3'},");
+                        }
                     }
                 }
             }
@@ -630,6 +635,11 @@ public class StatisticsController {
                 list3 = areasDao.selectByExample(areasExample);
                 for (int k = 0; k < list3.size(); k++) {
                     promap.append("{'name':'"+list3.get(k).getName()+"',"+ "'pId':"+list3.get(k).getCitycode()+",'id':" + list3.get(k).getCode() + ",type:'2'},");
+                    List<CompanyInfo> list4 = new ArrayList<CompanyInfo>();
+                    list4 = companyInfoDao.selectByLevelAndCounty(user,list3.get(k).getName());
+                    for(int l = 0; l < list4.size(); l++){
+                        promap.append("{'name':'"+list4.get(l).getName().replace("'","\'")+"',"+ "'pId':"+list3.get(k).getCode()+",'id':" + list4.get(l).getCompanyId() + ",type:'3'},");
+                    }
                 }
             }
         }
@@ -645,6 +655,11 @@ public class StatisticsController {
             list3 = areasDao.selectByExample(areasExample);
             for (int k = 0; k < list3.size(); k++) {
                 promap.append("{'name':'"+list3.get(k).getName()+"',"+ "'pId':"+list3.get(k).getCitycode()+",'id':" + list3.get(k).getCode() + ",type:'2'},");
+                List<CompanyInfo> list4 = new ArrayList<CompanyInfo>();
+                list4 = companyInfoDao.selectByLevelAndCounty(user,list3.get(k).getName());
+                for(int l = 0; l < list4.size(); l++){
+                    promap.append("{'name':'"+list4.get(l).getName().replace("'","\'")+"',"+ "'pId':"+list3.get(k).getCode()+",'id':" + list4.get(l).getCompanyId() + ",type:'3'},");
+                }
             }
         }
         if(type == 3){
@@ -653,11 +668,18 @@ public class StatisticsController {
             areasExample.createCriteria().andNameEqualTo(user.getCounty());
             list3 = areasDao.selectByExample(areasExample);
             promap.append("{'name':'"+list3.get(0).getName()+"',"+ "'pId':0,'id':" + list3.get(0).getCode() + ",type:'2'},");
+            List<CompanyInfo> list4 = new ArrayList<CompanyInfo>();
+            list4 = companyInfoDao.selectByLevelAndCounty(user,list3.get(0).getName());
+            for(int l = 0; l < list4.size(); l++){
+                promap.append("{'name':'"+list4.get(l).getName().replace("'","\'")+"',"+ "'pId':"+list3.get(0).getCode()+",'id':" + list4.get(l).getCompanyId() + ",type:'3'},");
+            }
         }
+        promap.deleteCharAt(promap.length() - 1);
         promap.append("]");
+        System.out.println(promap);
         modelAndView.addObject("promap", promap.toString());
-        List<CompanyInfo> companys = companyInfoDao.selectCompanyInfoByLevel(user);
-        modelAndView.addObject("companys", companys);
+//        List<CompanyInfo> companys = companyInfoDao.selectCompanyInfoByLevel(user);
+//        modelAndView.addObject("companys", companys);
         Website websiteall = websiteDao.sumByUser(user);
         if(websiteall == null){
             websiteall = new Website();
@@ -683,19 +705,26 @@ public class StatisticsController {
         }
         modelAndView.addObject("machineall", machineall);
 
+        int companystste = 1;
+        modelAndView.addObject("companystste", companystste);
+        CompanyInfo companyall = new CompanyInfo();
+        modelAndView.addObject("companyall", companyall);
+
         return modelAndView;
     }
 
     @RequestMapping("/toTreeSaerch")
     @ResponseBody
-    public ModelAndView toTreeSaerch( HttpServletRequest request,String level,String txt) {
+    public ModelAndView toTreeSaerch( HttpServletRequest request,String level,String txt,int treeId) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("count");
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
+        CompanyInfo companyall = new CompanyInfo();
+        int companystste = 1;
         if(level.equals("0")){
-            List<CompanyInfo> companys = companyInfoDao.selectByLevelAndProvince(user,txt);
-            modelAndView.addObject("companys", companys);
+//            List<CompanyInfo> companys = companyInfoDao.selectByLevelAndProvince(user,txt);
+//            modelAndView.addObject("companys", companys);
             Website websiteall = websiteDao.sumByUserAndProvince(user,txt);
             if(websiteall == null){
                 websiteall = new Website();
@@ -722,8 +751,8 @@ public class StatisticsController {
             modelAndView.addObject("machineall", machineall);
         }
         if(level.equals("1")){
-            List<CompanyInfo> companys = companyInfoDao.selectByLevelAndCity(user,txt);
-            modelAndView.addObject("companys", companys);
+//            List<CompanyInfo> companys = companyInfoDao.selectByLevelAndCity(user,txt);
+//            modelAndView.addObject("companys", companys);
             Website websiteall = websiteDao.sumByUserAndCity(user,txt);
             if(websiteall == null){
                 websiteall = new Website();
@@ -777,6 +806,56 @@ public class StatisticsController {
             }
             modelAndView.addObject("machineall", machineall);
         }
+        if(level.equals("3")){
+            companyall = companyInfoDao.selectByPrimaryKey(treeId);
+            WebsiteExample websiteExample = new WebsiteExample();
+            websiteExample.createCriteria().andCompanyIdEqualTo(treeId);
+            List<Website> websites = websiteDao.selectByExample(websiteExample);
+            Website websiteall = new Website();
+            if(websites.size()>0){
+                websiteall = websites.get(0);
+                companystste = websites.get(0).getState();
+            }else{
+                websiteall.setFlourExp(0.0);websiteall.setFlourReal(0.0);websiteall.setRiceExp(0.0);websiteall.setRiceReal(0.0);websiteall.setOilExp(0.0);websiteall.setOilReal(0.0);websiteall.setElseExp(0.0);websiteall.setElseReal(0.0);
+            }
+            modelAndView.addObject("websiteall", websiteall);
+            DeliveryExample deliveryExample = new DeliveryExample();
+            deliveryExample.createCriteria().andCompanyIdEqualTo(treeId);
+            List<Delivery> deliveries = deliveryDao.selectByExample(deliveryExample);
+            Delivery deliveryall = new Delivery();
+            if(deliveries.size()>0){
+                deliveryall = deliveries.get(0);
+                companystste = deliveries.get(0).getState();
+            }else{
+                deliveryall.setCarNum(0);deliveryall.setDeliveryDay(0.0);deliveryall.setDeliveryDayReal(0.0);deliveryall.setDeliveryNum(0);deliveryall.setRadius(0.0);deliveryall.setWareAbility(0.0);
+            }
+            modelAndView.addObject("deliveryall", deliveryall);
+            StoreageExample storeageExample = new StoreageExample();
+            storeageExample.createCriteria().andCompanyIdEqualTo(treeId);
+            List<Storeage> storeages = storeageDao.selectByExample(storeageExample);
+            Storeage storeageall = new Storeage();
+            if(storeages.size()>0){
+                storeageall = storeages.get(0);
+                companystste = storeages.get(0).getState();
+            }else{
+                storeageall.setCarNum(0);storeageall.setTransportDay(0.0);storeageall.setTransportDayReal(0.0);
+            }
+            modelAndView.addObject("storeageall", storeageall);
+            MachineExample machineExample = new MachineExample();
+            machineExample.createCriteria().andCompanyIdEqualTo(treeId);
+            List<Machine> machines = machineDao.selectByExample(machineExample);
+            Machine machineall = new Machine();
+            if(machines.size()>0){
+                machineall = machines.get(0);
+                companystste = machines.get(0).getState();
+            }else{
+                machineall.setWheatDay(0.0);machineall.setWheatDayReal(0.0);machineall.setPaddyDay(0.0);machineall.setPaddyDayReal(0.0);machineall.setOilDay(0.0);machineall.setOilDayReal(0.0);machineall.setOilConciseDay(0.0);machineall.setOilConciseDayReal(0.0);machineall.setOilSubpDay(0.0);machineall.setOilSubpDayReal(0.0);machineall.setElseDay(0.0);machineall.setElseDayReal(0.0);
+
+            }
+            modelAndView.addObject("machineall", machineall);
+        }
+        modelAndView.addObject("companystste", companystste);
+        modelAndView.addObject("companyall", companyall);
 
         return modelAndView;
     }
@@ -807,6 +886,11 @@ public class StatisticsController {
                     list3 = areasDao.selectByExample(areasExample);
                     for (int k = 0; k < list3.size(); k++) {
                         promap.append("{'name':'"+list3.get(k).getName()+"',"+ "'pId':"+list3.get(k).getCitycode()+",'id':" + list3.get(k).getCode() + ",type:'2'},");
+                        List<CompanyInfo> list4 = new ArrayList<CompanyInfo>();
+                        list4 = companyInfoDao.selectByLevelAndCounty(user,list3.get(k).getName());
+                        for(int l = 0; l < list4.size(); l++){
+                            promap.append("{'name':'"+list4.get(l).getName()+"',"+ "'pId':"+list3.get(k).getCode()+",'id':" + list4.get(l).getCompanyId() + ",type:'3'},");
+                        }
                     }
                 }
             }
@@ -829,6 +913,11 @@ public class StatisticsController {
                 list3 = areasDao.selectByExample(areasExample);
                 for (int k = 0; k < list3.size(); k++) {
                     promap.append("{'name':'"+list3.get(k).getName()+"',"+ "'pId':"+list3.get(k).getCitycode()+",'id':" + list3.get(k).getCode() + ",type:'2'},");
+                    List<CompanyInfo> list4 = new ArrayList<CompanyInfo>();
+                    list4 = companyInfoDao.selectByLevelAndCounty(user,list3.get(k).getName());
+                    for(int l = 0; l < list4.size(); l++){
+                        promap.append("{'name':'"+list4.get(l).getName()+"',"+ "'pId':"+list3.get(k).getCode()+",'id':" + list4.get(l).getCompanyId() + ",type:'3'},");
+                    }
                 }
             }
         }
@@ -837,13 +926,18 @@ public class StatisticsController {
             CitiesExample citiesExample = new CitiesExample();
             citiesExample.createCriteria().andNameEqualTo(user.getCity());
             list2 = citiesDao.selectByExample(citiesExample);
-            promap.append("{'name':'"+list2.get(0).getName()+"',"+ "'pId':0,'id':" + list2.get(0).getCode() + ",type:'0'},");
+            promap.append("{'name':'"+list2.get(0).getName()+"',"+ "'pId':0,'id':" + list2.get(0).getCode() + ",type:'1'},");
             List<Areas> list3 = new ArrayList<Areas>();
             AreasExample areasExample = new AreasExample();
             areasExample.createCriteria().andCitycodeEqualTo(list2.get(0).getCode());
             list3 = areasDao.selectByExample(areasExample);
             for (int k = 0; k < list3.size(); k++) {
-                promap.append("{'name':'"+list3.get(k).getName()+"',"+ "'pId':"+list3.get(k).getCitycode()+",'id':" + list3.get(k).getCode() + ",type:'1'},");
+                promap.append("{'name':'"+list3.get(k).getName()+"',"+ "'pId':"+list3.get(k).getCitycode()+",'id':" + list3.get(k).getCode() + ",type:'2'},");
+                List<CompanyInfo> list4 = new ArrayList<CompanyInfo>();
+                list4 = companyInfoDao.selectByLevelAndCounty(user,list3.get(k).getName());
+                for(int l = 0; l < list4.size(); l++){
+                    promap.append("{'name':'"+list4.get(l).getName()+"',"+ "'pId':"+list3.get(k).getCode()+",'id':" + list4.get(l).getCompanyId() + ",type:'3'},");
+                }
             }
         }
         if(type == 3){
@@ -851,7 +945,12 @@ public class StatisticsController {
             AreasExample areasExample = new AreasExample();
             areasExample.createCriteria().andNameEqualTo(user.getCounty());
             list3 = areasDao.selectByExample(areasExample);
-            promap.append("{'name':'"+list3.get(0).getName()+"',"+ "'pId':0,'id':" + list3.get(0).getCode() + ",type:'0'},");
+            promap.append("{'name':'"+list3.get(0).getName()+"',"+ "'pId':0,'id':" + list3.get(0).getCode() + ",type:'2'},");
+            List<CompanyInfo> list4 = new ArrayList<CompanyInfo>();
+            list4 = companyInfoDao.selectByLevelAndCounty(user,list3.get(0).getName());
+            for(int l = 0; l < list4.size(); l++){
+                promap.append("{'name':'"+list4.get(l).getName()+"',"+ "'pId':"+list3.get(0).getCode()+",'id':" + list4.get(l).getCompanyId() + ",type:'3'},");
+            }
         }
         promap.deleteCharAt(promap.length() - 1);
         promap.append("]");
