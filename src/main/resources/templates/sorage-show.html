@@ -125,7 +125,7 @@
                     </a>
                     <ul class="sub">
                         <li><a  href="toSupplyStatistics" >供应网点统计</a></li>
-                        <li><a  href="toSupplyShow" >全国供应网点列表展示</a></li>
+                        <li><a  href="toSupplyShow" >供应网点列表展示</a></li>
                         <li><a  href="toSupplyCount" >信息统计</a></li>
                     </ul>
                 </li>
@@ -231,8 +231,14 @@
                                             <th style="text-align: center; font-size: 1.5rem" class="center"><label class="pos-rel"> <input
                                                     type="checkbox" class="ace" /> <span class="lbl"></span>
                                             </label></th>
+                                            <th style="text-align: center; font-size: 1.5rem" >公司编号</th>
                                             <th style="text-align: center; font-size: 1.5rem">网点编号</th>
                                             <th style="text-align: center; font-size: 1.5rem">网点名称</th>
+                                            <th style="text-align: center; font-size: 1.5rem" >所在区域</th>
+                                            <th style="text-align: center; font-size: 1.5rem" >组织代码</th>
+                                            <th style="text-align: center; font-size: 1.5rem" >公司地址</th>
+                                            <th style="text-align: center; font-size: 1.5rem" >负责人</th>
+                                            <th style="text-align: center; font-size: 1.5rem" >联系电话</th>
                                             <th style="text-align: center; font-size: 1.5rem">日入库量</th>
                                             <th style="text-align: center; font-size: 1.5rem">日销量</th>
                                             <th style="text-align: center; font-size: 1.5rem">日库存</th>
@@ -250,8 +256,14 @@
                                                 <th style="text-align: center; font-size: 1.5rem"><label class="pos-rel"> <input
                                                         type="checkbox" class="ace" /> <span class="lbl"></span>
                                                 </label></th>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(storeageStat.index).getCompanyId()}"></td>
                                                 <td style="text-align: center; font-size: 1.5rem" th:text="${storeage.getStoreageId()}"></td>
                                                 <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(storeageStat.index).getName()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(storeageStat.index).getProvince() + companys.get(storeageStat.index).getCity() + companys.get(storeageStat.index).getCounty()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(storeageStat.index).getSocialId()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(storeageStat.index).getLocation()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(storeageStat.index).getPrincipal()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(storeageStat.index).getPhone()}"></td>
                                                 <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(storeageStat.index).getInDay()}"></td>
                                                 <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(storeageStat.index).getOutDay()}"></td>
                                                 <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(storeageStat.index).getSaveDay()}"></td>

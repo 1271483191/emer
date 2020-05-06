@@ -137,7 +137,7 @@
                     </a>
                     <ul class="sub">
                         <li><a  href="toSupplyStatistics" >供应网点统计</a></li>
-                        <li><a  href="toSupplyShow" >全国供应网点列表展示</a></li>
+                        <li><a  href="toSupplyShow" >供应网点列表展示</a></li>
                         <li><a  href="toSupplyCount" >信息统计</a></li>
                     </ul>
                 </li>
@@ -331,8 +331,14 @@
                                             <td style="text-align: center; font-size: 1.5rem" class="center"><label class="pos-rel"> <input
                                                     type="checkbox" class="ace" /> <span class="lbl"></span>
                                             </label></td>
+                                            <th style="text-align: center; font-size: 1.5rem" >公司编号</th>
                                             <th style="text-align: center; font-size: 1.5rem">网点编号</th>
                                             <th style="text-align: center; font-size: 1.5rem">网点名称</th>
+                                            <th style="text-align: center; font-size: 1.5rem" >所在区域</th>
+                                            <th style="text-align: center; font-size: 1.5rem" >组织代码</th>
+                                            <th style="text-align: center; font-size: 1.5rem" >公司地址</th>
+                                            <th style="text-align: center; font-size: 1.5rem" >负责人</th>
+                                            <th style="text-align: center; font-size: 1.5rem" >联系电话</th>
                                             <th style="text-align: center; font-size: 1.5rem">日入库量</th>
                                             <th style="text-align: center; font-size: 1.5rem">日销量</th>
                                             <th style="text-align: center; font-size: 1.5rem">日库存</th>
@@ -359,8 +365,14 @@
                                                 <td style="text-align: center; font-size: 1.5rem"><label class="pos-rel"> <input
                                                         type="checkbox" class="ace" /> <span class="lbl"></span>
                                                 </label></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(machineStat.index).getCompanyId()}"></td>
                                                 <td style="text-align: center; font-size: 1.5rem" th:text="${machine.getMachineId()}"></td>
                                                 <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(machineStat.index).getName()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(machineStat.index).getProvince() + companys.get(machineStat.index).getCity() + companys.get(machineStat.index).getCounty()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(machineStat.index).getSocialId()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(machineStat.index).getLocation()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(machineStat.index).getPrincipal()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(machineStat.index).getPhone()}"></td>
                                                 <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(machineStat.index).getInDay()}"></td>
                                                 <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(machineStat.index).getOutDay()}"></td>
                                                 <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(machineStat.index).getSaveDay()}"></td>
@@ -625,12 +637,12 @@
         ]
 
     };
-    new Chart(document.getElementById("doughnut").getContext("2d")).Doughnut(doughnutData);
-    new Chart(document.getElementById("line").getContext("2d")).Line(lineChartData);
-    new Chart(document.getElementById("radar").getContext("2d")).Radar(radarChartData);
-    new Chart(document.getElementById("polarArea").getContext("2d")).PolarArea(chartData);
-    new Chart(document.getElementById("bar").getContext("2d")).Bar(barChartData);
-    new Chart(document.getElementById("pie").getContext("2d")).Pie(pieData);
+//    new Chart(document.getElementById("doughnut").getContext("2d")).Doughnut(doughnutData);
+//    new Chart(document.getElementById("line").getContext("2d")).Line(lineChartData);
+//    new Chart(document.getElementById("radar").getContext("2d")).Radar(radarChartData);
+//    new Chart(document.getElementById("polarArea").getContext("2d")).PolarArea(chartData);
+//    new Chart(document.getElementById("bar").getContext("2d")).Bar(barChartData);
+//    new Chart(document.getElementById("pie").getContext("2d")).Pie(pieData);
 
 
 </script>
