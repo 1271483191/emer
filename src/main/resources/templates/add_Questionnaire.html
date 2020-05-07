@@ -25,8 +25,8 @@
         <div class="layui-form-item" pane="">
             <label class="layui-form-label">性别</label>
             <div class="layui-input-block sex">
-                <input type="radio" name="sex" value="男" title="男" checked="">
-                <input type="radio" name="sex" value="女" title="女">
+                <input class="layui-input sex" type="radio" name="sex" value="男" title="男" checked="">
+                <input class="layui-input sex" type="radio" name="sex" value="女" title="女">
             </div>
         </div>
         <div class="layui-form-item">
@@ -40,17 +40,17 @@
             <label class="layui-form-label">家庭住址</label>
             <div class="layui-input-inline">
                 <select name="province" lay-filter="province">
-                    <option value="">请选择省</option>
+                    <option class="province"  value="">请选择省</option>
                 </select>
             </div>
             <div class="layui-input-inline">
                 <select name="city" lay-filter="city" disabled>
-                    <option value="">请选择市</option>
+                    <option class="city" value="">请选择市</option>
                 </select>
             </div>
             <div class="layui-input-inline">
                 <select name="area" lay-filter="area" disabled>
-                    <option value="">请选择县/区</option>
+                    <option class="area" value="">请选择县/区</option>
                 </select>
             </div>
         </div>

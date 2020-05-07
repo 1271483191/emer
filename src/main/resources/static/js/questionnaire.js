@@ -69,9 +69,10 @@ layui.use(['form','layer','table','laytpl' ],function(){
                 var body = layui.layer.getChildFrame('body', index);
                 if(edit){
                     body.find(".user").val(edit.user);
-                    body.find(".sex").val(edit.sex);
+                    body.find(".sex input[value="+edit.sex+"]").prop("checked","checked");  //性别
+                    form.render();
                     body.find(".age").val(edit.age);
-                    body.find(".province").val(edit.age);
+                    body.find(".province select[name=province]").append("<option value=''>"+edit.province+"</option>");
                     body.find(".city").val(edit.age);
                     body.find(".area").val(edit.age);
 
@@ -80,10 +81,18 @@ layui.use(['form','layer','table','laytpl' ],function(){
                     body.find(".surplusGrain").val(edit.surplusGrain);
                     body.find(".averageGrainDay").val(edit.averageGrainDay);
 
-                    body.find(".clientSex input[value="+edit.clientSex+"]").prop("checked","checked");  //性别
-                    body.find(".clientGrade").val(edit.clientGrade);  //会员等级
-                    body.find(".enterTime").val(edit.enterTime);    //录入时间
-                    body.find(".introduce").text(edit.introduce);    //用户简介
+                    body.find(".purposeGrain").val(edit.purposeGrain);
+                    body.find(".reason").text(edit.reason);
+                    body.find(".tools").val(edit.tools);
+                    body.find(".toolsEvaluate").text(edit.toolsEvaluate);
+
+
+                    body.find(".toolsUse").val(edit.toolsUse);
+                    body.find(".supportTool").val(edit.supportTool);
+                    body.find(".toolType").val(edit.toolType);
+                    body.find(".toolNum").val(edit.toolNum);
+                    body.find(".notBuyReason").text(edit.notBuyReason);
+
                     form.render();
                 }
                 setTimeout(function(){
@@ -111,11 +120,11 @@ layui.use(['form','layer','table','laytpl' ],function(){
             newsId = [];
         if(data.length > 0) {
             for (var i in data) {
-                newsId.push(data[i].clientID);
+                newsId.push(data[i].questionnaireid);
             }
             console.log(typeof newsId);
             layer.confirm('确定删除选中的用户？', {icon: 3, title: '提示信息'}, function (index) {
-                $.post("../client/deleteCilentList.do",{
+                $.post("deletequestionnaire",{
                     newsId : newsId.join(",")  //将需要删除的newsId作为参数传入
                 },function(data){
                     tableIns.reload();
@@ -134,14 +143,14 @@ layui.use(['form','layer','table','laytpl' ],function(){
 
         if(layEvent === 'edit'){ //编辑
 
-            $.post('updataQuestionnaire',{clientID:data.clientID},function(str){
+            $.post('updataQuestionnaire',{questionnaireid:data.questionnaireid},function(str){
                 addQuestionnaire(data);
             })
 
         }else if(layEvent === 'del'){ //删除
             layer.confirm('确定删除此用户？',{icon:3, title:'提示信息'},function(index){
-                $.post("../client/deleteCilentList.do",{
-                    newsId : data.clientID  //将需要删除的newsId作为参数传入
+                $.post("deletequestionnaire",{
+                    newsId : data.questionnaireid  //将需要删除的newsId作为参数传入
                 },function(data){
                     tableIns.reload();
                     layer.close(index);

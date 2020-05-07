@@ -164,6 +164,13 @@
     </if>
   </select>
 
+    <!--批量删除-->
+    <delete id="deleteQuestionnaire">
+        delete from questionnaire where questionnaireID in
+        <foreach collection="array" item="id" open="(" close=")" separator="," >
+            #{id}
+        </foreach>
+    </delete>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -171,16 +178,19 @@
     from questionnaire
     where questionnaireID = #{questionnaireid,jdbcType=INTEGER}
   </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from questionnaire
     where questionnaireID = #{questionnaireid,jdbcType=INTEGER}
   </delete>
+
   <delete id="deleteByExample" parameterType="com.yunjing.emer.entity.QuestionnaireExample">
     delete from questionnaire
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
+
   <insert id="insert" keyColumn="questionnaireID" keyProperty="questionnaireid" parameterType="com.yunjing.emer.entity.Questionnaire" useGeneratedKeys="true">
     insert into questionnaire (province, citie, area, 
       `user`, sex, age, famer_type, 
@@ -418,6 +428,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
+
   <update id="updateByPrimaryKeySelective" parameterType="com.yunjing.emer.entity.Questionnaire">
     update questionnaire
     <set>
@@ -481,6 +492,7 @@
     </set>
     where questionnaireID = #{questionnaireid,jdbcType=INTEGER}
   </update>
+
   <update id="updateByPrimaryKey" parameterType="com.yunjing.emer.entity.Questionnaire">
     update questionnaire
     set province = #{province,jdbcType=VARCHAR},
