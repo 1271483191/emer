@@ -53,12 +53,12 @@ public class InputController {
     public boolean toInsertDelivery(CompanyInfo companyInfo, Delivery delivery){
         boolean result = false;
         Date date = new Date();
-        System.out.println(date);
+        //System.out.println(date);
         companyInfo.setTime(date);
         companyInfo.setCompanyType(1);
 
-        System.out.println(companyInfo);
-        System.out.println(delivery);
+        //System.out.println(companyInfo);
+        //System.out.println(delivery);
 
         List<CompanyInfo> companyInfos = companyInfoService.selectBySocialId(companyInfo.getSocialId());
         boolean c = false;

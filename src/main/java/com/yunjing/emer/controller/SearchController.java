@@ -63,7 +63,7 @@ public class SearchController {
         modelAndView.setViewName("search");
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-        System.out.print("---------"+totalpro+time1+time2);
+        //System.out.print("---------"+totalpro+time1+time2);
         List<Storeage> storeageList = storeageService.selectAll(user);
         List<Machine> machineList = machineService.selectAll(user);
         List<Website> websiteList = websiteService.selectAll(user);
