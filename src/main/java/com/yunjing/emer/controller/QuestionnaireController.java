@@ -87,9 +87,6 @@ public class QuestionnaireController {
     @RequestMapping(value="/addquestionnaire",method= RequestMethod.POST)
     @ResponseBody
     public Message addquestionnaire(@RequestBody Questionnaire questionnaire, HttpServletRequest request){
-
-        System.out.println(questionnaire);
-
         String name = request.getParameter("age");
         System.out.print(name);
         Message message = new Message();
@@ -97,6 +94,17 @@ public class QuestionnaireController {
         if(session.getAttribute("questionnaireid")!=null){
             //更新
             int questionnaireid =(int)session.getAttribute("questionnaireid");
+            int flag = qusetionnaireService.updateByPrimaryKeySelective(questionnaire,questionnaireid);
+
+            if(flag>0) {
+                message.setMsg("修改成功");
+                message.setCode(200);
+                message.setRes(true);
+            }else {
+                message.setMsg("发生未知错误！请重新输入！");
+                message.setCode(404);
+                message.setRes(false);
+            }
 
             session.removeAttribute("questionnaireid");
         }else {
@@ -115,6 +123,47 @@ public class QuestionnaireController {
         }
         //session.removeAttribute("questionnaireid");
 
+        return message;
+    }
+
+    /*微信接口添加*/
+    @RequestMapping(value="/addquestionnaireweixing",method= RequestMethod.POST)
+    @ResponseBody
+    public Message addquestionnaire1(@RequestBody Questionnaire questionnaire, HttpServletRequest request){
+
+        Message message = new Message();
+        HttpSession session = request.getSession();
+
+        boolean flag = qusetionnaireService.insert_xi(questionnaire);
+        if(flag) {
+            message.setCode(200);
+            message.setMsg("添加成功");
+            message.setRes(true);
+        }else {
+            message.setCode(404);
+            message.setMsg("添加失败,发生未知错误请重试！");
+            message.setRes(false);
+        }
+        return message;
+    }
+
+    /*删除*/
+    @RequestMapping(value="/deletequestionnaire",method= RequestMethod.POST)
+    @ResponseBody
+    public Message deletequestionnaire(String newsId){
+
+        Message message = new Message();
+        String[] idArray = newsId.split(",");
+        int[] questionnaireid = new int[idArray.length];
+        for(int i=0;i<=idArray.length-1;i++) {
+            questionnaireid[i] = Integer.parseInt(idArray[i]);
+        }
+        boolean flag = qusetionnaireService.deleteQuestionnaire(questionnaireid);
+        if(flag) {
+            message.setMsg("删除成功！");
+            message.setCode(200);
+            message.setRes(true);
+        }
         return message;
     }
 

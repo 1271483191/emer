@@ -30,14 +30,17 @@ public interface QuestionnaireDao {
 
     int updateByExample(@Param("record") Questionnaire record, @Param("example") QuestionnaireExample example);
 
-    int updateByPrimaryKeySelective(Questionnaire record);
-
     int updateByPrimaryKey(Questionnaire record);
 
     /*分页查询*/
     List <Questionnaire> selectAllShow(@Param("user") String user, @Param("pages")Integer page
             , @Param("number")Integer number,@Param("users") User users);
-
+    //根据条件统计数量
     int countQusetionnaireList(@Param("user")String user,@Param("users") User users);
 
+    /*更新*/
+    int updateByPrimaryKeySelective(Questionnaire record);
+
+    /*删除和批量删除*/
+    int deleteQuestionnaire(int[] questionnaireid);
 }
