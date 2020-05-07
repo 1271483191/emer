@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yunjing.emer.dao.QuestionnaireDao">
+  <resultMap id="BaseResultMap" type="com.yunjing.emer.entity.Questionnaire">
+    <id column="questionnaireID" jdbcType="INTEGER" property="questionnaireid" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="citie" jdbcType="VARCHAR" property="citie" />
+    <result column="area" jdbcType="VARCHAR" property="area" />
+    <result column="user" jdbcType="VARCHAR" property="user" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="famer_type" jdbcType="VARCHAR" property="famerType" />
+    <result column="harvest_grain" jdbcType="REAL" property="harvestGrain" />
+    <result column="surplus_grain" jdbcType="REAL" property="surplusGrain" />
+    <result column="average_grain_day" jdbcType="VARCHAR" property="averageGrainDay" />
+    <result column="purpose_grain" jdbcType="VARCHAR" property="purposeGrain" />
+    <result column="reason" jdbcType="VARCHAR" property="reason" />
+    <result column="tools" jdbcType="VARCHAR" property="tools" />
+    <result column="tools_evaluate" jdbcType="VARCHAR" property="toolsEvaluate" />
+    <result column="tools_use" jdbcType="VARCHAR" property="toolsUse" />
+    <result column="support_tool" jdbcType="VARCHAR" property="supportTool" />
+    <result column="tool_type" jdbcType="VARCHAR" property="toolType" />
+    <result column="tool_num" jdbcType="INTEGER" property="toolNum" />
+    <result column="not_buy_reason" jdbcType="VARCHAR" property="notBuyReason" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    questionnaireID, province, citie, area, `user`, sex, age, famer_type, harvest_grain, 
+    surplus_grain, average_grain_day, purpose_grain, reason, tools, tools_evaluate, tools_use, 
+    support_tool, tool_type, tool_num, not_buy_reason
+  </sql>
+  <select id="selectByExample" parameterType="com.yunjing.emer.entity.QuestionnaireExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from questionnaire
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+
+  <!--根据用户名条件查询-->
+  <select id="selectAllShow" resultMap="BaseResultMap">
+    select * from questionnaire
+    where 1=1
+    <if test="user!=null and user!=''">
+      AND questionnaire.user =#{user}
+    </if>
+    <if test="users.province != null and users.type ==1">
+      AND questionnaire.province = #{users.province}
+    </if>
+    <if test="users.province == null">
+      AND questionnaire.province = 'false'
+    </if>
+    <if test="users.city != null and users.type ==2">
+      AND questionnaire.citie = #{users.city}
+    </if>
+    <if test="users.city == null">
+      AND questionnaire.city = 'false'
+    </if>
+    <if test="users.county != null and users.type ==3">
+      AND questionnaire.area = #{users.county}
+    </if>
+    <if test="users.county == null">
+      AND questionnaire.area = 'false'
+    </if>
+    LIMIT #{pages},#{number}
+  </select>
+
+  <!--根据用户的姓名统计数据-->
+  <select id="countQusetionnaireList" parameterType="String" resultType="java.lang.Integer">
+    SELECT count(*) from questionnaire
+    where 1=1
+    <if test="user!=null and user!=''">
+      AND questionnaire.user = #{user}
+    </if>
+    <if test="users.province != null and users.type ==1">
+      AND questionnaire.province = #{users.province}
+    </if>
+    <if test="users.province == null">
+      AND questionnaire.province = 'false'
+    </if>
+    <if test="users.city != null and users.type ==2">
+      AND questionnaire.citie = #{users.city}
+    </if>
+    <if test="users.city == null">
+      AND questionnaire.city = 'false'
+    </if>
+    <if test="users.county != null and users.type ==3">
+      AND questionnaire.area = #{users.county}
+    </if>
+    <if test="users.county == null">
+      AND questionnaire.area = 'false'
+    </if>
+  </select>
+
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from questionnaire
+    where questionnaireID = #{questionnaireid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from questionnaire
+    where questionnaireID = #{questionnaireid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yunjing.emer.entity.QuestionnaireExample">
+    delete from questionnaire
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="questionnaireID" keyProperty="questionnaireid" parameterType="com.yunjing.emer.entity.Questionnaire" useGeneratedKeys="true">
+    insert into questionnaire (province, citie, area, 
+      `user`, sex, age, famer_type, 
+      harvest_grain, surplus_grain, average_grain_day, 
+      purpose_grain, reason, tools, 
+      tools_evaluate, tools_use, support_tool, 
+      tool_type, tool_num, not_buy_reason
+      )
+    values (#{province,jdbcType=VARCHAR}, #{citie,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, 
+      #{user,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, #{famerType,jdbcType=VARCHAR}, 
+      #{harvestGrain,jdbcType=REAL}, #{surplusGrain,jdbcType=REAL}, #{averageGrainDay,jdbcType=VARCHAR}, 
+      #{purposeGrain,jdbcType=VARCHAR}, #{reason,jdbcType=VARCHAR}, #{tools,jdbcType=VARCHAR}, 
+      #{toolsEvaluate,jdbcType=VARCHAR}, #{toolsUse,jdbcType=VARCHAR}, #{supportTool,jdbcType=VARCHAR}, 
+      #{toolType,jdbcType=VARCHAR}, #{toolNum,jdbcType=INTEGER}, #{notBuyReason,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="questionnaireID" keyProperty="questionnaireid" parameterType="com.yunjing.emer.entity.Questionnaire" useGeneratedKeys="true">
+    insert into questionnaire
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="province != null">
+        province,
+      </if>
+      <if test="citie != null">
+        citie,
+      </if>
+      <if test="area != null">
+        area,
+      </if>
+      <if test="user != null">
+        `user`,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="age != null">
+        age,
+      </if>
+      <if test="famerType != null">
+        famer_type,
+      </if>
+      <if test="harvestGrain != null">
+        harvest_grain,
+      </if>
+      <if test="surplusGrain != null">
+        surplus_grain,
+      </if>
+      <if test="averageGrainDay != null">
+        average_grain_day,
+      </if>
+      <if test="purposeGrain != null">
+        purpose_grain,
+      </if>
+      <if test="reason != null">
+        reason,
+      </if>
+      <if test="tools != null">
+        tools,
+      </if>
+      <if test="toolsEvaluate != null">
+        tools_evaluate,
+      </if>
+      <if test="toolsUse != null">
+        tools_use,
+      </if>
+      <if test="supportTool != null">
+        support_tool,
+      </if>
+      <if test="toolType != null">
+        tool_type,
+      </if>
+      <if test="toolNum != null">
+        tool_num,
+      </if>
+      <if test="notBuyReason != null">
+        not_buy_reason,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="citie != null">
+        #{citie,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="user != null">
+        #{user,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="famerType != null">
+        #{famerType,jdbcType=VARCHAR},
+      </if>
+      <if test="harvestGrain != null">
+        #{harvestGrain,jdbcType=REAL},
+      </if>
+      <if test="surplusGrain != null">
+        #{surplusGrain,jdbcType=REAL},
+      </if>
+      <if test="averageGrainDay != null">
+        #{averageGrainDay,jdbcType=VARCHAR},
+      </if>
+      <if test="purposeGrain != null">
+        #{purposeGrain,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null">
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="tools != null">
+        #{tools,jdbcType=VARCHAR},
+      </if>
+      <if test="toolsEvaluate != null">
+        #{toolsEvaluate,jdbcType=VARCHAR},
+      </if>
+      <if test="toolsUse != null">
+        #{toolsUse,jdbcType=VARCHAR},
+      </if>
+      <if test="supportTool != null">
+        #{supportTool,jdbcType=VARCHAR},
+      </if>
+      <if test="toolType != null">
+        #{toolType,jdbcType=VARCHAR},
+      </if>
+      <if test="toolNum != null">
+        #{toolNum,jdbcType=INTEGER},
+      </if>
+      <if test="notBuyReason != null">
+        #{notBuyReason,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yunjing.emer.entity.QuestionnaireExample" resultType="java.lang.Long">
+    select count(*) from questionnaire
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update questionnaire
+    <set>
+      <if test="record.questionnaireid != null">
+        questionnaireID = #{record.questionnaireid,jdbcType=INTEGER},
+      </if>
+      <if test="record.province != null">
+        province = #{record.province,jdbcType=VARCHAR},
+      </if>
+      <if test="record.citie != null">
+        citie = #{record.citie,jdbcType=VARCHAR},
+      </if>
+      <if test="record.area != null">
+        area = #{record.area,jdbcType=VARCHAR},
+      </if>
+      <if test="record.user != null">
+        `user` = #{record.user,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null">
+        sex = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.age != null">
+        age = #{record.age,jdbcType=INTEGER},
+      </if>
+      <if test="record.famerType != null">
+        famer_type = #{record.famerType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.harvestGrain != null">
+        harvest_grain = #{record.harvestGrain,jdbcType=REAL},
+      </if>
+      <if test="record.surplusGrain != null">
+        surplus_grain = #{record.surplusGrain,jdbcType=REAL},
+      </if>
+      <if test="record.averageGrainDay != null">
+        average_grain_day = #{record.averageGrainDay,jdbcType=VARCHAR},
+      </if>
+      <if test="record.purposeGrain != null">
+        purpose_grain = #{record.purposeGrain,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reason != null">
+        reason = #{record.reason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tools != null">
+        tools = #{record.tools,jdbcType=VARCHAR},
+      </if>
+      <if test="record.toolsEvaluate != null">
+        tools_evaluate = #{record.toolsEvaluate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.toolsUse != null">
+        tools_use = #{record.toolsUse,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supportTool != null">
+        support_tool = #{record.supportTool,jdbcType=VARCHAR},
+      </if>
+      <if test="record.toolType != null">
+        tool_type = #{record.toolType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.toolNum != null">
+        tool_num = #{record.toolNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.notBuyReason != null">
+        not_buy_reason = #{record.notBuyReason,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update questionnaire
+    set questionnaireID = #{record.questionnaireid,jdbcType=INTEGER},
+      province = #{record.province,jdbcType=VARCHAR},
+      citie = #{record.citie,jdbcType=VARCHAR},
+      area = #{record.area,jdbcType=VARCHAR},
+      `user` = #{record.user,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=VARCHAR},
+      age = #{record.age,jdbcType=INTEGER},
+      famer_type = #{record.famerType,jdbcType=VARCHAR},
+      harvest_grain = #{record.harvestGrain,jdbcType=REAL},
+      surplus_grain = #{record.surplusGrain,jdbcType=REAL},
+      average_grain_day = #{record.averageGrainDay,jdbcType=VARCHAR},
+      purpose_grain = #{record.purposeGrain,jdbcType=VARCHAR},
+      reason = #{record.reason,jdbcType=VARCHAR},
+      tools = #{record.tools,jdbcType=VARCHAR},
+      tools_evaluate = #{record.toolsEvaluate,jdbcType=VARCHAR},
+      tools_use = #{record.toolsUse,jdbcType=VARCHAR},
+      support_tool = #{record.supportTool,jdbcType=VARCHAR},
+      tool_type = #{record.toolType,jdbcType=VARCHAR},
+      tool_num = #{record.toolNum,jdbcType=INTEGER},
+      not_buy_reason = #{record.notBuyReason,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yunjing.emer.entity.Questionnaire">
+    update questionnaire
+    <set>
+      <if test="province != null">
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="citie != null">
+        citie = #{citie,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="user != null">
+        `user` = #{user,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="famerType != null">
+        famer_type = #{famerType,jdbcType=VARCHAR},
+      </if>
+      <if test="harvestGrain != null">
+        harvest_grain = #{harvestGrain,jdbcType=REAL},
+      </if>
+      <if test="surplusGrain != null">
+        surplus_grain = #{surplusGrain,jdbcType=REAL},
+      </if>
+      <if test="averageGrainDay != null">
+        average_grain_day = #{averageGrainDay,jdbcType=VARCHAR},
+      </if>
+      <if test="purposeGrain != null">
+        purpose_grain = #{purposeGrain,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null">
+        reason = #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="tools != null">
+        tools = #{tools,jdbcType=VARCHAR},
+      </if>
+      <if test="toolsEvaluate != null">
+        tools_evaluate = #{toolsEvaluate,jdbcType=VARCHAR},
+      </if>
+      <if test="toolsUse != null">
+        tools_use = #{toolsUse,jdbcType=VARCHAR},
+      </if>
+      <if test="supportTool != null">
+        support_tool = #{supportTool,jdbcType=VARCHAR},
+      </if>
+      <if test="toolType != null">
+        tool_type = #{toolType,jdbcType=VARCHAR},
+      </if>
+      <if test="toolNum != null">
+        tool_num = #{toolNum,jdbcType=INTEGER},
+      </if>
+      <if test="notBuyReason != null">
+        not_buy_reason = #{notBuyReason,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where questionnaireID = #{questionnaireid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yunjing.emer.entity.Questionnaire">
+    update questionnaire
+    set province = #{province,jdbcType=VARCHAR},
+      citie = #{citie,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR},
+      `user` = #{user,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      famer_type = #{famerType,jdbcType=VARCHAR},
+      harvest_grain = #{harvestGrain,jdbcType=REAL},
+      surplus_grain = #{surplusGrain,jdbcType=REAL},
+      average_grain_day = #{averageGrainDay,jdbcType=VARCHAR},
+      purpose_grain = #{purposeGrain,jdbcType=VARCHAR},
+      reason = #{reason,jdbcType=VARCHAR},
+      tools = #{tools,jdbcType=VARCHAR},
+      tools_evaluate = #{toolsEvaluate,jdbcType=VARCHAR},
+      tools_use = #{toolsUse,jdbcType=VARCHAR},
+      support_tool = #{supportTool,jdbcType=VARCHAR},
+      tool_type = #{toolType,jdbcType=VARCHAR},
+      tool_num = #{toolNum,jdbcType=INTEGER},
+      not_buy_reason = #{notBuyReason,jdbcType=VARCHAR}
+    where questionnaireID = #{questionnaireid,jdbcType=INTEGER}
+  </update>
+</mapper>
