@@ -305,18 +305,19 @@
                                         <br>
                                         <table width='100%' id="supplyTable2" style="margin-top: 0px;">
                                             <tr>
+                                                <th rowspan="2"></th>
                                                 <th colspan="2">物流能力</th>
-                                                <th>实际日运输能力（吨/天）</th>
+                                                <th rowspan="2">实际日运输能力（吨/天）</th>
                                             </tr>
                                             <tr>
                                                 <th>日运输能力（吨/天）</th>
                                                 <th>运输车辆数量(个)</th>
-                                                <td rowspan="2" th:text="${storeageall.getTransportDayReal()}"></td>
                                             </tr>
                                             <tr>
+                                                <td>合计</td>
                                                 <td th:text="${storeageall.getTransportDay()}"></td>
                                                 <td th:text="${storeageall.getCarNum()}"></td>
-
+                                                <td th:text="${storeageall.getTransportDayReal()}"></td>
                                             </tr>
                                         </table>
                                     </span>

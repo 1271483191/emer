@@ -261,6 +261,7 @@
                                 <table width='100%' id="supplyTable" style="margin-top: 0px;">
                                     <caption>应急供应网点基本情况</caption>
                                     <tr>
+                                        <th rowspan="2"></th>
                                         <th colspan="4">设计日供应能力（吨）</th>
                                         <th colspan="4">实际日供应能力（吨）</th>
                                     </tr>
@@ -275,6 +276,7 @@
                                         <th>其他</th>
                                     </tr>
                                     <tr>
+                                        <td>合计</td>
                                         <td th:text="${websiteall.getFlourExp()}"></td>
                                         <td th:text="${websiteall.getRiceExp()}"></td>
                                         <td th:text="${websiteall.getOilExp()}"></td>
@@ -288,6 +290,7 @@
                                 <table width='100%' id="deliveryTable">
                                     <caption>应急配送中心基本情况</caption>
                                     <tr>
+                                        <th rowspan="2"></th>
                                         <th rowspan="2">仓储能力（吨）</th>
                                         <th colspan="4">配送能力</th>
                                         <th rowspan="2">实际日配送能力（吨/天）</th>
@@ -300,6 +303,7 @@
                                         <th>运输车辆数量(个)</th>
                                     </tr>
                                     <tr>
+                                        <td>合计</td>
                                         <td th:text="${deliveryall.getWareAbility()}"></td>
                                         <td th:text="${deliveryall.getDeliveryDay()}"></td>
                                         <!--<td></td>-->
@@ -312,6 +316,7 @@
                                 <table width='100%' id="storeageTable">
                                     <caption>应急储运企业基本情况</caption>
                                     <tr>
+                                        <th rowspan="2"></th>
                                         <th colspan="2">物流能力</th>
                                         <th rowspan="2">实际日运输能力（吨/天）</th>
                                     </tr>
@@ -320,6 +325,7 @@
                                         <th>运输车辆数量(个)</th>
                                     </tr>
                                     <tr>
+                                        <td>合计</td>
                                         <td th:text="${storeageall.getTransportDay()}"></td>
                                         <td th:text="${storeageall.getCarNum()}"></td>
                                         <td th:text="${storeageall.getTransportDayReal()}"></td>
@@ -328,6 +334,7 @@
                                 <table width='100%' id="machineTable">
                                     <caption>应急加工企业基本情况</caption>
                                     <tr>
+                                        <th rowspan="2"></th>
                                         <th colspan="6">日加工能力（吨）</th>
                                         <th colspan="6">实际日产量（吨）</th>
                                     </tr>
@@ -346,6 +353,7 @@
                                         <th>其他</th>
                                     </tr>
                                     <tr>
+                                        <td>合计</td>
                                         <td th:text="${machineall.getWheatDay()}"></td>
                                         <td th:text="${machineall.getPaddyDay()}"></td>
                                         <td th:text="${machineall.getOilDay()}"></td>

@@ -298,8 +298,8 @@
                                     <span th:case="false">
                                         <table width='100%' id="supplyTable4" style="margin-top: 0px;">
                                             <tr>
+                                                <th rowspan="2"></th>
                                                 <th colspan="3">企业指标</th>
-
                                             </tr>
                                             <tr>
                                                 <th>日入库量</th>
@@ -307,6 +307,7 @@
                                                 <th>日库存</th>
                                             </tr>
                                             <tr>
+                                                <td>合计</td>
                                                 <td th:text="${companyall.getInDay()}"></td>
                                                 <td th:text="${companyall.getOutDay()}"></td>
                                                 <td th:text="${companyall.getSaveDay()}"></td>
@@ -316,6 +317,7 @@
                                         <br>
                                         <table width='100%' id="supplyTable2" style="margin-top: 0px;">
                                             <tr>
+                                                <th rowspan="2"></th>
                                                 <th colspan="4">设计日供应能力（吨）</th>
                                                 <th colspan="4">实际日供应能力（吨）</th>
                                             </tr>
@@ -330,6 +332,7 @@
                                                 <th>其他</th>
                                             </tr>
                                             <tr>
+                                                <td>合计</td>
                                                 <td th:text="${websiteall.getFlourExp()}"></td>
                                                 <td th:text="${websiteall.getRiceExp()}"></td>
                                                 <td th:text="${websiteall.getOilExp()}"></td>

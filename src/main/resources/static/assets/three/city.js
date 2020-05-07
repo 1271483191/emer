@@ -1514,103 +1514,103 @@ var provice = [
             }
         ]
     },
-    {
-        name: "香港",
-        city: [
-            {
-                name: "香港特别行政区",
-                districtAndCounty: ["中西区", "东区", "九龙城区", "观塘区", "南区", "深水埗区", "湾仔区", "黄大仙区", "油尖旺区", "离岛区", "葵青区", "北区", "西贡区", "沙田区", "屯门区", "大埔区", "荃湾区", "元朗区"]
-            }
-        ]
-    },
-    {
-        name: "澳门",
-        city: [
-            {
-                name: "澳门特别行政区",
-                districtAndCounty: ["澳门特别行政区"]
-            }
-        ]
-    },
-    {
-        name: "台湾省",
-        city: [
-            {
-                name: "台北",
-                districtAndCounty: []
-            },
-            {
-                name: "高雄",
-                districtAndCounty: []
-            },
-            {
-                name: "台中",
-                districtAndCounty: []
-            },
-            {
-                name: "花莲",
-                districtAndCounty: []
-            },
-            {
-                name: "基隆",
-                districtAndCounty: []
-            },
-            {
-                name: "嘉义",
-                districtAndCounty: []
-            },
-            {
-                name: "金门",
-                districtAndCounty: []
-            },
-            {
-                name: "连江",
-                districtAndCounty: []
-            },
-            {
-                name: "苗栗",
-                districtAndCounty: []
-            },
-            {
-                name: "南投",
-                districtAndCounty: []
-            },
-            {
-                name: "澎湖",
-                districtAndCounty: []
-            },
-            {
-                name: "屏东",
-                districtAndCounty: []
-            },
-            {
-                name: "台东",
-                districtAndCounty: []
-            },
-            {
-                name: "台南",
-                districtAndCounty: []
-            },
-            {
-                name: "桃园",
-                districtAndCounty: []
-            },
-            {
-                name: "新竹",
-                districtAndCounty: []
-            },
-            {
-                name: "宜兰",
-                districtAndCounty: []
-            },
-            {
-                name: "云林",
-                districtAndCounty: []
-            },
-            {
-                name: "彰化",
-                districtAndCounty: []
-            }
-        ]
-    }
+    // {
+    //     name: "香港",
+    //     city: [
+    //         {
+    //             name: "香港特别行政区",
+    //             districtAndCounty: ["中西区", "东区", "九龙城区", "观塘区", "南区", "深水埗区", "湾仔区", "黄大仙区", "油尖旺区", "离岛区", "葵青区", "北区", "西贡区", "沙田区", "屯门区", "大埔区", "荃湾区", "元朗区"]
+    //         }
+    //     ]
+    // },
+    // {
+    //     name: "澳门",
+    //     city: [
+    //         {
+    //             name: "澳门特别行政区",
+    //             districtAndCounty: ["澳门特别行政区"]
+    //         }
+    //     ]
+    // },
+    // {
+    //     name: "台湾省",
+    //     city: [
+    //         {
+    //             name: "台北",
+    //             districtAndCounty: []
+    //         },
+    //         {
+    //             name: "高雄",
+    //             districtAndCounty: []
+    //         },
+    //         {
+    //             name: "台中",
+    //             districtAndCounty: []
+    //         },
+    //         {
+    //             name: "花莲",
+    //             districtAndCounty: []
+    //         },
+    //         {
+    //             name: "基隆",
+    //             districtAndCounty: []
+    //         },
+    //         {
+    //             name: "嘉义",
+    //             districtAndCounty: []
+    //         },
+    //         {
+    //             name: "金门",
+    //             districtAndCounty: []
+    //         },
+    //         {
+    //             name: "连江",
+    //             districtAndCounty: []
+    //         },
+    //         {
+    //             name: "苗栗",
+    //             districtAndCounty: []
+    //         },
+    //         {
+    //             name: "南投",
+    //             districtAndCounty: []
+    //         },
+    //         {
+    //             name: "澎湖",
+    //             districtAndCounty: []
+    //         },
+    //         {
+    //             name: "屏东",
+    //             districtAndCounty: []
+    //         },
+    //         {
+    //             name: "台东",
+    //             districtAndCounty: []
+    //         },
+    //         {
+    //             name: "台南",
+    //             districtAndCounty: []
+    //         },
+    //         {
+    //             name: "桃园",
+    //             districtAndCounty: []
+    //         },
+    //         {
+    //             name: "新竹",
+    //             districtAndCounty: []
+    //         },
+    //         {
+    //             name: "宜兰",
+    //             districtAndCounty: []
+    //         },
+    //         {
+    //             name: "云林",
+    //             districtAndCounty: []
+    //         },
+    //         {
+    //             name: "彰化",
+    //             districtAndCounty: []
+    //         }
+    //     ]
+    // }
 ];

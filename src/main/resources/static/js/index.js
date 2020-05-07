@@ -75,7 +75,8 @@ function homepie_jjj(data){
                 },
                 restore: {show: true},
                 saveAsImage: {show: true}
-            }
+            },
+            x:100,
         },
         legend: {
             orient: 'vertical',
@@ -132,7 +133,8 @@ function homepie_ygc(data){
                 },
                 restore: {show: true},
                 saveAsImage: {show: true}
-            }
+            },
+            x:100,
         },
         legend: {
             orient: 'vertical',
@@ -186,7 +188,8 @@ function homepie_csj(data){
                 },
                 restore: {show: true},
                 saveAsImage: {show: true}
-            }
+            },
+            x:100,
         },
         tooltip: {
             trigger: 'item',
@@ -262,7 +265,8 @@ function homepie_zsj(data){
                 },
                 restore: {show: true},
                 saveAsImage: {show: true}
-            }
+            },
+            x:100,
         },
         series: [
             {
