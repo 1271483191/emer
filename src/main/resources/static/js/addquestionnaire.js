@@ -53,7 +53,7 @@ layui.config({
             'notBuyReason' : $(".notBuyReason").val()
         };
         $.ajax({
-            url:"toaddquestionnaire",
+            url:"addquestionnaire",
             type:'post',//method请求方式，get或者post
             dataType:'json',//预期服务器返回的数据类型
             data:JSON.stringify(userInfoHtml),//表格数据序列化

@@ -68,9 +68,18 @@ layui.use(['form','layer','table','laytpl' ],function(){
             success : function(layero, index){
                 var body = layui.layer.getChildFrame('body', index);
                 if(edit){
-                    body.find(".company").val(edit.company);
-                    body.find(".clientName").val(edit.clientName);  //登录名
-                    body.find(".clientPhone").val(edit.clientPhone);  //号码
+                    body.find(".user").val(edit.user);
+                    body.find(".sex").val(edit.sex);
+                    body.find(".age").val(edit.age);
+                    body.find(".province").val(edit.age);
+                    body.find(".city").val(edit.age);
+                    body.find(".area").val(edit.age);
+
+                    body.find(".famerType").val(edit.famerType);
+                    body.find(".harvestGrain").val(edit.harvestGrain);
+                    body.find(".surplusGrain").val(edit.surplusGrain);
+                    body.find(".averageGrainDay").val(edit.averageGrainDay);
+
                     body.find(".clientSex input[value="+edit.clientSex+"]").prop("checked","checked");  //性别
                     body.find(".clientGrade").val(edit.clientGrade);  //会员等级
                     body.find(".enterTime").val(edit.enterTime);    //录入时间
@@ -125,7 +134,7 @@ layui.use(['form','layer','table','laytpl' ],function(){
 
         if(layEvent === 'edit'){ //编辑
 
-            $.post('toupdataQuestionnaire',{clientID:data.clientID},function(str){
+            $.post('updataQuestionnaire',{clientID:data.clientID},function(str){
                 addQuestionnaire(data);
             })
 

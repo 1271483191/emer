@@ -70,7 +70,7 @@ public class QuestionnaireController {
 
 
     /*更改调查问卷*/
-    @RequestMapping(value="/toupdataQuestionnaire",method=RequestMethod.POST)
+    @RequestMapping(value="/updataQuestionnaire",method=RequestMethod.POST)
     @ResponseBody
     public  Message updataQuestionnaire(Questionnaire questionnaire, HttpServletRequest request){
 
@@ -84,7 +84,7 @@ public class QuestionnaireController {
 
 
     /*添加问卷数据*/
-    @RequestMapping(value="/toaddquestionnaire",method= RequestMethod.POST)
+    @RequestMapping(value="/addquestionnaire",method= RequestMethod.POST)
     @ResponseBody
     public Message addquestionnaire(@RequestBody Questionnaire questionnaire, HttpServletRequest request){
         String name = request.getParameter("age");
