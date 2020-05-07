@@ -87,6 +87,9 @@ public class QuestionnaireController {
     @RequestMapping(value="/addquestionnaire",method= RequestMethod.POST)
     @ResponseBody
     public Message addquestionnaire(@RequestBody Questionnaire questionnaire, HttpServletRequest request){
+
+        System.out.println(questionnaire);
+
         String name = request.getParameter("age");
         System.out.print(name);
         Message message = new Message();
