@@ -81,7 +81,10 @@
                 <p class="logoname hidden-lg hidden-md " style="font-size: 2rem;color: white;text-align: center;font-weight: bolder">粮食应急保障企业信息统计</p>
 
                 <p class="centered"><a href="#"><img src="assets/img/user.png" class="img-circle" width="60"></a></p>
-                <h5 class="centered">云境商务智能研究所</h5>
+                <h5 class="centered" th:if="${session.user == null}">未登录</h5>
+                <h5 class="centered" th:if="${session.user != null}">
+                    <span th:text="${session.user.getName()}"></span>
+                </h5>
 
                 <li class="mt">
                     <a href="toIndex">
@@ -215,7 +218,7 @@
                                                 <td style="text-align: center; font-size: 1.5rem" th:text="${user.getProvince()} + ',' + ${user.getCity()} + ',' + ${user.getCounty()}"></td>
                                             </tr>
                                             <tr>
-                                                <td style="text-align: center; font-size: 1.5rem" >权限</td>
+                                                <td th:onclick="'javascript:changeUser('+${user.getUserId()}+',\'type\')'" style="text-align: center; font-size: 1.5rem" >权限</td>
                                                 <span th:switch="${user.getType()}">
                                                     <td th:case="0" style="text-align: center; font-size: 1.5rem">国家级</td>
                                                     <td th:case="1" style="text-align: center; font-size: 1.5rem">省级</td>
@@ -261,6 +264,8 @@
                                                 localhostPaht = curWwwPath.substring(0,pos);
                                                 localhostPaht += "/";
 
+
+
                                                 var text = prompt("请输入","");
                                                 if(text == null || text == ""){
                                                     alert("修改值不能为空")
@@ -268,11 +273,13 @@
                                                     var href = localhostPaht + "changeUser?userId=" + userId + "&" + flag + "=" + text;
                                                     if(confirm("是否确定要修改该选项")){
                                                         if(flag == "phone"){
-                                                            if((/^1[3456789]\d{9}$/.test(text))){
+                                                            var pattern1=/^((0\d{2,3}-\d{7,8})|(1[34578]\d{9}))$/;
+                                                            var pattern2=/^((0\d{2,3}\d{7,8})|(1[34578]\d{9}))$/;
+                                                            if(!pattern1.test(text) && !pattern2.test(text)){
                                                                 console.log(href);
                                                                 location.href = href;
                                                             }else{
-                                                                alert("手机号格式不正确")
+                                                                alert("电话格式不正确")
                                                             }
                                                         }else{
                                                             console.log(href);
@@ -280,7 +287,6 @@
                                                         }
                                                     }
                                                 }
-
 
                                             }
                                         </script>

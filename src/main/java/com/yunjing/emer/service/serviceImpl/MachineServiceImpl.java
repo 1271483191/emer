@@ -6,6 +6,7 @@ import com.yunjing.emer.dao.MachineDao;
 import com.yunjing.emer.entity.*;
 import com.yunjing.emer.service.MachineService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

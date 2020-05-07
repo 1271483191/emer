@@ -48,7 +48,7 @@ public class InputController {
         return "machine_input";
     }
 
-    @RequestMapping("/toInsertDelivery")
+    @RequestMapping("/insertDelivery")
     @ResponseBody
     public boolean toInsertDelivery(CompanyInfo companyInfo, Delivery delivery){
         boolean result = false;
@@ -84,7 +84,7 @@ public class InputController {
         return result;
     }
 
-    @RequestMapping("/toInsertMachine")
+    @RequestMapping("/insertMachine")
     @ResponseBody
     public boolean toInsertMachine(CompanyInfo companyInfo, Machine machine){
         boolean result = false;
@@ -119,7 +119,7 @@ public class InputController {
         return result;
     }
 
-    @RequestMapping("/toInsertStoreage")
+    @RequestMapping("/insertStoreage")
     @ResponseBody
     public boolean toInsertStoreage(CompanyInfo companyInfo, Storeage storeage){
         boolean result = false;
@@ -155,7 +155,7 @@ public class InputController {
         return result;
     }
 
-    @RequestMapping("/toInsertSupply")
+    @RequestMapping("/insertSupply")
     @ResponseBody
     public boolean toInsertSupply(CompanyInfo companyInfo, Website website){
         boolean result = false;

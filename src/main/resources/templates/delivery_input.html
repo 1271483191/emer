@@ -75,7 +75,10 @@
                 <p class="logoname hidden-lg hidden-md " style="font-size: 2rem;color: white;text-align: center;font-weight: bolder">粮食应急保障企业信息统计</p>
 
                 <p class="centered"><a href="#"><img src="assets/img/user.png" class="img-circle" width="60"></a></p>
-                <h5 class="centered">云境商务智能研究所</h5>
+                <h5 class="centered" th:if="${session.user == null}">未登录</h5>
+                <h5 class="centered" th:if="${session.user != null}">
+                    <span th:text="${session.user.getName()}"></span>
+                </h5>
 
                 <li class="mt">
                     <a href="toIndex">
@@ -369,10 +372,10 @@
                                         <label class="col-sm-2 col-sm-2 control-label">企业性质</label>
                                         <div class="col-sm-10">
                                             <input value="1" name="activationStatus" type="radio" checked="checked"/><span style="margin-right: 10px;margin-left: 5px">国有企业</span>
-                                            <input value="2" name="activationStatus" type="radio"/><span style="margin-right: 10px;margin-left: 5px">集体所有制</span>
-                                            <input value="3" name="activationStatus" type="radio"/><span style="margin-right: 10px;margin-left: 5px">私营企业</span>
-                                            <input value="4" name="activationStatus" type="radio"/><span style="margin-right: 10px;margin-left: 5px">股份有限公司</span>
-                                            <input value="3" name="activationStatus" type="radio"/><span style="margin-right: 10px;margin-left: 5px">有限责任公司</span>
+                                            <input value="2" name="activationStatus" type="radio"/><span style="margin-right: 10px;margin-left: 5px">私有企业</span>
+                                            <input value="3" name="activationStatus" type="radio"/><span style="margin-right: 10px;margin-left: 5px">民营企业</span>
+                                            <input value="4" name="activationStatus" type="radio"/><span style="margin-right: 10px;margin-left: 5px">外资企业</span>
+                                            <input value="5" name="activationStatus" type="radio"/><span style="margin-right: 10px;margin-left: 5px">国有控股企业</span>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -415,8 +418,8 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label">联系电话</label>
                                         <div class="col-sm-10">
-                                            <input id="phone" type="text"  class="form-control" placeholder="请输入11位手机号">
-                                            <div id="phoneText" style="color: red; display: none">请输入11位手机号</div>
+                                            <input id="phone" type="text"  class="form-control" placeholder="请输入电话号码">
+                                            <div id="phoneText" style="color: red; display: none">请输入正确的电话格式（固话带区号）</div>
                                             <script>
                                                 $("#phone").blur(function(){
                                                     console.log("leave")
@@ -436,8 +439,9 @@
                                                         phoneText.attr("style","display:none;");
                                                     }
 
-                                                    var pattern=/^1[3456789]\d{9}$/;
-                                                    if(!pattern.test(phone.val()))
+                                                    var pattern1=/^((0\d{2,3}-\d{7,8})|(1[34578]\d{9}))$/;
+                                                    var pattern2=/^((0\d{2,3}\d{7,8})|(1[34578]\d{9}))$/;
+                                                    if(!pattern1.test(phone.val()) && !pattern2.test(phone.val()))
                                                     {
                                                         phoneText.attr("style","color: red;display:block;");
                                                         return false;
@@ -992,7 +996,7 @@
                                                 console.log("state:" + state);
 
 
-                                                $.post("/toInsertDelivery",
+                                                $.post("/insertDelivery",
                                                     {
                                                         name:name,
                                                         socialId:socialId,

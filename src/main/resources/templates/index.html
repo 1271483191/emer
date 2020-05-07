@@ -78,7 +78,10 @@
 				  <p class="logoname hidden-lg hidden-md " style="font-size: 2rem;color: white;text-align: center;font-weight: bolder">粮食应急保障企业信息统计</p>
 
               	  <p class="centered"><a href="#"><img src="assets/img/user.png" class="img-circle" width="60"></a></p>
-              	  <h5 class="centered">云境商务智能研究所</h5>
+				  <h5 class="centered" th:if="${session.user == null}">未登录</h5>
+				  <h5 class="centered" th:if="${session.user != null}">
+					  <span th:text="${session.user.getName()}"></span>
+				  </h5>
 
                   <li class="mt">
                       <a class="active" href="toIndex">
