@@ -957,4 +957,57 @@ public class StatisticsController {
 
         return  promap.toString();
     }
+
+    @RequestMapping("/CompanySearchUpdate")
+    @ResponseBody
+    public String CompanySearchUpdate(CompanyInfo companyInfo){
+        String message = "";
+        companyInfoDao.updateByPrimaryKeySelective(companyInfo);
+        return message;
+    }
+
+    @RequestMapping("/CompanySearchDelete")
+    @ResponseBody
+    public String CompanySearchDelete(int companyId){
+        String message = "";
+        companyInfoDao.deleteByPrimaryKey(companyId);
+        return message;
+    }
+
+    @RequestMapping("/DeliverySearchUpdate")
+    @ResponseBody
+    public String DeliverySearchUpdate(CompanyInfo companyInfo,Delivery delivery){
+        String message = "";
+        companyInfoDao.updateByPrimaryKeySelective(companyInfo);
+        deliveryDao.updateByPrimaryKeySelective(delivery);
+        return message;
+    }
+
+    @RequestMapping("/MechineSearchUpdate")
+    @ResponseBody
+    public String MechineSearchUpdate(CompanyInfo companyInfo,Machine machine){
+        String message = "";
+        companyInfoDao.updateByPrimaryKeySelective(companyInfo);
+        machineDao.updateByPrimaryKeySelective(machine);
+        return message;
+    }
+
+    @RequestMapping("/StoreageSearchUpdate")
+    @ResponseBody
+    public String StoreageSearchUpdate(CompanyInfo companyInfo,Storeage storeage){
+        String message = "";
+        companyInfoDao.updateByPrimaryKeySelective(companyInfo);
+        storeageDao.updateByPrimaryKeySelective(storeage);
+        return message;
+    }
+
+    @RequestMapping("/SupplySearchUpdate")
+    @ResponseBody
+    public String SupplySearchUpdate(CompanyInfo companyInfo,Website website){
+        String message = "";
+        companyInfoDao.updateByPrimaryKeySelective(companyInfo);
+        websiteDao.updateByPrimaryKeySelective(website);
+        return message;
+    }
+
 }

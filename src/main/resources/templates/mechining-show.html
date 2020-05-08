@@ -358,8 +358,8 @@
                                             <th style="text-align: center; font-size: 1.5rem">油脂分装实际（日）</th>
                                             <th style="text-align: center; font-size: 1.5rem">其它实际（日）</th>
                                             <th style="text-align: center; font-size: 1.5rem">生产状态</th>
-                                            <th style="text-align: center; font-size: 1.5rem">停用</th>
-
+                                            <!--<th style="text-align: center; font-size: 1.5rem">停用</th>-->
+                                            <th style="text-align: center; font-size: 1.5rem" >操作</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -371,7 +371,7 @@
                                                 <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(machineStat.index).getCompanyId()}"></td>
                                                 <td style="text-align: center; font-size: 1.5rem" th:text="${machine.getMachineId()}"></td>
                                                 <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(machineStat.index).getName()}"></td>
-                                                <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(machineStat.index).getProvince() + companys.get(machineStat.index).getCity() + companys.get(machineStat.index).getCounty()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(machineStat.index).getProvince() +','+ companys.get(machineStat.index).getCity() +','+ companys.get(machineStat.index).getCounty()}"></td>
                                                 <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(machineStat.index).getSocialId()}"></td>
                                                 <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(machineStat.index).getLocation()}"></td>
                                                 <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(machineStat.index).getPrincipal()}"></td>
@@ -396,13 +396,14 @@
                                                     <td style="text-align: center; font-size: 1.5rem" th:case="1">生产中</td>
                                                     <td style="text-align: center; font-size: 1.5rem" th:case="2">停产</td>
                                                 </span>
-                                                <span th:switch="${machine.getState()}">
-                                                    <td style="text-align: center; font-size: 1.5rem" th:case="0">未选择</td>
-                                                    <td style="text-align: center; font-size: 1.5rem" th:case="1">
-                                                        <button th:onclick="'javascript:stopCompany(' + ${machine.getMachineId()} + ')'">停用</button>
-                                                    </td>
-                                                    <td style="text-align: center; font-size: 1.5rem" th:case="2">已停产</td>
-                                                </span>
+                                                <!--<span th:switch="${machine.getState()}">-->
+                                                    <!--<td style="text-align: center; font-size: 1.5rem" th:case="0">未选择</td>-->
+                                                    <!--<td style="text-align: center; font-size: 1.5rem" th:case="1">-->
+                                                        <!--<button th:onclick="'javascript:stopCompany(' + ${machine.getMachineId()} + ')'">停用</button>-->
+                                                    <!--</td>-->
+                                                    <!--<td style="text-align: center; font-size: 1.5rem" th:case="2">已停产</td>-->
+                                                <!--</span>-->
+                                                <td><button type="button" class="btn edit-btn fa fa-pencil"/><button type="button" class="btn del-btn fa fa-trash-o"/></td>
                                             </tr>
                                         </div>
 

@@ -128,7 +128,7 @@
                     </a>
                     <ul class="sub">
                         <li><a  href="toSupplyStatistics" >供应网点统计</a></li>
-                        <li><a  href="toSupplyShow" >供应网点列表展示</a></li>
+                        <li><a  href="toSupplyShow" >全国供应网点列表展示</a></li>
                         <li><a  href="toSupplyCount" >信息统计</a></li>
                     </ul>
                 </li>
@@ -334,7 +334,8 @@
                                             <th style="text-align: center; font-size: 1.5rem">食用油实际（日）</th>
                                             <th style="text-align: center; font-size: 1.5rem">其他实际（日）</th>
                                             <th style="text-align: center; font-size: 1.5rem">生产状态</th>
-                                            <th style="text-align: center; font-size: 1.5rem">停用</th>
+                                            <!--<th style="text-align: center; font-size: 1.5rem">停用</th>-->
+                                            <th style="text-align: center; font-size: 1.5rem" >操作</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -347,7 +348,7 @@
                                                 <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(websiteStat.index).getCompanyId()}"></td>
                                                 <td style="text-align: center; font-size: 1.5rem" th:text="${website.getWebsiteId()}"></td>
                                                 <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(websiteStat.index).getName()}"></td>
-                                                <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(websiteStat.index).getProvince() + companys.get(websiteStat.index).getCity() + companys.get(websiteStat.index).getCounty()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(websiteStat.index).getProvince() +','+ companys.get(websiteStat.index).getCity() +','+ companys.get(websiteStat.index).getCounty()}"></td>
                                                 <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(websiteStat.index).getSocialId()}"></td>
                                                 <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(websiteStat.index).getLocation()}"></td>
                                                 <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(websiteStat.index).getPrincipal()}"></td>
@@ -368,13 +369,14 @@
                                                     <td style="text-align: center; font-size: 1.5rem" th:case="1">生产中</td>
                                                     <td style="text-align: center; font-size: 1.5rem" th:case="2">停产</td>
                                                 </span>
-                                                <span th:switch="${website.getState()}">
-                                                    <td style="text-align: center; font-size: 1.5rem" th:case="0">未选择</td>
-                                                    <td style="text-align: center; font-size: 1.5rem" th:case="1">
-                                                        <button th:onclick="'javascript:stopCompany(' + ${website.getWebsiteId()} + ')'">停用</button>
-                                                    </td>
-                                                    <td style="text-align: center; font-size: 1.5rem" th:case="2">已停产</td>
-                                                </span>
+                                                <!--<span th:switch="${website.getState()}">-->
+                                                    <!--<td style="text-align: center; font-size: 1.5rem" th:case="0">未选择</td>-->
+                                                    <!--<td style="text-align: center; font-size: 1.5rem" th:case="1">-->
+                                                        <!--<button th:onclick="'javascript:stopCompany(' + ${website.getWebsiteId()} + ')'">停用</button>-->
+                                                    <!--</td>-->
+                                                    <!--<td style="text-align: center; font-size: 1.5rem" th:case="2">已停产</td>-->
+                                                <!--</span>-->
+                                                <td><button type="button" class="btn edit-btn fa fa-pencil"/><button type="button" class="btn del-btn fa fa-trash-o"/></td>
                                             </tr>
                                         </div>
                                         <script>
