@@ -334,7 +334,8 @@
                                             <th style="text-align: center; font-size: 1.5rem">实际运输车辆数量</th>
                                             <th style="text-align: center; font-size: 1.5rem">实际日供应量</th>
                                             <th style="text-align: center; font-size: 1.5rem">生产状态</th>
-                                            <th style="text-align: center; font-size: 1.5rem">停用</th>
+                                            <!--<th style="text-align: center; font-size: 1.5rem">停用</th>-->
+                                            <th style="text-align: center; font-size: 1.5rem" >操作</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -347,7 +348,7 @@
                                                 <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(deliverieStat.index).getCompanyId()}"></td>
                                                 <td style="text-align: center; font-size: 1.5rem" th:text="${deliverie.getDeliveryId()}"></td>
                                                 <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(deliverieStat.index).getName()}"></td>
-                                                <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(deliverieStat.index).getProvince() + companys.get(deliverieStat.index).getCity() + companys.get(deliverieStat.index).getCounty()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(deliverieStat.index).getProvince() +','+ companys.get(deliverieStat.index).getCity() +','+ companys.get(deliverieStat.index).getCounty()}"></td>
                                                 <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(deliverieStat.index).getSocialId()}"></td>
                                                 <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(deliverieStat.index).getLocation()}"></td>
                                                 <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(deliverieStat.index).getPrincipal()}"></td>
@@ -367,13 +368,14 @@
                                                     <td style="text-align: center; font-size: 1.5rem" th:case="1">生产中</td>
                                                     <td style="text-align: center; font-size: 1.5rem" th:case="2">停产</td>
                                                 </span>
-                                                <span th:switch="${deliverie.getState()}">
+                                                <!--<span th:switch="${deliverie.getState()}">
                                                     <td style="text-align: center; font-size: 1.5rem" th:case="0">未选择</td>
                                                     <td style="text-align: center; font-size: 1.5rem" th:case="1">
                                                         <button th:onclick="'javascript:stopCompany(' + ${deliverie.getDeliveryId()} + ')'">停用</button>
                                                     </td>
                                                     <td style="text-align: center; font-size: 1.5rem" th:case="2">已停产</td>
-                                                </span>
+                                                </span>-->
+                                                <td><button type="button" class="btn edit-btn fa fa-pencil"/><button type="button" class="btn del-btn fa fa-trash-o"/></td>
                                             </tr>
                                         </div>
                                         <script>

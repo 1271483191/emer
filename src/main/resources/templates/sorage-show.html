@@ -246,7 +246,8 @@
                                             <th style="text-align: center; font-size: 1.5rem">运输车辆数量</th>
                                             <th style="text-align: center; font-size: 1.5rem">实际日供应量</th>
                                             <th style="text-align: center; font-size: 1.5rem">生产状态</th>
-                                            <th style="text-align: center; font-size: 1.5rem">停用</th>
+                                            <!--<th style="text-align: center; font-size: 1.5rem">停用</th>-->
+                                            <th style="text-align: center; font-size: 1.5rem" >操作</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -259,7 +260,7 @@
                                                 <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(storeageStat.index).getCompanyId()}"></td>
                                                 <td style="text-align: center; font-size: 1.5rem" th:text="${storeage.getStoreageId()}"></td>
                                                 <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(storeageStat.index).getName()}"></td>
-                                                <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(storeageStat.index).getProvince() + companys.get(storeageStat.index).getCity() + companys.get(storeageStat.index).getCounty()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(storeageStat.index).getProvince() +','+ companys.get(storeageStat.index).getCity() +','+ companys.get(storeageStat.index).getCounty()}"></td>
                                                 <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(storeageStat.index).getSocialId()}"></td>
                                                 <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(storeageStat.index).getLocation()}"></td>
                                                 <td style="text-align: center; font-size: 1.5rem" th:text="${companys.get(storeageStat.index).getPrincipal()}"></td>
@@ -275,13 +276,14 @@
                                                     <td style="text-align: center; font-size: 1.5rem" th:case="1">生产中</td>
                                                     <td style="text-align: center; font-size: 1.5rem" th:case="2">停产</td>
                                                 </span>
-                                                <span th:switch="${storeage.getState()}">
-                                                    <td style="text-align: center; font-size: 1.5rem" th:case="0">未选择</td>
-                                                    <td style="text-align: center; font-size: 1.5rem" th:case="1">
-                                                        <button th:onclick="'javascript:stopCompany(' + ${storeage.getStoreageId()} + ')'">停用</button>
-                                                    </td>
-                                                    <td style="text-align: center; font-size: 1.5rem" th:case="2">已停产</td>
-                                                </span>
+                                                <!--<span th:switch="${storeage.getState()}">-->
+                                                    <!--<td style="text-align: center; font-size: 1.5rem" th:case="0">未选择</td>-->
+                                                    <!--<td style="text-align: center; font-size: 1.5rem" th:case="1">-->
+                                                        <!--<button th:onclick="'javascript:stopCompany(' + ${storeage.getStoreageId()} + ')'">停用</button>-->
+                                                    <!--</td>-->
+                                                    <!--<td style="text-align: center; font-size: 1.5rem" th:case="2">已停产</td>-->
+                                                <!--</span>-->
+                                                <td><button type="button" class="btn edit-btn fa fa-pencil"/><button type="button" class="btn del-btn fa fa-trash-o"/></td>
                                             </tr>
                                         </div>
                                         <script>
