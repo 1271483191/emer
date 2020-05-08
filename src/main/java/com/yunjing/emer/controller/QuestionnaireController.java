@@ -87,12 +87,13 @@ public class QuestionnaireController {
     @RequestMapping(value="/addquestionnaire",method= RequestMethod.POST)
     @ResponseBody
     public Message addquestionnaire(@RequestBody Questionnaire questionnaire, HttpServletRequest request){
-        String name = request.getParameter("age");
-        System.out.print(name);
+        //String name = request.getParameter("age");
+        System.out.print(questionnaire);
         Message message = new Message();
         HttpSession session = request.getSession();
         if(session.getAttribute("questionnaireid")!=null){
             //更新
+            System.out.println("更新");
             int questionnaireid =(int)session.getAttribute("questionnaireid");
             int flag = qusetionnaireService.updateByPrimaryKeySelective(questionnaire,questionnaireid);
 
@@ -109,6 +110,8 @@ public class QuestionnaireController {
             session.removeAttribute("questionnaireid");
         }else {
             //添加操作
+            System.out.println("添加");
+            session.removeAttribute("questionnaireid");
             int flag = qusetionnaireService.insert(questionnaire);
             if(flag>=0) {
                 message.setCode(200);

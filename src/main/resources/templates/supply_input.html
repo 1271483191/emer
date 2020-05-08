@@ -28,10 +28,10 @@
 
     <script src="assets/js/chart-master/Chart.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.15/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="dataTables/css/jquery.dataTables.css">
 
     <!-- jQuery -->
-    <script type="text/javascript" charset="utf8" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="jquery/jquery-1.7.2.min.js"></script>
 
     <!-- DataTables -->
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -714,6 +714,47 @@
                                             </script>
                                         </div>
                                     </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">其它</label>
+                                        <div class="col-sm-10">
+                                            <input id="elseExp" type="text"  class="form-control" placeholder="请输入重量">
+                                            <div id="elseExpText" style="color: red; display: none">请输入正确的重量</div>
+                                            <script>
+                                                $("#elseExp").blur(function(){
+                                                    console.log("leave")
+                                                    elseExpValidate();
+
+                                                });
+                                                const elseExp = $("#elseExp");
+                                                const elseExpText = $("#elseExpText");
+
+                                                function elseExpValidate(){
+
+                                                    if(elseExp.val() == null || elseExp.val().length==0)
+                                                    {
+                                                        console.log("block")
+                                                        elseExpText.attr("style","color: red;display:block;");
+                                                        return false;
+                                                    }else{
+                                                        console.log("none")
+                                                        elseExpText.attr("style","display:none;");
+                                                    }
+
+                                                    var pattern=/^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$/;
+                                                    if(!pattern.test(elseExp.val()))
+                                                    {
+                                                        elseExpText.attr("style","color: red;display:block;");
+                                                        return false;
+                                                    }else{
+                                                        elseExpText.attr("style","display:none;");
+                                                        console.log("true")
+                                                        return true;
+                                                    }
+                                                }
+
+                                            </script>
+                                        </div>
+                                    </div>
                                     <!--设计日供应能力结束-->
                                     <!--实际加工能力-->
                                     <h4 class="mb"><i class="fa fa-angle-right"></i>实际日供应量（吨）</h4>
@@ -842,6 +883,47 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">其它</label>
+                                        <div class="col-sm-10">
+                                            <input id="elseReal" type="text"  class="form-control" placeholder="请输入重量">
+                                            <div id="elseRealText" style="color: red; display: none">请输入正确的重量</div>
+                                            <script>
+                                                $("#elseReal").blur(function(){
+                                                    console.log("leave")
+                                                    elseRealValidate();
+
+                                                });
+                                                const elseReal = $("#elseReal");
+                                                const elseRealText = $("#elseRealText");
+
+                                                function elseRealValidate(){
+
+                                                    if(elseReal.val() == null || elseReal.val().length==0)
+                                                    {
+                                                        console.log("block")
+                                                        elseRealText.attr("style","color: red;display:block;");
+                                                        return false;
+                                                    }else{
+                                                        console.log("none")
+                                                        elseRealText.attr("style","display:none;");
+                                                    }
+
+                                                    var pattern=/^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$/;
+                                                    if(!pattern.test(elseReal.val()))
+                                                    {
+                                                        elseRealText.attr("style","color: red;display:block;");
+                                                        return false;
+                                                    }else{
+                                                        elseRealText.attr("style","display:none;");
+                                                        console.log("true")
+                                                        return true;
+                                                    }
+                                                }
+
+                                            </script>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label">生产状态</label>
                                         <span class="radio col-sm-10">
                                             <label>
@@ -874,9 +956,11 @@
                                             var riceExpV = riceExpValidate();
                                             var flourExpV = flourExpValidate();
                                             var oilExpV = oilExpValidate();
+                                            var elseExpV = elseExpValidate();
                                             var riceRealV = riceRealValidate();
                                             var flourRealV = flourRealValidate();
                                             var oilRealV = oilRealValidate();
+                                            var elseRealV = elseRealValidate();
 
 
                                             var province = $("#provinces").val();
@@ -894,7 +978,7 @@
                                             if(nameV && socialIdV && locationV && llV && principalV
                                                 && phoneV && inDayV && outDayV && saveDayV
                                                 && riceExpV && flourExpV && oilExpV
-                                                && riceRealV && flourRealV && oilRealV
+                                                && riceRealV && flourRealV && oilRealV && elseExpV && elseRealV
                                                 && province != null && city != null && county != null){
 
                                                 console.log(true)
@@ -913,9 +997,11 @@
                                                 var riceExp = $("#riceExp").val();
                                                 var flourExp = $("#flourExp").val();
                                                 var oilExp = $("#oilExp").val();
+                                                var elseExp = $("#elseExp").val();
                                                 var riceReal = $("#riceReal").val();
                                                 var flourReal = $("#flourReal").val();
                                                 var oilReal = $("#oilReal").val();
+                                                var elseReal = $("#elseReal").val();
 
 
 
@@ -956,9 +1042,11 @@
                                                 console.log("riceExp:" + riceExp);
                                                 console.log("flourExp:" + flourExp);
                                                 console.log("oilExp:" + oilExp);
+                                                console.log("elseExp:" + elseExp);
                                                 console.log("riceReal:" + riceReal);
                                                 console.log("flourReal:" + flourReal);
                                                 console.log("oilReal:" + oilReal);
+                                                console.log("elseReal:" + elseReal);
 
 
                                                 console.log("longitude:" + longitude);
@@ -986,10 +1074,12 @@
                                                         saveDay:saveDay,
                                                         riceExp:riceExp,
                                                         flourExp:flourExp,
+                                                        elseExp:elseExp,
                                                         oilExp:oilExp,
                                                         riceReal:riceReal,
                                                         flourReal:flourReal,
                                                         oilReal:oilReal,
+                                                        elseReal:elseReal,
                                                         level:level,
                                                         state:state
                                                     },

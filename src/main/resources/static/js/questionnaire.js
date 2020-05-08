@@ -68,13 +68,37 @@ layui.use(['form','layer','table','laytpl' ],function(){
             success : function(layero, index){
                 var body = layui.layer.getChildFrame('body', index);
                 if(edit){
+                    //form.render();
+                    console.log(body.html());
+
                     body.find(".user").val(edit.user);
-                    body.find(".sex input[value="+edit.sex+"]").prop("checked","checked");  //性别
-                    form.render();
+
+
+
+
+
+                    if(edit.sex == "男"){
+                        console.log(edit.sex)
+                        body.find("#checked_man").prop("checked", true);
+                        body.find("#checked_woman").prop("checked", false);
+                        //form.render();
+                        form.render('radio')
+                    }
+
+                    if(edit.sex == "女"){
+                        console.log(edit.sex)
+                        body.find("#checked_woman").prop("checked", true);
+                        body.find("#checked_man").prop("checked", false);
+                        //form.render();
+                        form.render('radio')
+                    }
+
                     body.find(".age").val(edit.age);
-                    body.find(".province select[name=province]").append("<option value=''>"+edit.province+"</option>");
-                    body.find(".city").val(edit.age);
-                    body.find(".area").val(edit.age);
+                    body.find("#province").append("<option value='"+ edit.province +"'>"+edit.province+"</option>");
+
+
+                    body.find(".city").val(edit.city);
+                    body.find(".area").val(edit.area);
 
                     body.find(".famerType").val(edit.famerType);
                     body.find(".harvestGrain").val(edit.harvestGrain);
@@ -93,7 +117,13 @@ layui.use(['form','layer','table','laytpl' ],function(){
                     body.find(".toolNum").val(edit.toolNum);
                     body.find(".notBuyReason").text(edit.notBuyReason);
 
+
+
                     form.render();
+
+
+
+
                 }
                 setTimeout(function(){
                     layui.layer.tips('点击此处返回用问卷信息列表', '.layui-layer-setwin .layui-layer-close', {

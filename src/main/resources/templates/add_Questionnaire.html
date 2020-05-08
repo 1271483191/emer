@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>添加问卷信息</title>
     <meta name="renderer" content="webkit">
@@ -24,23 +25,23 @@
         </div>
         <div class="layui-form-item" pane="">
             <label class="layui-form-label">性别</label>
-            <div class="layui-input-block sex">
-                <input class="layui-input sex" type="radio" name="sex" value="男" title="男" checked="">
-                <input class="layui-input sex" type="radio" name="sex" value="女" title="女">
+            <div id="sexCheck" class="layui-input-block sex layui-form" >
+                <input id="checked_man" class="layui-input sex" type="radio" name="sex" value="男" title="男">
+                <input id="checked_woman" class="layui-input sex" type="radio" name="sex" value="女" title="女"  checked>
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">年龄</label>
             <div class="layui-input-block">
-                <input type="text"  value="" name="age" placeholder="请输入手机号码" lay-verify="required" class="layui-input age"/>
+                <input type="text"  value="" name="age" placeholder="请输入年龄" lay-verify="required" class="layui-input age"/>
             </div>
         </div>
     <!--</div>-->
         <div class="layui-form-item userAddress">
             <label class="layui-form-label">家庭住址</label>
             <div class="layui-input-inline">
-                <select name="province" lay-filter="province">
-                    <option class="province"  value="">请选择省</option>
+                <select id="province" name="province"  lay-filter="province">
+                    <option class="province" value="">请选择省</option>
                 </select>
             </div>
             <div class="layui-input-inline">

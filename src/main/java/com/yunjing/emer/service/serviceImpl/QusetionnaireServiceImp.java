@@ -41,12 +41,12 @@ public class QusetionnaireServiceImp implements QuestionnaireService {
 
     @Override
     public int insert(Questionnaire record) {
-        String[] provinces = record.getProvince().split("_");
+       /* String[] provinces = record.getProvince().split("_");
         String[] cities = record.getCitie().split("_");
         String[] country = record.getArea().split("_");
         record.setProvince(provinces[3]);
         record.setCitie(cities[3]);
-        record.setArea(country[1]);
+        record.setArea(country[1]);*/
 
         return dao.insert(record);
     }
@@ -64,13 +64,13 @@ public class QusetionnaireServiceImp implements QuestionnaireService {
     @Override
     public int updateByPrimaryKeySelective(Questionnaire record, Integer questionnaireID) {
 
-        String[] provinces = record.getProvince().split("_");
+        /*String[] provinces = record.getProvince().split("_");
         String[] cities = record.getCitie().split("_");
         String[] country = record.getArea().split("_");
         record.setProvince(provinces[3]);
         record.setCitie(cities[3]);
         record.setArea(country[1]);
-        record.setQuestionnaireid(questionnaireID);
+        record.setQuestionnaireid(questionnaireID);*/
 
 
         return dao.updateByPrimaryKeySelective(record);

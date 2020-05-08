@@ -328,9 +328,11 @@
                                             <th style="text-align: center; font-size: 1.5rem">大米（日）</th>
                                             <th style="text-align: center; font-size: 1.5rem">面粉（日）</th>
                                             <th style="text-align: center; font-size: 1.5rem">食用油（日）</th>
+                                            <th style="text-align: center; font-size: 1.5rem">其他（日）</th>
                                             <th style="text-align: center; font-size: 1.5rem">大米实际（日）</th>
                                             <th style="text-align: center; font-size: 1.5rem">面粉实际（日）</th>
                                             <th style="text-align: center; font-size: 1.5rem">食用油实际（日）</th>
+                                            <th style="text-align: center; font-size: 1.5rem">其他实际（日）</th>
                                             <th style="text-align: center; font-size: 1.5rem">生产状态</th>
                                             <th style="text-align: center; font-size: 1.5rem">停用</th>
                                         </tr>
@@ -356,9 +358,11 @@
                                                 <td style="text-align: center; font-size: 1.5rem" th:text="${website.getFlourExp()}"></td>
                                                 <td style="text-align: center; font-size: 1.5rem" th:text="${website.getRiceExp()}"></td>
                                                 <td style="text-align: center; font-size: 1.5rem" th:text="${website.getOilExp()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${website.getElseExp()}"></td>
                                                 <td style="text-align: center; font-size: 1.5rem" th:text="${website.getFlourReal()}"></td>
                                                 <td style="text-align: center; font-size: 1.5rem" th:text="${website.getRiceReal()}"></td>
                                                 <td style="text-align: center; font-size: 1.5rem" th:text="${website.getOilReal()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${website.getElseReal()}"></td>
                                                 <span th:switch="${website.getState()}">
                                                     <td style="text-align: center; font-size: 1.5rem" th:case="0">未选择</td>
                                                     <td style="text-align: center; font-size: 1.5rem" th:case="1">生产中</td>
