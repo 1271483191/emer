@@ -65,7 +65,7 @@ layui.config({
                     }, function(){
                         parent.window.location.reload();
                     });
-                }else if(res.res){
+                }else {
                     layer.msg(res.msg, {
                         time: 2000 //2秒关闭（如果不配置，默认是3秒）
                     }, function(){
@@ -75,8 +75,9 @@ layui.config({
             },
             error:function (data) {
                 layer.msg(data.msg,{icon:5});
-                layer.alert("error")
+                layer.alert("发生未知错误请重新输入")
                 //console.log(data);
+                parent.window.location.reload();
             }
         })
         //  console.log(userInfoHtml);
