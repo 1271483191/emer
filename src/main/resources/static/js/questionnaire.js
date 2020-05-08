@@ -18,27 +18,27 @@ layui.use(['form','layer','table','laytpl' ],function(){
         id : "newsListTable",
         cols : [[
             {type: "checkbox", fixed:"left", width:50},
-            {field: 'questionnaireid', title: 'ID', minWidth:50, align:"center"},
-            {field: 'user', title: '姓名', minWidth:100, align:"center"},
-            {field: 'sex', title: '性别', minWidth:100, align:"center"},
-            {field: 'age', title: '年龄', minWidth:80, align:'center'},
-            {field: 'province', title: '省份', minWidth:150, align:'center'},
-            {field: 'citie', title: '城市', minWidth:150, align:'center'},
-            {field: 'area', title: '地区', minWidth:150, align:'center'},
-            {field: 'famerType', title: '农民类型', minWidth:200, align:'center'},
-            {field: 'harvestGrain', title: '收获粮食', minWidth:200, align:'center'},
-            {field: 'surplusGrain', title: '每年存粮', minWidth:200, align:'center'},
-            {field: 'averageGrainDay', title: '每年存粮天数', minWidth:200, align:'center'},
-            {field: 'purposeGrain', title: '粮食用途', minWidth:200, align:'center'},
-            {field: 'reason', title: '不存粮原因', minWidth:250, align:"center"},
-            {field: 'tools', title: '是否了解储粮装具', minWidth:200, align:"center"},
-            {field: 'toolsEvaluate', title: '之前储粮装具评价', minWidth:250, align:"center"},
-            {field: 'toolsUse', title: '储粮装具的使用', minWidth:250, align:"center"},
-            {field: 'supportTool', title: '国家支持购买储量装具', minWidth:150, align:"center"},
-            {field: 'toolType', title: '储粮工具大小', minWidth:250, align:"center"},
-            {field: 'toolNum', title: '购买装具数量', minWidth:100, align:"center"},
-            {field: 'notBuyReason', title: '不买装具原因', minWidth:250, align:"center"},
-            {title: '操作', minWidth:150, templet:'#userListBar',fixed:"right",align:"center"}
+            {field: 'questionnaireid', title: 'ID', edit: 'text', minWidth:50, align:"center"},
+            {field: 'user', title: '姓名', minWidth:100, edit: 'text', align:"center"},
+            {field: 'sex', title: '性别', minWidth:100, edit: 'text', align:"center"},
+            {field: 'age', title: '年龄', minWidth:80, edit: 'text', align:'center'},
+            {field: 'province', title: '省份', minWidth:150, edit: 'text', align:'center'},
+            {field: 'citie', title: '城市', minWidth:150, edit: 'text', align:'center'},
+            {field: 'area', title: '地区', minWidth:150, edit: 'text', align:'center'},
+            {field: 'famerType', title: '农民类型', minWidth:200, edit: 'text', align:'center'},
+            {field: 'harvestGrain', title: '收获粮食', minWidth:200, edit: 'text', align:'center'},
+            {field: 'surplusGrain', title: '每年存粮', minWidth:200, edit: 'text', align:'center'},
+            {field: 'averageGrainDay', title: '每年存粮天数', minWidth:200, edit: 'text', align:'center'},
+            {field: 'purposeGrain', title: '粮食用途', minWidth:200, edit: 'text', align:'center'},
+            {field: 'reason', title: '不存粮原因', minWidth:250, edit: 'text', align:"center"},
+            {field: 'tools', title: '是否了解储粮装具', minWidth:200, edit: 'text', align:"center"},
+            {field: 'toolsEvaluate', title: '之前储粮装具评价', minWidth:250, edit: 'text', align:"center"},
+            {field: 'toolsUse', title: '储粮装具的使用', minWidth:250, edit: 'text', align:"center"},
+            {field: 'supportTool', title: '国家支持购买储量装具', minWidth:150, edit: 'text', align:"center"},
+            {field: 'toolType', title: '储粮工具大小', minWidth:250, edit: 'text', align:"center"},
+            {field: 'toolNum', title: '购买装具数量', minWidth:100, edit: 'text', align:"center"},
+            {field: 'notBuyReason', title: '不买装具原因', minWidth:250, edit: 'text', align:"center"},
+            {title: '操作', minWidth:100, templet:'#userListBar',fixed:"right" , align:"center"}
         ]]
     });
 
@@ -68,37 +68,13 @@ layui.use(['form','layer','table','laytpl' ],function(){
             success : function(layero, index){
                 var body = layui.layer.getChildFrame('body', index);
                 if(edit){
-                    //form.render();
-                    console.log(body.html());
-
                     body.find(".user").val(edit.user);
-
-
-
-
-
-                    if(edit.sex == "男"){
-                        console.log(edit.sex)
-                        body.find("#checked_man").prop("checked", true);
-                        body.find("#checked_woman").prop("checked", false);
-                        //form.render();
-                        form.render('radio')
-                    }
-
-                    if(edit.sex == "女"){
-                        console.log(edit.sex)
-                        body.find("#checked_woman").prop("checked", true);
-                        body.find("#checked_man").prop("checked", false);
-                        //form.render();
-                        form.render('radio')
-                    }
-
+                    body.find('input[name="sex"][value="'+edit.sex+'"]').prop("checked",true);  //性别
+                    form.render();
                     body.find(".age").val(edit.age);
-                    body.find("#province").append("<option value='"+ edit.province +"'>"+edit.province+"</option>");
-
-
-                    body.find(".city").val(edit.city);
-                    body.find(".area").val(edit.area);
+                    body.find(".province select[name=province]").append("<option value=''>"+edit.province+"</option>");
+                    body.find(".city").val(edit.age);
+                    body.find(".area").val(edit.age);
 
                     body.find(".famerType").val(edit.famerType);
                     body.find(".harvestGrain").val(edit.harvestGrain);
@@ -117,13 +93,7 @@ layui.use(['form','layer','table','laytpl' ],function(){
                     body.find(".toolNum").val(edit.toolNum);
                     body.find(".notBuyReason").text(edit.notBuyReason);
 
-
-
                     form.render();
-
-
-
-
                 }
                 setTimeout(function(){
                     layui.layer.tips('点击此处返回用问卷信息列表', '.layui-layer-setwin .layui-layer-close', {
@@ -152,7 +122,7 @@ layui.use(['form','layer','table','laytpl' ],function(){
             for (var i in data) {
                 newsId.push(data[i].questionnaireid);
             }
-            console.log(typeof newsId);
+            //console.log(typeof newsId);
             layer.confirm('确定删除选中的用户？', {icon: 3, title: '提示信息'}, function (index) {
                 $.post("deletequestionnaire",{
                     newsId : newsId.join(",")  //将需要删除的newsId作为参数传入
@@ -166,26 +136,88 @@ layui.use(['form','layer','table','laytpl' ],function(){
         }
     })
 
+    var information={};
+    //监听单元格编辑数据
+    table.on('edit(userList)', function(obj){
+        var value = obj.value //得到修改后的值
+            ,data = obj.data //得到所在行所有键值
+            ,field = obj.field //得到字段
+
+        var information={
+            'questionnaireid':data.questionnaireid
+
+        };
+        //var news = data.questionnaireid+'_'+field+'_'+value;
+        //info.push(news);
+        information[field] = data[field];
+        layer.msg('[ID: '+ data.questionnaireid +']的信息更改为：'+ value);
+        $.ajax({
+            url:"updataQuestionnaire",
+            type:'post',//method请求方式，get或者post
+            dataType:'json',//预期服务器返回的数据类型
+            data:JSON.stringify(information),//表格数据序列化
+            contentType: "application/json; charset=utf-8",
+            success:function(res){//res为相应体,function为回调函数
+                if(res.res){
+                    layer.msg(res.msg, {
+                        time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                    }, function(){
+                        parent.window.location.reload();
+                    });
+                }else {
+                    layer.msg(res.msg, {
+                        time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                    }, function(){
+                        parent.window.location.reload();
+                    });
+                }
+            },
+            error:function (data) {
+                layer.msg(res.msg, {
+                    time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                }, function(){
+                    parent.window.location.reload();
+                });
+            }
+        })
+
+        /*$.post('updataQuestionnaire',{information:info.join(",")
+          },function(str){
+              tableIns.reload();
+              layer.close(index);
+              parent.window.location.reload();
+          })*/
+    });
+
     //列表操作
     table.on('tool(userList)', function(obj){
         var layEvent = obj.event,
             data = obj.data;
 
-        if(layEvent === 'edit'){ //编辑
+        /*if(layEvent === 'edit'){ //编辑
 
-            $.post('updataQuestionnaire',{questionnaireid:data.questionnaireid},function(str){
-                addQuestionnaire(data);
-            })
+            /!*layer.confirm('确定修改问卷信息？', {icon: 3, title: '提示信息'}, function (index) {
+                /!*console.log('数组：', info);*!/
+                $.post('updataQuestionnaire',{information:info.join(",")
+                },function(str){
+                    tableIns.reload();
+                    layer.close(index);
+                    parent.window.location.reload();
+                })
 
-        }else if(layEvent === 'del'){ //删除
-            layer.confirm('确定删除此用户？',{icon:3, title:'提示信息'},function(index){
+            })*!/
+
+
+
+        }else*/if(layEvent === 'del'){ //删除
+              layer.confirm('确定删除此用户？',{icon:3, title:'提示信息'},function(index){
                 $.post("deletequestionnaire",{
                     newsId : data.questionnaireid  //将需要删除的newsId作为参数传入
                 },function(data){
                     tableIns.reload();
                     layer.close(index);
                 })
-            });
+              });
         }
     });
 
