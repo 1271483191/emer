@@ -42,6 +42,26 @@
 
 </head>
 
+<style>
+    .input-box {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .input-left {
+        /* display: inline-block; */
+        float: left;
+        width: 20rem;
+        font-size: 1.6rem;
+    }
+
+    .input-right {
+        /* display: inline-block; */
+        float: left;
+        width: 50%;
+    }
+</style>
+
 <body>
 
 <section id="container" class="">
@@ -203,15 +223,15 @@
                     <div class="row mt">
                         <div class="col-lg-12">
                             <div class="form-panel">
-                                <form class="form-horizontal style-form" method="get">
+                                <form class="form-horizontal style-form form-inline" style="padding: 5rem;" method="get">
 
                                     <!--企业基本信息-->
                                     <h4 class="mb"><i class="fa fa-angle-right"></i>企业基本信息</h4>
                                     <hr/>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 col-sm-2 control-label">企业名称</label>
-                                        <div class="col-sm-10">
-                                            <input id="name" name="name" type="text"  class="form-control" placeholder="请输入企业名称">
+                                    <div class="form-group input-box">
+                                        <label class="col-sm-2 col-sm-2 control-label input-left">企业名称</label>
+                                        <div class="col-sm-10 input-right">
+                                            <input id="name" style="width:25rem;" name="name" type="text"  class="form-control" placeholder="请输入企业名称">
                                             <div id="nameText" style="color: red; display: none">企业名不能为空</div>
                                             <script>
                                                 $("#name").blur(function(){
@@ -237,11 +257,11 @@
 
                                             </script>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 col-sm-2 control-label">统一社会信用代码</label>
-                                        <div class="col-sm-10">
-                                            <input id="socialId" name="socialId" type="text"  class="form-control" placeholder="请按企业营业执照标准填写">
+                                    </div><br>
+                                    <div class="form-group input-box">
+                                        <label class="col-sm-2 col-sm-2 control-label input-left">统一社会信用代码</label>
+                                        <div class="col-sm-10 input-right">
+                                            <input id="socialId" style="width:25rem;" name="socialId" type="text"  class="form-control" placeholder="请按企业营业执照标准填写">
                                             <div id="socialIdText" style="color: red; display: none">请按企业营业执照标准填写</div>
                                             <script>
                                                 $("#socialId").blur(function(){
@@ -278,9 +298,9 @@
 
                                             </script>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 col-sm-2 control-label" for="addr-show">所在地区：
+                                    </div><br>
+                                    <div class="form-group input-box">
+                                        <label class="col-sm-2 col-sm-2 control-label input-left" for="addr-show">所在地区：
                                             <input type="hidden" value="" id="addr-show"/>
                                         </label>
 
@@ -288,25 +308,25 @@
                                         <input  name="city" style="width: 30%" type="hidden" value="" id="cities"/>
                                         <input name="county" style="width: 30%" type="hidden" value="" id="counties"/>
 
-                                        <div class="col-sm-10">
+                                        <div class="col-sm-10 input-right">
                                             <!--省份选择-->
-                                            <select style="width: 30%" class="form-control" id="prov" onchange="showCity(this)">
+                                            <select style="width:15rem" class="form-control" id="prov" onchange="showCity(this)">
                                                 <option>=请选择省份=</option>
                                             </select>
-                                            <select style="width: 30%" class="form-control" id="city" onchange="showCountry(this)">
+                                            <select style="width: 15rem" class="form-control" id="city" onchange="showCountry(this)">
                                                 <option>=请选择城市=</option>
                                             </select>
-                                            <select style="width: 30%" class="form-control" id="country" onchange="selecCountry(this)">
+                                            <select style="width: 15rem" class="form-control" id="country" onchange="selecCountry(this)">
                                                 <option>=请选择县区=</option>
                                             </select>
                                         </div>
                                         <br/>
 
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 col-sm-2 control-label">实际经营地址</label>
-                                        <div class="col-sm-10">
-                                            <input id="locations" name="location" type="text"  class="form-control" placeholder="请输入地址">
+                                    </div><br>
+                                    <div class="form-group input-box">
+                                        <label class="col-sm-2 col-sm-2 control-label input-left">实际经营地址</label>
+                                        <div class="col-sm-10 input-right">
+                                            <input id="locations" style="width:25rem;" name="location" type="text"  class="form-control" placeholder="请输入地址">
                                             <div id="locationsText" style="color: red; display: none">请输入地址</div>
                                             <script>
                                                 $("#locations").blur(function(){
@@ -331,11 +351,11 @@
                                                 }
                                             </script>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 col-sm-2 control-label">经纬度</label>
-                                        <div class="col-sm-10">
-                                            <input id="ll" type="text"  class="form-control" placeholder="如:111,222">
+                                    </div><br>
+                                    <div class="form-group input-box">
+                                        <label class="col-sm-2 col-sm-2 control-label input-left">经纬度</label>
+                                        <div class="col-sm-10 input-right">
+                                            <input id="ll" style="width:25rem;" type="text"  class="form-control" placeholder="如:111,222">
                                             <div id="llText" style="color: red; display: none">请输入正确的经纬度格式</div>
                                             <script>
                                                 $("#ll").blur(function(){
@@ -379,29 +399,29 @@
                                                 }
                                             </script>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 col-sm-2 control-label">企业性质</label>
-                                        <div class="col-sm-10">
+                                    </div><br>
+                                    <div class="form-group input-box">
+                                        <label class="col-sm-2 col-sm-2 control-label input-left">企业性质</label>
+                                        <div class="col-sm-10 input-right">
                                             <input value="1" name="activationStatus" type="radio" checked="checked"/><span style="margin-right: 10px;margin-left: 5px">国有企业</span>
                                             <input value="2" name="activationStatus" type="radio"/><span style="margin-right: 10px;margin-left: 5px">私有企业</span>
                                             <input value="3" name="activationStatus" type="radio"/><span style="margin-right: 10px;margin-left: 5px">民营企业</span>
                                             <input value="4" name="activationStatus" type="radio"/><span style="margin-right: 10px;margin-left: 5px">外资企业</span>
                                             <input value="5" name="activationStatus" type="radio"/><span style="margin-right: 10px;margin-left: 5px">国有控股企业</span>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 col-sm-2 control-label">应急级别</label>
-                                        <div class="col-sm-10">
+                                    </div><br>
+                                    <div class="form-group input-box">
+                                        <label class="col-sm-2 col-sm-2 control-label input-left">应急级别</label>
+                                        <div class="col-sm-10 input-right">
                                             <input value="1" name="level" type="radio" checked="checked"/><span style="margin-right: 10px;margin-left: 5px">省级</span>
                                             <input value="2" name="level" type="radio"/><span style="margin-right: 10px;margin-left: 5px">市级</span>
                                             <input value="3" name="level" type="radio"/><span style="margin-right: 10px;margin-left: 5px">县级</span>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 col-sm-2 control-label">负责人姓名</label>
-                                        <div class="col-sm-10">
-                                            <input id="principal" type="text"  class="form-control" placeholder="请输入姓名">
+                                    </div><br>
+                                    <div class="form-group input-box">
+                                        <label class="col-sm-2 col-sm-2 control-label input-left">负责人姓名</label>
+                                        <div class="col-sm-10 input-right">
+                                            <input id="principal" style="width:25rem;" type="text"  class="form-control" placeholder="请输入姓名">
                                             <div id="principalText" style="color: red; display: none">姓名不能为空</div>
                                             <script>
                                                 $("#principal").blur(function(){
@@ -426,11 +446,11 @@
                                                 }
                                             </script>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 col-sm-2 control-label">联系电话</label>
-                                        <div class="col-sm-10">
-                                            <input id="phone" type="text"  class="form-control" placeholder="请输入电话号码">
+                                    </div><br>
+                                    <div class="form-group input-box">
+                                        <label class="col-sm-2 col-sm-2 control-label input-left">联系电话</label>
+                                        <div class="col-sm-10 input-right">
+                                            <input id="phone" style="width:25rem;" type="text"  class="form-control" placeholder="请输入电话号码">
                                             <div id="phoneText" style="color: red; display: none">请输入正确的电话格式（固话带区号）</div>
                                             <script>
                                                 $("#phone").blur(function(){
@@ -473,10 +493,10 @@
                                     <!--企业指标-->
                                     <h4 class="mb"><i class="fa fa-angle-right"></i>企业指标</h4>
                                     <hr/>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 col-sm-2 control-label">日入库量</label>
-                                        <div class="col-sm-10">
-                                            <input id="inDay" type="text"  class="form-control" placeholder="请输入重量">
+                                    <div class="form-group input-box">
+                                        <label class="col-sm-2 col-sm-2 control-label input-left">日入库量</label>
+                                        <div class="col-sm-10 input-right">
+                                            <input id="inDay" style="width:25rem;" type="text"  class="form-control" placeholder="请输入重量">
                                             <div id="inDayText" style="color: red; display: none">请输入正确的重量</div>
                                             <script>
                                                 $("#inDay").blur(function(){
@@ -513,11 +533,11 @@
 
                                             </script>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 col-sm-2 control-label">日销量</label>
-                                        <div class="col-sm-10">
-                                            <input id="outDay" type="text"  class="form-control" placeholder="请输入重量">
+                                    </div><br>
+                                    <div class="form-group input-box">
+                                        <label class="col-sm-2 col-sm-2 control-label input-left">日销量</label>
+                                        <div class="col-sm-10 input-right">
+                                            <input id="outDay" style="width:25rem;" type="text"  class="form-control" placeholder="请输入重量">
                                             <div id="outDayText" style="color: red; display: none">请输入正确的重量</div>
                                             <script>
                                                 $("#outDay").blur(function(){
@@ -554,11 +574,11 @@
 
                                             </script>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 col-sm-2 control-label">日库存</label>
-                                        <div class="col-sm-10">
-                                            <input id="saveDay" type="text"  class="form-control" placeholder="请输入重量">
+                                    </div><br>
+                                    <div class="form-group input-box">
+                                        <label class="col-sm-2 col-sm-2 control-label input-left">日库存</label>
+                                        <div class="col-sm-10 input-right">
+                                            <input id="saveDay" style="width:25rem;" type="text"  class="form-control" placeholder="请输入重量">
                                             <div id="saveDayText" style="color: red; display: none">请输入正确的重量</div>
                                             <script>
                                                 $("#saveDay").blur(function(){
@@ -603,10 +623,10 @@
                                     <!--日加工能力-->
                                     <h4 class="mb"><i class="fa fa-angle-right"></i>物流能力</h4>
                                     <hr/>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 col-sm-2 control-label">日运输能力（吨/天）</label>
-                                        <div class="col-sm-10">
-                                            <input id="transportDay" type="text"  class="form-control" placeholder="请输入重量">
+                                    <div class="form-group input-box">
+                                        <label class="col-sm-2 col-sm-2 control-label input-left">日运输能力（吨/天）</label>
+                                        <div class="col-sm-10 input-right">
+                                            <input id="transportDay" style="width:25rem;" type="text"  class="form-control" placeholder="请输入重量">
                                             <div id="transportDayText" style="color: red; display: none">请输入正确的重量</div>
                                             <script>
                                                 $("#transportDay").blur(function(){
@@ -643,11 +663,11 @@
 
                                             </script>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 col-sm-2 control-label">运输车辆数量（个）</label>
-                                        <div class="col-sm-10">
-                                            <input id="carNum" type="text"  class="form-control" placeholder="请输入个数">
+                                    </div><br>
+                                    <div class="form-group input-box">
+                                        <label class="col-sm-2 col-sm-2 control-label input-left">运输车辆数量（个）</label>
+                                        <div class="col-sm-10 input-right">
+                                            <input id="carNum" style="width:25rem;" type="text"  class="form-control" placeholder="请输入个数">
                                             <div id="carNumText" style="color: red; display: none">请输入正确的个数</div>
                                             <script>
                                                 $("#carNum").blur(function(){
@@ -682,11 +702,11 @@
 
                                             </script>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 col-sm-2 control-label">实际日供应量（吨/天）</label>
-                                        <div class="col-sm-10">
-                                            <input id="transportDayReal" type="text"  class="form-control" placeholder="请输入重量">
+                                    </div><br>
+                                    <div class="form-group input-box">
+                                        <label class="col-sm-2 col-sm-2 control-label input-left">实际日供应量（吨/天）</label>
+                                        <div class="col-sm-10 input-right">
+                                            <input id="transportDayReal" style="width:25rem;" type="text"  class="form-control" placeholder="请输入重量">
                                             <div id="transportDayRealText" style="color: red; display: none">请输入正确的重量</div>
                                             <script>
                                                 $("#transportDayReal").blur(function(){
@@ -721,10 +741,10 @@
 
                                             </script>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 col-sm-2 control-label">生产状态</label>
-                                        <span class="radio col-sm-10">
+                                    </div><br>
+                                    <div class="form-group input-box">
+                                        <label class="col-sm-2 col-sm-2 control-label input-left">生产状态</label>
+                                        <span class="radio col-sm-10 input-right">
                                             <label>
                                                 <input type="radio" name="state" id="optionsRadios1" value="1" checked>
                                                 生产
@@ -734,9 +754,9 @@
                                                 停产
                                             </label>
                                         </span>
-                                    </div>
+                                    </div><br>
                                     <!--日加工能力结束-->
-                                    <div style="text-align: center" class="form-group">
+                                    <div style="text-align: center;width: 100%;padding-left: 2rem;" class="form-group">
                                         <hr/>
                                         <input class="btn btn-success" type="button" onclick="submitDate()" value="提交"></input>
                                     </div>

@@ -177,6 +177,11 @@ function homepie_csj(data){
                 color: '#ccc'
             }
         },
+        legend: {
+            left: 50,
+            top: 'bottom',
+            data: ['供应网点', '配送中心', '储运企业', '应急加工']
+        },
         toolbox : {
             show : true,
             feature: {
@@ -198,8 +203,8 @@ function homepie_csj(data){
 
         visualMap: {
             show: false,
-            min: 80,
-            max: 600,
+            min: 0,
+            max: 50,
             inRange: {
                 colorLightness: [0, 1]
             }
