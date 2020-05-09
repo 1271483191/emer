@@ -18,7 +18,7 @@ layui.use(['form','layer','table','laytpl' ],function(){
         id : "newsListTable",
         cols : [[
             {type: "checkbox", fixed:"left", width:50},
-            {field: 'questionnaireid', title: 'ID', edit: 'text', minWidth:50, align:"center"},
+            {field: 'questionnaireid', title: 'ID', minWidth:50, align:"center"},
             {field: 'user', title: '姓名', minWidth:100, edit: 'text', align:"center"},
             {field: 'sex', title: '性别', minWidth:100, edit: 'text', align:"center"},
             {field: 'age', title: '年龄', minWidth:80, edit: 'text', align:'center'},

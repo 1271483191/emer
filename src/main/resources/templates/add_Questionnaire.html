@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<html xmlns:th="http://www.thymeleaf.org">
 <head>
-
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>添加问卷信息</title>
     <meta name="renderer" content="webkit">
@@ -16,148 +14,230 @@
 
 </head>
 <body class="childrenBody">
-<form class="layui-form" >
-    <!--<div class="layui-row">-->
-        <div class="layui-form-item">
-            <label class="layui-form-label">姓名</label>
-            <div class="layui-input-block">
-                <input type="text"  name="user" value="" placeholder="请输入姓名" lay-verify="required" class="layui-input user"/>
-            </div>
-        </div>
-        <div class="layui-form-item" pane="">
-            <label class="layui-form-label">性别</label>
-            <div id="sexCheck" class="layui-input-block sex layui-form" >
-                <input id="checked_man" class="layui-input sex" type="radio" name="sex" value="男" title="男">
-                <input id="checked_woman" class="layui-input sex" type="radio" name="sex" value="女" title="女"  checked>
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">年龄</label>
-            <div class="layui-input-block">
-                <input type="text"  value="" name="age" placeholder="请输入年龄" lay-verify="required" class="layui-input age"/>
-            </div>
-        </div>
-    <!--</div>-->
-        <div class="layui-form-item userAddress">
-            <label class="layui-form-label">家庭住址</label>
-            <div class="layui-input-inline">
-                <select id="province" name="province"  lay-filter="province">
-                    <option class="province" value="">请选择省</option>
-                </select>
-            </div>
-            <div class="layui-input-inline">
-                <select name="city" lay-filter="city" disabled>
-                    <option class="city" value="">请选择市</option>
-                </select>
-            </div>
-            <div class="layui-input-inline">
-                <select name="area" lay-filter="area" disabled>
-                    <option class="area" value="">请选择县/区</option>
-                </select>
-            </div>
-        </div>
+<form class="layui-form" style="width:80%;" >
 
-        <div class="layui-form-item">
-             <label class="layui-form-label">农民类型</label>
-             <div class="layui-input-block">
-             <input type="text"  name="famerType" value="" placeholder="请输入农民类型" lay-verify="required" class="layui-input famerType"/>
-             </div>
+ <div class="layui-row">
+     <div class="magb15 layui-col-md4 layui-col-xs12">
+        <label class="layui-form-label">姓名</label>
+        <div class="layui-input-block">
+           <input type="text"  name="user" value="" placeholder="请输入姓名" lay-verify="required" class="layui-input user"/>
         </div>
+     </div>
+     <div class="magb15 layui-col-md4 layui-col-xs12" pane="">
+        <label class="layui-form-label">性别</label>
+        <div class="layui-input-block sex">
+           <input class="layui-input sex" type="radio" name="sex" value="男" title="男" checked="">
+           <input class="layui-input sex" type="radio" name="sex" value="女" title="女">
+        </div>
+     </div>
+     <div class="magb15 layui-col-md4 layui-col-xs12">
+        <label class="layui-form-label">年龄</label>
+        <div class="layui-input-block">
+           <input type="text"  value="" name="age" placeholder="请输入年龄" lay-verify="required" class="layui-input age"/>
+        </div>
+     </div>
+  </div>
 
-        <div class="layui-form-item">
-            <label class="layui-form-label">收获粮食</label>
-            <div class="layui-input-block">
+<div class="layui-form-item userAddress">
+    <label class="layui-form-label">家庭住址</label>
+    <div class="layui-input-inline">
+        <select name="province" lay-filter="province">
+            <option class="province"  value="">请选择省</option>
+        </select>
+    </div>
+    <div class="layui-input-inline">
+        <select name="city" lay-filter="city" disabled>
+            <option class="city" value="">请选择市</option>
+        </select>
+    </div>
+    <div class="layui-input-inline">
+        <select name="area" lay-filter="area" disabled>
+            <option class="area" value="">请选择县/区</option>
+        </select>
+    </div>
+</div>
+
+<div class="layui-row ">
+    <div class="magb15 layui-col-md6 layui-col-xs12">
+        <label class="layui-form-label">农民类型</label>
+        <div class="layui-input-block">
+            <select name="famerType" class="famerType" lay-filter="famerType">
+                <option value="0">请选择</option>
+                <option value="一般小农户">一般小农户</option>
+                <option value="涉粮新型农业经营主体">涉粮新型农业经营主体</option>
+                <option value="其他">其他</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="magb15 layui-col-md6 layui-col-xs12">
+        <label class="layui-form-label">收获粮食</label>
+        <div class="layui-input-block">
             <input type="text"  name="harvestGrain" value="" placeholder="请输入收获粮食" lay-verify="required" class="layui-input harvestGrain"/>
-            </div>
         </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">每年存粮</label>
-            <div class="layui-input-block">
+    </div>
+</div>
+
+<div class="layui-row ">
+    <div class="magb15 layui-col-md6 layui-col-xs12">
+        <label class="layui-form-label">每年存粮</label>
+        <div class="layui-input-block">
             <input type="text"  name="surplusGrain" value="" placeholder="请输入每年存粮" lay-verify="required" class="layui-input surplusGrain"/>
-            </div>
         </div>
+    </div>
 
-        <div class="layui-form-item">
-          <label class="layui-form-label">每年存粮时间</label>
-          <div class="layui-input-block">
+    <div class="magb15 layui-col-md6  layui-col-xs12">
+        <label class="layui-form-label">年存粮时间</label>
+        <div class="layui-input-block ">
             <input type="text"  name="averageGrainDay" value="" placeholder="请输入每年存粮时间" lay-verify="required" class="layui-input averageGrainDay"/>
-          </div>
         </div>
+    </div>
+</div>
 
-        <div class="layui-form-item">
-            <label class="layui-form-label">粮食用途</label>
-            <div class="layui-input-block">
-            <input type="text"  name="purposeGrain" value="" placeholder="粮食用途" lay-verify="required" class="layui-input purposeGrain"/>
-            </div>
+<div class="layui-form-item layui-row layui-col-xs12">
+    <label class="layui-form-label">粮食用途</label>
+    <div class="layui-input-block">
+        <select name="purposeGrain" class="purposeGrain" lay-filter="purposeGrain">
+            <option value="0">请选择</option>
+            <option value="口粮">口粮</option>
+            <option value="种子">种子</option>
+            <option value="饲料用">饲料用</option>
+            <option value="择机售粮">择机售粮</option>
+            <option value="其他">其他</option>
+        </select>
+    </div>
+</div>
+
+<div class="layui-form-item layui-row layui-col-xs12">
+    <label class="layui-form-label">不存粮原因</label>
+    <div class="layui-input-block">
+        <select name="reason" class="reason" lay-filter="reason">
+            <option value="0">请选择</option>
+            <option value="口粮、种子、饲料用粮等都从市场或网上买，不用存">口粮、种子、饲料用粮等都从市场或网上买，不用存</option>
+            <option value="没那习惯，自己储存保管太麻烦">没那习惯，自己储存保管太麻烦</option>
+            <option value="急于卖钱还贷，收获不久就基本都卖了">急于卖钱还贷，收获不久就基本都卖了</option>
+            <option value="其他">其他</option>
+        </select>
+    </div>
+</div>
+
+<div class="layui-form-item layui-row layui-col-xs12">
+    <label class="layui-form-label">是否了解储粮装具</label>
+    <div class="layui-input-block">
+        <select name="tools" class="tools" lay-filter="tools">
+            <option value="0">请选择</option>
+            <option value="不了解">不了解</option>
+            <option value="听说过没见过">听说过没见过</option>
+            <option value="见过别人家的">见过别人家的</option>
+            <option value="自己购买使用过">自己购买使用过</option>
+            <option value="其他">其他</option>
+        </select>
+    </div>
+</div>
+
+<div class="layui-form-item layui-row layui-col-xs12">
+    <label class="layui-form-label">对之前储粮装具评价</label>
+    <div class="layui-input-block">
+        <select name="toolsEvaluate" class="toolsEvaluate" lay-filter="toolsEvaluate">
+            <option value="0">请选择</option>
+            <option value="很好，帮助农民减少损失增加收入">很好，帮助农民减少损失增加收入</option>
+            <option value="一般般吧，作用不明显">一般般吧，作用不明显</option>
+            <option value="没什么作用">没什么作用</option>
+            <option value="不了解">不了解</option>
+        </select>
+    </div>
+</div>
+
+<div class="layui-form-item layui-row layui-col-xs12">
+    <label class="layui-form-label">别人购买储粮装具使用</label>
+    <div class="layui-input-block">
+        <select name="toolsUse" class="toolsUse" lay-filter="toolsUse">
+            <option value="0">请选择</option>
+            <option value="季节性用作存粮">季节性用作存粮</option>
+            <option value="很少用作存粮">很少用作存粮</option>
+            <option value="大多时候堆放杂物或圈养家禽家畜">大多时候堆放杂物或圈养家禽家畜</option>
+            <option value="不了解具体情况">不了解具体情况</option>
+        </select>
+    </div>
+</div>
+
+<div class="layui-row ">
+    <div class="magb15 layui-col-md6 layui-col-xs12">
+        <label class="layui-form-label">国家支持购买储量装具</label>
+        <div class="layui-input-block">
+            <input type="radio" name="supportTool" lay-filter="supportTool" value="40%" title="40%" >
+            <input type="radio" name="supportTool" lay-filter="supportTool" value="30%" title="30%" >
+            <input type="radio" name="supportTool" lay-filter="supportTool" value="20%" title="20%" >
+            <input type="radio" name="supportTool" lay-filter="supportTool" value="supportTool_other" title="其他" >
         </div>
+    </div>
+    <div class="magb15 layui-col-md6 layui-col-xs12 " id="supportTool2" style="display: none;">
+          <div class="layui-input-block">
+          <input type="text" lay-filter="supportTool2" name="supportTool2" value="" placeholder="请填写" class="layui-form-item layui-input supportTool2"/>
+       </div>
+    </div>
+</div>
 
-        <div class="layui-form-item">
-           <label class="layui-form-label">不存粮原因</label>
-             <div class="layui-input-block">
-             <textarea name="reason" placeholder="请输入内容" class="layui-textarea reason"></textarea>
-           </div>
+
+<div class="layui-row">
+    <div class="magb15 layui-col-md6 layui-col-xs12">
+        <label class="layui-form-label">购买储粮工具大小</label>
+        <div class="layui-input-block">
+            <input type="radio" name="toolType" lay-filter="toolType" value="两千斤" title="两千斤" >
+            <input type="radio" name="toolType" lay-filter="toolType" value="一万斤" title="一万斤" >
+            <input type="radio" name="toolType" lay-filter="toolType" value="两万斤" title="两万斤" >
+            <input type="radio" name="toolType" lay-filter="toolType" value="toolType_other" title="其他" >
         </div>
+    </div>
+    <div class="magb15 layui-col-md6 layui-col-xs12 " id="toolType2" style="display: none;">
+       <div class="layui-input-block">
+         <input type="text" lay-filter="toolType2" name="toolType2" value="" placeholder="请填写"  class="layui-form-item layui-input toolType2"/>
+       </div>
+    </div>
+</div>
 
-        <div class="layui-form-item">
-            <label class="layui-form-label">是否了解储粮装具</label>
-            <div class="layui-input-block">
-            <input type="text"  name="tools" value="" placeholder="是否了解储粮装具" lay-verify="required" class="layui-input tools"/>
-            </div>
-        </div>
-
-        <div class="layui-form-item">
-            <label class="layui-form-label">之前储粮装具评价</label>
-            <div class="layui-input-block">
-                <textarea name="toolsEvaluate" placeholder="请输入内容" class="layui-textarea toolsEvaluate"></textarea>
-            </div>
-        </div>
-
-        <div class="layui-form-item">
-            <label class="layui-form-label">储粮装具的使用</label>
-            <div class="layui-input-block">
-            <input type="text"  name="toolsUse" value="" placeholder="储粮装具的使用" lay-verify="required" class="layui-input toolsUse"/>
-            </div>
-        </div>
-
-        <div class="layui-form-item">
-            <label class="layui-form-label">国家支持购买储量装具</label>
-            <div class="layui-input-block">
-            <input type="text"  name="supportTool" value="" placeholder="是否了解储粮装具" lay-verify="required" class="layui-input supportTool"/>
-            </div>
-        </div>
-
-        <div class="layui-form-item">
-           <label class="layui-form-label">储粮工具大小</label>
-           <div class="layui-input-block">
-            <input type="text"  name="toolType" value="" placeholder="是否了解储粮装具" lay-verify="required" class="layui-input toolType"/>
-           </div>
-        </div>
-
-    <div class="layui-form-item">
+<div class="layui-row ">
+    <div class="magb15 layui-col-md6 layui-col-xs12">
         <label class="layui-form-label">购买装具数量</label>
         <div class="layui-input-block">
-            <input type="text"  name="toolNum" value="" placeholder="是否了解储粮装具" lay-verify="required" class="layui-input toolNum"/>
+            <input type="radio" name="toolNum" lay-filter="toolNum" value="1个" title="1个" >
+            <input type="radio" name="toolNum" lay-filter="toolNum" value="2个" title="2个" >
+            <input type="radio" name="toolNum" lay-filter="toolNum" value="3个" title="3个" >
+            <input type="radio" name="toolNum" lay-filter="toolNum" value="toolNum_other" title="其他" >
         </div>
     </div>
+    <div class="magb15 layui-col-md6 layui-col-xs12 " id="toolNum2" style="display: none;">
+       <div class="layui-input-block">
+         <input type="text" lay-filter="toolNum2"  name="toolNum2" value="" placeholder="请填写" class="layui-form-item layui-input toolNum2"/>
+       </div>
+    </div>
+</div>
 
-    <div class="layui-form-item">
-        <label class="layui-form-label">不买装具原因</label>
-        <div class="layui-input-block">
-            <textarea name="notBuyReason" placeholder="请输入内容" class="layui-textarea notBuyReason"></textarea>
-        </div>
+<div class="layui-form-item layui-row layui-col-xs12">
+    <label class="layui-form-label">不买装具原因</label>
+    <div class="layui-input-block">
+        <select name="notBuyReason" class="notBuyReason" lay-filter="notBuyReason">
+            <option value="0">请选择</option>
+            <option value="家里基本不存粮">家里基本不存粮</option>
+            <option value="存粮很少时间又短，用不着">存粮很少时间又短，用不着 </option>
+            <option value="还要自己花钱去买不划算">还要自己花钱去买不划算</option>
+            <option value="其他">其他</option>
+        </select>
     </div>
+</div>
 
-    <div class="layui-form-item" style="margin-left: 5%;">
-        <div class="layui-input-block">
-            <button class="layui-btn" lay-submit="" lay-filter="changeUser">立即提交</button>
-            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-        </div>
+<div class="layui-form-item" style="margin-left: 5%;">
+    <div class="layui-input-block">
+        <button class="layui-btn" lay-submit="" lay-filter="changeUser">立即提交</button>
+        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
     </div>
+</div>
 </form>
 <script type="text/javascript" src="../static/js/jquery-1.7.2.min.js"></script>
 <!--引入layui-->
 <script type="text/javascript" src="../static/layui/layui.js"></script>
 <script type="text/javascript" src="../static/js/address.js"></script>
 <script type="text/javascript" src="../static/js/addquestionnaire.js"></script>
+
 </body>
 </html>

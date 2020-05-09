@@ -21,12 +21,41 @@ layui.config({
     });
 
 
+    form.on('radio(supportTool)', function(data){
+//			    console.log(data.value); //被点击的radio的value值
+        if(data.value == "supportTool_other"){
+            $("#supportTool2").show();
+        }else{
+            $("#supportTool2").hide();
+        }
+    });
+
+    form.on('radio(toolType)', function(data){
+        if(data.value == "toolType_other"){
+            $("#toolType2").show();
+        }else{
+            $("#toolType2").hide();
+        }
+    });
+
+    form.on('radio(toolNum)', function(data){
+        if(data.value == "toolNum_other"){
+            $("#toolNum2").show();
+        }else{
+            $("#toolNum2").hide();
+        }
+    });
+
+
     //提交数据
     form.on("submit(changeUser)",function(data){
         var index = layer.msg('提交中，请稍候',{icon: 16,time:false,shade:0.8});
         //将填写的用户信息存到session以便下次调取
-        var key,userInfoHtml = '';
-        userInfoHtml = {
+        var supportTool =  data.field.supportTool == "supportTool_other" ? data.field.supportTool2 : data.field.supportTool;
+        var toolType =  data.field.toolType == "toolType_other" ? data.field.toolType2 : data.field.toolType;
+        var toolNum =  data.field.toolNum == "toolNum_other" ? data.field.toolNum2 : data.field.toolNum;
+
+        var userInfoHtml = {
             'user': $(".user").val(),
             'sex' : data.field.sex,
             'age' : $(".age").val(),
@@ -46,10 +75,10 @@ layui.config({
             'toolsEvaluate' : $(".toolsEvaluate").val(),
 
             'toolsUse' : $(".toolsUse").val(),
-            'supportTool' : $(".supportTool").val(),
+            'supportTool' : supportTool,
 
-            'toolType' : $(".toolType").val(),
-            'toolNum' : $(".toolNum").val(),
+            'toolType' : toolType,
+            'toolNum' : toolNum,
             'notBuyReason' : $(".notBuyReason").val()
         };
         $.ajax({
@@ -82,8 +111,6 @@ layui.config({
         })
         //  console.log(userInfoHtml);
         return false;
-
-        //return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
     });
 
 
