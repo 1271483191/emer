@@ -23,6 +23,14 @@ public class QusetionnaireServiceImp implements QuestionnaireService {
 
     @Override
     public List<Questionnaire> selectAllShow(String user, int page, int number,User users) {
+
+        System.out.println("selectAllShow------------------------------------------------");
+        System.out.println(user);
+        System.out.println(page);
+        System.out.println(number);
+        System.out.println(users);
+        System.out.println("selectAllShowEnd------------------------------------------------");
+
         return dao.selectAllShow(user,page,number,users);
     }
 
