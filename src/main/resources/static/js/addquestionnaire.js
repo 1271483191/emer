@@ -20,7 +20,37 @@ layui.config({
         ,type: 'datetime'
     });
 
+    /*农民类型动态事件*/
+    form.on('select(famerType)',function(data){
+        //console.log(data.value);
+        if(data.value == "famerType_other"){
+            $("#famerType2").show();
+        }else{
+            $("#famerType2").hide();
+        }
+    })
 
+    /*联动效应*/
+    form.on('select(famerType2)',function(data){
+        //console.log(data.value);
+        if(data.value == "famerType2_other"){
+            $("#famerType3").show();
+        }else{
+            $("#famerType3").hide();
+        }
+    })
+
+    /*存粮用途动态事件*/
+    form.on('select(purposeGrain)',function(data){
+        //console.log(data.value);
+        if(data.value == "purposeGrain_other"){
+            $("#purposeGrain2").show();
+        }else{
+            $("#purposeGrain2").hide();
+        }
+    })
+
+    /*国家支持购买储量装具动态事件*/
     form.on('radio(supportTool)', function(data){
 //			    console.log(data.value); //被点击的radio的value值
         if(data.value == "supportTool_other"){
@@ -30,6 +60,29 @@ layui.config({
         }
     });
 
+
+    /*不存粮原因动态事件*/
+    form.on('select(reason)',function(data){
+       // console.log(data.value);
+        if(data.value == "reason_other"){
+            $("#reason2").show();
+        }else{
+            $("#reason2").hide();
+        }
+    })
+
+    /*是否了解储粮装具动态事件*/
+    form.on('select(tools)',function(data){
+       // console.log(data.value);
+        if(data.value == "tools_other"){
+            $("#tools2").show();
+        }else{
+            $("#tools2").hide();
+        }
+    })
+
+
+    /*购买储粮工具大小动态事件*/
     form.on('radio(toolType)', function(data){
         if(data.value == "toolType_other"){
             $("#toolType2").show();
@@ -38,6 +91,7 @@ layui.config({
         }
     });
 
+    /*购买装具数量动态事件*/
     form.on('radio(toolNum)', function(data){
         if(data.value == "toolNum_other"){
             $("#toolNum2").show();
@@ -46,14 +100,37 @@ layui.config({
         }
     });
 
+    /*不买装具原因动态事件*/
+    form.on('select(notBuyReason)',function(data){
+        //console.log(data.value);
+        if(data.value == "notBuyReason_other"){
+            $("#notBuyReason2").show();
+        }else{
+            $("#notBuyReason2").hide();
+        }
+    })
 
     //提交数据
     form.on("submit(changeUser)",function(data){
         var index = layer.msg('提交中，请稍候',{icon: 16,time:false,shade:0.8});
         //将填写的用户信息存到session以便下次调取
+        var famerType='';
+        var famerType1 = data.field.famerType == "famerType_other" ? data.field.famerType2 : data.field.famerType;
+
+        //var famerType0 = famerType1 == "famerType_other2" ? data.field.famerType3 : famerType1;
+        if(famerType1 == "famerType2_other"){
+            famerType = data.field.famerType3;
+        }else{
+            famerType = famerType1;
+        }
+
+        var purposeGrain = data.field.purposeGrain == "purposeGrain_other" ? data.field.purposeGrain2 : data.field.purposeGrain;
+        var reason = data.field.reason == "reason_other" ? data.field.reason2 : data.field.reason;
+        var tools = data.field.tools == "tools_other" ? data.field.tools2 : data.field.tools;
         var supportTool =  data.field.supportTool == "supportTool_other" ? data.field.supportTool2 : data.field.supportTool;
         var toolType =  data.field.toolType == "toolType_other" ? data.field.toolType2 : data.field.toolType;
         var toolNum =  data.field.toolNum == "toolNum_other" ? data.field.toolNum2 : data.field.toolNum;
+        var notBuyReason = data.field.notBuyReason == "notBuyReason_other" ? data.field.notBuyReason2 : data.field.notBuyReason;
 
         var userInfoHtml = {
             'user': $(".user").val(),
@@ -64,14 +141,14 @@ layui.config({
             'citie' : data.field.city,
             'area' : data.field.area,
 
-            'famerType' : $(".famerType").val(),
+            'famerType' : famerType,
             'harvestGrain' : $(".harvestGrain").val(),
             'surplusGrain' : $(".surplusGrain").val(),
             'averageGrainDay' : $(".averageGrainDay").val(),
-            'purposeGrain' : $(".purposeGrain").val(),
+            'purposeGrain' : purposeGrain,
 
-            'reason' : $(".reason").val(),
-            'tools' : $(".tools").val(),
+            'reason' : reason,
+            'tools' : tools,
             'toolsEvaluate' : $(".toolsEvaluate").val(),
 
             'toolsUse' : $(".toolsUse").val(),
@@ -79,7 +156,7 @@ layui.config({
 
             'toolType' : toolType,
             'toolNum' : toolNum,
-            'notBuyReason' : $(".notBuyReason").val()
+            'notBuyReason' : notBuyReason
         };
         $.ajax({
             url:"addquestionnaire",
@@ -112,10 +189,7 @@ layui.config({
         //  console.log(userInfoHtml);
         return false;
     });
-
-
-
-})
+ });
 
 //加载省数据
 function loadProvince() {

@@ -194,22 +194,7 @@ layui.use(['form','layer','table','laytpl' ],function(){
         var layEvent = obj.event,
             data = obj.data;
 
-        /*if(layEvent === 'edit'){ //编辑
-
-            /!*layer.confirm('确定修改问卷信息？', {icon: 3, title: '提示信息'}, function (index) {
-                /!*console.log('数组：', info);*!/
-                $.post('updataQuestionnaire',{information:info.join(",")
-                },function(str){
-                    tableIns.reload();
-                    layer.close(index);
-                    parent.window.location.reload();
-                })
-
-            })*!/
-
-
-
-        }else*/if(layEvent === 'del'){ //删除
+           if(layEvent === 'del'){ //删除
               layer.confirm('确定删除此用户？',{icon:3, title:'提示信息'},function(index){
                 $.post("deletequestionnaire",{
                     newsId : data.questionnaireid  //将需要删除的newsId作为参数传入
