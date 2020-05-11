@@ -28,6 +28,7 @@ layui.config({
         }else{
             $("#famerType2").hide();
         }
+        form.render();
     })
 
     /*联动效应*/
@@ -38,6 +39,7 @@ layui.config({
         }else{
             $("#famerType3").hide();
         }
+        form.render();
     })
 
     /*存粮用途动态事件*/
@@ -48,16 +50,18 @@ layui.config({
         }else{
             $("#purposeGrain2").hide();
         }
+        form.render();
     })
 
     /*国家支持购买储量装具动态事件*/
     form.on('radio(supportTool)', function(data){
-//			    console.log(data.value); //被点击的radio的value值
+    // console.log(data.value); //被点击的radio的value值
         if(data.value == "supportTool_other"){
             $("#supportTool2").show();
         }else{
             $("#supportTool2").hide();
         }
+        form.render();
     });
 
 
@@ -69,6 +73,7 @@ layui.config({
         }else{
             $("#reason2").hide();
         }
+        form.render();
     })
 
     /*是否了解储粮装具动态事件*/
@@ -79,6 +84,7 @@ layui.config({
         }else{
             $("#tools2").hide();
         }
+        form.render();
     })
 
 
@@ -89,6 +95,7 @@ layui.config({
         }else{
             $("#toolType2").hide();
         }
+        form.render();
     });
 
     /*购买装具数量动态事件*/
@@ -98,6 +105,7 @@ layui.config({
         }else{
             $("#toolNum2").hide();
         }
+        form.render();
     });
 
     /*不买装具原因动态事件*/
@@ -108,38 +116,39 @@ layui.config({
         }else{
             $("#notBuyReason2").hide();
         }
+        form.render();
     })
 
     //提交数据
-    form.on("submit(changeUser)",function(data){
+    form.on("submit(changeUser)",function(data1){
         var index = layer.msg('提交中，请稍候',{icon: 16,time:false,shade:0.8});
         //将填写的用户信息存到session以便下次调取
         var famerType='';
-        var famerType1 = data.field.famerType == "famerType_other" ? data.field.famerType2 : data.field.famerType;
+        var famerType1 = data1.field.famerType == "famerType_other" ? data1.field.famerType2 : data1.field.famerType;
 
-        //var famerType0 = famerType1 == "famerType_other2" ? data.field.famerType3 : famerType1;
+        //var famerType0 = famerType1 == "famerType_other2" ? data1.field.famerType3 : famerType1;
         if(famerType1 == "famerType2_other"){
-            famerType = data.field.famerType3;
+            famerType = data1.field.famerType3;
         }else{
             famerType = famerType1;
         }
 
-        var purposeGrain = data.field.purposeGrain == "purposeGrain_other" ? data.field.purposeGrain2 : data.field.purposeGrain;
-        var reason = data.field.reason == "reason_other" ? data.field.reason2 : data.field.reason;
-        var tools = data.field.tools == "tools_other" ? data.field.tools2 : data.field.tools;
-        var supportTool =  data.field.supportTool == "supportTool_other" ? data.field.supportTool2 : data.field.supportTool;
-        var toolType =  data.field.toolType == "toolType_other" ? data.field.toolType2 : data.field.toolType;
-        var toolNum =  data.field.toolNum == "toolNum_other" ? data.field.toolNum2 : data.field.toolNum;
-        var notBuyReason = data.field.notBuyReason == "notBuyReason_other" ? data.field.notBuyReason2 : data.field.notBuyReason;
+        var purposeGrain = data1.field.purposeGrain == "purposeGrain_other" ? data1.field.purposeGrain2 : data1.field.purposeGrain;
+        var reason = data1.field.reason == "reason_other" ? data1.field.reason2 : data1.field.reason;
+        var tools = data1.field.tools == "tools_other" ? data1.field.tools2 : data1.field.tools;
+        var supportTool =  data1.field.supportTool == "supportTool_other" ? data1.field.supportTool2 : data1.field.supportTool;
+        var toolType =  data1.field.toolType == "toolType_other" ? data1.field.toolType2 : data1.field.toolType;
+        var toolNum =  data1.field.toolNum == "toolNum_other" ? data1.field.toolNum2 : data1.field.toolNum;
+        var notBuyReason = data1.field.notBuyReason == "notBuyReason_other" ? data1.field.notBuyReason2 : data1.field.notBuyReason;
 
         var userInfoHtml = {
             'user': $(".user").val(),
-            'sex' : data.field.sex,
+            'sex' : data1.field.sex,
             'age' : $(".age").val(),
 
-            'province' : data.field.province,
-            'citie' : data.field.city,
-            'area' : data.field.area,
+            'province' : data1.field.province,
+            'citie' : data1.field.city,
+            'area' : data1.field.area,
 
             'famerType' : famerType,
             'harvestGrain' : $(".harvestGrain").val(),
@@ -158,16 +167,6 @@ layui.config({
             'toolNum' : toolNum,
             'notBuyReason' : notBuyReason
         };
-
-
-       /* $.post("updateQuestionnaire",userInfoHtml,function(str){
-            layer.msg(str.msg, {
-                icon: 1,
-                // time: 2000 //2秒关闭（如果不配置，默认是3秒）
-            }, function(){
-                parent.window.location.reload();
-            });
-        })*/
 
           $.ajax({
             url:"addQuestionnaireList",

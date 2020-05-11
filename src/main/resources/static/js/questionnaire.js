@@ -140,17 +140,17 @@ layui.use(['form','layer','table','laytpl' ],function(){
     //监听单元格编辑数据
     table.on('edit(userList)', function(obj){
         var value = obj.value //得到修改后的值
-            ,data = obj.data //得到所在行所有键值
+            ,data1 = obj.data //得到所在行所有键值
             ,field = obj.field //得到字段
 
         var information={
-            'questionnaireid':data.questionnaireid
+            'questionnaireid':data1.questionnaireid
 
         };
         //var news = data.questionnaireid+'_'+field+'_'+value;
         //info.push(news);
-        information[field] = data[field];
-        layer.msg('[ID: '+ data.questionnaireid +']的信息更改为：'+ value);
+        information[field] = data1[field];
+        layer.msg('[ID: '+ data1.questionnaireid +']的信息更改为：'+ value);
         $.ajax({
             url:"updateQuestionnaire",
             type:'post',//method请求方式，get或者post
