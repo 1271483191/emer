@@ -9,7 +9,7 @@ layui.use(['form','layer','table','laytpl' ],function(){
     var tableIns = table.render({
         elem: '#questionnaireList',
         url : 'toquestionnaireList',
-        toolbar: 'default', //开启工具栏
+        toolbar: 'true', //开启工具栏
         cellMinWidth : 90,
         page : true,
         height : "full-200",
