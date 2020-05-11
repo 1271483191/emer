@@ -152,7 +152,7 @@ layui.use(['form','layer','table','laytpl' ],function(){
         information[field] = data[field];
         layer.msg('[ID: '+ data.questionnaireid +']的信息更改为：'+ value);
         $.ajax({
-            url:"updataQuestionnaire",
+            url:"updateQuestionnaire",
             type:'post',//method请求方式，get或者post
             dataType:'json',//预期服务器返回的数据类型
             data:JSON.stringify(information),//表格数据序列化
@@ -172,8 +172,8 @@ layui.use(['form','layer','table','laytpl' ],function(){
                     });
                 }
             },
-            error:function (data) {
-                layer.msg(res.msg, {
+            error:function (res) {
+                layer.msg("出现未知错误，请重新输入！", {
                     time: 2000 //2秒关闭（如果不配置，默认是3秒）
                 }, function(){
                     parent.window.location.reload();

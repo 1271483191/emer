@@ -158,13 +158,25 @@ layui.config({
             'toolNum' : toolNum,
             'notBuyReason' : notBuyReason
         };
-        $.ajax({
-            url:"addquestionnaire",
+
+
+       /* $.post("updateQuestionnaire",userInfoHtml,function(str){
+            layer.msg(str.msg, {
+                icon: 1,
+                // time: 2000 //2秒关闭（如果不配置，默认是3秒）
+            }, function(){
+                parent.window.location.reload();
+            });
+        })*/
+
+          $.ajax({
+            url:"addQuestionnaireList",
             type:'post',//method请求方式，get或者post
             dataType:'json',//预期服务器返回的数据类型
             data:JSON.stringify(userInfoHtml),//表格数据序列化
             contentType: "application/json; charset=utf-8",
             success:function(res){//res为相应体,function为回调函数
+                debugger
                 if(res.res){
                     layer.msg(res.msg, {
                         time: 2000 //2秒关闭（如果不配置，默认是3秒）
@@ -179,11 +191,13 @@ layui.config({
                     });
                 }
             },
-            error:function (data) {
-                layer.msg(data.msg,{icon:5});
-                layer.alert("发生未知错误请重新输入")
-                //console.log(data);
-                parent.window.location.reload();
+            error:function (res) {
+                debugger
+                layer.msg("出现未知错误，请重新输入！", {
+                    time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                }, function(){
+                    parent.window.location.reload();
+                });
             }
         })
         //  console.log(userInfoHtml);

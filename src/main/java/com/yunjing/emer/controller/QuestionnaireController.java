@@ -71,20 +71,10 @@ public class QuestionnaireController {
 
 
     /*更改调查问卷*/
-    @RequestMapping(value="/updataQuestionnaire",method=RequestMethod.POST)
+    @RequestMapping(value="/updateQuestionnaire",method=RequestMethod.POST)
     @ResponseBody
     public  Message updataQuestionnaire(@RequestBody Questionnaire questionnaire){
 
-        //1_user_王志生 11,1_province_安徽省,1_citie_安庆市,1_area_枞阳县
-        //1_user_王志生
-        /*String[] info = information.split(",");
-        String id = info[0].split("_")[0];
-
-        for (String i: info) {
-            String[] news = i.split("_");
-            if(id.equals(news[0])){
-            }
-        }*/
         Message message = new Message();
         int questionnaireid = questionnaire.getQuestionnaireid();
 
@@ -106,20 +96,10 @@ public class QuestionnaireController {
     }
 
 
-    /*@RequestMapping(value="/addtoQuestionnaire",method=RequestMethod.POST)
-    @ResponseBody
-    public  Message addtoQuestionnaire(String tag, HttpServletRequest request){
-        //System.out.print(tag+"-----------------------------------");
-        Message message = new Message();
-        HttpSession session = request.getSession();
-        session.setAttribute("tag",tag);
-        return message;
-    }*/
-
     /*添加问卷数据*/
-    @RequestMapping(value="/addquestionnaire",method= RequestMethod.POST)
+    @RequestMapping(value="/addQuestionnaireList",method=RequestMethod.POST)
     @ResponseBody
-    public Message addquestionnaire(@RequestBody Questionnaire questionnaire){
+    public Message addQuestionnaire(@RequestBody Questionnaire questionnaire){
 
         Message message = new Message();
             //添加操作
@@ -134,40 +114,16 @@ public class QuestionnaireController {
                 message.setRes(false);
             }
 
-        /*else if(session.getAttribute("tag")==null && session.getAttribute("questionnaireid") !=null)
-        {
-            //更新
-            int questionnaireid =(int)session.getAttribute("questionnaireid");
-            int flag = qusetionnaireService.updateByPrimaryKeySelective(questionnaire,questionnaireid);
-
-            if(flag>0) {
-                message.setMsg("修改成功");
-                message.setCode(200);
-                message.setRes(true);
-            }else {
-                message.setMsg("发生未知错误！请重新输入！");
-                message.setCode(404);
-                message.setRes(false);
-            }
-            session.removeAttribute("questionnaireid");
-        }*else {
-            message.setMsg("发生未知错误！请重新输入！");
-            message.setCode(404);
-            message.setRes(false);
-            session.removeAttribute("questionnaireid");
-            session.removeAttribute("tag");
-        }*/
-
         return message;
     }
 
     /*微信接口添加*/
     @RequestMapping(value="/addquestionnaireweixing",method= RequestMethod.POST)
     @ResponseBody
-    public Message addquestionnaire1(@RequestBody Questionnaire questionnaire, HttpServletRequest request){
+    public Message addquestionnaire1(@RequestBody Questionnaire questionnaire){
 
         Message message = new Message();
-        HttpSession session = request.getSession();
+       /* HttpSession session = request.getSession();*/
 
         boolean flag = qusetionnaireService.insert_xi(questionnaire);
         if(flag) {
