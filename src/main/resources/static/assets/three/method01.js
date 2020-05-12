@@ -84,7 +84,8 @@ function showCountry(obj) {
 
 /*选择县区之后的处理函数*/
 function selecCountry(obj) {
-    current.country = provice[current.prov]["city"][current.city].districtAndCounty[current.country];
+    current.country = obj.options[obj.selectedIndex].value;
+    counties.value = provice[current.prov]["city"][current.city].districtAndCounty[current.country];
     if ((current.city != null) && (current.country != null)) {
         //btn.disabled = false;
     }
@@ -94,6 +95,7 @@ function selecCountry(obj) {
 /*点击确定按钮显示用户所选的地址*/
 function showAddr() {
     addrShow.value = provice[current.prov].name + '-' + provice[current.prov]["city"][current.city].name + '-' + provice[current.prov]["city"][current.city].districtAndCounty[current.country];
+    console.log(addrShow.value)
     provinces.value = provice[current.prov].name;
     cityes.value = provice[current.prov]["city"][current.city].name;
     counties.value = provice[current.prov]["city"][current.city].districtAndCounty[current.country];
