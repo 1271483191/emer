@@ -39,20 +39,26 @@ MAIN CONTENT
 <div id="login-page">
     <div class="container">
 
-        <form class="form-login" action="insertUser">
+        <form class="form-login" action="">
             <h2 class="form-login-heading">注册</h2>
             <div class="login-wrap">
-                <input name="username" id="username" type="text" class="form-control" placeholder="用户名" autofocus>
+                <input onblur="usernameValidate()" name="username" id="username" type="text" class="form-control" placeholder="用户名" autofocus>
+                <span id="usernameInfo" style="display: none;color: red">请输入用户名</span>
                 <br>
-                <input name="password" id="password" type="password" class="form-control" placeholder="密码">
+                <input onblur="passwordValidate()" name="password" id="password" type="password" class="form-control" placeholder="密码">
+                <span id="passwordInfo" style="display: none;color: red">请输入密码</span>
                 <br>
-                <input id="password2" type="password" class="form-control" placeholder="确认密码">
+                <input onblur="password2Validate()" id="password2" type="password" class="form-control" placeholder="确认密码">
+                <span id="password2Info" style="display: none;color: red">两次输入密码不一致</span>
                 <br>
-                <input name="name" id="name" type="text" class="form-control" placeholder="姓名" autofocus>
+                <input onblur="nameValidate()" name="name" id="name" type="text" class="form-control" placeholder="姓名" autofocus>
+                <span id="nameInfo" style="display: none;color: red">姓名不能为空</span>
                 <br>
-                <input name="phone" id="phone" type="text" class="form-control" placeholder="联系电话" autofocus>
+                <input onblur="phoneValidate()" name="phone" id="phone" type="text" class="form-control" placeholder="联系电话" autofocus>
+                <span id="phoneInfo" style="display: none;color: red">请输入正确的电话号码</span>
                 <br>
-                <input name="company" id="company" type="text" class="form-control" placeholder="单位" autofocus>
+                <input onblur="companyValidate()" name="company" id="company" type="text" class="form-control" placeholder="单位" autofocus>
+                <span id="companyInfo" style="display: none;color: red">单位不能为空</span>
                 <br>
                 <div>
                     <label for="addr-show">所在地区：
@@ -94,7 +100,7 @@ MAIN CONTENT
                     <input value="2" name="type" type="radio"/><span style="margin-right: 10px;margin-left: 5px">市级</span>
                     <input value="3" name="type" type="radio"/><span style="margin-right: 10px;margin-left: 5px">县级</span>
                 </div>
-                <button class="btn btn-theme btn-block" href="toIndex" type="submit"><i class="fa fa-angle-right"></i>注册</button>
+                <button class="btn btn-theme btn-block" href="toIndex" onclick="submitValidate()" type="button"><i class="fa fa-angle-right"></i>注册</button>
                 <br>
 
                 <div class="registration">
@@ -124,6 +130,151 @@ MAIN CONTENT
 <script type="text/javascript" src="assets/js/jquery.backstretch.min.js"></script>
 <script>
     $.backstretch("assets/img/bg.jpg", {speed: 500});
+</script>
+
+<script>
+    function usernameValidate(){
+        var username = $("#username").val();
+        if(username == null || username == ""){
+            $("#usernameInfo").css("display","inline").css("color","red");
+            return false;
+        }
+        $("#usernameInfo").css("display","none").css("color","red");
+
+
+        return true;
+    }
+
+    function passwordValidate(){
+        var password = $("#password").val();
+        if(password == null || password == ""){
+            $("#passwordInfo").css("display","inline").css("color","red");
+            return false;
+        }
+        $("#passwordInfo").css("display","none").css("color","red");
+
+
+        return true;
+    }
+
+    function password2Validate(){
+        var password = $("#password").val();
+        var password2 = $("#password2").val();
+        if(password != password2){
+            $("#password2Info").css("display","inline").css("color","red");
+            return false;
+        }
+        $("#password2Info").css("display","none").css("color","red");
+
+
+        return true;
+    }
+
+    function nameValidate(){
+        var name = $("#name").val();
+        if(name == null || name == ""){
+            $("#nameInfo").css("display","inline").css("color","red");
+            return false;
+        }
+        $("#nameInfo").css("display","none").css("color","red");
+
+
+        return true;
+    }
+
+    function phoneValidate(){
+        var phone = $("#phone").val();
+        var reg01 = /^(0|86|17951)?(13[0-9]|15[012356789]|17[01678]|18[0-9]|14[57])[0-9]{8}$/;
+        var reg02 = /^(0[0-9]{2,3}\-)([2-9][0-9]{6,7})+(\-[0-9]{1,4})?$/;
+        if(!reg01.test(phone) && !reg02.test(phone) && phone != "" && phone != null) {
+            $("#phoneInfo").css("display","inline").css("color","red");
+            return false;
+        }
+
+        $("#phoneInfo").css("display","none").css("color","red");
+
+
+        return true;
+    }
+
+    function companyValidate(){
+        var company = $("#company").val();
+        if(company == null || company == ""){
+            $("#companyInfo").css("display","inline").css("color","red");
+            return false;
+        }
+        $("#companyInfo").css("display","none").css("color","red");
+
+
+        return true;
+    }
+
+    function submitValidate(){
+
+
+        if(usernameValidate() && passwordValidate() && password2Validate() && nameValidate() && nameValidate() && companyValidate()){
+            var username = $("#username").val();
+            var password = $("#password").val();
+            var password2 = $("#password2").val();
+            var name = $("#name").val();
+            var phone = $("#phone").val();
+            var company = $("#company").val();
+
+            var province = $("#provinces").val();
+            var city = $("#cities").val();
+            var county = $("#counties").val();
+
+            var type = $('input:radio:checked').val();
+
+            //console.log(type);
+            //console.log(province);
+            //console.log(city);
+            //console.log(county);
+            //console.log(county);
+
+            if(type == 1 && (province == null || province == "")){
+                alert("请选择省份")
+                return;
+            }
+
+            if(type == 2 && (city == null || city == "")){
+                alert("请选择市")
+                return;
+            }
+
+            if(type == 3 && (county == null || county == "")){
+                alert("请选择县")
+                return;
+            }
+
+            $.post('insertUser',{
+                username:username,
+                password:password,
+                name:name,
+                phone:phone,
+                company:company,
+                province:province,
+                city:city,
+                county:county,
+                type:type
+            },
+            function(date){
+
+                if(date == false){
+                    alert("账号已存在，请重新输入")
+                }else{
+                    location.href = "toLogin";
+                }
+            })
+
+
+
+
+        }
+
+
+    }
+
 </script>
 
 

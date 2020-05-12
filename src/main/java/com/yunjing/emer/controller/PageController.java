@@ -390,6 +390,23 @@ public class PageController {
         return src;
     }
 
+    @RequestMapping("/insertUser2")
+    @ResponseBody
+    public boolean insertUser2(User user){
+
+        //String src = "insert_false";
+        System.out.println(user);
+        user.setPass(0);
+        boolean result = userService.insertUser(user);
+        System.out.println(result);
+
+        /*if(result){
+            src = "redirect:toLogin";
+        }*/
+
+        return result;
+    }
+
     @RequestMapping("/toIndexMain")
     public String toIndexMain(){
         return "indexMain";
