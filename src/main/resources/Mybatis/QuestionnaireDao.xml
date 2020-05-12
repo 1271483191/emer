@@ -20,8 +20,10 @@
     <result column="tools_use" jdbcType="VARCHAR" property="toolsUse" />
     <result column="support_tool" jdbcType="VARCHAR" property="supportTool" />
     <result column="tool_type" jdbcType="VARCHAR" property="toolType" />
-    <result column="tool_num" jdbcType="INTEGER" property="toolNum" />
-    <result column="not_buy_reason" jdbcType="VARCHAR" property="notBuyReason" />
+    <result column="tool_num" jdbcType="VARCHAR" property="toolNum" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.yunjing.emer.entity.Questionnaire">
+    <result column="not_buy_reason" jdbcType="LONGVARCHAR" property="notBuyReason" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -84,8 +86,35 @@
   <sql id="Base_Column_List">
     questionnaireID, province, citie, area, `user`, sex, age, famer_type, harvest_grain, 
     surplus_grain, average_grain_day, purpose_grain, reason, tools, tools_evaluate, tools_use, 
-    support_tool, tool_type, tool_num, not_buy_reason
+    support_tool, tool_type, tool_num
   </sql>
+  <sql id="Blob_Column_List">
+    not_buy_reason
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.yunjing.emer.entity.QuestionnaireExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from questionnaire
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
   <select id="selectByExample" parameterType="com.yunjing.emer.entity.QuestionnaireExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -164,33 +193,32 @@
     </if>
   </select>
 
-    <!--批量删除-->
-    <delete id="deleteQuestionnaire">
-        delete from questionnaire where questionnaireID in
-        <foreach collection="array" item="id" open="(" close=")" separator="," >
-            #{id}
-        </foreach>
-    </delete>
+  <!--批量删除-->
+  <delete id="deleteQuestionnaire">
+    delete from questionnaire where questionnaireID in
+    <foreach collection="array" item="id" open="(" close=")" separator="," >
+      #{id}
+    </foreach>
+  </delete>
 
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
     select 
     <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
     from questionnaire
     where questionnaireID = #{questionnaireid,jdbcType=INTEGER}
   </select>
-
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from questionnaire
     where questionnaireID = #{questionnaireid,jdbcType=INTEGER}
   </delete>
-
   <delete id="deleteByExample" parameterType="com.yunjing.emer.entity.QuestionnaireExample">
     delete from questionnaire
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-
   <insert id="insert" keyColumn="questionnaireID" keyProperty="questionnaireid" parameterType="com.yunjing.emer.entity.Questionnaire" useGeneratedKeys="true">
     insert into questionnaire (province, citie, area, 
       `user`, sex, age, famer_type, 
@@ -204,7 +232,7 @@
       #{harvestGrain,jdbcType=REAL}, #{surplusGrain,jdbcType=REAL}, #{averageGrainDay,jdbcType=VARCHAR}, 
       #{purposeGrain,jdbcType=VARCHAR}, #{reason,jdbcType=VARCHAR}, #{tools,jdbcType=VARCHAR}, 
       #{toolsEvaluate,jdbcType=VARCHAR}, #{toolsUse,jdbcType=VARCHAR}, #{supportTool,jdbcType=VARCHAR}, 
-      #{toolType,jdbcType=VARCHAR}, #{toolNum,jdbcType=INTEGER}, #{notBuyReason,jdbcType=VARCHAR}
+      #{toolType,jdbcType=VARCHAR}, #{toolNum,jdbcType=VARCHAR}, #{notBuyReason,jdbcType=LONGVARCHAR}
       )
   </insert>
   <insert id="insertSelective" keyColumn="questionnaireID" keyProperty="questionnaireid" parameterType="com.yunjing.emer.entity.Questionnaire" useGeneratedKeys="true">
@@ -321,10 +349,10 @@
         #{toolType,jdbcType=VARCHAR},
       </if>
       <if test="toolNum != null">
-        #{toolNum,jdbcType=INTEGER},
+        #{toolNum,jdbcType=VARCHAR},
       </if>
       <if test="notBuyReason != null">
-        #{notBuyReason,jdbcType=VARCHAR},
+        #{notBuyReason,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -392,12 +420,38 @@
         tool_type = #{record.toolType,jdbcType=VARCHAR},
       </if>
       <if test="record.toolNum != null">
-        tool_num = #{record.toolNum,jdbcType=INTEGER},
+        tool_num = #{record.toolNum,jdbcType=VARCHAR},
       </if>
       <if test="record.notBuyReason != null">
-        not_buy_reason = #{record.notBuyReason,jdbcType=VARCHAR},
+        not_buy_reason = #{record.notBuyReason,jdbcType=LONGVARCHAR},
       </if>
     </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update questionnaire
+    set questionnaireID = #{record.questionnaireid,jdbcType=INTEGER},
+      province = #{record.province,jdbcType=VARCHAR},
+      citie = #{record.citie,jdbcType=VARCHAR},
+      area = #{record.area,jdbcType=VARCHAR},
+      `user` = #{record.user,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=VARCHAR},
+      age = #{record.age,jdbcType=INTEGER},
+      famer_type = #{record.famerType,jdbcType=VARCHAR},
+      harvest_grain = #{record.harvestGrain,jdbcType=REAL},
+      surplus_grain = #{record.surplusGrain,jdbcType=REAL},
+      average_grain_day = #{record.averageGrainDay,jdbcType=VARCHAR},
+      purpose_grain = #{record.purposeGrain,jdbcType=VARCHAR},
+      reason = #{record.reason,jdbcType=VARCHAR},
+      tools = #{record.tools,jdbcType=VARCHAR},
+      tools_evaluate = #{record.toolsEvaluate,jdbcType=VARCHAR},
+      tools_use = #{record.toolsUse,jdbcType=VARCHAR},
+      support_tool = #{record.supportTool,jdbcType=VARCHAR},
+      tool_type = #{record.toolType,jdbcType=VARCHAR},
+      tool_num = #{record.toolNum,jdbcType=VARCHAR},
+      not_buy_reason = #{record.notBuyReason,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -422,13 +476,11 @@
       tools_use = #{record.toolsUse,jdbcType=VARCHAR},
       support_tool = #{record.supportTool,jdbcType=VARCHAR},
       tool_type = #{record.toolType,jdbcType=VARCHAR},
-      tool_num = #{record.toolNum,jdbcType=INTEGER},
-      not_buy_reason = #{record.notBuyReason,jdbcType=VARCHAR}
+      tool_num = #{record.toolNum,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-
   <update id="updateByPrimaryKeySelective" parameterType="com.yunjing.emer.entity.Questionnaire">
     update questionnaire
     <set>
@@ -484,15 +536,37 @@
         tool_type = #{toolType,jdbcType=VARCHAR},
       </if>
       <if test="toolNum != null">
-        tool_num = #{toolNum,jdbcType=INTEGER},
+        tool_num = #{toolNum,jdbcType=VARCHAR},
       </if>
       <if test="notBuyReason != null">
-        not_buy_reason = #{notBuyReason,jdbcType=VARCHAR},
+        not_buy_reason = #{notBuyReason,jdbcType=LONGVARCHAR},
       </if>
     </set>
     where questionnaireID = #{questionnaireid,jdbcType=INTEGER}
   </update>
-
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.yunjing.emer.entity.Questionnaire">
+    update questionnaire
+    set province = #{province,jdbcType=VARCHAR},
+      citie = #{citie,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR},
+      `user` = #{user,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      famer_type = #{famerType,jdbcType=VARCHAR},
+      harvest_grain = #{harvestGrain,jdbcType=REAL},
+      surplus_grain = #{surplusGrain,jdbcType=REAL},
+      average_grain_day = #{averageGrainDay,jdbcType=VARCHAR},
+      purpose_grain = #{purposeGrain,jdbcType=VARCHAR},
+      reason = #{reason,jdbcType=VARCHAR},
+      tools = #{tools,jdbcType=VARCHAR},
+      tools_evaluate = #{toolsEvaluate,jdbcType=VARCHAR},
+      tools_use = #{toolsUse,jdbcType=VARCHAR},
+      support_tool = #{supportTool,jdbcType=VARCHAR},
+      tool_type = #{toolType,jdbcType=VARCHAR},
+      tool_num = #{toolNum,jdbcType=VARCHAR},
+      not_buy_reason = #{notBuyReason,jdbcType=LONGVARCHAR}
+    where questionnaireID = #{questionnaireid,jdbcType=INTEGER}
+  </update>
   <update id="updateByPrimaryKey" parameterType="com.yunjing.emer.entity.Questionnaire">
     update questionnaire
     set province = #{province,jdbcType=VARCHAR},
@@ -512,8 +586,7 @@
       tools_use = #{toolsUse,jdbcType=VARCHAR},
       support_tool = #{supportTool,jdbcType=VARCHAR},
       tool_type = #{toolType,jdbcType=VARCHAR},
-      tool_num = #{toolNum,jdbcType=INTEGER},
-      not_buy_reason = #{notBuyReason,jdbcType=VARCHAR}
+      tool_num = #{toolNum,jdbcType=VARCHAR}
     where questionnaireID = #{questionnaireid,jdbcType=INTEGER}
   </update>
 </mapper>

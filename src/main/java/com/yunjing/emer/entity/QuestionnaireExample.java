@@ -1354,123 +1354,63 @@ public class QuestionnaireExample {
             return (Criteria) this;
         }
 
-        public Criteria andToolNumEqualTo(Integer value) {
+        public Criteria andToolNumEqualTo(String value) {
             addCriterion("tool_num =", value, "toolNum");
             return (Criteria) this;
         }
 
-        public Criteria andToolNumNotEqualTo(Integer value) {
+        public Criteria andToolNumNotEqualTo(String value) {
             addCriterion("tool_num <>", value, "toolNum");
             return (Criteria) this;
         }
 
-        public Criteria andToolNumGreaterThan(Integer value) {
+        public Criteria andToolNumGreaterThan(String value) {
             addCriterion("tool_num >", value, "toolNum");
             return (Criteria) this;
         }
 
-        public Criteria andToolNumGreaterThanOrEqualTo(Integer value) {
+        public Criteria andToolNumGreaterThanOrEqualTo(String value) {
             addCriterion("tool_num >=", value, "toolNum");
             return (Criteria) this;
         }
 
-        public Criteria andToolNumLessThan(Integer value) {
+        public Criteria andToolNumLessThan(String value) {
             addCriterion("tool_num <", value, "toolNum");
             return (Criteria) this;
         }
 
-        public Criteria andToolNumLessThanOrEqualTo(Integer value) {
+        public Criteria andToolNumLessThanOrEqualTo(String value) {
             addCriterion("tool_num <=", value, "toolNum");
             return (Criteria) this;
         }
 
-        public Criteria andToolNumIn(List<Integer> values) {
+        public Criteria andToolNumLike(String value) {
+            addCriterion("tool_num like", value, "toolNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andToolNumNotLike(String value) {
+            addCriterion("tool_num not like", value, "toolNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andToolNumIn(List<String> values) {
             addCriterion("tool_num in", values, "toolNum");
             return (Criteria) this;
         }
 
-        public Criteria andToolNumNotIn(List<Integer> values) {
+        public Criteria andToolNumNotIn(List<String> values) {
             addCriterion("tool_num not in", values, "toolNum");
             return (Criteria) this;
         }
 
-        public Criteria andToolNumBetween(Integer value1, Integer value2) {
+        public Criteria andToolNumBetween(String value1, String value2) {
             addCriterion("tool_num between", value1, value2, "toolNum");
             return (Criteria) this;
         }
 
-        public Criteria andToolNumNotBetween(Integer value1, Integer value2) {
+        public Criteria andToolNumNotBetween(String value1, String value2) {
             addCriterion("tool_num not between", value1, value2, "toolNum");
-            return (Criteria) this;
-        }
-
-        public Criteria andNotBuyReasonIsNull() {
-            addCriterion("not_buy_reason is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andNotBuyReasonIsNotNull() {
-            addCriterion("not_buy_reason is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andNotBuyReasonEqualTo(String value) {
-            addCriterion("not_buy_reason =", value, "notBuyReason");
-            return (Criteria) this;
-        }
-
-        public Criteria andNotBuyReasonNotEqualTo(String value) {
-            addCriterion("not_buy_reason <>", value, "notBuyReason");
-            return (Criteria) this;
-        }
-
-        public Criteria andNotBuyReasonGreaterThan(String value) {
-            addCriterion("not_buy_reason >", value, "notBuyReason");
-            return (Criteria) this;
-        }
-
-        public Criteria andNotBuyReasonGreaterThanOrEqualTo(String value) {
-            addCriterion("not_buy_reason >=", value, "notBuyReason");
-            return (Criteria) this;
-        }
-
-        public Criteria andNotBuyReasonLessThan(String value) {
-            addCriterion("not_buy_reason <", value, "notBuyReason");
-            return (Criteria) this;
-        }
-
-        public Criteria andNotBuyReasonLessThanOrEqualTo(String value) {
-            addCriterion("not_buy_reason <=", value, "notBuyReason");
-            return (Criteria) this;
-        }
-
-        public Criteria andNotBuyReasonLike(String value) {
-            addCriterion("not_buy_reason like", value, "notBuyReason");
-            return (Criteria) this;
-        }
-
-        public Criteria andNotBuyReasonNotLike(String value) {
-            addCriterion("not_buy_reason not like", value, "notBuyReason");
-            return (Criteria) this;
-        }
-
-        public Criteria andNotBuyReasonIn(List<String> values) {
-            addCriterion("not_buy_reason in", values, "notBuyReason");
-            return (Criteria) this;
-        }
-
-        public Criteria andNotBuyReasonNotIn(List<String> values) {
-            addCriterion("not_buy_reason not in", values, "notBuyReason");
-            return (Criteria) this;
-        }
-
-        public Criteria andNotBuyReasonBetween(String value1, String value2) {
-            addCriterion("not_buy_reason between", value1, value2, "notBuyReason");
-            return (Criteria) this;
-        }
-
-        public Criteria andNotBuyReasonNotBetween(String value1, String value2) {
-            addCriterion("not_buy_reason not between", value1, value2, "notBuyReason");
             return (Criteria) this;
         }
     }

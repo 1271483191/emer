@@ -1,15 +1,12 @@
 package com.yunjing.emer.dao;
 
-
 import com.yunjing.emer.entity.Questionnaire;
 import com.yunjing.emer.entity.QuestionnaireExample;
-import com.yunjing.emer.entity.User;
-import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
-
 import java.util.List;
 
-@Repository
+import com.yunjing.emer.entity.User;
+import org.apache.ibatis.annotations.Param;
+
 public interface QuestionnaireDao {
     long countByExample(QuestionnaireExample example);
 
@@ -22,13 +19,19 @@ public interface QuestionnaireDao {
 
     int insertSelective(Questionnaire record);
 
+    List<Questionnaire> selectByExampleWithBLOBs(QuestionnaireExample example);
+
     List<Questionnaire> selectByExample(QuestionnaireExample example);
 
     Questionnaire selectByPrimaryKey(Integer questionnaireid);
 
     int updateByExampleSelective(@Param("record") Questionnaire record, @Param("example") QuestionnaireExample example);
 
+    int updateByExampleWithBLOBs(@Param("record") Questionnaire record, @Param("example") QuestionnaireExample example);
+
     int updateByExample(@Param("record") Questionnaire record, @Param("example") QuestionnaireExample example);
+
+    int updateByPrimaryKeyWithBLOBs(Questionnaire record);
 
     int updateByPrimaryKey(Questionnaire record);
 
@@ -40,7 +43,7 @@ public interface QuestionnaireDao {
 
     /*更新*/
     int updateByPrimaryKeySelective(Questionnaire record);
-
     /*删除和批量删除*/
     int deleteQuestionnaire(int[] questionnaireid);
+
 }

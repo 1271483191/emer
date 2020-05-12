@@ -42,7 +42,9 @@ public class Questionnaire implements Serializable {
      */
     private Float surplusGrain;
 
-     /*存粮的天数*/
+    /**
+     * 每年存粮多少天
+     */
     private String averageGrainDay;
 
     /**
@@ -83,7 +85,7 @@ public class Questionnaire implements Serializable {
     /**
      * 购买装具的数量
      */
-    private Integer toolNum;
+    private String toolNum;
 
     /**
      * 不打算购买使用国家支持的农户科学储粮装具，主要原因
@@ -236,11 +238,11 @@ public class Questionnaire implements Serializable {
         this.toolType = toolType;
     }
 
-    public Integer getToolNum() {
+    public String getToolNum() {
         return toolNum;
     }
 
-    public void setToolNum(Integer toolNum) {
+    public void setToolNum(String toolNum) {
         this.toolNum = toolNum;
     }
 

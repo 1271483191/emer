@@ -127,8 +127,7 @@ layui.use(['form','layer','table','laytpl' ],function(){
                 $.post("deletequestionnaire",{
                     newsId : newsId.join(",")  //将需要删除的newsId作为参数传入
                 },function(data){
-                    tableIns.reload();
-                    layer.close(index);
+                    parent.window.location.reload();
                 })
             })
         }else{
@@ -180,13 +179,6 @@ layui.use(['form','layer','table','laytpl' ],function(){
                 });
             }
         })
-
-        /*$.post('updataQuestionnaire',{information:info.join(",")
-          },function(str){
-              tableIns.reload();
-              layer.close(index);
-              parent.window.location.reload();
-          })*/
     });
 
     //列表操作
@@ -199,8 +191,7 @@ layui.use(['form','layer','table','laytpl' ],function(){
                 $.post("deletequestionnaire",{
                     newsId : data.questionnaireid  //将需要删除的newsId作为参数传入
                 },function(data){
-                    tableIns.reload();
-                    layer.close(index);
+                    parent.window.location.reload();
                 })
               });
         }

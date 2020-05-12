@@ -122,16 +122,11 @@ layui.config({
     //提交数据
     form.on("submit(changeUser)",function(data1){
         var index = layer.msg('提交中，请稍候',{icon: 16,time:false,shade:0.8});
-        //将填写的用户信息存到session以便下次调取
-        var famerType='';
+
+
         var famerType1 = data1.field.famerType == "famerType_other" ? data1.field.famerType2 : data1.field.famerType;
 
-        //var famerType0 = famerType1 == "famerType_other2" ? data1.field.famerType3 : famerType1;
-        if(famerType1 == "famerType2_other"){
-            famerType = data1.field.famerType3;
-        }else{
-            famerType = famerType1;
-        }
+        var famerType = famerType1 == "famerType2_other" ? data1.field.famerType3 : famerType1;
 
         var purposeGrain = data1.field.purposeGrain == "purposeGrain_other" ? data1.field.purposeGrain2 : data1.field.purposeGrain;
         var reason = data1.field.reason == "reason_other" ? data1.field.reason2 : data1.field.reason;
