@@ -55,7 +55,7 @@ MAIN CONTENT
                 <span id="nameInfo" style="display: none;color: red">姓名不能为空</span>
                 <br>
                 <input onblur="phoneValidate()" name="phone" id="phone" type="text" class="form-control" placeholder="联系电话" autofocus>
-                <span id="phoneInfo" style="display: none;color: red">请输入正确的电话号码</span>
+                <span id="phoneInfo" style="display: none;color: red">电话号码不能为空</span>
                 <br>
                 <input onblur="companyValidate()" name="company" id="company" type="text" class="form-control" placeholder="单位" autofocus>
                 <span id="companyInfo" style="display: none;color: red">单位不能为空</span>
@@ -184,9 +184,8 @@ MAIN CONTENT
 
     function phoneValidate(){
         var phone = $("#phone").val();
-        var reg01 = /^(0|86|17951)?(13[0-9]|15[012356789]|17[01678]|18[0-9]|14[57])[0-9]{8}$/;
-        var reg02 = /^(0[0-9]{2,3}\-)([2-9][0-9]{6,7})+(\-[0-9]{1,4})?$/;
-        if(!reg01.test(phone) && !reg02.test(phone) && phone != "" && phone != null) {
+
+        if(phone == null || phone == "") {
             $("#phoneInfo").css("display","inline").css("color","red");
             return false;
         }
