@@ -33,7 +33,7 @@ var current = {
         provOpt.value = i;
         prov.appendChild(provOpt);
     }
-    showAddr();
+    //showAddr();
 
 })();
 
@@ -42,7 +42,8 @@ function showCity(obj) {
     var val = obj.options[obj.selectedIndex].value;
     if (val != current.prov) {
         current.prov = val;
-        addrShow.value = '';
+        provinces.value = provice[current.prov].name;
+
         //btn.disabled = true;
     }
     //console.log(val);
@@ -56,13 +57,14 @@ function showCity(obj) {
             city.appendChild(cityOpt);
         }
     }
-    showAddr();
+    //showAddr();
 }
 
 /*根据所选的城市来显示县区列表*/
 function showCountry(obj) {
     var val = obj.options[obj.selectedIndex].value;
     current.city = val;
+    cityes.value = provice[current.prov]["city"][current.city].name;
     if (val != null) {
         country.length = 1; //清空之前的内容只留第一个默认选项
         var countryLen = provice[current.prov]["city"][val].districtAndCounty.length;
@@ -77,16 +79,16 @@ function showCountry(obj) {
             country.appendChild(countryOpt);
         }
     }
-    showAddr();
+    //showAddr();
 }
 
 /*选择县区之后的处理函数*/
 function selecCountry(obj) {
-    current.country = obj.options[obj.selectedIndex].value;
+    current.country = provice[current.prov]["city"][current.city].districtAndCounty[current.country];
     if ((current.city != null) && (current.country != null)) {
         //btn.disabled = false;
     }
-    showAddr();
+    //showAddr();
 }
 
 /*点击确定按钮显示用户所选的地址*/
