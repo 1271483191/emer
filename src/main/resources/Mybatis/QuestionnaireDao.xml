@@ -139,7 +139,7 @@
   </select>
 
   <!--根据用户名条件查询-->
-  <select id="selectAllShow" resultMap="BaseResultMap">
+  <select id="selectAllShow" resultMap="ResultMapWithBLOBs">
     select * from questionnaire
     where 1=1
     <if test="user!=null and user!=''">
