@@ -821,6 +821,9 @@ public class PageController {
     public String changeUser(User user, HttpServletRequest request){
         System.out.println(user);
         userService.update(user);
+        if(user.getPassword() != null && !(user.getPassword().equals(""))){
+            return "redirect:toLogin";
+        }
         HttpSession session = request.getSession();
         User rUser = (User) session.getAttribute("user");
         User newUser = loginService.getUser(rUser.getUsername(),rUser.getPassword());

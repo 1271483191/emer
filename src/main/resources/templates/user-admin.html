@@ -243,6 +243,9 @@
                                                 <td style="text-align: center; font-size: 1.5rem"  th:onclick="'javascript:changeUser('+${user.getUserId()}+',\'company\')'"><a href="javascript:void(0)" th:text="${user.getCompany()}"></a></td>
 
                                             </tr>
+                                            <!--<tr>
+                                                <td colspan="2"  style="text-align: center; font-size: 1.5rem"><a onclick="showChangePwd()" href="javascript:void(0)">修改密码</a></td>
+                                            </tr>-->
                                         <!--<tr th:each="user,userStat : ${users.getList()}">
                                             <td style="text-align: center; font-size: 1.5rem" class="center"><label class="pos-rel"> <input
                                                     type="checkbox" class="ace" /> <span class="lbl"></span>
@@ -266,6 +269,7 @@
                                             </td>
                                         </tr>-->
                                         <script>
+                                            
                                             function changeUser(userId, flag){
                                                 console.log(userId);
                                                 console.log(flag)
@@ -299,14 +303,80 @@
                                                         }
                                                     }
                                                 }
-
                                             }
                                         </script>
 
                                         </tbody>
+
                                     </table>
 
+
+
+
+                                    <table  border="1" id="dynamic-table2" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+
+                                        <tbody>
+                                        <tr>
+                                            <td style="text-align: center; font-size: 1.5rem; width: 50%" >旧密码：</td>
+                                            <td style="text-align: center; font-size: 1.5rem; width: 50%" ><input type="password" id="pwd1"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: center; font-size: 1.5rem; width: 50%" >新密码：</td>
+                                            <td style="text-align: center; font-size: 1.5rem; width: 50%" ><input type="password" id="pwd2"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: center; font-size: 1.5rem; width: 50%" >确认新密码：</td>
+                                            <td style="text-align: center; font-size: 1.5rem; width: 50%" ><input type="password" id="pwd3"></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2"  style="text-align: center; font-size: 1.5rem"><a href="javascript:void(0)" th:onclick="'javascript:changePassword('+${user.getUserId()}+')'">修改密码</a></td>
+                                        </tr>
+
+
+
+                                        </tbody>
+                                    </table>
+                                    <input type="hidden" id="oldPwd" th:value="${user.getPassword()}" >
+
+                                    <script>
+                                        function changePassword(userId){
+                                            var pwd1 =$("#pwd1").val();
+                                            var pwd2 =$("#pwd2").val();
+                                            var pwd3 =$("#pwd3").val();
+                                            var oldPwd = $("#oldPwd").val();
+
+                                            //console.log(pwd1)
+                                            //console.log(oldPwd)
+
+                                            if(pwd1 == null || pwd1 == "" ||
+                                                pwd2 == null || pwd2 == "" ||
+                                                pwd3 == null || pwd3 == ""){
+                                                alert("输入不能为空")
+                                            }else if(pwd1.trim() != oldPwd.trim()){
+
+                                                alert("旧密码不正确")
+                                            }else if(pwd2 != pwd3){
+                                                alert("两次输入的新密码不一致")
+                                            }else{
+                                                console.log(userId);
+                                                var curWwwPath=window.document.location.href;
+                                                var pathName=window.document.location.pathname;
+                                                var localhostPaht;
+                                                var pos = curWwwPath.indexOf(pathName);
+                                                localhostPaht = curWwwPath.substring(0,pos);
+                                                localhostPaht += "/";
+
+                                                var href = localhostPaht + "changeUser?userId=" + userId + "&password=" + pwd2;
+
+                                                location.href = href;
+
+                                            }
+
+                                        }
+                                    </script>
+
                                 </section>
+
 
                                <!-- <div style="font-size: 1.7rem;margin-top: 10px;padding-bottom: 10px;text-align: center" >
                                     <a th:href="@{'/toJurAdmin?page='+${users.getPageNum() - 1}}">上一页</a><span th:text="'&nbsp;&nbsp;第' + ${users.getPageNum()} + '页&nbsp;'"></span>
@@ -328,7 +398,7 @@
     <!--footer start-->
     <footer class="site-footer">
         <div class="text-center">
-            2020.<a href="http://www.winginbi.com" target="_blank">winginbi</a>
+            2020.<a href="http://www.lswz.gov.cn" target="_blank">国家粮食和物质储备局</a>
         </div>
     </footer>
     <!--footer end-->
