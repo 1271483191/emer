@@ -84,19 +84,19 @@
     <if test="province != null and type == 1">
       and c.province = #{province}
     </if>
-    <if test="province == null">
+    <if test="province == null and type == 1">
       and c.province = 'false'
     </if>
     <if test="city != null and type == 2">
         and c.city = #{city}
     </if>
-    <if test="city == null">
+    <if test="city == null and type == 2">
       and c.city = 'false'
     </if>
     <if test="county != null and type == 3">
       and c.county = #{county}
     </if>
-    <if test="county == null">
+    <if test="county == null and type == 3">
       and c.county = 'false'
     </if>
   </select>
@@ -106,19 +106,19 @@
     <if test="province != null and type == 1">
       and c.province = #{province}
     </if>
-    <if test="province == null">
+    <if test="province == null and type == 1">
       and c.province = 'false'
     </if>
     <if test="city != null and type == 2">
       and c.city = #{city}
     </if>
-    <if test="city == null">
+    <if test="city == null and type == 2">
       and c.city = 'false'
     </if>
     <if test="county != null and type == 3">
       and c.county = #{county}
     </if>
-    <if test="county == null">
+    <if test="county == null and type == 3">
       and c.county = 'false'
     </if>
   </select>
@@ -130,19 +130,19 @@
     <if test="user.province != null and user.type == 1">
       and c.province = #{user.province}
     </if>
-    <if test="user.province == null">
+    <if test="user.province == null and user.type == 1">
       and c.province = 'false'
     </if>
     <if test="user.city != null and user.type == 2">
       and c.city = #{user.city}
     </if>
-    <if test="user.city == null">
+    <if test="user.city == null and user.type == 2">
       and c.city = 'false'
     </if>
     <if test="user.county != null and user.type == 3">
       and c.county = #{user.county}
     </if>
-    <if test="user.county == null">
+    <if test="user.county == null and user.type == 3">
       and c.county = 'false'
     </if>
   </select>
@@ -419,19 +419,19 @@
     <if test="province != null and type == 1">
       and c.province = #{province}
     </if>
-    <if test="province == null">
+    <if test="province == null and type == 1">
       and c.province = 'false'
     </if>
     <if test="city != null and type == 2">
       and c.city = #{city}
     </if>
-    <if test="city == null">
+    <if test="city == null and type == 2">
       and c.city = 'false'
     </if>
     <if test="county != null and type == 3">
       and c.county = #{county}
     </if>
-    <if test="county == null">
+    <if test="county == null and type == 3">
       and c.county = 'false'
     </if>
   </select>

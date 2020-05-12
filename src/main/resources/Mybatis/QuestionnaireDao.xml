@@ -148,19 +148,19 @@
     <if test="users.province != null and users.type ==1">
       AND questionnaire.province = #{users.province}
     </if>
-    <if test="users.province == null">
+    <if test="users.province == null and users.type ==1">
       AND questionnaire.province = 'false'
     </if>
     <if test="users.city != null and users.type ==2">
       AND questionnaire.citie = #{users.city}
     </if>
-    <if test="users.city == null">
+    <if test="users.city == null and users.type ==2">
       AND questionnaire.citie = 'false'
     </if>
     <if test="users.county != null and users.type ==3">
       AND questionnaire.area = #{users.county}
     </if>
-    <if test="users.county == null">
+    <if test="users.county == null and users.type ==3">
       AND questionnaire.area = 'false'
     </if>
     LIMIT #{pages},#{number}
@@ -176,19 +176,19 @@
     <if test="users.province != null and users.type ==1">
       AND questionnaire.province = #{users.province}
     </if>
-    <if test="users.province == null">
+    <if test="users.province == null and users.type ==1">
       AND questionnaire.province = 'false'
     </if>
     <if test="users.city != null and users.type ==2">
       AND questionnaire.citie = #{users.city}
     </if>
-    <if test="users.city == null">
+    <if test="users.city == null and users.type ==2">
       AND questionnaire.citie = 'false'
     </if>
     <if test="users.county != null and users.type ==3">
       AND questionnaire.area = #{users.county}
     </if>
-    <if test="users.county == null">
+    <if test="users.county == null and users.type ==3">
       AND questionnaire.area = 'false'
     </if>
   </select>

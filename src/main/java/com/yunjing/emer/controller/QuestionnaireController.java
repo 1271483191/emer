@@ -47,7 +47,15 @@ public class QuestionnaireController {
         LayuiUtil<Questionnaire> result = new LayuiUtil<>();
         int pages=1;
         page=(page-1)*limit;
-        System.out.println(questionnaire.getUser());
+
+        System.out.println("===========================================");
+        System.out.println(questionnaire);
+        System.out.println(page);
+        System.out.println(limit);
+        System.out.println(user);
+        System.out.println("===========================================");
+
+
         List<Questionnaire> li = qusetionnaireService.selectAllShow(questionnaire.getUser(),page,limit,user);
 
         /*QuestionnaireExample example = new QuestionnaireExample();
