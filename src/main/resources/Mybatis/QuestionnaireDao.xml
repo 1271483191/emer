@@ -193,6 +193,29 @@
     </if>
   </select>
 
+  <!--导出数据到Excel-->
+  <select id="SelectQuestionnaireExcel" resultMap="BaseResultMap">
+    select * from questionnaire
+    where 1=1
+    <if test="users.province != null and users.type ==1">
+      AND questionnaire.province = #{users.province}
+    </if>
+    <if test="users.province == null and users.type ==1">
+      AND questionnaire.province = 'false'
+    </if>
+    <if test="users.city != null and users.type ==2">
+      AND questionnaire.citie = #{users.city}
+    </if>
+    <if test="users.city == null and users.type ==2">
+      AND questionnaire.citie = 'false'
+    </if>
+    <if test="users.county != null and users.type ==3">
+      AND questionnaire.area = #{users.county}
+    </if>
+    <if test="users.county == null and users.type ==3">
+      AND questionnaire.area = 'false'
+    </if>
+  </select>
   <!--批量删除-->
   <delete id="deleteQuestionnaire">
     delete from questionnaire where questionnaireID in

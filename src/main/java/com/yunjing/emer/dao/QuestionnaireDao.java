@@ -46,4 +46,7 @@ public interface QuestionnaireDao {
     /*删除和批量删除*/
     int deleteQuestionnaire(int[] questionnaireid);
 
+    /*Excel导出*/
+    List <Questionnaire> SelectQuestionnaireExcel(@Param("users") User users);
+
 }

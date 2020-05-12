@@ -91,5 +91,10 @@ public class QusetionnaireServiceImp implements QuestionnaireService {
         return false;
     }
 
+    @Override
+    public List<Questionnaire> SelectQuestionnaireExcel(User users) {
+        return dao.SelectQuestionnaireExcel(users);
+    }
+
 
 }

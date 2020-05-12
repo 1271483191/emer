@@ -70,6 +70,21 @@ public class QuestionnaireController {
         return result;
     }
 
+    /*导出到Excel表格中*/
+    @RequestMapping("/toQuestionnaireExcel")
+    @ResponseBody
+    public LayuiUtil<Questionnaire> toQuestionnaireExcel(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        LayuiUtil<Questionnaire> result = new LayuiUtil<>();
+
+        List<Questionnaire> li = qusetionnaireService.SelectQuestionnaireExcel(user);
+        result.setData(li);
+        result.setCode(200);
+        result.setMsg("导出成功！");
+        return result;
+    }
+
     /*跳转到添加和修改界面*/
     @RequestMapping("/toAddQuestionnaire")
     public String toAddQuestionnaire(){

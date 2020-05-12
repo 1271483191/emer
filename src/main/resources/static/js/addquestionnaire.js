@@ -125,7 +125,6 @@ layui.config({
 
 
         var famerType1 = data1.field.famerType == "famerType_other" ? data1.field.famerType2 : data1.field.famerType;
-
         var famerType = famerType1 == "famerType2_other" ? data1.field.famerType3 : famerType1;
 
         var purposeGrain = data1.field.purposeGrain == "purposeGrain_other" ? data1.field.purposeGrain2 : data1.field.purposeGrain;

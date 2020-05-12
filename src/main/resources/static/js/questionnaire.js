@@ -1,10 +1,14 @@
-layui.use(['form','layer','table','laytpl' ],function(){
+
+
+layui.use(['form','layer','table','excel','jquery'],function(){
     var form = layui.form,
         layer = parent.layer === undefined ? layui.layer : top.layer,
         $ = layui.jquery,
-        laytpl = layui.laytpl,
+        excel = layui.excel,
+        /*laytpl = layui.laytpl,*/
         table = layui.table;
 
+    var exportData='';
     //问卷列表
     var tableIns = table.render({
         elem: '#questionnaireList',
@@ -39,7 +43,10 @@ layui.use(['form','layer','table','laytpl' ],function(){
             {field: 'toolNum', title: '购买装具数量', minWidth:100, edit: 'text', align:"center"},
             {field: 'notBuyReason', title: '不买装具原因', minWidth:250, edit: 'text', align:"center"},
             {title: '操作', minWidth:100, templet:'#userListBar',fixed:"right" , align:"center"}
-        ]]
+        ]],
+        done: function (res) {
+            exportData=res.data;
+        }
     });
 
     //搜索
@@ -58,6 +65,8 @@ layui.use(['form','layer','table','laytpl' ],function(){
             layer.msg("请输入搜索的内容");
         }
     });
+
+
 
     //添加
     function addQuestionnaire(edit){
@@ -135,6 +144,75 @@ layui.use(['form','layer','table','laytpl' ],function(){
         }
     })
 
+    /*一次性将问卷信息表格全部导出*/
+    table.on('toolbar(userList)',function (obj) {
+
+          var layEvent = obj.event;
+         if(layEvent === 'LAYTABLE_EXPORT')
+         {
+            layer.alert('正在导出，请稍等！');
+            $.ajax({
+                url : 'toQuestionnaireExcel',
+                dataType: 'json',
+                success: function(res) {
+                    console.log(res.data);
+                    // 1. 数组头部新增表头
+                    res.data.unshift({
+                        questionnaireid: '用户名',
+                        user: '姓名',
+                        age: '年龄',
+                        province: '省份',
+                        citie: '城市',
+                        area: '地区',
+                        famerType: '农民类型',
+                        harvestGrain: '收获粮食',
+                        surplusGrain: '每年存粮',
+                        averageGrainDay: '每年存粮天数',
+                        purposeGrain: '粮食用途',
+                        reason: '不存粮原因',
+                        tools: '是否了解储粮装具',
+                        toolsEvaluate: '之前储粮装具评价',
+                        toolsUse: '每年存粮',
+                        supportTool: '国家支持购买储量装具',
+                        toolType: '储粮工具大小',
+                        toolNum: '购买装具数量',
+                        notBuyReason: '不买装具原因'
+                    });
+
+                    // 2.调整顺序，执行梳理函数
+                    var data = excel.filterExportData(res.data, [
+                        'questionnaireid',
+                        'user' ,
+                        'age' ,
+                        'province' ,
+                        'citie' ,
+                        'area' ,
+                        'famerType' ,
+                        'harvestGrain',
+                        'averageGrainDay' ,
+                        'purposeGrain' ,
+                        'reason' ,
+                        'tools' ,
+                        'toolsEvaluate' ,
+                        'toolsUse' ,
+                        'supportTool' ,
+                        'toolType' ,
+                        'toolNum' ,
+                        'notBuyReason'
+                    ]);
+
+                    // 3. 执行导出函数，系统会弹出弹框
+                    excel.exportExcel({
+                        sheet1: data
+                    }, '问卷信息列表.xlsx', 'xlsx');
+                }
+            })
+         }
+
+    })
+
+
+
     var information={};
     //监听单元格编辑数据
     table.on('edit(userList)', function(obj){
@@ -194,7 +272,9 @@ layui.use(['form','layer','table','laytpl' ],function(){
                     parent.window.location.reload();
                 })
               });
-        }
+        }/*else if(layEvent === 'LAYTABLE_EXPORT'){
+               layer.alert('Hi，头部工具栏扩展的右侧图标。');
+           }*/
     });
 
 })

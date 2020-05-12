@@ -2,6 +2,7 @@ package com.yunjing.emer.service;
 
 import com.yunjing.emer.entity.Questionnaire;
 import com.yunjing.emer.entity.User;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -31,4 +32,7 @@ public interface QuestionnaireService {
 
     /*删除和批量删除*/
     boolean deleteQuestionnaire(int[] questionnaireid);
+
+    /*Excel导出*/
+    List <Questionnaire> SelectQuestionnaireExcel(@Param("users") User users);
 }
