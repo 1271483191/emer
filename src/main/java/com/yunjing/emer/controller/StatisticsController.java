@@ -191,9 +191,20 @@ public class StatisticsController {
                 promap2.append(0.0+",");
                 promap3.append(0.0+",");
             }else{
-                promap1.append(temp.getInDay()+",");
-                promap2.append(temp.getOutDay()+",");
-                promap3.append(temp.getSaveDay()+",");
+                if(temp.getInDay()==null){
+                    promap1.append(0.0+",");
+                }else{
+                    promap1.append(temp.getInDay()+",");
+                }
+                if(temp.getOutDay()==null){
+                    promap2.append(0.0+",");
+                }else{
+                    promap2.append(temp.getSaveDay()+",");
+                }if(temp.getSaveDay()==null){
+                    promap3.append(0.0+",");
+                }else{
+                    promap3.append(temp.getSaveDay()+",");
+                }
             }
 
         }
@@ -237,14 +248,43 @@ public class StatisticsController {
                 promap7.append(0.0+",");
                 promap8.append(0.0+",");
             }else{
-                promap1.append(temp.getFlourExp()+",");
-                promap2.append(temp.getRiceExp()+",");
-                promap3.append(temp.getOilExp()+",");
-                promap4.append(temp.getElseExp()+",");
-                promap5.append(temp.getFlourReal()+",");
-                promap6.append(temp.getRiceReal()+",");
-                promap7.append(temp.getOilReal()+",");
-                promap8.append(temp.getElseReal()+",");
+                if(temp.getFlourExp()==null){
+                    promap1.append(0.0+",");
+                }else{
+                    promap1.append(temp.getFlourExp()+",");
+                }
+                if(temp.getRiceExp()==null){
+                    promap2.append(0.0+",");
+                }else{
+                    promap2.append(temp.getRiceExp()+",");
+                }if(temp.getOilExp()==null){
+                    promap3.append(0.0+",");
+                }else{
+                    promap3.append(temp.getOilExp()+",");
+                }
+                if(temp.getElseExp()==null){
+                    promap4.append(0.0+",");
+                }else{
+                    promap4.append(temp.getElseExp()+",");
+                }
+                if(temp.getFlourReal()==null){
+                    promap5.append(0.0+",");
+                }else{
+                    promap5.append(temp.getFlourReal()+",");
+                }if(temp.getRiceReal()==null){
+                    promap6.append(0.0+",");
+                }else{
+                    promap6.append(temp.getRiceReal()+",");
+                }
+                if(temp.getOilReal()==null){
+                    promap7.append(0.0+",");
+                }else{
+                    promap7.append(temp.getOilReal()+",");
+                }if(temp.getElseReal()==null){
+                    promap8.append(0.0+",");
+                }else{
+                    promap8.append(temp.getElseReal()+",");
+                }
             }
 
         }
@@ -301,9 +341,20 @@ public class StatisticsController {
                 promap2.append(0.0+",");
                 promap3.append(0.0+",");
             }else{
-                promap1.append(temp.getInDay()+",");
-                promap2.append(temp.getOutDay()+",");
-                promap3.append(temp.getSaveDay()+",");
+                if(temp.getInDay()==null){
+                    promap1.append(0.0+",");
+                }else{
+                    promap1.append(temp.getInDay()+",");
+                }
+                if(temp.getOutDay()==null){
+                    promap2.append(0.0+",");
+                }else{
+                    promap2.append(temp.getSaveDay()+",");
+                }if(temp.getSaveDay()==null){
+                    promap3.append(0.0+",");
+                }else{
+                    promap3.append(temp.getSaveDay()+",");
+                }
             }
 
         }
@@ -332,9 +383,20 @@ public class StatisticsController {
                 promap2.append(0.0+",");
                 promap3.append(0.0+",");
             }else{
-                promap1.append(temp.getWareAbility()+",");
-                promap2.append(temp.getDeliveryDay()+",");
-                promap3.append(temp.getDeliveryDayReal()+",");
+                if(temp.getWareAbility()==null){
+                    promap1.append(0.0+",");
+                }else{
+                    promap1.append(temp.getWareAbility()+",");
+                }
+                if(temp.getDeliveryDay()==null){
+                    promap2.append(0.0+",");
+                }else{
+                    promap2.append(temp.getDeliveryDay()+",");
+                }if(temp.getDeliveryDayReal()==null){
+                    promap3.append(0.0+",");
+                }else{
+                    promap3.append(temp.getDeliveryDayReal()+",");
+                }
             }
 
         }
@@ -386,9 +448,20 @@ public class StatisticsController {
                 promap2.append(0.0+",");
                 promap3.append(0.0+",");
             }else{
-                promap1.append(temp.getInDay()+",");
-                promap2.append(temp.getOutDay()+",");
-                promap3.append(temp.getSaveDay()+",");
+                if(temp.getInDay()==null){
+                    promap1.append(0.0+",");
+                }else{
+                    promap1.append(temp.getInDay()+",");
+                }
+                if(temp.getOutDay()==null){
+                    promap2.append(0.0+",");
+                }else{
+                    promap2.append(temp.getSaveDay()+",");
+                }if(temp.getSaveDay()==null){
+                    promap3.append(0.0+",");
+                }else{
+                    promap3.append(temp.getSaveDay()+",");
+                }
             }
 
         }
@@ -417,9 +490,20 @@ public class StatisticsController {
                 promap2.append(0.0+",");
                 promap3.append(0.0+",");
             }else{
-                promap1.append(temp.getTransportDay()+",");
-                promap2.append(temp.getCarNum()+",");
-                promap3.append(temp.getTransportDayReal()+",");
+                if(temp.getTransportDay()==null){
+                    promap1.append(0.0+",");
+                }else{
+                    promap1.append(temp.getTransportDay()+",");
+                }
+                if(temp.getCarNum()==null){
+                    promap2.append(0.0+",");
+                }else{
+                    promap2.append(temp.getCarNum()+",");
+                }if(temp.getTransportDayReal()==null){
+                    promap3.append(0.0+",");
+                }else{
+                    promap3.append(temp.getTransportDayReal()+",");
+                }
             }
 
         }
@@ -471,9 +555,20 @@ public class StatisticsController {
                 promap2.append(0.0+",");
                 promap3.append(0.0+",");
             }else{
-                promap1.append(temp.getInDay()+",");
-                promap2.append(temp.getOutDay()+",");
-                promap3.append(temp.getSaveDay()+",");
+                if(temp.getInDay()==null){
+                    promap1.append(0.0+",");
+                }else{
+                    promap1.append(temp.getInDay()+",");
+                }
+                if(temp.getOutDay()==null){
+                    promap2.append(0.0+",");
+                }else{
+                    promap2.append(temp.getSaveDay()+",");
+                }if(temp.getSaveDay()==null){
+                    promap3.append(0.0+",");
+                }else{
+                    promap3.append(temp.getSaveDay()+",");
+                }
             }
 
         }
@@ -529,18 +624,61 @@ public class StatisticsController {
                 promap11.append(0.0+",");
                 promap12.append(0.0+",");
             }else{
-                promap1.append(temp.getWheatDay()+",");
-                promap2.append(temp.getPaddyDay()+",");
-                promap3.append(temp.getOilDay()+",");
-                promap4.append(temp.getOilConciseDay()+",");
-                promap5.append(temp.getOilSubpDay()+",");
-                promap6.append(temp.getElseDay()+",");
-                promap7.append(temp.getWheatDayReal()+",");
-                promap8.append(temp.getPaddyDayReal()+",");
-                promap9.append(temp.getOilDayReal()+",");
-                promap10.append(temp.getOilConciseDayReal()+",");
-                promap11.append(temp.getOilSubpDayReal()+",");
-                promap12.append(temp.getElseDayReal()+",");
+                if(temp.getWheatDay()==null){
+                    promap1.append(0.0+",");
+                }else{
+                    promap1.append(temp.getWheatDay()+",");
+                }
+                if(temp.getPaddyDay()==null){
+                    promap2.append(0.0+",");
+                }else{
+                    promap2.append(temp.getPaddyDay()+",");
+                }if(temp.getOilDay()==null){
+                    promap3.append(0.0+",");
+                }else{
+                    promap3.append(temp.getOilDay()+",");
+                }
+                if(temp.getOilConciseDay()==null){
+                    promap4.append(0.0+",");
+                }else{
+                    promap4.append(temp.getOilConciseDay()+",");
+                }
+                if(temp.getOilSubpDay()==null){
+                    promap5.append(0.0+",");
+                }else{
+                    promap5.append(temp.getOilSubpDay()+",");
+                }if(temp.getElseDay()==null){
+                    promap6.append(0.0+",");
+                }else{
+                    promap6.append(temp.getElseDay()+",");
+                }
+                if(temp.getWheatDayReal()==null){
+                    promap7.append(0.0+",");
+                }else{
+                    promap7.append(temp.getWheatDayReal()+",");
+                }if(temp.getPaddyDayReal()==null){
+                    promap8.append(0.0+",");
+                }else{
+                    promap8.append(temp.getPaddyDayReal()+",");
+                }
+                if(temp.getOilDayReal()==null){
+                    promap9.append(0.0+",");
+                }else{
+                    promap9.append(temp.getOilDayReal()+",");
+                }if(temp.getOilConciseDayReal()==null){
+                    promap10.append(0.0+",");
+                }else{
+                    promap10.append(temp.getOilConciseDayReal()+",");
+                }
+                if(temp.getOilSubpDayReal()==null){
+                    promap11.append(0.0+",");
+                }else{
+                    promap11.append(temp.getOilSubpDayReal()+",");
+                }if(temp.getElseDayReal()==null){
+                    promap12.append(0.0+",");
+                }else{
+                    promap12.append(temp.getElseDayReal()+",");
+                }
             }
 
         }
