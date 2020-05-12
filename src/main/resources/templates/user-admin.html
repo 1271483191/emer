@@ -227,7 +227,7 @@
                                             </tr>
                                             <tr>
                                                 <td style="text-align: center; font-size: 1.5rem" >所在地区</td>
-                                                <td style="text-align: center; font-size: 1.5rem" th:text="${user.getProvince()} + ',' + ${user.getCity()} + ',' + ${user.getCounty()}"></td>
+                                                <td style="text-align: center; font-size: 1.5rem" th:text="${user.getProvince()} + ${user.getCity()} + ${user.getCounty()}"></td>
                                             </tr>
                                             <tr>
                                                 <td th:onclick="'javascript:changeUser('+${user.getUserId()}+',\'type\')'" style="text-align: center; font-size: 1.5rem" >权限</td>
