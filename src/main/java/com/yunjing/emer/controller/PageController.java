@@ -838,15 +838,24 @@ public class PageController {
     public String changeUser(User user, HttpServletRequest request){
         System.out.println(user);
         userService.update(user);
-        if(user.getPassword() != null && !(user.getPassword().equals(""))){
-            return "redirect:toLogin";
-        }
         HttpSession session = request.getSession();
         User rUser = (User) session.getAttribute("user");
         User newUser = loginService.getUser(rUser.getUsername(),rUser.getPassword());
         System.out.println(newUser);
         session.setAttribute("user", newUser);
         return "redirect:toUserAdmin";
+    }
+
+    @RequestMapping("/changePassword")
+    @ResponseBody
+    public boolean changePassword(User user){
+        System.out.println(user);
+        userService.update(user);
+        if(user.getPassword() != null && !(user.getPassword().equals(""))){
+            return true;
+        }
+
+        return false;
     }
 
     @RequestMapping("/toChangeUser")

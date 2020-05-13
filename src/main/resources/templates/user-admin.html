@@ -366,7 +366,20 @@
                                                 localhostPaht = curWwwPath.substring(0,pos);
                                                 localhostPaht += "/";
 
-                                                var href = localhostPaht + "changeUser?userId=" + userId + "&password=" + pwd2;
+                                                var href = localhostPaht + "changePassword?userId=" + userId + "&password=" + pwd2;
+
+                                                $.post('changePassword',
+                                                    {
+                                                        userId:userId,password:pwd2
+                                                    },
+                                                    function(date){
+                                                        if(date == true){
+                                                            alert("密码修改成功，请重新登录")
+                                                            location.href = 'toLogin';
+                                                        }else{
+                                                            alert("服务器繁忙，请重新尝试")
+                                                        }
+                                                    });
 
                                                 location.href = href;
 
