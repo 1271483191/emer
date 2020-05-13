@@ -142,9 +142,6 @@
   <select id="selectAllShow" resultMap="ResultMapWithBLOBs">
     select * from questionnaire
     where 1=1
-    <if test="user!=null and user!=''">
-      AND questionnaire.user = #{user}
-    </if>
     <if test="users.province != null and users.type ==1">
       AND questionnaire.province = #{users.province}
     </if>
@@ -163,16 +160,33 @@
     <if test="users.county == null and users.type ==3">
       AND questionnaire.area = 'false'
     </if>
-    LIMIT #{pages},#{number}
+    <if test="usernews!=null and usernews!=''">
+    and (questionnaire.user like concat('%',#{usernews},'%')
+    or questionnaire.province like concat('%',#{usernews},'%')
+    or questionnaire.citie like concat('%',#{usernews},'%')
+    or questionnaire.area like concat('%',#{usernews},'%')
+    or questionnaire.famer_type like concat('%',#{usernews},'%')
+    or questionnaire.harvest_grain like concat('%',#{usernews},'%')
+    or questionnaire.surplus_grain like concat('%',#{usernews},'%')
+    or questionnaire.average_grain_day like concat('%',#{usernews},'%')
+    or questionnaire.purpose_grain like concat('%',#{usernews},'%')
+    or questionnaire.reason like concat('%',#{usernews},'%')
+    or questionnaire.tools like concat('%',#{usernews},'%')
+    or questionnaire.tools_evaluate like concat('%',#{usernews},'%')
+    or questionnaire.tools_use like concat('%',#{usernews},'%')
+    or questionnaire.tool_type like concat('%',#{usernews},'%')
+    or questionnaire.tool_num like concat('%',#{usernews},'%')
+    or questionnaire.not_buy_reason like concat('%',#{usernews},'%')
+    or questionnaire.sex like concat('%',#{usernews},'%')
+    )
+    </if>
+      LIMIT #{pages},#{number}
   </select>
 
   <!--根据用户的姓名统计数据-->
   <select id="countQusetionnaireList" parameterType="String" resultType="java.lang.Integer">
     SELECT count(*) from questionnaire
-    where 1=1
-    <if test="user!=null and user!=''">
-      AND questionnaire.user = #{user}
-    </if>
+    where 1 =1
     <if test="users.province != null and users.type ==1">
       AND questionnaire.province = #{users.province}
     </if>
@@ -191,10 +205,30 @@
     <if test="users.county == null and users.type ==3">
       AND questionnaire.area = 'false'
     </if>
+    <if test="usernews!=null and usernews!=''">
+      and (questionnaire.user like concat('%',#{usernews},'%')
+      or questionnaire.province like concat('%',#{usernews},'%')
+      or questionnaire.citie like concat('%',#{usernews},'%')
+      or questionnaire.area like concat('%',#{usernews},'%')
+      or questionnaire.famer_type like concat('%',#{usernews},'%')
+      or questionnaire.harvest_grain like concat('%',#{usernews},'%')
+      or questionnaire.surplus_grain like concat('%',#{usernews},'%')
+      or questionnaire.average_grain_day like concat('%',#{usernews},'%')
+      or questionnaire.purpose_grain like concat('%',#{usernews},'%')
+      or questionnaire.reason like concat('%',#{usernews},'%')
+      or questionnaire.tools like concat('%',#{usernews},'%')
+      or questionnaire.tools_evaluate like concat('%',#{usernews},'%')
+      or questionnaire.tools_use like concat('%',#{usernews},'%')
+      or questionnaire.tool_type like concat('%',#{usernews},'%')
+      or questionnaire.tool_num like concat('%',#{usernews},'%')
+      or questionnaire.not_buy_reason like concat('%',#{usernews},'%')
+      or questionnaire.sex like concat('%',#{usernews},'%')
+      )
+    </if>
   </select>
 
   <!--导出数据到Excel-->
-  <select id="SelectQuestionnaireExcel" resultMap="BaseResultMap">
+  <select id="SelectQuestionnaireExcel" resultMap="ResultMapWithBLOBs">
     select * from questionnaire
     where 1=1
     <if test="users.province != null and users.type ==1">
@@ -214,6 +248,27 @@
     </if>
     <if test="users.county == null and users.type ==3">
       AND questionnaire.area = 'false'
+    </if>
+
+    <if test="usernews!=null and usernews!=''">
+      and (questionnaire.user like concat('%',#{usernews},'%')
+      or questionnaire.province like concat('%',#{usernews},'%')
+      or questionnaire.citie like concat('%',#{usernews},'%')
+      or questionnaire.area like concat('%',#{usernews},'%')
+      or questionnaire.famer_type like concat('%',#{usernews},'%')
+      or questionnaire.harvest_grain like concat('%',#{usernews},'%')
+      or questionnaire.surplus_grain like concat('%',#{usernews},'%')
+      or questionnaire.average_grain_day like concat('%',#{usernews},'%')
+      or questionnaire.purpose_grain like concat('%',#{usernews},'%')
+      or questionnaire.reason like concat('%',#{usernews},'%')
+      or questionnaire.tools like concat('%',#{usernews},'%')
+      or questionnaire.tools_evaluate like concat('%',#{usernews},'%')
+      or questionnaire.tools_use like concat('%',#{usernews},'%')
+      or questionnaire.tool_type like concat('%',#{usernews},'%')
+      or questionnaire.tool_num like concat('%',#{usernews},'%')
+      or questionnaire.not_buy_reason like concat('%',#{usernews},'%')
+      or questionnaire.sex like concat('%',#{usernews},'%')
+      )
     </if>
   </select>
   <!--批量删除-->

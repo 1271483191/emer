@@ -161,6 +161,7 @@ layui.use(['form','layer','table','excel','jquery'],function(){
                         questionnaireid: '用户名',
                         user: '姓名',
                         age: '年龄',
+                        sex: '性别',
                         province: '省份',
                         citie: '城市',
                         area: '地区',
@@ -184,6 +185,7 @@ layui.use(['form','layer','table','excel','jquery'],function(){
                         'questionnaireid',
                         'user' ,
                         'age' ,
+                        'sex' ,
                         'province' ,
                         'citie' ,
                         'area' ,
@@ -204,7 +206,7 @@ layui.use(['form','layer','table','excel','jquery'],function(){
                     // 3. 执行导出函数，系统会弹出弹框
                     excel.exportExcel({
                         sheet1: data
-                    }, '问卷信息列表.xlsx', 'xlsx');
+                    }, '农户储粮问卷信息.xlsx', 'xlsx');
                 }
             })
          }

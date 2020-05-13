@@ -43,10 +43,10 @@ public class QuestionnaireController {
 
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-
         LayuiUtil<Questionnaire> result = new LayuiUtil<>();
-        int pages=1;
-        page=(page-1)*limit;
+        session.setAttribute("usernews",questionnaire.getUser());
+
+        int pages = 1;
 
         System.out.println("===========================================");
         System.out.println(questionnaire);
@@ -55,15 +55,10 @@ public class QuestionnaireController {
         System.out.println(user);
         System.out.println("===========================================");
 
-
+        page = (page - 1) * limit;
+        pages = qusetionnaireService.countQusetionnaireList(questionnaire.getUser(),user);
         List<Questionnaire> li = qusetionnaireService.selectAllShow(questionnaire.getUser(),page,limit,user);
 
-        /*QuestionnaireExample example = new QuestionnaireExample();
-        QuestionnaireExample.Criteria criteria = example.createCriteria();
-        criteria.andUserEqualTo(questionnaire.getUser());
-        pages = qusetionnaireService.countByExample(example);
-        */
-        pages = qusetionnaireService.countQusetionnaireList(questionnaire.getUser(),user);
         result.setData(li);
         result.setCount(pages);
 
@@ -76,9 +71,13 @@ public class QuestionnaireController {
     public LayuiUtil<Questionnaire> toQuestionnaireExcel(HttpServletRequest request){
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-        LayuiUtil<Questionnaire> result = new LayuiUtil<>();
+        String usernews = (String)session.getAttribute("usernews");
 
-        List<Questionnaire> li = qusetionnaireService.SelectQuestionnaireExcel(user);
+        LayuiUtil<Questionnaire> result = new LayuiUtil<>();
+        List<Questionnaire> li = qusetionnaireService.SelectQuestionnaireExcel(usernews,user);
+
+
+
         result.setData(li);
         result.setCode(200);
         result.setMsg("导出成功！");

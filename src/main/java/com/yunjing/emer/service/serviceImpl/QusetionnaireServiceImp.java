@@ -4,6 +4,7 @@ import com.yunjing.emer.dao.QuestionnaireDao;
 import com.yunjing.emer.entity.Questionnaire;
 import com.yunjing.emer.entity.User;
 import com.yunjing.emer.service.QuestionnaireService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -92,8 +93,8 @@ public class QusetionnaireServiceImp implements QuestionnaireService {
     }
 
     @Override
-    public List<Questionnaire> SelectQuestionnaireExcel(User users) {
-        return dao.SelectQuestionnaireExcel(users);
+    public List<Questionnaire> SelectQuestionnaireExcel(String usernews, User users) {
+        return dao.SelectQuestionnaireExcel(usernews,users);
     }
 
 

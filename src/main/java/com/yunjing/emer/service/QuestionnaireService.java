@@ -34,5 +34,5 @@ public interface QuestionnaireService {
     boolean deleteQuestionnaire(int[] questionnaireid);
 
     /*Excel导出*/
-    List <Questionnaire> SelectQuestionnaireExcel(@Param("users") User users);
+    List <Questionnaire> SelectQuestionnaireExcel(String usernews,@Param("users") User users);
 }
