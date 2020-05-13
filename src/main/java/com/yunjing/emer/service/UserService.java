@@ -15,4 +15,5 @@ public interface UserService {
     Page<User> selectUserByPass(User user);
     List<User> selectUserListByPass(User user, Integer pass);
     boolean passUser(Integer userId);
+    boolean selectUserByUsername(User user);
 }

@@ -128,4 +128,19 @@ public class UserServiceImpl implements UserService {
         }
         return false;
     }
+
+    @Override
+    public boolean selectUserByUsername(User user) {
+
+        UserExample example = new UserExample();
+        UserExample.Criteria criteria = example.createCriteria();
+        criteria.andUsernameEqualTo(user.getUsername());
+
+        List<User> result = userDao.selectByExample(example);
+        if(result == null || result.size() == 0){
+            return true;
+        }
+
+        return false;
+    }
 }
