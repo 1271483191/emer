@@ -154,6 +154,9 @@ public class PageController {
         modelAndView.setViewName("index");
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
+        Date date = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日");
+        String dates = simpleDateFormat.format(date);
 
         if(page == null){
             page = 1;
@@ -165,26 +168,238 @@ public class PageController {
         System.out.println(companyInfoList.getList());
 
 
-        List websiteList = websiteService.selectAll(user);
-        List deliveryList = deliveryService.selectAll(user);
-        List machineList = machineService.selectAll(user);
-        List storeageList = storeageService.selectAll(user);
+        List<Website> websiteList = websiteService.selectAll(user);
+        List<Delivery> deliveryList = deliveryService.selectAll(user);
+        List<Machine> machineList = machineService.selectAll(user);
+        List<Storeage> storeageList = storeageService.selectAll(user);
+
 
         int websiteNum = websiteList.size();
         int deliveryNum = deliveryList.size();
         int machineNum = machineList.size();
         int storeageNum = storeageList.size();
 
+        int websiteUsingNum = 0;
+        int deliveryUsingNum = 0;
+        int machineUsingNum = 0;
+        int storeageUsingNum = 0;
+
+        for(Website w : websiteList){
+            CompanyInfo c = companyInfoService.selectById(w.getCompanyId());
+            if(c.getCompanyType() == 1){
+                websiteUsingNum++;
+            }
+        }
+
+        for(Delivery d : deliveryList){
+            CompanyInfo c = companyInfoService.selectById(d.getCompanyId());
+            if(c.getCompanyType() == 1){
+                deliveryUsingNum++;
+            }
+        }
+
+        for(Machine m : machineList){
+            CompanyInfo c = companyInfoService.selectById(m.getCompanyId());
+            if(c.getCompanyType() == 1){
+                machineUsingNum++;
+            }
+        }
+
+        for(Storeage s : storeageList){
+            CompanyInfo c = companyInfoService.selectById(s.getCompanyId());
+            if(c.getCompanyType() == 1){
+                storeageUsingNum++;
+            }
+        }
+
+        //提取供应网点详细信息
+        Website allWebsite = new Website();
+        CompanyInfo websiteCompanyInfo = new CompanyInfo();
+
+        allWebsite.setElseReal(0.0);
+        allWebsite.setElseExp(0.0);
+        allWebsite.setFlourExp(0.0);
+        allWebsite.setFlourReal(0.0);
+        allWebsite.setOilExp(0.0);
+        allWebsite.setOilReal(0.0);
+        allWebsite.setRiceExp(0.0);
+        allWebsite.setRiceReal(0.0);
+
+        websiteCompanyInfo.setInDay(0.0);
+        websiteCompanyInfo.setOutDay(0.0);
+        websiteCompanyInfo.setSaveDay(0.0);
+
+
+        if(websiteList != null && websiteList.size() > 0){
+            for(Website w : websiteList){
+
+                CompanyInfo c = companyInfoService.selectById(w.getCompanyId());
+
+                //System.out.println(w);
+                //System.out.println(allWebsite);
+                allWebsite.setElseExp(allWebsite.getElseExp() + w.getElseExp());
+                allWebsite.setElseReal(allWebsite.getElseReal() + w.getElseReal());
+                allWebsite.setFlourExp(allWebsite.getFlourExp() + w.getFlourExp());
+                allWebsite.setFlourReal(allWebsite.getFlourReal() + w.getFlourReal());
+                allWebsite.setOilExp(allWebsite.getOilExp() + w.getOilExp());
+                allWebsite.setOilReal(allWebsite.getOilReal() + w.getOilReal());
+                allWebsite.setRiceExp(allWebsite.getRiceExp() + w.getRiceExp());
+                allWebsite.setRiceReal(allWebsite.getRiceReal() + w.getRiceReal());
+                websiteCompanyInfo.setInDay(websiteCompanyInfo.getInDay() + c.getInDay());
+                websiteCompanyInfo.setOutDay(websiteCompanyInfo.getOutDay() + c.getOutDay());
+                websiteCompanyInfo.setSaveDay(websiteCompanyInfo.getSaveDay() + c.getSaveDay());
+
+            }
+        }
+
+        //提取供应网点详细信息结束
+
+        //提取配送中心详细信息
+        Delivery allDelivery = new Delivery();
+        CompanyInfo deliveryCompanyInfo = new CompanyInfo();
+
+        allDelivery.setWareAbility(0.0);
+        allDelivery.setDeliveryDay(0.0);
+        allDelivery.setRadius(0.0);
+        allDelivery.setDeliveryNum(0);
+        allDelivery.setCarNum(0);
+        allDelivery.setDeliveryDayReal(0.0);
+
+        deliveryCompanyInfo.setInDay(0.0);
+        deliveryCompanyInfo.setOutDay(0.0);
+        deliveryCompanyInfo.setSaveDay(0.0);
+
+
+        if(deliveryList != null && deliveryList.size() > 0){
+            for(Delivery d : deliveryList){
+
+                CompanyInfo c = companyInfoService.selectById(d.getCompanyId());
+
+                allDelivery.setWareAbility(allDelivery.getWareAbility() + d.getWareAbility());
+                allDelivery.setDeliveryDay(allDelivery.getDeliveryDay() + d.getDeliveryDay());
+                allDelivery.setRadius(allDelivery.getRadius() + d.getRadius());
+                allDelivery.setDeliveryNum(allDelivery.getDeliveryNum() + d.getDeliveryNum());
+                allDelivery.setCarNum(allDelivery.getCarNum() + d.getCarNum());
+                allDelivery.setDeliveryDayReal(allDelivery.getDeliveryDayReal() + d.getDeliveryDayReal());
+
+
+                deliveryCompanyInfo.setInDay(deliveryCompanyInfo.getInDay() + c.getInDay());
+                deliveryCompanyInfo.setOutDay(deliveryCompanyInfo.getOutDay() + c.getOutDay());
+                deliveryCompanyInfo.setSaveDay(deliveryCompanyInfo.getSaveDay() + c.getSaveDay());
+
+            }
+        }
+
+        //提取配送中心详细信息结束
+
+        //提取加工企业详细信息
+        Machine allMachine = new Machine();
+        CompanyInfo machineCompanyInfo = new CompanyInfo();
+
+        allMachine.setWheatDay(0.0);
+        allMachine.setPaddyDay(0.0);
+        allMachine.setOilDay(0.0);
+        allMachine.setOilConciseDay(0.0);
+        allMachine.setOilSubpDay(0.0);
+        allMachine.setElseDay(0.0);
+        allMachine.setWheatDayReal(0.0);
+        allMachine.setPaddyDayReal(0.0);
+        allMachine.setOilDayReal(0.0);
+        allMachine.setOilConciseDayReal(0.0);
+        allMachine.setOilSubpDayReal(0.0);
+        allMachine.setElseDayReal(0.0);
+
+
+        machineCompanyInfo.setInDay(0.0);
+        machineCompanyInfo.setOutDay(0.0);
+        machineCompanyInfo.setSaveDay(0.0);
+
+
+        if(machineList != null && machineList.size() > 0){
+            for(Machine m : machineList){
+
+                CompanyInfo c = companyInfoService.selectById(m.getCompanyId());
+
+                allMachine.setWheatDay(allMachine.getWheatDay() + m.getWheatDay());
+                allMachine.setPaddyDay(allMachine.getPaddyDay() + m.getPaddyDay());
+                allMachine.setOilDay(allMachine.getOilDay() + m.getOilDay());
+                allMachine.setOilConciseDay(allMachine.getOilConciseDay() + m.getOilConciseDay());
+                allMachine.setOilSubpDay(allMachine.getOilSubpDay() + m.getOilSubpDay());
+                allMachine.setElseDay(allMachine.getElseDay() + m.getElseDay());
+                allMachine.setWheatDayReal(allMachine.getWheatDayReal() + m.getWheatDayReal());
+                allMachine.setPaddyDayReal(allMachine.getPaddyDayReal() + m.getPaddyDayReal());
+                allMachine.setOilDayReal(allMachine.getOilDayReal() + m.getOilDayReal());
+                allMachine.setOilConciseDayReal(allMachine.getOilConciseDayReal() + m.getOilConciseDayReal());
+                allMachine.setOilSubpDayReal(allMachine.getOilSubpDayReal() + m.getOilSubpDayReal());
+                allMachine.setElseDayReal(allMachine.getElseDayReal() + m.getElseDayReal());
+
+
+                machineCompanyInfo.setInDay(machineCompanyInfo.getInDay() + c.getInDay());
+                machineCompanyInfo.setOutDay(machineCompanyInfo.getOutDay() + c.getOutDay());
+                machineCompanyInfo.setSaveDay(machineCompanyInfo.getSaveDay() + c.getSaveDay());
+
+            }
+        }
+        //提取加工企业详细信息结束
+
+        //提取仓储企业详细信息
+        Storeage allStoreage = new Storeage();
+        CompanyInfo storeageCompanyInfo = new CompanyInfo();
+
+        allStoreage.setTransportDay(0.0);
+        allStoreage.setCarNum(0);
+        allStoreage.setTransportDayReal(0.0);
+
+
+        storeageCompanyInfo.setInDay(0.0);
+        storeageCompanyInfo.setOutDay(0.0);
+        storeageCompanyInfo.setSaveDay(0.0);
+
+
+        if(storeageList != null && storeageList.size() > 0){
+            for(Storeage s : storeageList){
+
+                CompanyInfo c = companyInfoService.selectById(s.getCompanyId());
+
+                allStoreage.setTransportDay(allStoreage.getTransportDay() + s.getTransportDay());
+                allStoreage.setCarNum(allStoreage.getCarNum() + s.getCarNum());
+                allStoreage.setTransportDayReal(allStoreage.getTransportDayReal() + s.getTransportDayReal());
+
+
+                storeageCompanyInfo.setInDay(storeageCompanyInfo.getInDay() + c.getInDay());
+                storeageCompanyInfo.setOutDay(storeageCompanyInfo.getOutDay() + c.getOutDay());
+                storeageCompanyInfo.setSaveDay(storeageCompanyInfo.getSaveDay() + c.getSaveDay());
+
+            }
+        }
+
+
+        //提取仓储企业详细信息结束
+
         Map baseInfoMap = new HashMap();
         baseInfoMap.put("websiteNum", websiteNum);
         baseInfoMap.put("deliveryNum", deliveryNum);
         baseInfoMap.put("machineNum", machineNum);
         baseInfoMap.put("storeageNum", storeageNum);
+        baseInfoMap.put("websiteUsingNum", websiteUsingNum);
+        baseInfoMap.put("deliveryUsingNum", deliveryUsingNum);
+        baseInfoMap.put("machineUsingNum", machineUsingNum);
+        baseInfoMap.put("storeageUsingNum", storeageUsingNum);
         baseInfoMap.put("total", websiteNum + deliveryNum + machineNum + storeageNum);
         baseInfoMap.put("companyInfoList", companyInfoList);
+        baseInfoMap.put("allWebsite", allWebsite);
+        baseInfoMap.put("websiteCompanyInfo", websiteCompanyInfo);
+        baseInfoMap.put("allDelivery", allDelivery);
+        baseInfoMap.put("deliveryCompanyInfo", deliveryCompanyInfo);
+        baseInfoMap.put("allMachine", allMachine);
+        baseInfoMap.put("machineCompanyInfo", machineCompanyInfo);
+        baseInfoMap.put("allStoreage", allStoreage);
+        baseInfoMap.put("storeageCompanyInfo", storeageCompanyInfo);
+
         System.out.println(baseInfoMap);
 
         modelAndView.addObject("baseInfoMap", baseInfoMap);
+        modelAndView.addObject("date", dates);
 
         return modelAndView;
     }
