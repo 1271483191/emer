@@ -449,6 +449,34 @@ public class PageController {
         return src;
     }
 
+    @RequestMapping("/login2")
+    @ResponseBody
+    public String login2(String username, String password, HttpServletRequest request){
+
+        String src = "redirect:toLogin";
+        System.out.println("username:" + username + ",password:" + password);
+        int result = loginService.login(username, password);
+        System.out.println("result:" + result);
+        switch (result){
+            case -1:
+                src = "login_false";
+                break;
+            case 0:
+                src = "pass_false";
+                break;
+            case 1:{
+                src = "success";
+                HttpSession session = request.getSession();
+                User user = loginService.getUser(username,password);
+                System.out.println(user);
+                session.setAttribute("user", user);
+            }
+        }
+
+
+        return src;
+    }
+
     @RequestMapping("/toRegist")
     public String toRegist(){
         return "regist";

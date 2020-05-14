@@ -36,7 +36,7 @@
 	  <div id="login-page">
 	  	<div class="container">
 	  	
-		      <form class="form-login" action="login">
+		      <form class="form-login" action="">
 		        <h2 class="form-login-heading">登录</h2>
 		        <div class="login-wrap">
 		            <input name="username" id="username" type="text" class="form-control" placeholder="用户名" autofocus>
@@ -44,7 +44,7 @@
 		            <input name="password" id="password" type="password" class="form-control" placeholder="密码">
 					<br>
 					<hr>
-		            <button class="btn btn-theme btn-block" href="toIndex" type="submit"><i class="fa fa-angle-right"></i>登录</button>
+		            <button class="btn btn-theme btn-block" href="toIndex" type="button" onclick="login()"><i class="fa fa-angle-right"></i>登录</button>
 		            <br>
 		            <div class="registration">
 		                <a class="" href="toRegist">
@@ -71,6 +71,27 @@
     <script type="text/javascript" src="assets/js/jquery.backstretch.min.js"></script>
     <script>
         $.backstretch("assets/img/bg.jpg", {speed: 500});
+        function login(){
+			var username = $("#username").val();
+			var password = $("#password").val();
+
+			$.post(
+					'login2',
+					{
+						username:username,
+						password:password
+					},
+					function(data){
+						if(data == 'login_false'){
+							alert("用户名或密码不正确")
+						}else if(data == 'pass_false'){
+							alert("此用户尚未通过审核，请耐心等待")
+						}else if(data == 'success'){
+							location.href = 'toIndex';
+						}
+					}
+			);
+		}
     </script>
 
 
