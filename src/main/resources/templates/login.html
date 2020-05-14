@@ -30,23 +30,16 @@
 
 <style>
     .title {
-        /* position: absolute;
-        top: 15rem;
-        left: 16rem; */
         font-size: 2.5rem;
         font-style: italic;
         font-weight: bold;
         color: white !important;
-        /* border-right: 0.4rem solid white; */
         height: 5rem;
         line-height: 5rem;
-        /* padding-right: 3rem; */
         text-align: center;
     }
 
     .right {
-        /* float: right; */
-        /* background: rgba(0, 0, 0, 0.2); */
         height: 34rem;
         width: 35rem;
         border-radius: 0.8rem;
@@ -70,9 +63,12 @@
 
     #login-page {
         background: rgba(0, 0, 0, 0.2);
-        position: absolute;
+        position: fixed;
+        bottom: 0;
+        left: 0;
         height: 100% !important;
         width: 100%;
+        z-index: -1;
     }
 
     .box {
@@ -88,6 +84,32 @@
         width: 5rem;
     }
 
+    #tips {
+        width: 26rem;
+        height: 15rem;
+        background: rgba(0, 0, 0, 0.8);
+        margin: 0 auto;
+        text-align: center;
+        color: white;
+        line-height: 7rem;
+        font-size: 2rem;
+        border-radius: 1.5rem;
+        overflow: hidden;
+        z-index: 1000;
+        margin-top: -15rem;
+    }
+
+    .little-title {
+        position: relative;
+        font-size: 1.5rem;
+        height: 4rem;
+        text-align: left;
+        padding-top: 1rem;
+        padding-left: 2rem;
+        line-height: 2rem;
+        background: white;
+        color: black;
+    }
 </style>
 
 <body>
@@ -125,6 +147,18 @@
         </div>
     </div>
 
+    <div id="tips">
+        <div>
+            <div class="little-title">
+                <img style="width: 2rem;" src="../static/img/logo.png" alt="">
+                粮食应急保障企业信息统计
+            </div>
+        </div>
+        <div id="tipstext" style="height: 11rem;line-height: 11rem;">
+            提示信息
+        </div>
+    </div>
+
     <!-- js placed at the end of the document so the pages load faster -->
     <script src="assets/js/jquery.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
@@ -133,6 +167,16 @@
     <!-- You can use an image of whatever size. This script will stretch to fit in any screen size.-->
     <script type="text/javascript" src="assets/js/jquery.backstretch.min.js"></script>
     <script>
+
+
+        function showTips(title) {
+            $("#tipstext").html(title);
+            $("#tips:not(:animated)").animate({ marginTop: "20rem" }, 800, function () {
+                $("#tips").animate({ marginTop: "20rem" },1500, function () {
+                    $("#tips").animate({ marginTop: "-15rem" }, 800);
+                })
+            });
+        }
         $.backstretch("assets/img/小麦2.jpg", { speed: 500 });
 
         function login() {
@@ -140,12 +184,12 @@
             var password = $("#password").val();
 
             if (username == "" || username == null) {
-                alert("请输入用户名");
-                event.preventDefault();
+                // alert("请输入用户名");
+                showTips("请输入用户名");
                 return false
             } else if (password == "" || password == null) {
-                alert("请输入密码");
-                event.preventDefault();
+                // alert("请输入密码");
+                showTips("请输入密码");
                 return false
             } else {
                 $.post(
@@ -156,9 +200,11 @@
                     },
                     function (data) {
                         if (data == 'login_false') {
-                            alert("用户名或密码不正确")
+                            // alert("用户名或密码不正确")
+                            showTips("用户名或密码不正确");
                         } else if (data == 'pass_false') {
-                            alert("此用户尚未通过审核，请耐心等待")
+                            // alert("此用户尚未通过审核，请耐心等待")
+                            showTips("此用户尚未通过审核，请耐心等待");
                         } else if (data == 'success') {
                             location.href = 'toIndex';
                         }
@@ -166,28 +212,6 @@
                 );
             }
         }
-
-        // function login() {
-        //     var username = $("#username").val();
-        //     var password = $("#password").val();
-
-        //     $.post(
-        //         'login2',
-        //         {
-        //             username: username,
-        //             password: password
-        //         },
-        //         function (data) {
-        //             if (data == 'login_false') {
-        //                 alert("用户名或密码不正确")
-        //             } else if (data == 'pass_false') {
-        //                 alert("此用户尚未通过审核，请耐心等待")
-        //             } else if (data == 'success') {
-        //                 location.href = 'toIndex';
-        //             }
-        //         }
-        //     );
-        // }
     </script>
 
 

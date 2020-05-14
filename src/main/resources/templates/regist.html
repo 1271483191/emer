@@ -98,9 +98,12 @@
 
     #login-page {
         background: rgba(0, 0, 0, 0.2);
-        position: absolute;
+        position: fixed;
+        bottom: 0;
+        left: 0;
         height: 100% !important;
         width: 100%;
+        z-index: -1;
     }
 
     .container {
@@ -109,6 +112,33 @@
         justify-content: center;
         align-items: center;
     }
+
+    #tips {
+        width: 26rem;
+        height: 15rem;
+        background: rgba(0, 0, 0, 0.8);
+        margin: 0 auto;
+        text-align: center;
+        color: white;
+        line-height: 7rem;
+        font-size: 2rem;
+        border-radius: 1.5rem;
+        overflow: hidden;
+        z-index: 1000;
+        margin-top: -15rem;
+    }
+
+    .little-title {
+        position: relative;
+        font-size: 1.5rem;
+        height: 4rem;
+        text-align: left;
+        padding-top: 1rem;
+        padding-left: 2rem;
+        line-height: 2rem;
+        background: white;
+        color: black;
+    }
 </style>
 
 <body>
@@ -116,91 +146,6 @@
     <!-- **********************************************************************************************************************************************************
 MAIN CONTENT
 *********************************************************************************************************************************************************** -->
-
-    <!-- <div id="login-page">
-        <div class="container">
-
-            <form class="form-login" action="">
-                <h2 class="form-login-heading">注册</h2>
-                <div class="login-wrap">
-                    <input onblur="usernameValidate()" name="username" id="username" type="text" class="form-control"
-                        placeholder="用户名" autofocus>
-                    <span id="usernameInfo" style="display: none;color: red">请输入用户名</span>
-                    <br>
-                    <input onblur="passwordValidate()" name="password" id="password" type="password"
-                        class="form-control" placeholder="密码">
-                    <span id="passwordInfo" style="display: none;color: red">请输入密码</span>
-                    <br>
-                    <input onblur="password2Validate()" id="password2" type="password" class="form-control"
-                        placeholder="确认密码">
-                    <span id="password2Info" style="display: none;color: red">两次输入密码不一致</span>
-                    <br>
-                    <input onblur="nameValidate()" name="name" id="name" type="text" class="form-control"
-                        placeholder="姓名" autofocus>
-                    <span id="nameInfo" style="display: none;color: red">姓名不能为空</span>
-                    <br>
-                    <input onblur="phoneValidate()" name="phone" id="phone" type="text" class="form-control"
-                        placeholder="联系电话" autofocus>
-                    <span id="phoneInfo" style="display: none;color: red">电话号码不能为空</span>
-                    <br>
-                    <input onblur="companyValidate()" name="company" id="company" type="text" class="form-control"
-                        placeholder="单位" autofocus>
-                    <span id="companyInfo" style="display: none;color: red">单位不能为空</span>
-                    <br>
-                    <div>
-                        <label for="addr-show">所在地区：
-                            <input type="hidden" value="" id="addr-show" />
-                        </label>
-                        <input name="province" type="hidden" value="" id="provinces" />
-                        <input name="city" type="hidden" value="" id="cities" />
-                        <input name="county" type="hidden" value="" id="counties" />
-                        <br />
-
-                        <div>
-                            <select class="form-control" id="prov" onchange="showCity(this)">
-                                <option>=请选择省份=</option>
-                            </select>
-                        </div>
-                        <br />
-
-                        <div>
-                            <select class="form-control" id="city" onchange="showCountry(this)">
-                                <option>=请选择城市=</option>
-                            </select>
-                        </div>
-                        <br />
-
-                        <div>
-                            <select class="form-control" id="country" onchange="selecCountry(this)">
-                                <option>=请选择县区=</option>
-                            </select>
-                        </div>
-                        <br />
-                    </div>
-                    <div>
-                        <div>选择权限：</div>
-                        <input value="0" name="type" type="radio" checked="checked" /><span
-                            style="margin-right: 10px;margin-left: 5px">国家级</span>
-                        <input value="1" name="type" type="radio" /><span
-                            style="margin-right: 10px;margin-left: 5px">省级</span>
-                        <input value="2" name="type" type="radio" /><span
-                            style="margin-right: 10px;margin-left: 5px">市级</span>
-                        <input value="3" name="type" type="radio" /><span
-                            style="margin-right: 10px;margin-left: 5px">县级</span>
-                    </div>
-                    <button class="btn btn-theme btn-block" href="toIndex" onclick="submitValidate()" type="button"><i
-                            class="fa fa-angle-right"></i>注册</button>
-                    <br>
-
-                    <div class="registration">
-                        <a class="" href="toLogin">
-                            已有账号？去登录
-                        </a>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div> -->
 
     <div id="login-page">
         <div class="container" style="overflow: hidden">
@@ -286,8 +231,8 @@ MAIN CONTENT
                         <input value="3" name="type" type="radio" /><span
                             style="margin-right: 10px;margin-left: 5px;width: 5rem;">县级</span>
                     </div>
-                    <button class="btn btn-theme btn-block" style="outline: none!important;" href="toIndex" onclick="submitValidate()"
-                        type="button">注册</button>
+                    <button class="btn btn-theme btn-block" style="outline: none!important;" href="toIndex"
+                        onclick="submitValidate()" type="button">注册</button>
 
                     <div class="registration">
                         <a class="" href="toLogin" style="color: white;margin: 0!important;">
@@ -297,6 +242,18 @@ MAIN CONTENT
                 </div>
             </form>
 
+        </div>
+    </div>
+
+    <div id="tips">
+        <div>
+            <div class="little-title">
+                <img style="width: 2rem;" src="../static/img/logo.png" alt="">
+                粮食应急保障企业信息统计
+            </div>
+        </div>
+        <div id="tipstext" style="height: 11rem;line-height: 11rem;">
+            提示信息
         </div>
     </div>
 
@@ -312,9 +269,16 @@ MAIN CONTENT
     <script type="text/javascript" src="assets/js/jquery.backstretch.min.js"></script>
     <script>
         $.backstretch("assets/img/小麦.jpg", { speed: 500 });
-    </script>
 
-    <script>
+        function showTips(title) {
+            $("#tipstext").html(title);
+            $("#tips:not(:animated)").animate({ marginTop: "20rem" }, 800, function () {
+                $("#tips").animate({ marginTop: "20rem" }, 1500, function () {
+                    $("#tips").animate({ marginTop: "-15rem" }, 800);
+                })
+            });
+        }
+
         function usernameValidate() {
             var username = $("#username").val();
             if (username == null || username == "") {
@@ -406,18 +370,21 @@ MAIN CONTENT
                 }*/
 
                 if (type == 1 && (province == null || province == "")) {
-                    alert("请选择省份")
-                    event.preventDefault();
+                    // alert("请选择省份")
+                    showTips("请选择省份");
+                    // event.preventDefault();
                     return false;
                 }
                 if (type == 2 && (city == null || city == "")) {
-                    alert("请选择市")
-                    event.preventDefault();
+                    // alert("请选择市")
+                    showTips("请选择市");
+                    // event.preventDefault();
                     return false;
                 }
                 if (type == 3 && (county == null || county == "")) {
-                    alert("请选择县")
-                    event.preventDefault();
+                    // alert("请选择县")
+                    showTips("请选择县");
+                    // event.preventDefault();
                     return false;
                 }
                 $.post('insertUser2',
@@ -434,14 +401,16 @@ MAIN CONTENT
                     },
                     function (date) {
                         if (date == false) {
-                            alert("账号已存在，请重新输入")
+                            // alert("账号已存在，请重新输入")
+                            showTips("账号已存在，请重新输入");
                         } else {
-                            alert("注册成功，请等待管理员审核")
+                            // alert("注册成功，请等待管理员审核")
+                            showTips("注册成功，请等待管理员审核");
                             location.href = "toLogin";
                         }
                     })
             } else {
-                event.preventDefault();
+                // event.preventDefault();
                 return false;
             }
         }
