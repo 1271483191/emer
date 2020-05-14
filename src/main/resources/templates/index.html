@@ -221,7 +221,14 @@
 						  家，其中已经复工
 						  <span th:text="${baseInfoMap.get('machineUsingNum')}"></span>
 						  家，复工率
-						  <span th:text="${(baseInfoMap.get('machineUsingNum')/baseInfoMap.get('machineNum'))*100}"></span>
+						  <span th:if="${baseInfoMap.get('machineNum') != 0}">
+							  <span th:text="${(baseInfoMap.get('machineUsingNum')/baseInfoMap.get('machineNum'))*100}"></span>
+						  </span>
+
+						  <span th:if="${baseInfoMap.get('machineNum') == 0}">
+							  <span>0</span>
+						  </span>
+
 						  %，复工企业的小麦日加工能力
 						  <span th:text="${baseInfoMap.get('allMachine').getWheatDay()}"></span>吨,
 						  稻谷日加工能力
@@ -260,7 +267,16 @@
 						  家，其中已经复工
 						  <span th:text="${baseInfoMap.get('websiteUsingNum')}"></span>
 						  家，复工率
-						  <span th:text="${(baseInfoMap.get('websiteUsingNum')/baseInfoMap.get('websiteNum'))*100}"></span>
+
+						  <span th:if="${baseInfoMap.get('websiteNum') != 0}">
+							  <span th:text="${(baseInfoMap.get('websiteUsingNum')/baseInfoMap.get('websiteNum'))*100}"></span>
+						  </span>
+
+						  <span th:if="${baseInfoMap.get('websiteNum') == 0}">
+							  <span>0</span>
+						  </span>
+
+
 						  %，复工企业的面粉日供应能力
 						  <span th:text="${baseInfoMap.get('allWebsite').getFlourExp()}"></span>吨,
 						  大米日供应能力
@@ -291,7 +307,16 @@
 						  家，其中已经复工
 						  <span th:text="${baseInfoMap.get('deliveryUsingNum')}"></span>
 						  家，复工率
-						  <span th:text="${(baseInfoMap.get('deliveryUsingNum')/baseInfoMap.get('deliveryNum'))*100}"></span>
+
+						  <span th:if="${baseInfoMap.get('deliveryNum') != 0}">
+							  <span th:text="${(baseInfoMap.get('deliveryUsingNum')/baseInfoMap.get('deliveryNum'))*100}"></span>
+						  </span>
+
+						  <span th:if="${baseInfoMap.get('deliveryNum') == 0}">
+							  <span>0</span>
+						  </span>
+
+
 						  %，复工企业的仓储能力
 						  <span th:text="${baseInfoMap.get('allDelivery').getWareAbility()}"></span>吨,
 						  日配送能力
@@ -318,7 +343,16 @@
 						  家，其中已经复工
 						  <span th:text="${baseInfoMap.get('storeageUsingNum')}"></span>
 						  家，复工率
-						  <span th:text="${(baseInfoMap.get('storeageUsingNum')/baseInfoMap.get('storeageNum'))*100}"></span>
+
+						  <span th:if="${baseInfoMap.get('storeageNum') != 0}">
+							  <span th:text="${(baseInfoMap.get('storeageUsingNum')/baseInfoMap.get('storeageNum'))*100}"></span>
+						  </span>
+
+						  <span th:if="${baseInfoMap.get('storeageNum') == 0}">
+							  <span>0</span>
+						  </span>
+
+
 						  %，复工企业的日运输能力
 						  <span th:text="${baseInfoMap.get('allStoreage').getTransportDay()}"></span>吨,
 						  运输车辆数量
