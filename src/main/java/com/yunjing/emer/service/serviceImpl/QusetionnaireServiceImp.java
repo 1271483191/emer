@@ -66,10 +66,20 @@ public class QusetionnaireServiceImp implements QuestionnaireService {
 
     @Override
     public boolean insert_xi(Questionnaire record) {
-        int flag = dao.insert(record);
-        if(flag>0){
+
+        Integer questionnaire = dao.selectOnlyone(record);
+
+        if(questionnaire == 0) {
+            int flag = dao.insert(record);
+            if (flag > 0) {
+                return true;
+            }
+        }else {
+            record.setQuestionnaireid(questionnaire);
+            dao.updateByPrimaryKeySelective(record);
             return true;
         }
+
         return false;
     }
 

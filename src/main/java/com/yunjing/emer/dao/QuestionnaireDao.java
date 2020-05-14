@@ -49,4 +49,9 @@ public interface QuestionnaireDao {
     /*Excel导出*/
     List <Questionnaire> SelectQuestionnaireExcel(@Param("usernews")String usernews,@Param("users") User users);
 
+    /*--查询省,姓名,年龄,性别,是否一样的数据*/
+    int selectOnlyone(@Param("record") Questionnaire record);
+
+    //int selectID()
+
 }

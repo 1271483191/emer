@@ -138,6 +138,41 @@
     </if>
   </select>
 
+  <!--查询省 市 县,姓名,年龄,性别,农民类型,是否一样的数据-->
+  <select id="selectOnlyone" parameterType = "com.yunjing.emer.entity.Questionnaire" resultType="java.lang.Integer">
+
+    select ifnull(sum(questionnaireID),0 )  from questionnaire
+    where 1=1
+    <if test="record.user != null and record.user !=''">
+      AND questionnaire.user = #{record.user}
+    </if>
+
+    <if test="record.province != null and record.province !=''">
+      AND questionnaire.province = #{record.province}
+    </if>
+
+    <if test="record.citie != null and record.citie !=''">
+      AND questionnaire.citie = #{record.citie}
+    </if>
+
+    <if test="record.area != null and record.area !=''">
+      AND questionnaire.area = #{record.area}
+    </if>
+
+    <if test="record.age != null and record.age !=''">
+      AND questionnaire.age = #{record.age}
+    </if>
+
+    <if test="record.sex != null and record.sex !=''">
+      AND questionnaire.sex = #{record.sex}
+    </if>
+
+    <if test="record.famerType != null and record.famerType !=''">
+      AND questionnaire.famer_type = #{record.famerType}
+    </if>
+
+  </select>
+
   <!--根据用户名条件查询-->
   <select id="selectAllShow" resultMap="ResultMapWithBLOBs">
     select * from questionnaire
