@@ -399,11 +399,11 @@ MAIN CONTENT
                 //console.log(county);
                 //console.log(county);
 
-                if (!/(^1[3|4|5|7|8|9]\d{9}$)|(^09\d{8}$)/.test(phone)) {
+                /*if (!/(^1[3|4|5|7|8|9]\d{9}$)|(^09\d{8}$)/.test(phone)) {
                     alert("联系电话格式错误")
                     event.preventDefault();
                     return false;
-                }
+                }*/
 
                 if (type == 1 && (province == null || province == "")) {
                     alert("请选择省份")
@@ -436,6 +436,7 @@ MAIN CONTENT
                         if (date == false) {
                             alert("账号已存在，请重新输入")
                         } else {
+                            alert("注册成功，请等待管理员审核")
                             location.href = "toLogin";
                         }
                     })
