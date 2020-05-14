@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,252 +31,421 @@
     <![endif]-->
 </head>
 
+<style>
+    .select-box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    .select-box>div {
+        margin-bottom: 1rem;
+    }
+
+    form {
+        background: rgba(0, 0, 0, 0.15) !important;
+        max-width: 50rem !important;
+        margin: 0 !important;
+    }
+
+    .login-wrap>div {
+        margin-bottom: 1.8rem;
+    }
+
+    .login-wrap>div>span {
+        display: inline-block;
+        width: 8rem;
+        font-size: 1.5rem;
+    }
+
+    .city-box {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .btn-theme {
+        background: #629b6b !important;
+        width: 14rem;
+        border: 0;
+        border-radius: 5rem;
+        margin: 0 auto;
+    }
+
+    .center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    body {
+        color: white;
+    }
+
+    .error {
+        color: red;
+        margin: 0 !important;
+        font-weight: bold;
+        position: relative;
+        top: -9px;
+        left: 16rem;
+        display: none;
+    }
+
+    #login-page {
+        background: rgba(0, 0, 0, 0.2);
+        position: absolute;
+        height: 100% !important;
+        width: 100%;
+    }
+
+    .container {
+        height: 100% !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+
 <body>
 
-<!-- **********************************************************************************************************************************************************
+    <!-- **********************************************************************************************************************************************************
 MAIN CONTENT
 *********************************************************************************************************************************************************** -->
 
-<div id="login-page">
-    <div class="container">
+    <!-- <div id="login-page">
+        <div class="container">
 
-        <form class="form-login" action="">
-            <h2 class="form-login-heading">注册</h2>
-            <div class="login-wrap">
-                <input onblur="usernameValidate()" name="username" id="username" type="text" class="form-control" placeholder="用户名" autofocus>
-                <span id="usernameInfo" style="display: none;color: red">请输入用户名</span>
-                <br>
-                <input onblur="passwordValidate()" name="password" id="password" type="password" class="form-control" placeholder="密码">
-                <span id="passwordInfo" style="display: none;color: red">请输入密码</span>
-                <br>
-                <input onblur="password2Validate()" id="password2" type="password" class="form-control" placeholder="确认密码">
-                <span id="password2Info" style="display: none;color: red">两次输入密码不一致</span>
-                <br>
-                <input onblur="nameValidate()" name="name" id="name" type="text" class="form-control" placeholder="姓名" autofocus>
-                <span id="nameInfo" style="display: none;color: red">姓名不能为空</span>
-                <br>
-                <input onblur="phoneValidate()" name="phone" id="phone" type="text" class="form-control" placeholder="联系电话" autofocus>
-                <span id="phoneInfo" style="display: none;color: red">电话号码不能为空</span>
-                <br>
-                <input onblur="companyValidate()" name="company" id="company" type="text" class="form-control" placeholder="单位" autofocus>
-                <span id="companyInfo" style="display: none;color: red">单位不能为空</span>
-                <br>
-                <div>
-                    <label for="addr-show">所在地区：
-                        <input type="hidden" value="" id="addr-show"/>
-                    </label>
-                    <input name="province" type="hidden" value="" id="provinces"/>
-                    <input name="city" type="hidden" value="" id="cities"/>
-                    <input name="county" type="hidden" value="" id="counties"/>
-                    <br/>
-
+            <form class="form-login" action="">
+                <h2 class="form-login-heading">注册</h2>
+                <div class="login-wrap">
+                    <input onblur="usernameValidate()" name="username" id="username" type="text" class="form-control"
+                        placeholder="用户名" autofocus>
+                    <span id="usernameInfo" style="display: none;color: red">请输入用户名</span>
+                    <br>
+                    <input onblur="passwordValidate()" name="password" id="password" type="password"
+                        class="form-control" placeholder="密码">
+                    <span id="passwordInfo" style="display: none;color: red">请输入密码</span>
+                    <br>
+                    <input onblur="password2Validate()" id="password2" type="password" class="form-control"
+                        placeholder="确认密码">
+                    <span id="password2Info" style="display: none;color: red">两次输入密码不一致</span>
+                    <br>
+                    <input onblur="nameValidate()" name="name" id="name" type="text" class="form-control"
+                        placeholder="姓名" autofocus>
+                    <span id="nameInfo" style="display: none;color: red">姓名不能为空</span>
+                    <br>
+                    <input onblur="phoneValidate()" name="phone" id="phone" type="text" class="form-control"
+                        placeholder="联系电话" autofocus>
+                    <span id="phoneInfo" style="display: none;color: red">电话号码不能为空</span>
+                    <br>
+                    <input onblur="companyValidate()" name="company" id="company" type="text" class="form-control"
+                        placeholder="单位" autofocus>
+                    <span id="companyInfo" style="display: none;color: red">单位不能为空</span>
+                    <br>
                     <div>
-                        <!--省份选择-->
-                        <select class="form-control" id="prov" onchange="showCity(this)">
-                            <option>=请选择省份=</option>
-                        </select>
-                    </div>
-                    <br/>
+                        <label for="addr-show">所在地区：
+                            <input type="hidden" value="" id="addr-show" />
+                        </label>
+                        <input name="province" type="hidden" value="" id="provinces" />
+                        <input name="city" type="hidden" value="" id="cities" />
+                        <input name="county" type="hidden" value="" id="counties" />
+                        <br />
 
+                        <div>
+                            <select class="form-control" id="prov" onchange="showCity(this)">
+                                <option>=请选择省份=</option>
+                            </select>
+                        </div>
+                        <br />
+
+                        <div>
+                            <select class="form-control" id="city" onchange="showCountry(this)">
+                                <option>=请选择城市=</option>
+                            </select>
+                        </div>
+                        <br />
+
+                        <div>
+                            <select class="form-control" id="country" onchange="selecCountry(this)">
+                                <option>=请选择县区=</option>
+                            </select>
+                        </div>
+                        <br />
+                    </div>
                     <div>
-                        <!--城市选择-->
-                        <select class="form-control" id="city" onchange="showCountry(this)">
-                            <option>=请选择城市=</option>
-                        </select>
+                        <div>选择权限：</div>
+                        <input value="0" name="type" type="radio" checked="checked" /><span
+                            style="margin-right: 10px;margin-left: 5px">国家级</span>
+                        <input value="1" name="type" type="radio" /><span
+                            style="margin-right: 10px;margin-left: 5px">省级</span>
+                        <input value="2" name="type" type="radio" /><span
+                            style="margin-right: 10px;margin-left: 5px">市级</span>
+                        <input value="3" name="type" type="radio" /><span
+                            style="margin-right: 10px;margin-left: 5px">县级</span>
                     </div>
-                    <br/>
+                    <button class="btn btn-theme btn-block" href="toIndex" onclick="submitValidate()" type="button"><i
+                            class="fa fa-angle-right"></i>注册</button>
+                    <br>
 
-                    <div>
-                        <!--县区选择-->
-                        <select class="form-control" id="country" onchange="selecCountry(this)">
-                            <option>=请选择县区=</option>
-                        </select>
+                    <div class="registration">
+                        <a class="" href="toLogin">
+                            已有账号？去登录
+                        </a>
                     </div>
-                    <br/>
                 </div>
-                <div>
-                    <div>选择权限：</div>
-                    <input value="0" name="type" type="radio" checked="checked"/><span style="margin-right: 10px;margin-left: 5px">国家级</span>
-                    <input value="1" name="type" type="radio"/><span style="margin-right: 10px;margin-left: 5px">省级</span>
-                    <input value="2" name="type" type="radio"/><span style="margin-right: 10px;margin-left: 5px">市级</span>
-                    <input value="3" name="type" type="radio"/><span style="margin-right: 10px;margin-left: 5px">县级</span>
+            </form>
+        </div>
+    </div> -->
+
+    <div id="login-page">
+        <div class="container" style="overflow: hidden">
+            <form class="form-login form-inline" action="">
+                <h2 class="form-login-heading" style="color: white;font-size: 3rem;background: transparent;">注册</h2>
+                <div class="login-wrap" style="width: 50rem;">
+                    <div class="center">
+                        <span style="width: 10rem;">用户名：</span>
+                        <input name="username" onblur="usernameValidate()" style="width: 25rem;" id="username"
+                            type="text" class="form-control" placeholder="请输入用户名" autofocus>
+                    </div>
+                    <div id="usernameInfo" class="error">请输入用户名</div>
+                    <div class="center">
+                        <span style="width: 10rem;">密码：</span>
+                        <input name="password" onblur="passwordValidate()" onchange="passwordVerifiers()"
+                            style="width: 25rem;" id="password" type="password" class="form-control"
+                            placeholder="请输入密码">
+                    </div>
+                    <div id="passwordInfo" class="error">请输入密码</div>
+                    <div class="center">
+                        <span style="width: 10rem;">密码确认：</span>
+                        <input id="password2" onblur="password2Validate()" style="width: 25rem;" type="password"
+                            class="form-control" placeholder="请再次输入密码">
+                    </div>
+                    <div id="password2Info" class="error">两次输入密码不一致</div>
+                    <div class="center">
+                        <span style="width: 10rem;">姓名：</span>
+                        <input name="name" onblur="nameValidate()" style="width: 25rem;" id="name" type="text"
+                            class="form-control" placeholder="请输入姓名" autofocus>
+                    </div>
+                    <div id="nameInfo" class="error">姓名不能为空</div>
+                    <div class="center">
+                        <span style="width: 10rem;">联系电话：</span>
+                        <input name="phone" onblur="phoneValidate()" style="width: 25rem;" id="phone" type="text"
+                            class="form-control" placeholder="请输入电话" autofocus>
+                    </div>
+                    <div id="phoneInfo" class="error">电话号码不能为空</div>
+                    <div class="center">
+                        <span style="width: 10rem;">单位：</span>
+                        <input name="company" onblur="companyValidate()" style="width: 25rem;" id="company" type="text"
+                            class="form-control" placeholder="请输入单位" autofocus>
+                    </div>
+                    <div id="companyInfo" class="error">单位不能为空</div>
+                    <div style="text-align: center;font-size: 1.5rem;margin-bottom: 0rem;">
+                        <label for="addr-show">所在地区：
+                            <input type="hidden" value="" id="addr-show" />
+                        </label>
+                        <input name="province" type="hidden" value="" id="provinces" />
+                        <input name="city" type="hidden" value="" id="cities" />
+                        <input name="county" type="hidden" value="" id="counties" />
+                        <br />
+
+                        <div class="city-box">
+                            <div>
+                                <select class="form-control" id="prov" onchange="showCity(this)">
+                                    <option>=请选择省份=</option>
+                                </select>
+                            </div>
+                            <br />
+                            <div>
+                                <select class="form-control" id="city" onchange="showCountry(this)">
+                                    <option>=请选择城市=</option>
+                                </select>
+                            </div>
+                            <br />
+                            <div>
+                                <select class="form-control" id="country" onchange="selecCountry(this)">
+                                    <option>=请选择县区=</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <br />
+                    </div>
+                    <div style="font-size: 1.5rem;">
+                        <div style="text-align: center;">选择权限：</div>
+                        <input value="0" style="margin-left: 8rem;" name="type" type="radio" checked="checked" /><span
+                            style="margin-right: 10px;margin-left: 5px;width: 5rem;">国家级</span>
+                        <input value="1" name="type" type="radio" /><span
+                            style="margin-right: 10px;margin-left: 5px;width: 5rem;">省级</span>
+                        <input value="2" name="type" type="radio" /><span
+                            style="margin-right: 10px;margin-left: 5px;width: 5rem;">市级</span>
+                        <input value="3" name="type" type="radio" /><span
+                            style="margin-right: 10px;margin-left: 5px;width: 5rem;">县级</span>
+                    </div>
+                    <button class="btn btn-theme btn-block" style="outline: none!important;" href="toIndex" onclick="submitValidate()"
+                        type="button">注册</button>
+
+                    <div class="registration">
+                        <a class="" href="toLogin" style="color: white;margin: 0!important;">
+                            已有账号？去登录
+                        </a>
+                    </div>
                 </div>
-                <button class="btn btn-theme btn-block" href="toIndex" onclick="submitValidate()" type="button"><i class="fa fa-angle-right"></i>注册</button>
-                <br>
+            </form>
 
-                <div class="registration">
-                    <a class="" href="toLogin">
-                        已有账号？去登录
-                    </a>
-                </div>
-            </div>
-
-
-            <!-- myModal -->
-
-        </form>
-
+        </div>
     </div>
-</div>
 
-<!-- js placed at the end of the document so the pages load faster -->
-<script src="assets/js/jquery.js"></script>
-<script src="assets/js/bootstrap.min.js"></script>
-<script src="assets/three/city.js"></script>
-<script src="assets/three/city02.js"></script>
-<script src="assets/three/method01.js"></script>
+    <!-- js placed at the end of the document so the pages load faster -->
+    <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/three/city.js"></script>
+    <script src="assets/three/city02.js"></script>
+    <script src="assets/three/method01.js"></script>
 
-<!--BACKSTRETCH-->
-<!-- You can use an image of whatever size. This script will stretch to fit in any screen size.-->
-<script type="text/javascript" src="assets/js/jquery.backstretch.min.js"></script>
-<script>
-    $.backstretch("assets/img/bg.jpg", {speed: 500});
-</script>
+    <!--BACKSTRETCH-->
+    <!-- You can use an image of whatever size. This script will stretch to fit in any screen size.-->
+    <script type="text/javascript" src="assets/js/jquery.backstretch.min.js"></script>
+    <script>
+        $.backstretch("assets/img/小麦.jpg", { speed: 500 });
+    </script>
 
-<script>
-    function usernameValidate(){
-        var username = $("#username").val();
-        if(username == null || username == ""){
-            $("#usernameInfo").css("display","inline").css("color","red");
-            return false;
-        }
-        $("#usernameInfo").css("display","none").css("color","red");
-
-
-        return true;
-    }
-
-    function passwordValidate(){
-        var password = $("#password").val();
-        if(password == null || password == ""){
-            $("#passwordInfo").css("display","inline").css("color","red");
-            return false;
-        }
-        $("#passwordInfo").css("display","none").css("color","red");
-
-
-        return true;
-    }
-
-    function password2Validate(){
-        var password = $("#password").val();
-        var password2 = $("#password2").val();
-        if(password != password2){
-            $("#password2Info").css("display","inline").css("color","red");
-            return false;
-        }
-        $("#password2Info").css("display","none").css("color","red");
-
-
-        return true;
-    }
-
-    function nameValidate(){
-        var name = $("#name").val();
-        if(name == null || name == ""){
-            $("#nameInfo").css("display","inline").css("color","red");
-            return false;
-        }
-        $("#nameInfo").css("display","none").css("color","red");
-
-
-        return true;
-    }
-
-    function phoneValidate(){
-        var phone = $("#phone").val();
-
-        if(phone == null || phone == "") {
-            $("#phoneInfo").css("display","inline").css("color","red");
-            return false;
-        }
-
-        $("#phoneInfo").css("display","none").css("color","red");
-
-
-        return true;
-    }
-
-    function companyValidate(){
-        var company = $("#company").val();
-        if(company == null || company == ""){
-            $("#companyInfo").css("display","inline").css("color","red");
-            return false;
-        }
-        $("#companyInfo").css("display","none").css("color","red");
-
-
-        return true;
-    }
-
-    function submitValidate(){
-
-
-        if(usernameValidate() && passwordValidate() && password2Validate() && nameValidate() && nameValidate() && companyValidate()){
+    <script>
+        function usernameValidate() {
             var username = $("#username").val();
+            if (username == null || username == "") {
+                $("#usernameInfo").css("display", "inline").css("color", "red");
+                return false;
+            }
+            $("#usernameInfo").css("display", "none").css("color", "red");
+            return true;
+        }
+
+        function passwordValidate() {
+            var password = $("#password").val();
+            if (password == null || password == "") {
+                $("#passwordInfo").css("display", "inline").css("color", "red");
+                return false;
+            }
+            $("#passwordInfo").css("display", "none").css("color", "red");
+            password2Validate();
+            return true;
+        }
+
+        function password2Validate() {
             var password = $("#password").val();
             var password2 = $("#password2").val();
-            var name = $("#name").val();
-            var phone = $("#phone").val();
-            var company = $("#company").val();
-
-            var province = $("#provinces").val();
-            var city = $("#cities").val();
-            var county = $("#counties").val();
-
-            var type = $('input:radio:checked').val();
-
-            //console.log(type);
-            //console.log(province);
-            //console.log(city);
-            //console.log(county);
-            //console.log(county);
-
-            if(type == 1 && (province == null || province == "")){
-                alert("请选择省份")
-                return;
+            if (password != password2) {
+                $("#password2Info").css("display", "inline").css("color", "red");
+                return false;
             }
-
-            if(type == 2 && (city == null || city == "")){
-                alert("请选择市")
-                return;
-            }
-
-            if(type == 3 && (county == null || county == "")){
-                alert("请选择县")
-                return;
-            }
-
-            $.post('insertUser2',{
-                username:username,
-                password:password,
-                name:name,
-                phone:phone,
-                company:company,
-                province:province,
-                city:city,
-                county:county,
-                type:type
-            },
-            function(date){
-
-                if(date == false){
-                    alert("账号已存在，请重新输入")
-                }else{
-                    location.href = "toLogin";
-                }
-            })
-
-
-
-
+            $("#password2Info").css("display", "none").css("color", "red");
+            return true;
         }
 
+        function nameValidate() {
+            var name = $("#name").val();
+            if (name == null || name == "") {
+                $("#nameInfo").css("display", "inline").css("color", "red");
+                return false;
+            }
+            $("#nameInfo").css("display", "none").css("color", "red");
+            return true;
+        }
 
-    }
+        function phoneValidate() {
+            var phone = $("#phone").val();
 
-</script>
+            if (phone == null || phone == "") {
+                $("#phoneInfo").css("display", "inline").css("color", "red");
+                return false;
+            }
+            $("#phoneInfo").css("display", "none").css("color", "red");
+            return true;
+        }
 
+        function companyValidate() {
+            var company = $("#company").val();
+            if (company == null || company == "") {
+                $("#companyInfo").css("display", "inline").css("color", "red");
+                return false;
+            }
+            $("#companyInfo").css("display", "none").css("color", "red");
+            return true;
+        }
+
+        function submitValidate() {
+            if (usernameValidate() && passwordValidate() && password2Validate() && nameValidate() && nameValidate() && companyValidate()) {
+                var username = $("#username").val();
+                var password = $("#password").val();
+                var password2 = $("#password2").val();
+                var name = $("#name").val();
+                var phone = $("#phone").val();
+                var company = $("#company").val();
+
+                var province = $("#provinces").val();
+                var city = $("#cities").val();
+                var county = $("#counties").val();
+
+                var type = $('input:radio:checked').val();
+
+                //console.log(type);
+                //console.log(province);
+                //console.log(city);
+                //console.log(county);
+                //console.log(county);
+
+                if (!/(^1[3|4|5|7|8|9]\d{9}$)|(^09\d{8}$)/.test(phone)) {
+                    alert("联系电话格式错误")
+                    event.preventDefault();
+                    return false;
+                }
+
+                if (type == 1 && (province == null || province == "")) {
+                    alert("请选择省份")
+                    event.preventDefault();
+                    return false;
+                }
+                if (type == 2 && (city == null || city == "")) {
+                    alert("请选择市")
+                    event.preventDefault();
+                    return false;
+                }
+                if (type == 3 && (county == null || county == "")) {
+                    alert("请选择县")
+                    event.preventDefault();
+                    return false;
+                }
+                $.post('insertUser2',
+                    {
+                        username: username,
+                        password: password,
+                        name: name,
+                        phone: phone,
+                        company: company,
+                        province: province,
+                        city: city,
+                        county: county,
+                        type: type
+                    },
+                    function (date) {
+                        if (date == false) {
+                            alert("账号已存在，请重新输入")
+                        } else {
+                            location.href = "toLogin";
+                        }
+                    })
+            } else {
+                event.preventDefault();
+                return false;
+            }
+        }
+    </script>
 
 </body>
+
 </html>
