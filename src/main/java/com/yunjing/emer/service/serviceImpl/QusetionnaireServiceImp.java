@@ -50,19 +50,27 @@ public class QusetionnaireServiceImp implements QuestionnaireService {
 
     @Override
     public int insert(Questionnaire record) {
+
         String[] provinces = record.getProvince().split("_");
         String[] cities = record.getCitie().split("_");
         String[] country = record.getArea().split("_");
 
-        if(provinces.length>1&&cities.length>1&&country.length>1)
-        {
+        if (provinces.length > 1 && cities.length > 1 && country.length > 1) {
             record.setProvince(provinces[3]);
             record.setCitie(cities[3]);
             record.setArea(country[1]);
         }
+        Integer questionnaire = dao.selectOnlyone(record);
+        if(questionnaire == 0) {
+            return dao.insert(record);
+        }else {
+            record.setQuestionnaireid(questionnaire);
+            dao.updateByPrimaryKeySelective(record);
+        }
+
 
         return dao.insert(record);
-    }
+ }
 
     @Override
     public boolean insert_xi(Questionnaire record) {

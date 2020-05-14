@@ -135,7 +135,6 @@ public class QuestionnaireController {
                 message.setMsg("添加失败,发生未知错误请重试！");
                 message.setRes(false);
             }
-
         return message;
     }
 
