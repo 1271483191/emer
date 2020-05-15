@@ -73,35 +73,6 @@ layui.use(['form','layer','table','excel','jquery'],function(){
             type : 2,
             content : "toAddQuestionnaire",
             success : function(layero, index){
-                var body = layui.layer.getChildFrame('body', index);
-                if(edit){
-                    body.find(".user").val(edit.user);
-                    body.find('input[name="sex"][value="'+edit.sex+'"]').prop("checked",true);  //性别
-                    form.render();
-                    body.find(".age").val(edit.age);
-                    body.find(".province select[name=province]").append("<option value=''>"+edit.province+"</option>");
-                    body.find(".city").val(edit.age);
-                    body.find(".area").val(edit.age);
-
-                    body.find(".famerType").val(edit.famerType);
-                    body.find(".harvestGrain").val(edit.harvestGrain);
-                    body.find(".surplusGrain").val(edit.surplusGrain);
-                    body.find(".averageGrainDay").val(edit.averageGrainDay);
-
-                    body.find(".purposeGrain").val(edit.purposeGrain);
-                    body.find(".reason").text(edit.reason);
-                    body.find(".tools").val(edit.tools);
-                    body.find(".toolsEvaluate").text(edit.toolsEvaluate);
-
-
-                    body.find(".toolsUse").val(edit.toolsUse);
-                    body.find(".supportTool").val(edit.supportTool);
-                    body.find(".toolType").val(edit.toolType);
-                    body.find(".toolNum").val(edit.toolNum);
-                    body.find(".notBuyReason").text(edit.notBuyReason);
-
-                    form.render();
-                }
                 setTimeout(function(){
                     layui.layer.tips('点击此处返回用问卷信息列表', '.layui-layer-setwin .layui-layer-close', {
                         tips: 3
@@ -157,7 +128,7 @@ layui.use(['form','layer','table','excel','jquery'],function(){
                     console.log(res.data);
                     // 1. 数组头部新增表头
                     res.data.unshift({
-                        questionnaireid: '用户名',
+                        questionnaireid: 'ID',
                         user: '姓名',
                         age: '年龄',
                         sex: '性别',
