@@ -4,6 +4,7 @@ import com.yunjing.emer.dao.*;
 import com.yunjing.emer.entity.*;
 import com.yunjing.emer.service.MachineService;
 import com.yunjing.emer.service.WebsiteService;
+import com.yunjing.emer.util.PropertiesUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,137 +52,152 @@ public class MachineCountController {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
 
-        StringBuffer promap = new StringBuffer();
-        promap.append("[");
+//        StringBuffer promap = new StringBuffer();
+//        promap.append("[");
+//        int type = user.getType();
+//        if (type == 0) {
+//
+//            List<Provinces> list = new ArrayList<Provinces>();
+//            ProvincesExample provexample = new ProvincesExample();
+//            list = provincesDao.selectByExample(provexample);
+//            User myUser = new User();
+//            myUser.setType(3);
+//
+//            for (int i = 0; i < list.size(); i++) {
+//
+//                promap.append("{'name':'" + list.get(i).getName() + "'," + "'pId':0,'id':" + list.get(i).getCode() + ",type:'0'},");
+//                List<Cities> list2 = new ArrayList<Cities>();
+//                CitiesExample citiesExample = new CitiesExample();
+//                citiesExample.createCriteria().andProvincecodeEqualTo(list.get(i).getCode());
+//                list2 = citiesDao.selectByExample(citiesExample);
+//
+//
+//                for (int j = 0; j < list2.size(); j++) {
+//
+//                    promap.append("{'name':'" + list2.get(j).getName() + "'," + "'pId':" + list2.get(j).getProvincecode() + ",'id':" + list2.get(j).getCode() + ",type:'1'},");
+//                    List<Areas> list3 = new ArrayList<Areas>();
+//                    AreasExample areasExample = new AreasExample();
+//                    areasExample.createCriteria().andCitycodeEqualTo(list2.get(j).getCode());
+//                    list3 = areasDao.selectByExample(areasExample);
+//
+//                    for (int k = 0; k < list3.size(); k++) {
+//
+//
+//                        myUser.setProvince(list.get(i).getName());
+//                        myUser.setCity(list2.get(j).getName());
+//                        myUser.setCounty(list3.get(k).getName());
+//                        List<Machine> list4 = machineService.selectMachineByCounty(myUser);
+//                        if (list4.size() > 0) {
+//
+//                            promap.append("{'name':'" + list3.get(k).getName() + "'," + "'pId':" + list3.get(k).getCitycode() + ",'id':" + list3.get(k).getCode() + ",type:'2'},");
+//                        }
+//                        for (int l = 0; l < list4.size(); l++) {
+//                            CompanyInfo companyInfo = companyInfoDao.selectByPrimaryKey(list4.get(l).getCompanyId());
+//                            promap.append("{'name':'" + companyInfo.getName() + "'," + "'pId':" + list3.get(k).getCode() + ",'id':" + list4.get(l).getCompanyId() + ",type:'3'},");
+//                            System.out.println(companyInfo);
+//                            total++;
+//                        }
+//
+//                    }
+//                }
+//            }
+//        }
+//        if (type == 1) {
+//            User myUser = new User();
+//            myUser.setType(3);
+//            List<Provinces> list = new ArrayList<Provinces>();
+//            ProvincesExample provexample = new ProvincesExample();
+//            provexample.createCriteria().andNameEqualTo(user.getProvince());
+//            list = provincesDao.selectByExample(provexample);
+//            promap.append("{'name':'" + list.get(0).getName() + "'," + "'pId':0,'id':" + list.get(0).getCode() + ",type:'0'},");
+//            List<Cities> list2 = new ArrayList<Cities>();
+//            CitiesExample citiesExample = new CitiesExample();
+//            citiesExample.createCriteria().andProvincecodeEqualTo(list.get(0).getCode());
+//            list2 = citiesDao.selectByExample(citiesExample);
+//            for (int j = 0; j < list2.size(); j++) {
+//                promap.append("{'name':'" + list2.get(j).getName() + "'," + "'pId':" + list.get(0).getCode() + ",'id':" + list2.get(j).getCode() + ",type:'1'},");
+//                List<Areas> list3 = new ArrayList<Areas>();
+//                AreasExample areasExample = new AreasExample();
+//                areasExample.createCriteria().andCitycodeEqualTo(list2.get(j).getCode());
+//                list3 = areasDao.selectByExample(areasExample);
+//                for (int k = 0; k < list3.size(); k++) {
+//                    promap.append("{'name':'" + list3.get(k).getName() + "'," + "'pId':" + list2.get(j).getCode() + ",'id':" + list3.get(k).getCode() + ",type:'2'},");
+//                    myUser.setProvince(user.getProvince());
+//                    myUser.setCity(list2.get(j).getName());
+//                    myUser.setCounty(list3.get(k).getName());
+//                    List<Machine> list4 = machineService.selectMachineByCounty(myUser);
+//                    for (int l = 0; l < list4.size(); l++) {
+//                        CompanyInfo companyInfo = companyInfoDao.selectByPrimaryKey(list4.get(l).getCompanyId());
+//                        promap.append("{'name':'" + companyInfo.getName() + "'," + "'pId':" + list3.get(k).getCode() + ",'id':" + list4.get(l).getCompanyId() + ",type:'3'},");
+//                        System.out.println(companyInfo);
+//                        total++;
+//                    }
+//                }
+//            }
+//        }
+//        if (type == 2) {
+//            User myUser = new User();
+//            myUser.setType(3);
+//            List<Cities> list2 = new ArrayList<Cities>();
+//            CitiesExample citiesExample = new CitiesExample();
+//            citiesExample.createCriteria().andNameEqualTo(user.getCity());
+//            list2 = citiesDao.selectByExample(citiesExample);
+//            promap.append("{'name':'" + list2.get(0).getName() + "'," + "'pId':0,'id':" + list2.get(0).getCode() + ",type:'1'},");
+//            List<Areas> list3 = new ArrayList<Areas>();
+//            AreasExample areasExample = new AreasExample();
+//            areasExample.createCriteria().andCitycodeEqualTo(list2.get(0).getCode());
+//            list3 = areasDao.selectByExample(areasExample);
+//            for (int k = 0; k < list3.size(); k++) {
+//                promap.append("{'name':'" + list3.get(k).getName() + "'," + "'pId':" + list3.get(k).getCitycode() + ",'id':" + list3.get(k).getCode() + ",type:'2'},");
+//                myUser.setProvince(user.getProvince());
+//                myUser.setCity(user.getCity());
+//                myUser.setCounty(list3.get(k).getName());
+//                List<Machine> list4 = machineService.selectMachineByCounty(myUser);
+//                for (int l = 0; l < list4.size(); l++) {
+//                    CompanyInfo companyInfo = companyInfoDao.selectByPrimaryKey(list4.get(l).getCompanyId());
+//                    promap.append("{'name':'" + companyInfo.getName() + "'," + "'pId':" + list3.get(k).getCode() + ",'id':" + list4.get(l).getCompanyId() + ",type:'3'},");
+//                    System.out.println(companyInfo);
+//                    total++;
+//                }
+//            }
+//        }
+//        if (type == 3) {
+//            User myUser = new User();
+//            myUser.setType(3);
+//            List<Areas> list3 = new ArrayList<Areas>();
+//            AreasExample areasExample = new AreasExample();
+//            areasExample.createCriteria().andNameEqualTo(user.getCounty());
+//            list3 = areasDao.selectByExample(areasExample);
+//            promap.append("{'name':'" + list3.get(0).getName() + "'," + "'pId':0,'id':" + list3.get(0).getCode() + ",type:'2'},");
+//            myUser.setProvince(user.getProvince());
+//            myUser.setCity(user.getCity());
+//            myUser.setCounty(user.getCounty());
+//            List<Machine> list4 = machineService.selectMachineByCounty(myUser);
+//            for (int l = 0; l < list4.size(); l++) {
+//                CompanyInfo companyInfo = companyInfoDao.selectByPrimaryKey(list4.get(l).getCompanyId());
+//                promap.append("{'name':'" + companyInfo.getName() + "'," + "'pId':" + list3.get(0).getCode() + ",'id':" + list4.get(l).getCompanyId() + ",type:'3'},");
+//                System.out.println(companyInfo);
+//                total++;
+//            }
+//        }
+//
+//        promap.append("]");
+//        System.out.println(promap);
+        String promap = "";
+        PropertiesUtil p = new PropertiesUtil("MachineTree.properties");
         int type = user.getType();
-        if (type == 0) {
-
-            List<Provinces> list = new ArrayList<Provinces>();
-            ProvincesExample provexample = new ProvincesExample();
-            list = provincesDao.selectByExample(provexample);
-            User myUser = new User();
-            myUser.setType(3);
-
-            for (int i = 0; i < list.size(); i++) {
-
-                promap.append("{'name':'" + list.get(i).getName() + "'," + "'pId':0,'id':" + list.get(i).getCode() + ",type:'0'},");
-                List<Cities> list2 = new ArrayList<Cities>();
-                CitiesExample citiesExample = new CitiesExample();
-                citiesExample.createCriteria().andProvincecodeEqualTo(list.get(i).getCode());
-                list2 = citiesDao.selectByExample(citiesExample);
-
-
-                for (int j = 0; j < list2.size(); j++) {
-
-                    promap.append("{'name':'" + list2.get(j).getName() + "'," + "'pId':" + list2.get(j).getProvincecode() + ",'id':" + list2.get(j).getCode() + ",type:'1'},");
-                    List<Areas> list3 = new ArrayList<Areas>();
-                    AreasExample areasExample = new AreasExample();
-                    areasExample.createCriteria().andCitycodeEqualTo(list2.get(j).getCode());
-                    list3 = areasDao.selectByExample(areasExample);
-
-                    for (int k = 0; k < list3.size(); k++) {
-
-
-                        myUser.setProvince(list.get(i).getName());
-                        myUser.setCity(list2.get(j).getName());
-                        myUser.setCounty(list3.get(k).getName());
-                        List<Machine> list4 = machineService.selectMachineByCounty(myUser);
-                        if (list4.size() > 0) {
-
-                            promap.append("{'name':'" + list3.get(k).getName() + "'," + "'pId':" + list3.get(k).getCitycode() + ",'id':" + list3.get(k).getCode() + ",type:'2'},");
-                        }
-                        for (int l = 0; l < list4.size(); l++) {
-                            CompanyInfo companyInfo = companyInfoDao.selectByPrimaryKey(list4.get(l).getCompanyId());
-                            promap.append("{'name':'" + companyInfo.getName() + "'," + "'pId':" + list3.get(k).getCode() + ",'id':" + list4.get(l).getCompanyId() + ",type:'3'},");
-                            System.out.println(companyInfo);
-                            total++;
-                        }
-
-                    }
-                }
-            }
+        if(type == 0){
+            promap = p.readProperty("all0");
         }
-        if (type == 1) {
-            User myUser = new User();
-            myUser.setType(3);
-            List<Provinces> list = new ArrayList<Provinces>();
-            ProvincesExample provexample = new ProvincesExample();
-            provexample.createCriteria().andNameEqualTo(user.getProvince());
-            list = provincesDao.selectByExample(provexample);
-            promap.append("{'name':'" + list.get(0).getName() + "'," + "'pId':0,'id':" + list.get(0).getCode() + ",type:'0'},");
-            List<Cities> list2 = new ArrayList<Cities>();
-            CitiesExample citiesExample = new CitiesExample();
-            citiesExample.createCriteria().andProvincecodeEqualTo(list.get(0).getCode());
-            list2 = citiesDao.selectByExample(citiesExample);
-            for (int j = 0; j < list2.size(); j++) {
-                promap.append("{'name':'" + list2.get(j).getName() + "'," + "'pId':" + list.get(0).getCode() + ",'id':" + list2.get(j).getCode() + ",type:'1'},");
-                List<Areas> list3 = new ArrayList<Areas>();
-                AreasExample areasExample = new AreasExample();
-                areasExample.createCriteria().andCitycodeEqualTo(list2.get(j).getCode());
-                list3 = areasDao.selectByExample(areasExample);
-                for (int k = 0; k < list3.size(); k++) {
-                    promap.append("{'name':'" + list3.get(k).getName() + "'," + "'pId':" + list2.get(j).getCode() + ",'id':" + list3.get(k).getCode() + ",type:'2'},");
-                    myUser.setProvince(user.getProvince());
-                    myUser.setCity(list2.get(j).getName());
-                    myUser.setCounty(list3.get(k).getName());
-                    List<Machine> list4 = machineService.selectMachineByCounty(myUser);
-                    for (int l = 0; l < list4.size(); l++) {
-                        CompanyInfo companyInfo = companyInfoDao.selectByPrimaryKey(list4.get(l).getCompanyId());
-                        promap.append("{'name':'" + companyInfo.getName() + "'," + "'pId':" + list3.get(k).getCode() + ",'id':" + list4.get(l).getCompanyId() + ",type:'3'},");
-                        System.out.println(companyInfo);
-                        total++;
-                    }
-                }
-            }
+        if(type == 1){
+            promap = p.readProperty(user.getProvince()+1);
         }
-        if (type == 2) {
-            User myUser = new User();
-            myUser.setType(3);
-            List<Cities> list2 = new ArrayList<Cities>();
-            CitiesExample citiesExample = new CitiesExample();
-            citiesExample.createCriteria().andNameEqualTo(user.getCity());
-            list2 = citiesDao.selectByExample(citiesExample);
-            promap.append("{'name':'" + list2.get(0).getName() + "'," + "'pId':0,'id':" + list2.get(0).getCode() + ",type:'1'},");
-            List<Areas> list3 = new ArrayList<Areas>();
-            AreasExample areasExample = new AreasExample();
-            areasExample.createCriteria().andCitycodeEqualTo(list2.get(0).getCode());
-            list3 = areasDao.selectByExample(areasExample);
-            for (int k = 0; k < list3.size(); k++) {
-                promap.append("{'name':'" + list3.get(k).getName() + "'," + "'pId':" + list3.get(k).getCitycode() + ",'id':" + list3.get(k).getCode() + ",type:'2'},");
-                myUser.setProvince(user.getProvince());
-                myUser.setCity(user.getCity());
-                myUser.setCounty(list3.get(k).getName());
-                List<Machine> list4 = machineService.selectMachineByCounty(myUser);
-                for (int l = 0; l < list4.size(); l++) {
-                    CompanyInfo companyInfo = companyInfoDao.selectByPrimaryKey(list4.get(l).getCompanyId());
-                    promap.append("{'name':'" + companyInfo.getName() + "'," + "'pId':" + list3.get(k).getCode() + ",'id':" + list4.get(l).getCompanyId() + ",type:'3'},");
-                    System.out.println(companyInfo);
-                    total++;
-                }
-            }
+        if(type == 2){
+            promap = p.readProperty(user.getCity()+2);
         }
-        if (type == 3) {
-            User myUser = new User();
-            myUser.setType(3);
-            List<Areas> list3 = new ArrayList<Areas>();
-            AreasExample areasExample = new AreasExample();
-            areasExample.createCriteria().andNameEqualTo(user.getCounty());
-            list3 = areasDao.selectByExample(areasExample);
-            promap.append("{'name':'" + list3.get(0).getName() + "'," + "'pId':0,'id':" + list3.get(0).getCode() + ",type:'2'},");
-            myUser.setProvince(user.getProvince());
-            myUser.setCity(user.getCity());
-            myUser.setCounty(user.getCounty());
-            List<Machine> list4 = machineService.selectMachineByCounty(myUser);
-            for (int l = 0; l < list4.size(); l++) {
-                CompanyInfo companyInfo = companyInfoDao.selectByPrimaryKey(list4.get(l).getCompanyId());
-                promap.append("{'name':'" + companyInfo.getName() + "'," + "'pId':" + list3.get(0).getCode() + ",'id':" + list4.get(l).getCompanyId() + ",type:'3'},");
-                System.out.println(companyInfo);
-                total++;
-            }
+        if(type == 3){
+            promap = p.readProperty(user.getCounty()+3);
         }
-
-        promap.append("]");
-        System.out.println(promap);
         modelAndView.addObject("promap", promap.toString());
         List<CompanyInfo> companys = companyInfoDao.selectCompanyInfoByLevel(user);
         modelAndView.addObject("companys", companys);
