@@ -16,6 +16,14 @@ var address = [
                         "areaName": "西城区"
                     },
                     {
+                        "areaCode": "110103",
+                        "areaName": "崇文区"
+                    },
+                    {
+                        "areaCode": "110104",
+                        "areaName": "宣武区"
+                    },
+                    {
                         "areaCode": "110105",
                         "areaName": "朝阳区"
                     },
@@ -4558,6 +4566,10 @@ var address = [
                         "areaName": "郊区"
                     },
                     {
+                        "areaCode": "340723",
+                        "areaName": "枞阳县"
+                    },
+                    {
                         "areaCode": "340721",
                         "areaName": "铜陵县"
                     }
@@ -4582,10 +4594,6 @@ var address = [
                     {
                         "areaCode": "340822",
                         "areaName": "怀宁县"
-                    },
-                    {
-                        "areaCode": "340823",
-                        "areaName": "枞阳县"
                     },
                     {
                         "areaCode": "340824",
@@ -8366,6 +8374,10 @@ var address = [
                     {
                         "areaCode": "440308",
                         "areaName": "盐田区"
+                    },
+                    {
+                        "areaCode": "440309",
+                        "areaName": "高新区"
                     }
                 ]
             },
