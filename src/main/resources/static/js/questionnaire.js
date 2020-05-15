@@ -38,7 +38,7 @@ layui.use(['form','layer','table','excel','jquery'],function(){
             {field: 'tools', title: '是否了解储粮装具', minWidth:200, edit: 'text', align:"center"},
             {field: 'toolsEvaluate', title: '之前储粮装具评价', minWidth:250, edit: 'text', align:"center"},
             {field: 'toolsUse', title: '储粮装具的使用', minWidth:250, edit: 'text', align:"center"},
-            {field: 'supportTool', title: '国家支持购买储量装具', minWidth:150, edit: 'text', align:"center"},
+            {field: 'supportTool', title: '国家支持购买储粮装具', minWidth:150, edit: 'text', align:"center"},
             {field: 'toolType', title: '储粮工具大小', minWidth:250, edit: 'text', align:"center"},
             {field: 'toolNum', title: '购买装具数量', minWidth:100, edit: 'text', align:"center"},
             {field: 'notBuyReason', title: '不买装具原因', minWidth:250, edit: 'text', align:"center"},
