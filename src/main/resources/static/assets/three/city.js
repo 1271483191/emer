@@ -1481,7 +1481,7 @@ var provice = [
                 districtAndCounty: ["吐鲁番市", "鄯善县", "鄯善镇", "托克逊县", "托克逊镇"]
             },
             {
-                name: "哈密地区",
+                name: "哈密市",
                 districtAndCounty: ["哈密市", "伊吾县", "伊吾镇", "巴里坤哈萨克自治县", "巴里坤镇"]
             },
             {
