@@ -5,10 +5,10 @@ layui.use(['form','layer','table','excel','jquery'],function(){
         layer = parent.layer === undefined ? layui.layer : top.layer,
         $ = layui.jquery,
         excel = layui.excel,
-        /*laytpl = layui.laytpl,*/
+        laytpl = layui.laytpl,
         table = layui.table;
 
-    var exportData='';
+
     //问卷列表
     var tableIns = table.render({
         elem: '#questionnaireList',
@@ -43,10 +43,8 @@ layui.use(['form','layer','table','excel','jquery'],function(){
             {field: 'toolNum', title: '购买装具数量', minWidth:100, edit: 'text', align:"center"},
             {field: 'notBuyReason', title: '不买装具原因', minWidth:250, edit: 'text', align:"center"},
             {title: '操作', minWidth:100, templet:'#userListBar',fixed:"right" , align:"center"}
-        ]],
-        done: function (res) {
-            exportData=res.data;
-        }
+        ]]
+
     });
 
     //搜索
@@ -118,6 +116,7 @@ layui.use(['form','layer','table','excel','jquery'],function(){
             layui.layer.full(window.sessionStorage.getItem("index"));
         })
     }
+
     $(".addNews_btn").click(function(){
         addQuestionnaire();
     })
