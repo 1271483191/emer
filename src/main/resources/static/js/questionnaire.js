@@ -38,8 +38,8 @@ layui.use(['form','layer','table','excel','jquery'],function(){
             {field: 'tools', title: '是否了解储粮装具', minWidth:200, edit: 'text', align:"center"},
             {field: 'toolsEvaluate', title: '之前储粮装具评价', minWidth:250, edit: 'text', align:"center"},
             {field: 'toolsUse', title: '储粮装具的使用', minWidth:250, edit: 'text', align:"center"},
-            {field: 'supportTool', title: '国家支持购买储量装具', minWidth:150, edit: 'text', align:"center"},
-            {field: 'toolType', title: '储粮工具大小', minWidth:250, edit: 'text', align:"center"},
+            {field: 'supportTool', title: '国家支持购买储粮装具', minWidth:150, edit: 'text', align:"center"},
+            {field: 'toolType', title: '储粮装具大小', minWidth:250, edit: 'text', align:"center"},
             {field: 'toolNum', title: '购买装具数量', minWidth:100, edit: 'text', align:"center"},
             {field: 'notBuyReason', title: '不买装具原因', minWidth:250, edit: 'text', align:"center"},
             {title: '操作', minWidth:100, templet:'#userListBar',fixed:"right" , align:"center"}
@@ -73,35 +73,6 @@ layui.use(['form','layer','table','excel','jquery'],function(){
             type : 2,
             content : "toAddQuestionnaire",
             success : function(layero, index){
-                var body = layui.layer.getChildFrame('body', index);
-                if(edit){
-                    body.find(".user").val(edit.user);
-                    body.find('input[name="sex"][value="'+edit.sex+'"]').prop("checked",true);  //性别
-                    form.render();
-                    body.find(".age").val(edit.age);
-                    body.find(".province select[name=province]").append("<option value=''>"+edit.province+"</option>");
-                    body.find(".city").val(edit.age);
-                    body.find(".area").val(edit.age);
-
-                    body.find(".famerType").val(edit.famerType);
-                    body.find(".harvestGrain").val(edit.harvestGrain);
-                    body.find(".surplusGrain").val(edit.surplusGrain);
-                    body.find(".averageGrainDay").val(edit.averageGrainDay);
-
-                    body.find(".purposeGrain").val(edit.purposeGrain);
-                    body.find(".reason").text(edit.reason);
-                    body.find(".tools").val(edit.tools);
-                    body.find(".toolsEvaluate").text(edit.toolsEvaluate);
-
-
-                    body.find(".toolsUse").val(edit.toolsUse);
-                    body.find(".supportTool").val(edit.supportTool);
-                    body.find(".toolType").val(edit.toolType);
-                    body.find(".toolNum").val(edit.toolNum);
-                    body.find(".notBuyReason").text(edit.notBuyReason);
-
-                    form.render();
-                }
                 setTimeout(function(){
                     layui.layer.tips('点击此处返回用问卷信息列表', '.layui-layer-setwin .layui-layer-close', {
                         tips: 3
@@ -157,7 +128,7 @@ layui.use(['form','layer','table','excel','jquery'],function(){
                     console.log(res.data);
                     // 1. 数组头部新增表头
                     res.data.unshift({
-                        questionnaireid: '用户名',
+                        questionnaireid: 'ID',
                         user: '姓名',
                         age: '年龄',
                         sex: '性别',
@@ -174,7 +145,7 @@ layui.use(['form','layer','table','excel','jquery'],function(){
                         toolsEvaluate: '之前储粮装具评价',
                         toolsUse: '每年存粮',
                         supportTool: '国家支持购买储量装具',
-                        toolType: '储粮工具大小',
+                        toolType: '储粮装具大小',
                         toolNum: '购买装具数量',
                         notBuyReason: '不买装具原因'
                     });
@@ -190,6 +161,7 @@ layui.use(['form','layer','table','excel','jquery'],function(){
                         'area' ,
                         'famerType' ,
                         'harvestGrain',
+                        'surplusGrain',
                         'averageGrainDay' ,
                         'purposeGrain' ,
                         'reason' ,

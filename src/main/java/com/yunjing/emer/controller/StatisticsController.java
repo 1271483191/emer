@@ -3,6 +3,7 @@ package com.yunjing.emer.controller;
 import com.yunjing.emer.dao.*;
 import com.yunjing.emer.entity.*;
 import com.yunjing.emer.service.*;
+import com.yunjing.emer.util.PropertiesUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -718,9 +719,9 @@ public class StatisticsController {
         return promap1.toString()+"~"+promap2.toString();
     }
 
-    @RequestMapping("/toCountStatic")
+    @RequestMapping("/toCountStaticBack")
     @ResponseBody
-    public ModelAndView toCompanyInfo( HttpServletRequest request){
+    public ModelAndView toCompanyInfoBack( HttpServletRequest request){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("count");
         HttpSession session = request.getSession();
@@ -816,6 +817,64 @@ public class StatisticsController {
         promap.append("]");
         System.out.println(promap);
         modelAndView.addObject("promap", promap.toString());
+//        List<CompanyInfo> companys = companyInfoDao.selectCompanyInfoByLevel(user);
+//        modelAndView.addObject("companys", companys);
+        Website websiteall = websiteDao.sumByUser(user);
+        if(websiteall == null){
+            websiteall = new Website();
+            websiteall.setFlourExp(0.0);websiteall.setFlourReal(0.0);websiteall.setRiceExp(0.0);websiteall.setRiceReal(0.0);websiteall.setOilExp(0.0);websiteall.setOilReal(0.0);websiteall.setElseExp(0.0);websiteall.setElseReal(0.0);
+        }
+        modelAndView.addObject("websiteall", websiteall);
+        Delivery deliveryall = deliveryDao.sumByUser(user);
+        if(deliveryall == null){
+            deliveryall = new Delivery();
+            deliveryall.setCarNum(0);deliveryall.setDeliveryDay(0.0);deliveryall.setDeliveryDayReal(0.0);deliveryall.setDeliveryNum(0);deliveryall.setRadius(0.0);deliveryall.setWareAbility(0.0);
+        }
+        modelAndView.addObject("deliveryall", deliveryall);
+        Storeage storeageall = storeageDao.sumByUser(user);
+        if(storeageall == null){
+            storeageall = new Storeage();
+            storeageall.setCarNum(0);storeageall.setTransportDay(0.0);storeageall.setTransportDayReal(0.0);
+        }
+        modelAndView.addObject("storeageall", storeageall);
+        Machine machineall = machineDao.sumByUser(user);
+        if(machineall == null){
+            machineall = new Machine();
+            machineall.setWheatDay(0.0);machineall.setWheatDayReal(0.0);machineall.setPaddyDay(0.0);machineall.setPaddyDayReal(0.0);machineall.setOilDay(0.0);machineall.setOilDayReal(0.0);machineall.setOilConciseDay(0.0);machineall.setOilConciseDayReal(0.0);machineall.setOilSubpDay(0.0);machineall.setOilSubpDayReal(0.0);machineall.setElseDay(0.0);machineall.setElseDayReal(0.0);
+        }
+        modelAndView.addObject("machineall", machineall);
+
+        int companystste = 1;
+        modelAndView.addObject("companystste", companystste);
+        CompanyInfo companyall = new CompanyInfo();
+        modelAndView.addObject("companyall", companyall);
+
+        return modelAndView;
+    }
+
+    @RequestMapping("/toCountStatic")
+    @ResponseBody
+    public ModelAndView toCompanyInfo( HttpServletRequest request){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("count");
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        String promap = "";
+        PropertiesUtil p = new PropertiesUtil("tree.properties");
+        int type = user.getType();
+        if(type == 0){
+            promap = p.readProperty("all0");
+        }
+        if(type == 1){
+            promap = p.readProperty(user.getProvince()+1);
+        }
+        if(type == 2){
+            promap = p.readProperty(user.getCity()+2);
+        }
+        if(type == 3){
+            promap = p.readProperty(user.getCounty()+3);
+        }
+        modelAndView.addObject("promap", promap);
 //        List<CompanyInfo> companys = companyInfoDao.selectCompanyInfoByLevel(user);
 //        modelAndView.addObject("companys", companys);
         Website websiteall = websiteDao.sumByUser(user);

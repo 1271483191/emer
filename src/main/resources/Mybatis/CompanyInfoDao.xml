@@ -889,4 +889,32 @@
     where level >= #{user.type}
     and county = #{country}
   </select>
+  <select id="selectByTypeAndCounty"  resultMap="BaseResultMap" >
+    select * from company_info
+    where level >= #{type}
+    and county = #{country}
+  </select>
+  <select id="selectDeliveryByTypeAndCounty"  resultMap="BaseResultMap" >
+    select * from company_info c left outer join emer.delivery b on(c.company_id=b.company_id)
+    where c.company_id=b.company_id
+    and c.level >= #{type}
+    and c.county = #{country}
+  </select>
+  <select id="selectStoreageByTypeAndCounty"  resultMap="BaseResultMap" >
+    select * from company_info c left outer join emer.storeage b on(c.company_id=b.company_id)
+    where c.company_id=b.company_id
+    and c.level >= #{type}
+    and c.county = #{country}
+  </select><select id="selectWebsiteByTypeAndCounty"  resultMap="BaseResultMap" >
+  select * from company_info c left outer join emer.website b on(c.company_id=b.company_id)
+  where c.company_id=b.company_id
+    and c.level >= #{type}
+    and c.county = #{country}
+</select>
+  <select id="selectMachineByTypeAndCounty"  resultMap="BaseResultMap" >
+    select * from company_info c left outer join emer.machine b on(c.company_id=b.company_id)
+    where c.company_id=b.company_id
+    and c.level >= #{type}
+    and c.county = #{country}
+  </select>
 </mapper>

@@ -90,4 +90,14 @@ public interface CompanyInfoDao {
     CompanyInfo sumByUserAndCity(@Param("user")User user,@Param("city") String city);
 
     CompanyInfo sumByUserAndCountry(@Param("user")User user,@Param("country") String country);
+
+    List<CompanyInfo> selectByTypeAndCounty(@Param("type")int type,@Param("country") String country);
+
+    List<CompanyInfo> selectDeliveryByTypeAndCounty(@Param("type")int type,@Param("country") String country);
+
+    List<CompanyInfo> selectStoreageByTypeAndCounty(@Param("type")int type,@Param("country") String country);
+
+    List<CompanyInfo> selectWebsiteByTypeAndCounty(@Param("type")int type,@Param("country") String country);
+
+    List<CompanyInfo> selectMachineByTypeAndCounty(@Param("type")int type,@Param("country") String country);
 }
