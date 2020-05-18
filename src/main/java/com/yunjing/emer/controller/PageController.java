@@ -1189,5 +1189,14 @@ public class PageController {
 
         return src;
     }
+
+    @RequestMapping("/toQuestionnaireCount")
+    public ModelAndView toQuestionnaireCount(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("questionnaire_count");
+
+
+        return modelAndView;
+    }
 }
 
